@@ -19,7 +19,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 
 - [x] 1. Fondations : Next.js, TypeScript, Tailwind, i18n, lint, tests, CI
 - [x] 2. Système de design (page `/fr/style`, clair et sombre, mobile et ordinateur)
-- [ ] 3. Base de données et sécurité (Supabase, RLS, tests vie privée)
+- [x] 3. Base de données et sécurité (migrations, RLS, tests vie privée)
 - [ ] 4. Outils de saisie et jeu de démonstration fictif (assistant de démarrage, saisie dans l’arbre)
 - [ ] 5. Page d’accueil (proposer d’abord deux directions pour l’écran d’ouverture)
 - [ ] 6. Arbre généalogique
@@ -50,7 +50,12 @@ npm run check        # lint + types + format + tests unitaires : à lancer avant
 npm run build        # build de production
 npm run test:e2e     # tests Playwright (380 px et 1440 px) sur le build de production
 npm run format       # formate tout le code
+npm run test:db      # règles d’accès et vie privée, sur un vrai Postgres (TEST_DATABASE_URL)
+npm run db:reset     # local seulement : recrée la base de DATABASE_URL depuis les migrations
+npm run db:migrate   # applique les migrations manquantes
 ```
+
+Postgres local dans le conteneur : `pg_ctlcluster 16 main start` (utilisateur `postgres`, mot de passe `postgres`).
 
 Dans un conteneur où Chromium est déjà installé (sans `playwright install`) :
 `PLAYWRIGHT_CHROMIUM_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome npm run test:e2e`.
@@ -79,9 +84,12 @@ components/heraldique/ écus en SVG (Croÿ, Croÿ-Renty, Hongrie ancienne, écu 
 lib/design/            polices, palette, contrastes
 lib/i18n/              langues, adresses traduites, navigation, chargement des textes
 lib/site.ts            URL publique, indexation
+lib/db/                accès à Postgres sous le rôle du visiteur (withViewer)
+supabase/migrations/   schéma, règles d’accès (RLS), journal
+scripts/db.mjs         applique les migrations
 messages/              fr.json, en.json, de.json : textes de l’interface
 docs/                  cahier des charges
-tests/unit, tests/e2e
+tests/unit, tests/e2e, tests/db (vie privée, sur Postgres)
 proxy.ts               détection de langue et préfixe /fr /en /de
 ```
 
@@ -96,6 +104,16 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - **Ton** : narratif, direct, chaleureux, vouvoiement simple. Pas de majuscules partout ni de latin décoratif. Une légende est présentée comme une légende ; une date incertaine porte « vers ».
 - **Code** : identifiants et commentaires en anglais ; commentaires rares, pour le _pourquoi_. Messages de commit en anglais, à l’impératif.
 - **Traductions EN/DE** : tout texte traduit par l’IA reste « à relire » par la famille (y compris les segments d’adresse).
+
+## Base de données (étape 3)
+
+- Migrations SQL dans `supabase/migrations` (une par changement, jamais modifiée une fois poussée). `supabase/local/bootstrap.sql` recrée en local ce que Supabase fournit (rôles `anon`, `authenticated`, `service_role`, `auth.uid()`).
+- **Chaque requête du site passe par `withViewer()` (`lib/db`)** : transaction sous le rôle `anon` (visiteur) ou `authenticated` (compte), donc les règles RLS s’appliquent. `withSystem()` (rôle propriétaire) seulement pour les tâches techniques, jamais pour lire un contenu affiché.
+- Règle des vivants : `app.is_living()`. Le public ne voit ni la personne, ni ses liens, photos, histoires, événements, sources ou titres. Dans l’arbre public, `public.tree_people()` la rend « Personne vivante » (id et branche seulement).
+- Membres : lisent tout ce qui est publié (vivants compris), écrivent leurs brouillons d’histoires, leurs photos en attente et leurs propositions. Administrateurs : tout. Un compte désactivé redevient visiteur.
+- Toute écriture passe dans `audit_log` (qui, quoi, avant, après) par trigger.
+- Comptes, sessions et liens de connexion dans le schéma `private`, illisible par le site. Les comptes sont gérés par le site (lien magique envoyé par Resend), pas par Supabase Auth : tout reste testable en local ; Supabase héberge Postgres et les fichiers.
+- Toute nouvelle table : RLS activée, politique explicite, test dans `tests/db`.
 
 ## Système de design (étape 2)
 
