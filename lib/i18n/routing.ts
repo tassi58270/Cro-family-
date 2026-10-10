@@ -50,6 +50,21 @@ export const routing = defineRouting({
       en: "/stories/[histoire]",
       de: "/geschichten/[histoire]",
     },
+    "/photos": {
+      fr: "/photos",
+      en: "/photos",
+      de: "/fotos",
+    },
+    "/photos/[photo]": {
+      fr: "/photos/[photo]",
+      en: "/photos/[photo]",
+      de: "/fotos/[photo]",
+    },
+    "/photos/albums/[album]": {
+      fr: "/photos/albums/[album]",
+      en: "/photos/albums/[album]",
+      de: "/fotos/alben/[album]",
+    },
     "/lieux-et-evenements": {
       fr: "/lieux-et-evenements",
       en: "/places-and-events",
@@ -81,6 +96,8 @@ export const routing = defineRouting({
       de: "/konto",
     },
     "/admin": "/admin",
+    // Design system page (step 2), for the team; never indexed.
+    "/style": "/style",
   },
 });
 

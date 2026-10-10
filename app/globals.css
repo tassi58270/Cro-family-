@@ -1,35 +1,464 @@
 @import "tailwindcss";
 
 /*
- * Starting tokens. The two colours come from the coat of arms
- * (cahier des charges, section 3): argent (white) and gueules (red).
- * The full design system (typography, spacing, motion) is built at step 2.
+ * Design tokens (cahier des charges, section 3).
+ *
+ * Two colours only, those of the coat of arms: argent (white) and gueules
+ * (the Croÿ red). Everything else is ink, greys and the deep red for hovers.
+ * Components use the semantic tokens below, never raw hex values, so that the
+ * dark theme only has to redefine them once.
  */
 :root {
-  color-scheme: light dark;
+  color-scheme: light;
+
   --paper: #ffffff;
+  /* « Gris doux » of the spec: secondary backgrounds. */
+  --paper-2: #f4f4f2;
   --ink: #141414;
   /* Darker than the spec's #8a8a86, which is below 4.5:1 on white for small text. */
   --ink-muted: #5f5f5b;
+  --hairline: #e4e4df;
+  --hairline-strong: #c9c9c3;
+
+  --croy: #c8102e;
+  --croy-deep: #8e0b20;
+  --on-croy: #ffffff;
+  /* Red used for small text. On white the brand red passes (5.9:1). */
+  --croy-text: #c8102e;
+  /* The field of every shield stays argent, whatever the theme. */
+  --argent: #ffffff;
+
+  --scrim: rgb(20 20 20 / 0.42);
+  --chrome: rgb(255 255 255 / 0.86);
+  --shadow-panel: 0 24px 64px -16px rgb(20 20 20 / 0.28);
+
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --section: clamp(4rem, 12svh, 9rem);
+  --header-h: 4rem;
 }
 
+/* Dark theme: ink background, identical red (section 3). */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
     --paper: #141414;
+    --paper-2: #1e1e1d;
     --ink: #f4f4f2;
-    --ink-muted: #a3a39f;
+    --ink-muted: #a8a8a3;
+    --hairline: #2e2e2c;
+    --hairline-strong: #4a4a47;
+    --croy-deep: #a50d26;
+    /* The brand red fails on ink for small text (3.1:1): a lighter tint of it. */
+    --croy-text: #ff7a8a;
+    --scrim: rgb(0 0 0 / 0.6);
+    --chrome: rgb(20 20 20 / 0.86);
+    --shadow-panel: 0 24px 64px -16px rgb(0 0 0 / 0.7);
   }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141414;
+  --paper-2: #1e1e1d;
+  --ink: #f4f4f2;
+  --ink-muted: #a8a8a3;
+  --hairline: #2e2e2c;
+  --hairline-strong: #4a4a47;
+  --croy-deep: #a50d26;
+  --croy-text: #ff7a8a;
+  --scrim: rgb(0 0 0 / 0.6);
+  --chrome: rgb(20 20 20 / 0.86);
+  --shadow-panel: 0 24px 64px -16px rgb(0 0 0 / 0.7);
 }
 
 @theme inline {
   --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
-  --color-croy: #c8102e;
-  --color-croy-deep: #8e0b20;
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-croy: var(--croy);
+  --color-croy-deep: var(--croy-deep);
+  --color-croy-text: var(--croy-text);
+  --color-on-croy: var(--on-croy);
+  --color-argent: var(--argent);
+  --color-scrim: var(--scrim);
+  --color-chrome: var(--chrome);
+
+  --font-display: var(--font-bodoni), "Bodoni 72", Didot, Georgia, serif;
+  --font-sans:
+    var(--font-atkinson), "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 
-body {
+@theme static {
+  /* The full menu fits on one line from 1360 px; below, it opens full screen. */
+  --breakpoint-nav: 85rem;
+
+  /*
+   * Type scale. Body text is 16 px on phones and 18 px from 900 px wide
+   * (section 3), set on <body>. Display sizes are fluid.
+   */
+  --text-caption: 0.875rem;
+  --text-caption--line-height: 1.45;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-lead: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-lead--line-height: 1.5;
+  --text-title-sm: clamp(1.375rem, 1.2rem + 0.8vw, 1.75rem);
+  --text-title-sm--line-height: 1.2;
+  --text-title: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem);
+  --text-title--line-height: 1.1;
+  --text-title-lg: clamp(2.25rem, 1.6rem + 3vw, 4.5rem);
+  --text-title-lg--line-height: 1.04;
+  --text-display: clamp(3rem, 1.5rem + 7vw, 8rem);
+  --text-display--line-height: 0.98;
+  /* « Croÿ » on the opening screen: up to 18 vw (section 3). */
+  --text-monument: min(29vw, max(18vw, 6.5rem), 30svh);
+  --text-monument--line-height: 1.1;
+
+  --tracking-display: -0.015em;
+
+  /* Sharp, like the bands and the shield: almost no rounding. */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Motion stays between 200 and 600 ms (section 3); press feedback is quicker. */
+  --duration-press: 140ms;
+  --duration-fast: 200ms;
+  --duration-base: 320ms;
+  --duration-slow: 600ms;
+
+  --animate-band: band-pulse 1.2s var(--ease-in-out) infinite;
+
+  @keyframes band-pulse {
+    0%,
+    100% {
+      transform: scaleX(0.18);
+      opacity: 0.35;
+    }
+    50% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html:focus-within {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (min-width: 900px) {
+    body {
+      font-size: 1.125rem;
+    }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--croy);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--croy);
+    color: var(--on-croy);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Dates and numbers are always tabular (section 3). */
+  time,
+  data,
+  .tabular {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  sup {
+    font-size: 0.62em;
+    line-height: 0;
+    vertical-align: 0.62em;
+  }
+}
+
+@layer components {
+  .font-display {
+    font-weight: 500;
+    font-optical-sizing: auto;
+    font-kerning: normal;
+    letter-spacing: var(--tracking-display);
+  }
+
+  .page {
+    padding-inline: var(--gutter);
+  }
+
+  /* Underlined link: ink text, red rule that thickens on hover. */
+  .link {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-color: var(--croy);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 0.22em;
+    transition: text-decoration-thickness var(--duration-fast) var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .link:hover {
+      text-decoration-thickness: 3px;
+    }
+  }
+}
+
+/*
+ * Page transition: route changes are React transitions, so the browser
+ * crossfades the old page into the new one. The three red bands sweep on top
+ * (components/ui/page-transition.tsx).
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Separators draw their bands from the left as they enter the viewport. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .bands-rule > span {
+      transform-origin: left center;
+      animation: band-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 30%;
+    }
+    .bands-rule > span:nth-child(2) {
+      animation-range: entry 16% cover 34%;
+    }
+    .bands-rule > span:nth-child(3) {
+      animation-range: entry 22% cover 38%;
+    }
+  }
+}
+
+@keyframes band-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/*
+ * Side panel (components/ui/side-panel.tsx): a bottom sheet on phones, a
+ * drawer from the right from 768 px. Enters in 420 ms, leaves faster.
+ */
+.side-panel {
+  position: fixed;
+  inset: auto 0 0 0;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 92svh;
+  padding: 0;
+  border: 0;
+  border-radius: 12px 12px 0 0;
   background: var(--paper);
   color: var(--ink);
+  box-shadow: var(--shadow-panel);
+  transform: translateY(100%);
+  transition:
+    transform 260ms var(--ease-out),
+    overlay 260ms allow-discrete,
+    display 260ms allow-discrete;
+}
+.side-panel[open] {
+  transform: none;
+  transition:
+    transform 420ms var(--ease-drawer),
+    overlay 420ms allow-discrete,
+    display 420ms allow-discrete;
+}
+@starting-style {
+  .side-panel[open] {
+    transform: translateY(100%);
+  }
+}
+.side-panel::backdrop {
+  background: var(--scrim);
+  opacity: 0;
+  transition:
+    opacity 260ms var(--ease-out),
+    overlay 260ms allow-discrete,
+    display 260ms allow-discrete;
+}
+.side-panel[open]::backdrop {
+  opacity: 1;
+}
+@starting-style {
+  .side-panel[open]::backdrop {
+    opacity: 0;
+  }
+}
+@media (min-width: 768px) {
+  .side-panel {
+    inset: 0 0 0 auto;
+    width: min(32rem, 100vw);
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+    transform: translateX(100%);
+  }
+  @starting-style {
+    .side-panel[open] {
+      transform: translateX(100%);
+    }
+  }
+}
+html:has(dialog[open]:modal) {
+  overflow: hidden;
+}
+
+/* Full-screen menu on phones and tablets (components/ui/site-header.tsx). */
+.menu-sheet {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-y: auto;
+  opacity: 0;
+  transition:
+    opacity 200ms var(--ease-out),
+    overlay 200ms allow-discrete,
+    display 200ms allow-discrete;
+}
+.menu-sheet[open] {
+  opacity: 1;
+}
+@starting-style {
+  .menu-sheet[open] {
+    opacity: 0;
+  }
+}
+.menu-sheet::backdrop {
+  background: transparent;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .menu-sheet[open] .menu-item {
+    animation: rise var(--duration-base) var(--ease-out) both;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+/* Explained words (components/ui/term.tsx). */
+.term {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+.term-popover {
+  max-width: min(22rem, calc(100vw - 2rem));
+  margin: 0;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-panel);
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 180ms var(--ease-out),
+    transform 180ms var(--ease-out),
+    overlay 180ms allow-discrete,
+    display 180ms allow-discrete;
+}
+.term-popover:popover-open {
+  opacity: 1;
+  transform: none;
+}
+@starting-style {
+  .term-popover:popover-open {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+@supports (position-anchor: --a) {
+  .term-popover {
+    inset: auto;
+    top: anchor(bottom);
+    left: anchor(left);
+    margin-top: 0.5rem;
+    position-try-fallbacks: flip-block, flip-inline;
+  }
+}
+@supports not (position-anchor: --a) {
+  /* Without anchor positioning, the explanation docks at the bottom. */
+  .term-popover {
+    inset: auto 1rem 1rem 1rem;
+    margin-inline: auto;
+  }
 }

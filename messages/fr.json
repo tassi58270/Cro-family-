@@ -10,6 +10,106 @@
       "fr": "Français",
       "en": "English",
       "de": "Deutsch"
+    },
+    "close": "Fermer",
+    "loading": "Chargement…"
+  },
+  "nav": {
+    "label": "Menu principal",
+    "homeLabel": "Maison de Croÿ, accueil",
+    "home": "Accueil",
+    "tree": "Arbre",
+    "arms": "Armoiries et branches",
+    "stories": "Histoires",
+    "photos": "Photos",
+    "places": "Lieux et événements",
+    "contribute": "Contribuer",
+    "search": "Rechercher",
+    "signIn": "Connexion",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "theme": {
+    "label": "Apparence",
+    "system": "Auto",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "footer": {
+    "invitationTitle": "Vous êtes de la famille ?",
+    "invitationBody": "Ce site se construit avec vous. Proposez une photo, une histoire, une correction : un administrateur la relit avant qu’elle ne soit publiée.",
+    "contribute": "Contribuer",
+    "requestAccess": "Demander un accès",
+    "siteMap": "Plan du site",
+    "house": "Maison de Croÿ",
+    "pronunciation": "Croÿ se prononce « croui »",
+    "credits": "Le crédit de chaque image est indiqué sous l’image."
+  },
+  "arms": {
+    "croy": "Armes de Croÿ : d’argent à trois fasces de gueules",
+    "croyRenty": "Armes de Croÿ-Renty : écartelé, aux 1 et 4 de Croÿ, aux 2 et 3 d’argent à trois doloires de gueules, les deux en chef adossées",
+    "hongrieAncienne": "Armes anciennes de Hongrie : fascé de gueules et d’argent de huit pièces",
+    "blank": "Écu sans armoiries renseignées"
+  },
+  "status": {
+    "draft": "Brouillon",
+    "pending": "À valider",
+    "published": "Publié",
+    "rejected": "Refusé"
+  },
+  "glossary": {
+    "fasce": "Bande horizontale qui traverse l’écu d’un bord à l’autre.",
+    "ecartele": "Écu partagé en quatre quartiers, pour réunir les armes de plusieurs familles.",
+    "doloire": "Fer de hache large et sans manche, à l’origine un outil de tonnelier.",
+    "gueules": "Le rouge, dans le vocabulaire des armoiries.",
+    "argent": "Le blanc, dans le vocabulaire des armoiries."
+  },
+  "sections": {
+    "tree": {
+      "title": "Arbre généalogique",
+      "emptyTitle": "L’arbre attend ses premières branches",
+      "emptyBody": "Personne n’a encore été ajouté. Les membres de la famille peuvent proposer les premiers ancêtres ; un administrateur les valide avant qu’ils n’apparaissent ici.",
+      "emptyAction": "Proposer une personne"
+    },
+    "arms": {
+      "title": "Armoiries et branches",
+      "emptyTitle": "Les armoiries arrivent bientôt",
+      "emptyBody": "Les écus, les branches de la famille et leur explication seront ajoutés par la famille.",
+      "emptyAction": "Proposer un ajout"
+    },
+    "stories": {
+      "title": "Histoires",
+      "emptyTitle": "Aucune histoire pour l’instant",
+      "emptyBody": "Une anecdote, un souvenir, une lettre retrouvée : chaque histoire commence par quelqu’un qui la raconte.",
+      "emptyAction": "Raconter une histoire"
+    },
+    "photos": {
+      "title": "Photos",
+      "emptyTitle": "Le mur de photos est encore vide",
+      "emptyBody": "Portraits, mariages, réunions de famille : envoyez vos photos, elles seront publiées après validation.",
+      "emptyAction": "Envoyer des photos"
+    },
+    "places": {
+      "title": "Lieux et événements",
+      "emptyTitle": "La carte et la frise se rempliront bientôt",
+      "emptyBody": "Les lieux de la famille et les grands moments de son histoire apparaîtront ici dès qu’ils auront été saisis.",
+      "emptyAction": "Proposer un lieu"
+    },
+    "search": {
+      "title": "Rechercher",
+      "emptyTitle": "La recherche arrive bientôt",
+      "emptyBody": "Elle couvrira à la fois les personnes, les histoires, les lieux, les événements, les branches et les titres."
+    },
+    "contribute": {
+      "title": "Contribuer",
+      "emptyTitle": "Le site se construit avec la famille",
+      "emptyBody": "Bientôt, les membres de la famille pourront proposer ici une correction, une personne, une photo ou une histoire. Chaque proposition est relue par un administrateur avant d’être publiée.",
+      "emptyAction": "Demander un accès famille"
+    },
+    "signIn": {
+      "title": "Connexion",
+      "emptyTitle": "La connexion arrive bientôt",
+      "emptyBody": "Vous recevrez un lien par e-mail pour vous connecter, sans mot de passe à retenir."
     }
   },
   "home": {
@@ -22,5 +122,91 @@
     "title": "Page introuvable",
     "body": "Cette adresse ne mène à aucune page. Elle a peut-être changé, ou la page n’existe pas encore.",
     "backHome": "Revenir à l’accueil"
+  },
+  "style": {
+    "title": "Système de design",
+    "intro": "Les couleurs, les caractères, les mouvements et les composants du site, réunis sur une page pour les vérifier en clair et en sombre, sur téléphone et sur ordinateur.",
+    "internal": "Page de travail, non référencée.",
+    "colors": "Couleurs",
+    "colorsIntro": "Deux couleurs, celles du blason : le blanc et le rouge. Le reste est encre et gris. Le rapport de contraste est calculé sur le fond de la page.",
+    "contrastSmall": "texte courant",
+    "contrastLarge": "grand texte seulement",
+    "contrastFail": "décor seulement",
+    "swatches": {
+      "paper": "Papier",
+      "paper2": "Gris doux",
+      "ink": "Encre",
+      "inkMuted": "Encre adoucie",
+      "hairline": "Filet",
+      "croy": "Rouge Croÿ",
+      "croyDeep": "Rouge profond",
+      "croyText": "Rouge pour petit texte"
+    },
+    "type": "Typographie",
+    "typeIntro": "Titres en Bodoni Moda, texte en Atkinson Hyperlegible Next. Le ÿ doit être parfaitement dessiné.",
+    "typeSample": "Une famille, des visages, des histoires",
+    "typeBody": "Texte courant : 16 pixels sur téléphone, 18 sur ordinateur. Des phrases courtes, au présent de narration, pour un cousin plutôt que pour un historien.",
+    "numbers": "Chiffres tabulaires",
+    "spacing": "Espacements, rayons, durées",
+    "spacingIntro": "Le blanc respire : de grandes marges, peu d’éléments par écran. Les angles restent vifs, comme les bandes et l’écu. Les mouvements durent de 200 à 600 millisecondes.",
+    "motif": "Motif",
+    "motifIntro": "Les trois fasces deviennent séparateur, indicateur de chargement et transition de page ; les deux points du ÿ servent de puce et de repère.",
+    "motifList": {
+      "separator": "Séparateur de section",
+      "loader": "Indicateur de chargement",
+      "hover": "Survol des cartes"
+    },
+    "replayTransition": "Rejouer la transition de page",
+    "buttons": "Boutons",
+    "buttonPrimary": "Action principale",
+    "buttonSecondary": "Action secondaire",
+    "buttonGhost": "Lien d’action",
+    "buttonBusy": "Envoi",
+    "buttonDisabled": "Indisponible",
+    "cards": "Cartes",
+    "cardEyebrow": "Exemple · XVe siècle",
+    "cardTitle": "Titre d’une histoire d’exemple",
+    "cardExcerpt": "Texte d’exemple. Ici s’affichera le début de l’histoire, sur trois lignes au plus, pour donner envie de lire la suite.",
+    "cardFeatureTitle": "Une histoire à la une, en grand",
+    "chips": "Pastilles",
+    "chipPerson": "Prénom Exemple",
+    "chipPerson2": "Autre Exemple",
+    "filters": {
+      "war": "Guerre",
+      "court": "Cour",
+      "travel": "Voyage",
+      "daily": "Vie quotidienne"
+    },
+    "fields": "Champs",
+    "fieldName": "Nom de la personne",
+    "fieldNameHint": "Tel qu’il figure dans les documents.",
+    "fieldDate": "Date de naissance",
+    "fieldDateError": "Indiquez au moins l’année, par exemple 1890.",
+    "fieldPrecision": "Précision de la date",
+    "precisions": {
+      "exact": "Date exacte",
+      "about": "Vers",
+      "before": "Avant",
+      "after": "Après"
+    },
+    "fieldStory": "Votre histoire",
+    "fieldOptional": "facultatif",
+    "fieldAnonymous": "Publier sans mon nom",
+    "fieldAnonymousHint": "L’administrateur saura qui l’a écrite.",
+    "panel": "Panneau latéral",
+    "panelIntro": "Sur ordinateur, il glisse depuis la droite ; sur téléphone, il monte du bas de l’écran.",
+    "panelOpen": "Ouvrir une fiche d’exemple",
+    "panelEyebrow": "Fiche d’exemple",
+    "panelTitle": "Prénom Exemple",
+    "panelBody": "Une fiche de personne s’ouvrira ici depuis l’arbre : portrait, dates, mariages, parents et enfants, histoires liées.",
+    "panelAction": "Voir la fiche complète",
+    "arms": "Armoiries",
+    "armsIntro": "Dessinées pour le site en SVG net. La famille pourra les remplacer par ses propres fichiers.",
+    "armsBlank": "Sans armoiries",
+    "glossary": "Chaque terme technique s’explique d’un clic : trois <fasce>fasces</fasce> de <gueules>gueules</gueules> sur fond d’<argent>argent</argent>, un écu <ecartele>écartelé</ecartele>, des <doloire>doloires</doloire>.",
+    "empty": "État vide",
+    "emptyIntro": "Une rubrique sans contenu invite à contribuer, jamais de trou ni de texte de remplissage.",
+    "menuFooter": "Menu et pied de page",
+    "menuFooterIntro": "Le menu est en haut de cette page ; le pied de page, en bas. Sous 1360 pixels de large, le menu s’ouvre en plein écran."
   }
 }

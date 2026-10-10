@@ -10,6 +10,106 @@
       "fr": "Français",
       "en": "English",
       "de": "Deutsch"
+    },
+    "close": "Close",
+    "loading": "Loading…"
+  },
+  "nav": {
+    "label": "Main menu",
+    "homeLabel": "House of Croÿ, home",
+    "home": "Home",
+    "tree": "Family tree",
+    "arms": "Arms and branches",
+    "stories": "Stories",
+    "photos": "Photos",
+    "places": "Places and events",
+    "contribute": "Contribute",
+    "search": "Search",
+    "signIn": "Sign in",
+    "openMenu": "Open the menu",
+    "closeMenu": "Close the menu"
+  },
+  "theme": {
+    "label": "Appearance",
+    "system": "Auto",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "footer": {
+    "invitationTitle": "Are you family?",
+    "invitationBody": "This site is built with you. Suggest a photo, a story, a correction: an administrator reviews it before it is published.",
+    "contribute": "Contribute",
+    "requestAccess": "Request access",
+    "siteMap": "Site map",
+    "house": "House of Croÿ",
+    "pronunciation": "Croÿ is pronounced “croo-ee”",
+    "credits": "Each image is credited beneath it."
+  },
+  "arms": {
+    "croy": "Arms of Croÿ: argent, three bars gules",
+    "croyRenty": "Arms of Croÿ-Renty: quarterly, 1 and 4 Croÿ, 2 and 3 argent, three doloires gules, the two in chief addorsed",
+    "hongrieAncienne": "Ancient arms of Hungary: barry of eight gules and argent",
+    "blank": "Shield without recorded arms"
+  },
+  "status": {
+    "draft": "Draft",
+    "pending": "To review",
+    "published": "Published",
+    "rejected": "Declined"
+  },
+  "glossary": {
+    "fasce": "A horizontal band running across the shield from one edge to the other.",
+    "ecartele": "A shield divided into four quarters, to bring together the arms of several families.",
+    "doloire": "A broad axe head without a handle, originally a cooper’s tool.",
+    "gueules": "Red, in the language of heraldry.",
+    "argent": "White, in the language of heraldry."
+  },
+  "sections": {
+    "tree": {
+      "title": "Family tree",
+      "emptyTitle": "The tree is waiting for its first branches",
+      "emptyBody": "No one has been added yet. Family members can suggest the first ancestors; an administrator approves them before they appear here.",
+      "emptyAction": "Suggest a person"
+    },
+    "arms": {
+      "title": "Arms and branches",
+      "emptyTitle": "The coats of arms are coming soon",
+      "emptyBody": "The shields, the branches of the family and their explanation will be added by the family.",
+      "emptyAction": "Suggest an addition"
+    },
+    "stories": {
+      "title": "Stories",
+      "emptyTitle": "No stories yet",
+      "emptyBody": "An anecdote, a memory, a rediscovered letter: every story begins with someone who tells it.",
+      "emptyAction": "Tell a story"
+    },
+    "photos": {
+      "title": "Photos",
+      "emptyTitle": "The photo wall is still empty",
+      "emptyBody": "Portraits, weddings, family gatherings: send your photos, they will be published once approved.",
+      "emptyAction": "Send photos"
+    },
+    "places": {
+      "title": "Places and events",
+      "emptyTitle": "The map and the timeline will fill up soon",
+      "emptyBody": "The family’s places and the key moments of its history will appear here as soon as they have been entered.",
+      "emptyAction": "Suggest a place"
+    },
+    "search": {
+      "title": "Search",
+      "emptyTitle": "Search is coming soon",
+      "emptyBody": "It will cover people, stories, places, events, branches and titles all at once."
+    },
+    "contribute": {
+      "title": "Contribute",
+      "emptyTitle": "The site is built with the family",
+      "emptyBody": "Soon, family members will be able to suggest a correction, a person, a photo or a story here. Every suggestion is reviewed by an administrator before it is published.",
+      "emptyAction": "Request family access"
+    },
+    "signIn": {
+      "title": "Sign in",
+      "emptyTitle": "Signing in is coming soon",
+      "emptyBody": "You will receive a link by email to sign in, with no password to remember."
     }
   },
   "home": {
@@ -22,5 +122,91 @@
     "title": "Page not found",
     "body": "This address does not lead to any page. It may have changed, or the page does not exist yet.",
     "backHome": "Back to the home page"
+  },
+  "style": {
+    "title": "Design system",
+    "intro": "The colours, typefaces, motion and components of the site, gathered on one page to check them in light and dark, on phone and on computer.",
+    "internal": "Working page, not indexed.",
+    "colors": "Colours",
+    "colorsIntro": "Two colours, those of the coat of arms: white and red. Everything else is ink and grey. The contrast ratio is measured against the page background.",
+    "contrastSmall": "body text",
+    "contrastLarge": "large text only",
+    "contrastFail": "decoration only",
+    "swatches": {
+      "paper": "Paper",
+      "paper2": "Soft grey",
+      "ink": "Ink",
+      "inkMuted": "Muted ink",
+      "hairline": "Hairline",
+      "croy": "Croÿ red",
+      "croyDeep": "Deep red",
+      "croyText": "Red for small text"
+    },
+    "type": "Typography",
+    "typeIntro": "Titles in Bodoni Moda, text in Atkinson Hyperlegible Next. The ÿ must be perfectly drawn.",
+    "typeSample": "A family, its faces, its stories",
+    "typeBody": "Body text: 16 pixels on phones, 18 on computers. Short sentences in the narrative present, written for a cousin rather than a historian.",
+    "numbers": "Tabular figures",
+    "spacing": "Spacing, corners, durations",
+    "spacingIntro": "White space breathes: wide margins, few elements per screen. Corners stay sharp, like the bands and the shield. Motion lasts 200 to 600 milliseconds.",
+    "motif": "Motif",
+    "motifIntro": "The three bars become a separator, a loading indicator and the page transition; the two dots of the ÿ serve as bullet and marker.",
+    "motifList": {
+      "separator": "Section separator",
+      "loader": "Loading indicator",
+      "hover": "Card hover"
+    },
+    "replayTransition": "Replay the page transition",
+    "buttons": "Buttons",
+    "buttonPrimary": "Main action",
+    "buttonSecondary": "Secondary action",
+    "buttonGhost": "Action link",
+    "buttonBusy": "Sending",
+    "buttonDisabled": "Unavailable",
+    "cards": "Cards",
+    "cardEyebrow": "Example · 15th century",
+    "cardTitle": "Title of an example story",
+    "cardExcerpt": "Example text. The beginning of the story will show here, three lines at most, to make you want to read on.",
+    "cardFeatureTitle": "A featured story, shown large",
+    "chips": "Chips",
+    "chipPerson": "Firstname Example",
+    "chipPerson2": "Another Example",
+    "filters": {
+      "war": "War",
+      "court": "Court",
+      "travel": "Travel",
+      "daily": "Daily life"
+    },
+    "fields": "Fields",
+    "fieldName": "Name of the person",
+    "fieldNameHint": "As written in the documents.",
+    "fieldDate": "Date of birth",
+    "fieldDateError": "Enter at least the year, for example 1890.",
+    "fieldPrecision": "Precision of the date",
+    "precisions": {
+      "exact": "Exact date",
+      "about": "About",
+      "before": "Before",
+      "after": "After"
+    },
+    "fieldStory": "Your story",
+    "fieldOptional": "optional",
+    "fieldAnonymous": "Publish without my name",
+    "fieldAnonymousHint": "The administrator will know who wrote it.",
+    "panel": "Side panel",
+    "panelIntro": "On computers it slides in from the right; on phones it rises from the bottom of the screen.",
+    "panelOpen": "Open an example profile",
+    "panelEyebrow": "Example profile",
+    "panelTitle": "Firstname Example",
+    "panelBody": "A person’s profile will open here from the tree: portrait, dates, marriages, parents and children, related stories.",
+    "panelAction": "See the full profile",
+    "arms": "Coats of arms",
+    "armsIntro": "Drawn for the site as crisp SVG. The family can replace them with its own files.",
+    "armsBlank": "No arms",
+    "glossary": "Every technical term is explained in one click: three <fasce>bars</fasce> <gueules>gules</gueules> on an <argent>argent</argent> field, a <ecartele>quartered</ecartele> shield, <doloire>doloires</doloire>.",
+    "empty": "Empty state",
+    "emptyIntro": "A section without content invites people to contribute: never a hole, never filler text.",
+    "menuFooter": "Menu and footer",
+    "menuFooterIntro": "The menu is at the top of this page; the footer at the bottom. Below 1360 pixels wide, the menu opens full screen."
   }
 }

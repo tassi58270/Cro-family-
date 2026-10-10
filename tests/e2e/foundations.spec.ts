@@ -47,7 +47,10 @@ test.describe("the three languages", () => {
     page,
   }) => {
     await page.goto("/fr");
-    await page.getByRole("link", { name: "en", exact: true }).click();
+    await page
+      .getByRole("contentinfo")
+      .getByRole("link", { name: "en", exact: true })
+      .click();
     await expect(page).toHaveURL(/\/en$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(
       homes[1].title,

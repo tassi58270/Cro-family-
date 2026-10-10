@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { PageTransition } from "@/components/ui/page-transition";
+import { themeScript } from "@/components/ui/theme-switcher";
+import { atkinson, bodoni } from "@/lib/design/fonts";
 import { getPathname } from "@/lib/i18n/navigation";
 import { routing } from "@/lib/i18n/routing";
 import { resolveLocale } from "@/lib/i18n/server";
@@ -40,6 +43,7 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#141414" },
   ],
+  viewportFit: "cover",
 };
 
 export default async function LocaleLayout({
@@ -50,7 +54,15 @@ export default async function LocaleLayout({
   const t = await getTranslations({ locale, namespace: "common" });
 
   return (
-    <html lang={locale} className="h-full antialiased">
+    <html
+      lang={locale}
+      className={`${bodoni.variable} ${atkinson.variable} h-full`}
+      // The theme script below may set data-theme before React hydrates.
+      suppressHydrationWarning
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <a
           href="#contenu"
@@ -58,7 +70,10 @@ export default async function LocaleLayout({
         >
           {t("skipToContent")}
         </a>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          {children}
+          <PageTransition />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

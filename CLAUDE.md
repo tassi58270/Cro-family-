@@ -18,7 +18,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 ## Avancement (section 8)
 
 - [x] 1. Fondations : Next.js, TypeScript, Tailwind, i18n, lint, tests, CI
-- [ ] 2. Système de design (page « style », clair et sombre, mobile et ordinateur)
+- [x] 2. Système de design (page `/fr/style`, clair et sombre, mobile et ordinateur)
 - [ ] 3. Base de données et sécurité (Supabase, RLS, tests vie privée)
 - [ ] 4. Outils de saisie et jeu de démonstration fictif (assistant de démarrage, saisie dans l’arbre)
 - [ ] 5. Page d’accueil (proposer d’abord deux directions pour l’écran d’ouverture)
@@ -73,7 +73,10 @@ app/
     (admin)/admin      dashboard (à venir)
     connexion/         (à venir)
   layout.tsx           simple passe-plat ; not-found.tsx = 404 de dernier recours
-components/ui/         composants de base
+components/ui/         composants de base : bouton, carte, pastille, champ, panneau
+                       latéral, menu, pied de page, transition, état vide, terme expliqué
+components/heraldique/ écus en SVG (Croÿ, Croÿ-Renty, Hongrie ancienne, écu vide)
+lib/design/            polices, palette, contrastes
 lib/i18n/              langues, adresses traduites, navigation, chargement des textes
 lib/site.ts            URL publique, indexation
 messages/              fr.json, en.json, de.json : textes de l’interface
@@ -93,6 +96,14 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - **Ton** : narratif, direct, chaleureux, vouvoiement simple. Pas de majuscules partout ni de latin décoratif. Une légende est présentée comme une légende ; une date incertaine porte « vers ».
 - **Code** : identifiants et commentaires en anglais ; commentaires rares, pour le _pourquoi_. Messages de commit en anglais, à l’impératif.
 - **Traductions EN/DE** : tout texte traduit par l’IA reste « à relire » par la famille (y compris les segments d’adresse).
+
+## Système de design (étape 2)
+
+- Jetons dans `app/globals.css` : couleurs sémantiques (`paper`, `paper-2`, `ink`, `ink-muted`, `hairline`, `croy`, `croy-deep`, `croy-text`), échelle de texte (`text-caption` à `text-monument`), `ease-out` / `ease-in-out` / `ease-drawer`, durées `--duration-press|fast|base|slow`, point de rupture `nav` (1360 px).
+- Jamais de couleur en dur dans un composant : passer par les jetons, pour que le thème sombre suive. `croy-text` pour le petit texte rouge (le rouge Croÿ échoue sur fond encre).
+- Thème : automatique, clair ou sombre (`data-theme` sur `<html>`, mémorisé dans le navigateur).
+- La page `/fr/style` montre tout ; la mettre à jour quand un composant de base change.
+- Les textes français suivent la typographie (espace fine insécable avant `; : ! ?`, insécables dans « ») : un test le vérifie.
 
 ## Identité visuelle (section 3)
 

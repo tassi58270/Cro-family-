@@ -10,6 +10,106 @@
       "fr": "Français",
       "en": "English",
       "de": "Deutsch"
+    },
+    "close": "Schließen",
+    "loading": "Wird geladen…"
+  },
+  "nav": {
+    "label": "Hauptmenü",
+    "homeLabel": "Haus Croÿ, Startseite",
+    "home": "Startseite",
+    "tree": "Stammbaum",
+    "arms": "Wappen und Linien",
+    "stories": "Geschichten",
+    "photos": "Fotos",
+    "places": "Orte und Ereignisse",
+    "contribute": "Mitwirken",
+    "search": "Suchen",
+    "signIn": "Anmelden",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen"
+  },
+  "theme": {
+    "label": "Darstellung",
+    "system": "Auto",
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "footer": {
+    "invitationTitle": "Gehören Sie zur Familie?",
+    "invitationBody": "Diese Seite entsteht mit Ihnen. Schlagen Sie ein Foto, eine Geschichte, eine Korrektur vor: Ein Administrator prüft sie vor der Veröffentlichung.",
+    "contribute": "Mitwirken",
+    "requestAccess": "Zugang anfragen",
+    "siteMap": "Seitenübersicht",
+    "house": "Haus Croÿ",
+    "pronunciation": "Croÿ wird „Kru-i“ ausgesprochen",
+    "credits": "Die Bildnachweise stehen jeweils unter dem Bild."
+  },
+  "arms": {
+    "croy": "Wappen Croÿ: in Silber drei rote Balken",
+    "croyRenty": "Wappen Croÿ-Renty: geviert, 1 und 4 Croÿ, 2 und 3 in Silber drei rote Breitbeile, die beiden oberen abgewendet",
+    "hongrieAncienne": "Altes Wappen Ungarns: achtmal von Rot und Silber geteilt",
+    "blank": "Schild ohne erfasstes Wappen"
+  },
+  "status": {
+    "draft": "Entwurf",
+    "pending": "Zu prüfen",
+    "published": "Veröffentlicht",
+    "rejected": "Abgelehnt"
+  },
+  "glossary": {
+    "fasce": "Ein waagerechter Streifen, der den Schild von Rand zu Rand durchquert.",
+    "ecartele": "Ein in vier Felder geteilter Schild, der die Wappen mehrerer Familien vereint.",
+    "doloire": "Ein breites Beil ohne Stiel, ursprünglich ein Werkzeug der Böttcher.",
+    "gueules": "Rot, in der Sprache der Wappenkunde.",
+    "argent": "Weiß oder Silber, in der Sprache der Wappenkunde."
+  },
+  "sections": {
+    "tree": {
+      "title": "Stammbaum",
+      "emptyTitle": "Der Stammbaum wartet auf seine ersten Zweige",
+      "emptyBody": "Noch wurde niemand hinzugefügt. Familienmitglieder können die ersten Vorfahren vorschlagen; ein Administrator prüft sie, bevor sie hier erscheinen.",
+      "emptyAction": "Eine Person vorschlagen"
+    },
+    "arms": {
+      "title": "Wappen und Linien",
+      "emptyTitle": "Die Wappen folgen in Kürze",
+      "emptyBody": "Die Schilde, die Linien der Familie und ihre Erklärung werden von der Familie ergänzt.",
+      "emptyAction": "Eine Ergänzung vorschlagen"
+    },
+    "stories": {
+      "title": "Geschichten",
+      "emptyTitle": "Noch keine Geschichten",
+      "emptyBody": "Eine Anekdote, eine Erinnerung, ein wiedergefundener Brief: Jede Geschichte beginnt mit jemandem, der sie erzählt.",
+      "emptyAction": "Eine Geschichte erzählen"
+    },
+    "photos": {
+      "title": "Fotos",
+      "emptyTitle": "Die Fotowand ist noch leer",
+      "emptyBody": "Porträts, Hochzeiten, Familientreffen: Schicken Sie Ihre Fotos, sie werden nach Prüfung veröffentlicht.",
+      "emptyAction": "Fotos senden"
+    },
+    "places": {
+      "title": "Orte und Ereignisse",
+      "emptyTitle": "Karte und Zeitleiste füllen sich bald",
+      "emptyBody": "Die Orte der Familie und die großen Momente ihrer Geschichte erscheinen hier, sobald sie erfasst sind.",
+      "emptyAction": "Einen Ort vorschlagen"
+    },
+    "search": {
+      "title": "Suchen",
+      "emptyTitle": "Die Suche folgt in Kürze",
+      "emptyBody": "Sie wird Personen, Geschichten, Orte, Ereignisse, Linien und Titel zugleich umfassen."
+    },
+    "contribute": {
+      "title": "Mitwirken",
+      "emptyTitle": "Die Seite entsteht mit der Familie",
+      "emptyBody": "Bald können Familienmitglieder hier eine Korrektur, eine Person, ein Foto oder eine Geschichte vorschlagen. Jeder Vorschlag wird vor der Veröffentlichung von einem Administrator geprüft.",
+      "emptyAction": "Familienzugang anfragen"
+    },
+    "signIn": {
+      "title": "Anmelden",
+      "emptyTitle": "Die Anmeldung folgt in Kürze",
+      "emptyBody": "Sie erhalten einen Link per E-Mail und melden sich ohne Passwort an."
     }
   },
   "home": {
@@ -22,5 +122,91 @@
     "title": "Seite nicht gefunden",
     "body": "Unter dieser Adresse gibt es keine Seite. Vielleicht hat sie sich geändert, oder die Seite existiert noch nicht.",
     "backHome": "Zurück zur Startseite"
+  },
+  "style": {
+    "title": "Designsystem",
+    "intro": "Farben, Schriften, Bewegungen und Bausteine der Seite auf einer Seite, um sie hell und dunkel, auf Telefon und Computer zu prüfen.",
+    "internal": "Arbeitsseite, nicht indexiert.",
+    "colors": "Farben",
+    "colorsIntro": "Zwei Farben, die des Wappens: Weiß und Rot. Alles andere ist Tinte und Grau. Das Kontrastverhältnis wird auf dem Seitenhintergrund berechnet.",
+    "contrastSmall": "Fließtext",
+    "contrastLarge": "nur großer Text",
+    "contrastFail": "nur Dekor",
+    "swatches": {
+      "paper": "Papier",
+      "paper2": "Sanftes Grau",
+      "ink": "Tinte",
+      "inkMuted": "Gedämpfte Tinte",
+      "hairline": "Haarlinie",
+      "croy": "Croÿ-Rot",
+      "croyDeep": "Tiefes Rot",
+      "croyText": "Rot für kleinen Text"
+    },
+    "type": "Typografie",
+    "typeIntro": "Titel in Bodoni Moda, Text in Atkinson Hyperlegible Next. Das ÿ muss tadellos gezeichnet sein.",
+    "typeSample": "Eine Familie, ihre Gesichter, ihre Geschichten",
+    "typeBody": "Fließtext: 16 Pixel auf dem Telefon, 18 auf dem Computer. Kurze Sätze im erzählenden Präsens, für einen Cousin statt für einen Historiker.",
+    "numbers": "Tabellenziffern",
+    "spacing": "Abstände, Ecken, Dauer",
+    "spacingIntro": "Der Weißraum atmet: großzügige Ränder, wenige Elemente pro Bildschirm. Die Ecken bleiben scharf wie die Balken und der Schild. Bewegungen dauern 200 bis 600 Millisekunden.",
+    "motif": "Motiv",
+    "motifIntro": "Die drei Balken werden zu Trenner, Ladeanzeige und Seitenübergang; die zwei Punkte des ÿ dienen als Aufzählungszeichen und Markierung.",
+    "motifList": {
+      "separator": "Abschnittstrenner",
+      "loader": "Ladeanzeige",
+      "hover": "Karten beim Überfahren"
+    },
+    "replayTransition": "Seitenübergang erneut abspielen",
+    "buttons": "Schaltflächen",
+    "buttonPrimary": "Hauptaktion",
+    "buttonSecondary": "Nebenaktion",
+    "buttonGhost": "Aktionslink",
+    "buttonBusy": "Wird gesendet",
+    "buttonDisabled": "Nicht verfügbar",
+    "cards": "Karten",
+    "cardEyebrow": "Beispiel · 15. Jahrhundert",
+    "cardTitle": "Titel einer Beispielgeschichte",
+    "cardExcerpt": "Beispieltext. Hier erscheint der Anfang der Geschichte, höchstens drei Zeilen, damit man weiterlesen möchte.",
+    "cardFeatureTitle": "Eine Geschichte im Fokus, groß dargestellt",
+    "chips": "Plaketten",
+    "chipPerson": "Vorname Beispiel",
+    "chipPerson2": "Noch ein Beispiel",
+    "filters": {
+      "war": "Krieg",
+      "court": "Hof",
+      "travel": "Reisen",
+      "daily": "Alltag"
+    },
+    "fields": "Felder",
+    "fieldName": "Name der Person",
+    "fieldNameHint": "So, wie er in den Dokumenten steht.",
+    "fieldDate": "Geburtsdatum",
+    "fieldDateError": "Geben Sie mindestens das Jahr an, zum Beispiel 1890.",
+    "fieldPrecision": "Genauigkeit des Datums",
+    "precisions": {
+      "exact": "Genaues Datum",
+      "about": "Um",
+      "before": "Vor",
+      "after": "Nach"
+    },
+    "fieldStory": "Ihre Geschichte",
+    "fieldOptional": "freiwillig",
+    "fieldAnonymous": "Ohne meinen Namen veröffentlichen",
+    "fieldAnonymousHint": "Der Administrator weiß, wer sie geschrieben hat.",
+    "panel": "Seitenleiste",
+    "panelIntro": "Auf dem Computer gleitet sie von rechts herein; auf dem Telefon steigt sie vom unteren Bildschirmrand auf.",
+    "panelOpen": "Ein Beispielprofil öffnen",
+    "panelEyebrow": "Beispielprofil",
+    "panelTitle": "Vorname Beispiel",
+    "panelBody": "Hier öffnet sich vom Stammbaum aus das Profil einer Person: Porträt, Daten, Ehen, Eltern und Kinder, verknüpfte Geschichten.",
+    "panelAction": "Vollständiges Profil ansehen",
+    "arms": "Wappen",
+    "armsIntro": "Für die Seite als klares SVG gezeichnet. Die Familie kann sie durch eigene Dateien ersetzen.",
+    "armsBlank": "Ohne Wappen",
+    "glossary": "Jeder Fachbegriff erklärt sich mit einem Klick: drei <fasce>Balken</fasce> in <gueules>Rot</gueules> auf <argent>Silber</argent>, ein <ecartele>gevierter</ecartele> Schild, <doloire>Breitbeile</doloire>.",
+    "empty": "Leerer Zustand",
+    "emptyIntro": "Ein Bereich ohne Inhalt lädt zum Mitwirken ein: nie eine Lücke, nie Fülltext.",
+    "menuFooter": "Menü und Fußzeile",
+    "menuFooterIntro": "Das Menü steht oben auf dieser Seite, die Fußzeile unten. Unter 1360 Pixel Breite öffnet sich das Menü im Vollbild."
   }
 }
