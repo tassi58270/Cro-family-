@@ -74,7 +74,7 @@ function pick<T extends Row>(rows: T[], locale: Locale): T | undefined {
 function localized(row: Row | undefined, field: string): Localized | null {
   const text = row?.[field];
   return typeof text === "string" && text.trim()
-    ? { text, lang: row!.locale }
+    ? { text: typeset(text, row!.locale), lang: row!.locale }
     : null;
 }
 
