@@ -9,10 +9,10 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 
 ## Règles absolues
 
-1. **N’invente aucun fait** : ni personne, ni date, ni titre, ni blason, ni anecdote. Seuls les repères de la section 2 du cahier des charges servent de contenu de départ, au statut « à valider par la famille ». S’il manque une information, laisse un champ vide signalé.
+1. **Le site est livré vide : tout le contenu est écrit par la famille**, depuis le dashboard. N’écris aucun texte historique, biographie ni anecdote, ne reprends rien de Wikipédia ni d’ailleurs. La section 2 du cahier des charges sert seulement à comprendre le sujet et à dimensionner le design : rien n’en est publié. Pour tester, un jeu de démonstration **visiblement fictif** (famille « Exemple »), signalé par un bandeau et supprimable en un clic. Chaque page reste belle vide (invitation à contribuer, jamais de texte de remplissage).
 2. **Vie privée** : une personne vivante n’est jamais visible du public ni des moteurs de recherche (« Personne vivante », sans nom ni date). La règle est appliquée **dans la base** (RLS), pas seulement dans l’interface.
 3. **Rien ne se publie sans validation** d’un administrateur. Tout changement est journalisé et réversible.
-4. **Une étape à la fois** (section 8). Avant : un court plan. Après : vérifier le critère « terminé quand », commit, montrer le résultat, bilan, puis **attendre la validation** avant l’étape suivante.
+4. **Une étape à la fois** (section 8). Avant : un court plan. Après : vérifier le critère « terminé quand », commit, montrer le résultat, bilan. Depuis le 10 octobre 2026, Baudouin autorise à **enchaîner les étapes sans attendre sa validation** (un commit poussé et un bilan par étape) ; ne s’arrêter que pour ce qui exige les fichiers, les clés ou une décision de la famille.
 5. Pose une question plutôt que de supposer, surtout sur le contenu historique.
 
 ## Avancement (section 8)
@@ -20,15 +20,27 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 - [x] 1. Fondations : Next.js, TypeScript, Tailwind, i18n, lint, tests, CI
 - [ ] 2. Système de design (page « style », clair et sombre, mobile et ordinateur)
 - [ ] 3. Base de données et sécurité (Supabase, RLS, tests vie privée)
-- [ ] 4. Données de départ (≥ 15 personnes, 10 titres, 13 branches, 12 lieux, 4 anecdotes)
+- [ ] 4. Outils de saisie et jeu de démonstration fictif (assistant de démarrage, saisie dans l’arbre)
 - [ ] 5. Page d’accueil (proposer d’abord deux directions pour l’écran d’ouverture)
 - [ ] 6. Arbre généalogique
 - [ ] 7. Armoiries et branches
-- [ ] 8. Histoires
+- [ ] 8. Histoires, puis page Photos (section 6.5)
 - [ ] 9. Lieux et événements
 - [ ] 10. Comptes famille et contributions
 - [ ] 11. Dashboard administrateur
 - [ ] 12. Traductions, finitions, mise en ligne
+
+## Décisions de la famille (10 octobre 2026)
+
+- **Écran d’ouverture : direction A « Monument »** (prototype `docs/prototypes/ouverture.html`) : écu et nom centrés. Titres en **Bodoni Moda**, texte en **Atkinson Hyperlegible Next**.
+- **Base de données : Postgres local d’abord**, migrations compatibles Supabase dans `supabase/migrations`. Le projet Supabase sera créé plus tard.
+- **Vie privée** : une personne est traitée comme vivante (invisible du public) tant qu’elle n’a ni date de décès ni case « décédée » cochée, **sauf si elle est née il y a plus de 100 ans**.
+- **Premier administrateur** : l’adresse est dans la variable d’environnement `ADMIN_EMAILS`, jamais dans le code.
+- **Accroche par défaut** sous le nom : « Neuf siècles d’une famille européenne » et « se prononce croui » (mots de la famille, modifiables dans le dashboard).
+- **Armoiries dessinées pour le projet** : Croÿ, Croÿ-Renty et Hongrie ancienne (Árpád, fascé de gueules et d’argent de huit pièces) ; la famille peut les remplacer par ses fichiers.
+- **Ascendance hongroise** : le site assume la position de la famille, chaque maillon affiche sa preuve, le débat historique est mentionné en une phrase. Ne jamais écrire la lignée soi-même.
+- **Pas encore de nom de domaine** : adresse provisoire jusqu’à l’étape 12.
+- man8rove.com (inspiration pour l’arbre) est bloqué depuis le conteneur : attendre les captures annotées de la famille.
 
 ## Commandes
 
@@ -56,7 +68,7 @@ Next.js 16 diffère de ce que tu connais peut-être : lis le guide concerné dan
 app/
   [locale]/            layout racine réel (<html lang>), une page par langue
     (public)/          accueil, arbre, armoiries, branches, titres, histoires,
-                       lieux-et-evenements, recherche, contribuer
+                       photos, lieux-et-evenements, recherche, contribuer
     (membre)/compte    espace membre (à venir)
     (admin)/admin      dashboard (à venir)
     connexion/         (à venir)

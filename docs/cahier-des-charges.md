@@ -16,19 +16,31 @@ Le site répond à trois besoins :
 
 Le public visé est la famille elle-même, de l'adolescent au grand-parent. Beaucoup ne connaissent pas la généalogie. Le site doit donc être compréhensible sans explication, sur téléphone comme sur ordinateur.
 
-**Règle absolue sur le contenu.** Tu n'inventes aucun fait : ni personne, ni date, ni titre, ni blason, ni anecdote. Les repères de la section 2 viennent de sources publiques : utilise-les comme contenu de départ, chacun marqué « à valider par la famille » dans le dashboard. Tout le reste (personnes récentes, photos, anecdotes familiales) sera fourni par la famille (section 10). S'il te manque une information, tu laisses un champ vide signalé, jamais une invention.
+**Règle absolue sur le contenu.** Tout le contenu du site est écrit par la famille, depuis le dashboard. Tu ne rédiges aucun texte historique, aucune biographie, aucune anecdote, et tu ne reprends rien de Wikipédia ni d'aucun autre site. Tu livres un site vide, beau et prêt à remplir, avec des outils de saisie très simples. La section 2 est là pour que tu comprennes le sujet et que tu dimensionnes bien le design : rien de ce qu'elle contient ne doit être publié.
+
+**Un vrai site de famille.** Le site est fait pour être partagé entre cousins, pas pour ressembler à une encyclopédie. Ce qui compte : les personnes, leurs visages, leurs histoires, et l'envie d'y revenir et d'y ajouter quelque chose.
 
 **L'esprit du site.** Ce n'est pas une archive poussiéreuse. C'est un site moderne, vivant et beau, qui donne envie d'explorer, comme le site d'un grand musée contemporain ou un long format interactif de presse.
 
-## 2. Repères historiques (contenu de départ)
+## 2. Repères historiques (contexte pour toi, à ne pas publier)
 
-Ces repères sont tirés de sources publiques listées en fin de document. Ils servent à remplir le site dès le premier jour et à calibrer le design sur du vrai contenu. Charge-les dans la base avec le statut « à valider par la famille ».
+Ces repères viennent de sources publiques listées en fin de document. Ils te servent à comprendre de quelle famille il s'agit, à prévoir les bonnes rubriques et à tester le design sur des volumes réalistes (nombre de branches, de titres, de lieux, longueur des noms). Ne les charge pas dans le site et ne les recopie dans aucune page : la famille saisira elle-même ses informations.
 
 **Le nom.** La maison tire son nom du village de Crouy-Saint-Pierre, dans la Somme, en Picardie. C'est pourquoi Croÿ se prononce « croui ». Les premières traces remontent au XIIe siècle : des seigneurs locaux, sans fortune ni influence particulière.
 
 **Le blason.** Les armes primitives sont *d'argent à trois fasces de gueules* : trois bandes horizontales rouges sur fond blanc. Après le mariage de Guillaume de Croÿ avec Isabeau de Renty (1354), elles sont écartelées avec Renty : *d'argent à trois doloires de gueules, les deux en chef adossées* (trois haches rouges sur fond blanc). Le rouge et le blanc sont donc les deux seules couleurs de l'identité du site.
 
-**La légende hongroise.** Au début du XVIIe siècle, la famille fait dresser une généalogie (Jacques de Bye, 1612) qui la rattache aux rois de Hongrie : un prince Marc, réfugié en France en 1147, aurait épousé Catherine de Croÿ. Le rapprochement s'appuie sur la ressemblance des blasons, tous deux à bandes rouges et blanches. À présenter comme une légende, pas comme un fait.
+**L'ascendance hongroise.** La famille détient des preuves qui font remonter sa lignée aux rois de Hongrie de la dynastie des Árpád. L'arbre doit donc pouvoir commencer en Hongrie, avant la Picardie. La tradition connue rattache les Croÿ à un prince Marc de Hongrie, réfugié en France en 1147, qui aurait épousé Catherine de Croÿ ; les deux blasons partagent les bandes rouges et blanches.
+
+Consignes pour cette partie :
+
+- N'écris pas toi-même cette lignée. Attends les documents de la famille (section 10) et saisis uniquement ce qu'ils établissent.
+
+- Chaque maillon de la lignée hongroise affiche sa preuve : document numérisé, référence, transcription.
+
+- Les sources publiques consultées présentent cette ascendance comme une tradition dressée au XVIIe siècle (généalogie de Jacques de Bye, 1612) et débattue par les historiens. Le site assume la position de la famille, montre ses preuves et mentionne honnêtement ce débat en une phrase. C'est ce qui rendra la démonstration crédible.
+
+- Sur la page d'accueil, le récit s'ouvre par un prologue : « Aux origines, la Hongrie des Árpád », avant le chapitre picard. Le texte de ce prologue sera fourni ou validé par la famille.
 
 ### L'histoire en six chapitres
 
@@ -116,7 +128,7 @@ Ces repères sont tirés de sources publiques listées en fin de document. Ils s
 | Dülmen et Merfeld (Westphalie) | Allemagne | Duché de 1803 ; château de Dülmen détruit en 1945            |
 | Crécy (1346), Azincourt (1415) | France    | Batailles où des Croÿ ont combattu                           |
 
-### Anecdotes prêtes pour la page Histoires
+### Anecdotes connues (exemples de format, à ne pas publier)
 
 - **« Sauvez les titres de la maison de Croÿ ! »** Selon une anecdote sans doute apocryphe, un duc aurait fait peindre un Déluge où un nageur tend un parchemin à Noé en criant cette phrase.
 
@@ -255,6 +267,8 @@ La pile ci-dessous est une recommandation. Si tu proposes mieux, explique pourqu
 
 - Sauvegarde automatique quotidienne de la base.
 
+**Preuves et niveau de certitude.** Ajoute une table sources (document numérisé, référence, dépôt d'archives, transcription, traduction) reliée aux personnes, aux unions et aux liens de filiation. Chaque lien de l'arbre porte un niveau de certitude : attesté par document, tradition familiale, ou débattu. Ce niveau s'affiche discrètement sur le trait de l'arbre et en clair sur la fiche.
+
 ### Arborescence du site
 
 Le site se divise en trois zones, chacune avec son niveau d'accès. Un visiteur lit, un membre connecté propose, un administrateur valide et publie.
@@ -263,7 +277,7 @@ Le site se divise en trois zones, chacune avec son niveau d'accès. Un visiteur 
 
 arborescence du site · 3 zones
 
-La zone publique porte les six pages de la section 6. Tout ce qu'un membre écrit part vers l'administration, et seul ce qui y est validé revient sur le site public.
+La zone publique porte les sept pages de la section 6. Tout ce qu'un membre écrit part vers l'administration, et seul ce qui y est validé revient sur le site public.
 
 ### Adresses des pages
 
@@ -288,6 +302,8 @@ Chaque page, chaque personne, chaque histoire et chaque lieu a sa propre adresse
 | /fr/admin/...              | Tous les écrans du dashboard              | Administrateurs                  |
 
 L'état de l'arbre vit aussi dans l'adresse : personne centrée, vue choisie, année du curseur. Un lien partagé rouvre l'arbre exactement au même endroit.
+
+S'y ajoutent /fr/photos (mur de photos), /fr/photos/albums/\[album\] et /fr/photos/\[photo\], publiques pour les personnes décédées et réservées aux membres pour les vivants.
 
 ### Liens entre les contenus
 
@@ -345,7 +361,9 @@ Deux sortes de textes, à ne pas mélanger : les textes de l'interface (menus, b
 
 ## 6. Détail des pages
 
-Six pages publiques, plus l'espace membre et le dashboard (section 7). Menu fixe et discret : Accueil, Arbre, Armoiries et branches, Histoires, Lieux et événements, Contribuer. À droite : recherche globale, sélecteur FR / EN / DE, connexion.
+Sept pages publiques, plus l'espace membre et le dashboard (section 7). Menu fixe et discret : Accueil, Arbre, Armoiries et branches, Histoires, Photos, Lieux et événements, Contribuer. À droite : recherche globale, sélecteur FR / EN / DE, connexion.
+
+Tous les textes, chiffres, titres de chapitres et exemples cités ci-dessous illustrent la forme attendue. Le contenu réel est saisi par la famille dans le dashboard. Chaque page doit rester belle quand elle est encore vide ou peu remplie.
 
 ### 6.1 Accueil
 
@@ -367,9 +385,9 @@ C'est la page la plus importante. Elle doit être spectaculaire, moderne et donn
 
 **En quelques lignes.** Trois ou quatre phrases en très grand corps, révélées mot à mot au défilement : d'où vient la famille, comment elle s'est élevée, où elle vit aujourd'hui.
 
-**En chiffres.** Une rangée de grands nombres qui s'animent en comptant : 9 siècles, 15 ducs, 32 chevaliers de la Toison d'or, 2 cardinaux, 5 pays.
+**En chiffres.** Une rangée de grands nombres qui s'animent en comptant. La famille choisit ses chiffres et leurs libellés dans le dashboard ; certains se calculent seuls à partir de l'arbre (nombre de personnes, de générations, de pays, de photos).
 
-**L'histoire en six chapitres.** Un récit au défilement, plein écran, un chapitre par écran (voir section 2).
+**L'histoire en quelques chapitres.** Un récit au défilement, plein écran, un chapitre par écran. La famille écrit ses chapitres dans le dashboard (quatre à huit) : une date, un titre, quelques lignes, une image, un lieu sur la carte.
 
 - À gauche, le texte du chapitre : une date géante, un titre, quatre lignes.
 
@@ -387,7 +405,7 @@ C'est la page la plus importante. Elle doit être spectaculaire, moderne et donn
 
 **Le saviez-vous ?** Trois anecdotes tirées au hasard à chaque visite, en cartes rouges à texte blanc.
 
-**Portes d'entrée.** Cinq grandes tuiles vers les autres pages, chacune avec un aperçu vivant : un morceau d'arbre qui respire, des écus qui défilent, la carte qui clignote.
+**Portes d'entrée.** Six grandes tuiles vers les autres pages, chacune avec un aperçu vivant : un morceau d'arbre qui respire, des écus qui défilent, la carte qui clignote.
 
 **Pied de page.** Invitation à contribuer pour les membres de la famille, sélecteur de langue, crédits.
 
@@ -431,6 +449,24 @@ C'est la page la plus importante. Elle doit être spectaculaire, moderne et donn
 
 - Bouton « Proposer une correction » pour les membres.
 
+**Racines hongroises et preuves.**
+
+- L'arbre a deux points d'entrée : « Depuis les rois de Hongrie » et « Depuis la Picardie ». Par défaut, il s'ouvre sur le premier.
+
+- La lignée des Árpád jusqu'au premier Croÿ forme le tronc, dessiné comme le reste de l'arbre, avec le blason de Hongrie ancienne à côté de celui de Croÿ.
+
+- Chaque fiche a un onglet « Preuves » : les documents numérisés s'ouvrent en grand, avec zoom, transcription et traduction.
+
+- Un bouton « Voir la démonstration » déroule la lignée maillon par maillon, de la Hongrie à aujourd'hui, en affichant la preuve de chaque étape.
+
+**Inspiration : la page Croÿ de man8rove.com.** La famille souhaite s'inspirer de [cette page](https://man8rove.com/fr/blason/sjfzcj8-croy). Ouvre-la dans un navigateur avant de commencer l'étape 6 et relève ce qui fonctionne bien.
+
+- Reprends les principes : le blason comme porte d'entrée de la famille, un petit écu à côté de chaque personne dans l'arbre, les alliances identifiées par l'écu de la famille du conjoint, la navigation d'une famille alliée à l'autre.
+
+- Ne copie ni les textes, ni les images, ni le code de ce site. Les écus sont redessinés pour le projet.
+
+- Garde l'identité de la section 3 : plus de blanc, plus d'air, plus de mouvement.
+
 ### 6.3 Armoiries et branches
 
 - En tête, le blason primitif expliqué pas à pas par une animation : le fond blanc, puis les trois fasces, puis l'écartelé avec les haches de Renty. Chaque terme héraldique est traduit en langage courant.
@@ -461,7 +497,31 @@ C'est la page la plus importante. Elle doit être spectaculaire, moderne et donn
 
 - Une histoire publiée affiche le nom de son auteur, sauf s'il préfère rester anonyme.
 
-### 6.5 Lieux et événements
+### 6.5 Photos
+
+La page qui donne des visages à l'arbre. Elle doit donner envie de s'y promener longtemps.
+
+- **Mur de photos** plein écran, en mosaïque de tailles variées, qui se charge au fil du défilement.
+
+- **Visages de la famille** : une vue en portraits ; un clic sur un visage ouvre la fiche de la personne.
+
+- **Entrées** : par personne, par branche, par époque (décennie par décennie), par lieu, par événement (mariages, réunions de famille), par album.
+
+- **Une photo en grand** : légende, date même approximative, lieu, auteur ou provenance, et les personnes présentes. Cliquer sur un nom ouvre sa fiche ; survoler un nom met en évidence la personne sur la photo.
+
+- **« Qui est-ce ? »** : un album des photos où quelqu'un n'est pas identifié. Les membres proposent un nom, l'administrateur valide. C'est le meilleur moyen de faire participer les anciens.
+
+- **Envoi par les membres** : plusieurs photos à la fois, depuis le téléphone, avec légende et identification des personnes. Publication après validation.
+
+- **Liens automatiques** : une photo apparaît d'elle-même sur la fiche de chaque personne identifiée, sur le lieu et sur l'événement concernés.
+
+- **Diaporama** : lecture plein écran d'un album, pratique pour une réunion de famille.
+
+- **Vie privée** : les photos de personnes vivantes ne sont visibles que par les membres connectés. Chacun peut demander le retrait d'une photo où il figure.
+
+- Portraits peints, gravures et photos anciennes ont toute leur place, avec leur provenance.
+
+### 6.6 Lieux et événements
 
 - Écran partagé : la carte en haut ou à gauche, la frise chronologique en bas ou à droite.
 
@@ -475,7 +535,7 @@ C'est la page la plus importante. Elle doit être spectaculaire, moderne et donn
 
 - Mention de ce que l'on peut encore visiter aujourd'hui.
 
-### 6.6 Contribuer
+### 6.7 Contribuer
 
 - Page publique qui explique simplement comment participer et pourquoi.
 
@@ -530,6 +590,24 @@ Le dashboard doit être utilisable par quelqu'un qui n'est pas technicien. Tout 
 
 - Le dashboard fonctionne correctement sur téléphone pour valider une proposition en déplacement.
 
+### Remplir le site soi-même
+
+Le site est livré vide. La famille le remplit elle-même, à son rythme. La saisie doit donc être un plaisir, pas une corvée.
+
+- **Assistant de démarrage** : à la première connexion, une liste guidée. Déposer le blason, écrire le résumé de l'accueil, ajouter les premiers ancêtres, envoyer les premières photos, inviter trois cousins.
+
+- **Saisie directe dans l'arbre** : sur chaque personne, un bouton « + » pour ajouter un parent, un conjoint ou un enfant sans quitter l'arbre.
+
+- **Modifier sur place** : connecté en administrateur, chaque page publique affiche un bouton « Modifier » qui ouvre le bon formulaire.
+
+- **Photos par lot** : glisser-déposer de dizaines de photos, puis légendes et identification à la chaîne.
+
+- **Fiche complète ou non** : un indicateur montre ce qui manque (dates, portrait, biographie, traductions) et propose de le compléter.
+
+- **Import** : un arbre existant se charge en une fois au format GEDCOM.
+
+- **Pages vides soignées** : une rubrique sans contenu affiche une invitation à contribuer, jamais un trou ni un texte de remplissage.
+
 ## 8. Plan de construction en 12 étapes
 
 Suis les étapes dans l'ordre. À la fin de chacune : vérifie le critère « terminé quand », fais un commit, montre le résultat, puis attends la validation avant de passer à la suivante.
@@ -560,15 +638,15 @@ Suis les étapes dans l'ordre. À la fin de chacune : vérifie le critère « te
 
     - Terminé quand : des tests prouvent qu'un visiteur ne peut lire aucune donnée d'une personne vivante.
 
-4.  **Données de départ.**
+4.  **Outils de saisie et jeu de démonstration.**
 
-    - Charge les repères de la section 2 : personnes, titres, branches, lieux, événements, anecdotes, tous au statut « à valider par la famille ».
+    - Ne charge aucun contenu réel. Crée un petit jeu de démonstration visiblement fictif (famille « Exemple »), signalé par un bandeau et supprimable en un clic, pour tester les pages.
 
-    - Relie les personnes entre elles quand la source le permet.
+    - Construis l'assistant de démarrage et la saisie directe dans l'arbre décrits en section 7.
 
     - Prépare l'import GEDCOM pour recevoir l'arbre complet de la famille.
 
-    - Terminé quand : la base contient au moins 15 personnes, 10 titres, 13 branches, 12 lieux et 4 anecdotes, sans aucune donnée inventée.
+    - Terminé quand : le site est présentable entièrement vide, puis avec le jeu de démonstration, et une personne non technicienne ajoute trois générations en moins de cinq minutes.
 
 5.  **Page d'accueil.**
 
@@ -594,7 +672,7 @@ Suis les étapes dans l'ordre. À la fin de chacune : vérifie le critère « te
 
 8.  **Histoires.**
 
-    - Construis la page magazine, la page de lecture, les filtres, les liens vers personnes, lieux et événements.
+    - Construis la page magazine, la page de lecture, les filtres, les liens vers personnes, lieux et événements. Construis ensuite la page Photos de la section 6.5 : mur de photos, albums, identification des personnes, envoi par lot.
 
     - Terminé quand : une histoire apparaît automatiquement sur la fiche de chaque personne qu'elle cite.
 
@@ -690,9 +768,15 @@ UTILISER LES SKILLS SUR LE SITE APPLE, SUR TOUTES CELLES QUI CONTIENNES ANIMATIO
 
 - [ ] Le nom de domaine souhaité
 
-- [ ] La relecture des repères de la section 2, en particulier pour la branche de la famille concernée
+- [ ] Le contenu lui-même, saisi par la famille dans le dashboard une fois le site livré : textes de l'accueil, personnes, histoires, lieux
 
 - [ ] Les personnes qui reliront l'anglais et l'allemand
+
+&nbsp;
+
+- [ ] Les preuves de l'ascendance hongroise : documents numérisés, références, transcriptions, et la lignée maillon par maillon
+
+- [ ] Ce qui plaît le plus sur la page Croÿ de man8rove.com (captures d'écran annotées)
 
 ## Sources des repères historiques
 
