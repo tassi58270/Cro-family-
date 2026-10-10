@@ -1,0 +1,799 @@
+<title>Ouverture Croÿ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=Schibsted+Grotesk:wght@400..700&display=swap">
+<script>
+  // Runs before the page paints: pick the direction and decide whether the opening plays,
+  // so the final layout never flashes before the animation.
+  (function () {
+    var d = document.documentElement;
+    var dir = location.hash === "#b" ? "b" : location.hash === "#a" ? "a" : null;
+    try { dir = dir || localStorage.getItem("croy:direction"); } catch (e) {}
+    d.dataset.dir = dir === "b" ? "b" : "a";
+    var seen = false;
+    try { seen = sessionStorage.getItem("croy:opening-seen") === "1"; } catch (e) {}
+    if (!seen && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      d.classList.add("intro");
+      // Safety net: if the script below never runs, show the page anyway.
+      window.__introSafety = setTimeout(function () { d.classList.remove("intro", "intro-motion"); }, 4500);
+    }
+  })();
+</script>
+<style>
+  /*
+   * Layout: A sets a centred monument on white (shield, name, line);
+   * B is an asymmetric magazine opener (shield top left, line on the right, name at the foot).
+   */
+  :root {
+    --paper: #ffffff;
+    --ink: #141414;
+    --muted: #5f5f5b;
+    --hairline: #e4e4df;
+    --croy: #c8102e;
+    --argent: #ffffff;
+    --chrome: rgb(255 255 255 / 0.78);
+    --display: "Bodoni Moda", "Bodoni 72", Didot, Georgia, serif;
+    --text: "Atkinson Hyperlegible Next", "Segoe UI", system-ui, sans-serif;
+    --gutter: clamp(1rem, 4vw, 3.5rem);
+    --review-room: 4.75rem;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  :root[data-dir="b"] {
+    --display: "Newsreader", "Iowan Old Style", Georgia, serif;
+    --text: "Schibsted Grotesk", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #141414;
+      --ink: #f4f4f2;
+      --muted: #a3a39f;
+      --hairline: #2d2d2b;
+      --chrome: rgb(20 20 20 / 0.78);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #141414;
+    --ink: #f4f4f2;
+    --muted: #a3a39f;
+    --hairline: #2d2d2b;
+    --chrome: rgb(20 20 20 / 0.78);
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: 1rem;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  @media (min-width: 900px) { body { font-size: 1.125rem; } }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  :focus-visible { outline: 2px solid var(--croy); outline-offset: 3px; border-radius: 2px; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  sup { font-size: 0.62em; line-height: 0; vertical-align: 0.62em; }
+
+  /* ── Opening screen ─────────────────────────────────────────── */
+  .opening {
+    position: relative;
+    box-sizing: border-box;
+    min-height: 100svh;
+    padding-inline: var(--gutter);
+    padding-block: clamp(1.5rem, 6svh, 4rem) calc(clamp(1.5rem, 4svh, 3rem) + var(--review-room));
+  }
+  .shield-slot { flex: none; perspective: 700px; }
+  .shield-tilt { transform-style: preserve-3d; }
+  .shield { display: block; width: 100%; height: auto; aspect-ratio: 100 / 120; overflow: visible; }
+  .shield-field { fill: var(--argent); }
+  .shield-fasces rect { fill: var(--croy); }
+  .shield-edge {
+    fill: none;
+    stroke: var(--croy);
+    stroke-width: 1.4;
+    stroke-dasharray: 1;
+  }
+
+  .name {
+    margin: 0;
+    font-family: var(--display);
+    font-optical-sizing: auto;
+    line-height: 1.1;
+    font-kerning: normal;
+  }
+  /* The word is split into letters by the script, at their kerned positions. */
+  .word { display: block; position: relative; width: fit-content; white-space: nowrap; padding-bottom: 0.16em; margin-bottom: -0.16em; }
+  .word .ch { position: absolute; top: 0; }
+  .word .glyph { display: inline-block; position: relative; }
+  .word .dot { position: absolute; left: 0; top: 0; color: var(--croy); }
+
+  .tagline { margin: 0; }
+  .pron { margin: 0; color: var(--muted); }
+  .pron-word { font-family: var(--display); font-style: italic; color: var(--ink); }
+  .dateline { display: none; }
+
+  .cue {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    min-height: 2.75rem;
+    color: var(--ink);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .cue svg { width: 0.9em; height: 0.9em; transition: transform 200ms var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) {
+    .cue:hover svg { transform: translateY(3px); }
+  }
+
+  /* Direction A · Monument */
+  [data-dir="a"] .opening {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.25rem, 3.6svh, 2.75rem);
+    text-align: center;
+  }
+  [data-dir="a"] .shield-slot { width: clamp(5.25rem, 13svh, 9.25rem); }
+  [data-dir="a"] .name {
+    font-size: min(29vw, max(18vw, 6.5rem), 30svh);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+  }
+  [data-dir="a"] .word { margin-inline: auto; margin-bottom: 0; }
+  [data-dir="a"] .lede { display: grid; justify-items: center; gap: 0.5rem; }
+  [data-dir="a"] .tagline {
+    max-width: 30ch;
+    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.625rem);
+    line-height: 1.3;
+    letter-spacing: 0.005em;
+    text-wrap: balance;
+  }
+  [data-dir="a"] .pron { font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem); }
+  [data-dir="a"] .cue {
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--review-room) + 0.75rem);
+    translate: -50% 0;
+  }
+
+  /* Direction B · Récit */
+  [data-dir="b"] .opening {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr auto auto;
+    grid-template-areas: "shield" "lede" "." "name" "cue";
+    row-gap: clamp(1.25rem, 3svh, 2rem);
+  }
+  [data-dir="b"] .shield-slot { grid-area: shield; width: clamp(4.25rem, 11svh, 7.25rem); }
+  [data-dir="b"] .lede { grid-area: lede; display: grid; gap: 0.875rem; align-content: start; }
+  [data-dir="b"] .dateline {
+    display: flex;
+    align-items: center;
+    gap: 0.625em;
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+  .tremas { display: inline-flex; gap: 0.3em; }
+  .tremas i { width: 0.42em; height: 0.42em; border-radius: 50%; background: var(--croy); }
+  [data-dir="b"] .tagline {
+    max-width: 15ch;
+    font-family: var(--display);
+    font-size: clamp(1.625rem, 1.05rem + 2vw, 2.875rem);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+  [data-dir="b"] .pron { font-size: 0.9375rem; }
+  [data-dir="b"] .name {
+    grid-area: name;
+    align-self: end;
+    margin-left: -0.05em;
+    font-size: min(31vw, max(18vw, 6.5rem), 34svh);
+    font-weight: 560;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+  [data-dir="b"] .cue { grid-area: cue; justify-self: start; }
+  @media (min-width: 900px) {
+    [data-dir="b"] .opening {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 23rem);
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas: "shield ." ". lede" "name cue";
+      column-gap: var(--gutter);
+    }
+    [data-dir="b"] .lede { align-self: end; padding-bottom: 1rem; }
+    [data-dir="b"] .cue { justify-self: end; align-self: end; margin-bottom: 0.4em; }
+  }
+
+  /* ── En quelques lignes ─────────────────────────────────────── */
+  .lines {
+    box-sizing: border-box;
+    padding-inline: var(--gutter);
+    padding-block: clamp(4rem, 14svh, 9rem) clamp(5rem, 18svh, 11rem);
+    border-top: 1px solid var(--hairline);
+  }
+  .lines-inner { display: grid; gap: 1.25rem; max-width: 34rem; margin-inline: auto; }
+  .eyebrow { margin: 0; font-family: var(--text); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.01em; color: var(--muted); }
+  .lines p {
+    margin: 0;
+    font-family: var(--display);
+    font-size: clamp(1.625rem, 1.15rem + 1.9vw, 2.75rem);
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    text-wrap: pretty;
+  }
+  [data-dir="b"] .lines-inner { max-width: 44rem; margin-inline: 0; }
+  [data-dir="b"] .lines p { font-weight: 400; }
+
+  /* ── Opening sequence ───────────────────────────────────────── */
+  .intro { overflow: hidden; }
+  .intro .opening, .intro .lines { visibility: hidden; }
+  .intro-motion .opening { visibility: visible; }
+  .intro-motion .word { clip-path: inset(-1.6em -0.3em 0 -0.3em); }
+  .intro-overlay { display: none; position: fixed; inset: 0; z-index: 30; overflow: hidden; pointer-events: none; }
+  .intro-motion .intro-overlay { display: block; }
+  .intro-field { position: absolute; transform-origin: 0 0; will-change: transform; }
+  .intro-field i {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: calc(100% / 7);
+    background: var(--croy);
+    transform-origin: 0 50%;
+    will-change: transform;
+  }
+  .intro-field i:nth-child(1) { top: calc(100% / 7); }
+  .intro-field i:nth-child(2) { top: calc(300% / 7); }
+  .intro-field i:nth-child(3) { top: calc(500% / 7); }
+  .fold-clock { position: absolute; width: 1px; height: 1px; visibility: hidden; }
+
+  .skip {
+    display: none;
+    position: fixed;
+    z-index: 40;
+    right: var(--gutter);
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    min-height: 2.75rem;
+    padding-inline: 1rem;
+    border: 0;
+    background: none;
+    color: var(--muted);
+    font: 500 0.875rem/1 var(--text);
+    cursor: pointer;
+  }
+  .intro-motion .skip { display: inline-flex; align-items: center; animation: appear 300ms var(--ease-out) 600ms both; }
+  @keyframes appear { from { opacity: 0; } }
+
+  /* ── Review toolbar (prototype only) ────────────────────────── */
+  .review {
+    position: fixed;
+    z-index: 50;
+    left: 50%;
+    bottom: calc(0.875rem + env(safe-area-inset-bottom, 0px));
+    translate: -50% 0;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    max-width: calc(100vw - 2rem);
+    box-sizing: border-box;
+    padding: 0.25rem;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    background: var(--chrome);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    backdrop-filter: blur(18px) saturate(170%);
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.08);
+    font: 500 0.8125rem/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+    transition: opacity 300ms var(--ease-out);
+  }
+  .intro .review { opacity: 0; visibility: hidden; }
+  .review-dirs { display: flex; gap: 0.125rem; padding-right: 0.25rem; border-right: 1px solid var(--hairline); }
+  .review button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    min-height: 2.25rem;
+    padding-inline: 0.8rem;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+  .review button:active { transform: scale(0.97); }
+  .review-dirs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  .review-key { font-weight: 700; }
+  .review button[aria-pressed="true"]#calm { background: var(--croy); color: #fff; }
+  .review svg { width: 1em; height: 1em; }
+  @media (hover: hover) and (pointer: fine) {
+    .review button:hover:not([aria-pressed="true"]) { background: var(--hairline); }
+  }
+  @media (max-width: 30rem) {
+    .review-name { display: none; }
+    .review button { padding-inline: 0.7rem; }
+  }
+  @media (pointer: coarse) { .review button { min-height: 2.75rem; } }
+  @media (prefers-reduced-transparency: reduce) {
+    .review { background: var(--paper); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  }
+</style>
+
+<main>
+  <section class="opening" aria-labelledby="nom">
+    <div class="shield-slot">
+      <div class="shield-tilt">
+        <svg class="shield" viewBox="0 0 100 120" role="img" aria-label="Armes de Croÿ : d’argent à trois fasces de gueules">
+          <defs>
+            <clipPath id="shield-clip">
+              <path class="shield-clip" d="M0 0 L100 0 L100 68.571 C100 98 78 112 50 120 C22 112 0 98 0 68.571 Z" />
+            </clipPath>
+          </defs>
+          <g clip-path="url(#shield-clip)">
+            <rect class="shield-field" x="0" y="0" width="100" height="140" />
+            <g class="shield-fasces">
+              <rect x="0" y="17.143" width="100" height="17.143" />
+              <rect x="0" y="51.429" width="100" height="17.143" />
+              <rect x="0" y="85.714" width="100" height="17.143" />
+            </g>
+          </g>
+          <path class="shield-edge" pathLength="1" d="M50 0 L0 0 L0 68.571 C0 98 22 112 50 120" />
+          <path class="shield-edge" pathLength="1" d="M50 0 L100 0 L100 68.571 C100 98 78 112 50 120" />
+        </svg>
+      </div>
+    </div>
+
+    <h1 class="name" id="nom"><span class="sr">Croÿ</span><span class="word" aria-hidden="true">Croÿ</span></h1>
+
+    <div class="lede">
+      <p class="dateline"><span class="tremas" aria-hidden="true"><i></i><i></i></span><span>Du XII<sup>e</sup> siècle à aujourd’hui</span></p>
+      <p class="tagline">Neuf siècles d’une famille européenne</p>
+      <p class="pron">se prononce <span class="pron-word">« croui »</span></p>
+    </div>
+
+    <a class="cue" href="#lignes">
+      Découvrir l’histoire
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v11M3 8.5 8 13.5l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+    </a>
+  </section>
+
+  <section class="lines" id="lignes" aria-labelledby="lignes-titre">
+    <div class="lines-inner">
+      <h2 class="eyebrow" id="lignes-titre">En quelques lignes</h2>
+      <p>Tout commence au XII<sup>e</sup> siècle à Crouy-Saint-Pierre, un village de la Somme qui donne son nom à la famille.</p>
+      <p>Au XV<sup>e</sup> siècle, Antoine de Croÿ devient le plus proche conseiller du duc de Bourgogne. Au siècle suivant, Guillaume de Croÿ guide le jeune Charles Quint.</p>
+      <p>Aujourd’hui, ses branches vivent en Allemagne, en Belgique, en France, en Autriche et en Bohême.</p>
+    </div>
+  </section>
+</main>
+
+<div class="intro-overlay" aria-hidden="true">
+  <div class="intro-field"><i></i><i></i><i></i></div>
+  <span class="fold-clock"></span>
+</div>
+<button type="button" class="skip" id="skip">Passer</button>
+
+<div class="review" role="group" aria-label="Comparer les directions">
+  <div class="review-dirs">
+    <button type="button" data-dir="a" aria-pressed="true"><span class="review-key">A</span><span class="review-name">Monument</span></button>
+    <button type="button" data-dir="b" aria-pressed="false"><span class="review-key">B</span><span class="review-name">Récit</span></button>
+  </div>
+  <button type="button" id="replay">
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 6.2A5 5 0 1 1 3 9.5M3 2.5v3.8h3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg>
+    Rejouer
+  </button>
+  <button type="button" id="calm" aria-pressed="false">Sans animation</button>
+</div>
+
+<script>
+(() => {
+  "use strict";
+
+  const root = document.documentElement;
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => [...document.querySelectorAll(s)];
+
+  // Curves: strong ease-out and ease-in-out for UI motion; quadratic ease-in/out for the
+  // falling dots, which follow gravity.
+  const EASE_OUT = "cubic-bezier(0.23, 1, 0.32, 1)";
+  const EASE_IN_OUT = "cubic-bezier(0.77, 0, 0.175, 1)";
+  const FALL = "cubic-bezier(0.55, 0.085, 0.68, 0.53)";
+  const REBOUND = "cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+
+  const DIRECTIONS = {
+    a: {
+      font: '500 100px "Bodoni Moda"',
+      tilt: 7,
+      // Bands cross a calm white screen, centred, then rise and tighten into the shield.
+      start: (vw, vh, shield) => {
+        const h = Math.min(shield.height * 2.6, vh * 0.5);
+        return { x: 0, y: (vh - h) / 2, w: vw, h };
+      },
+      sweep: { at: 120, dur: 560, stagger: 120, easing: EASE_OUT },
+      contract: { at: 820, dur: 620 },
+      fold: { dur: 480 },
+      letters: { at: 1320, dur: 600, stagger: 80 },
+      dots: { at: 1900, dur: 460, stagger: 100 },
+      lede: { at: 1980, dur: 520, stagger: 90 },
+    },
+    b: {
+      font: '560 100px "Newsreader"',
+      tilt: 9,
+      // The whole screen becomes the coat of arms, then collapses into the shield.
+      start: (vw, vh) => ({ x: 0, y: 0, w: vw, h: vh }),
+      sweep: { at: 80, dur: 480, stagger: 90, easing: EASE_IN_OUT },
+      contract: { at: 700, dur: 680 },
+      fold: { dur: 440 },
+      letters: { at: 1240, dur: 620, stagger: 70 },
+      dots: { at: 1820, dur: 460, stagger: 90 },
+      lede: { at: 1900, dur: 520, stagger: 90 },
+    },
+  };
+
+  const DOT_FALL = [
+    { transform: "translateY(-0.7em)", easing: FALL },
+    { transform: "translateY(0)", offset: 0.62, easing: REBOUND },
+    { transform: "translateY(-0.055em)", offset: 0.81, easing: FALL },
+    { transform: "translateY(0)" },
+  ];
+
+  // Same commands, so the clip can morph from a plain rectangle into the shield.
+  const SHIELD = [0, 0, 100, 0, 100, 68.571, 100, 98, 78, 112, 50, 120, 22, 112, 0, 98, 0, 68.571];
+  const SQUARE = [0, 0, 100, 0, 100, 68.571, 100, 140, 100, 140, 50, 140, 0, 140, 0, 140, 0, 68.571];
+  const shieldPath = (p) => {
+    const v = SHIELD.map((end, i) => (SQUARE[i] + (end - SQUARE[i]) * p).toFixed(3));
+    return `M${v[0]} ${v[1]} L${v[2]} ${v[3]} L${v[4]} ${v[5]} C${v[6]} ${v[7]} ${v[8]} ${v[9]} ${v[10]} ${v[11]} C${v[12]} ${v[13]} ${v[14]} ${v[15]} ${v[16]} ${v[17]} Z`;
+  };
+
+  const session = {
+    seen() { try { return sessionStorage.getItem("croy:opening-seen") === "1"; } catch { return false; } },
+    mark() { try { sessionStorage.setItem("croy:opening-seen", "1"); } catch {} },
+  };
+  const remember = (dir) => { try { localStorage.setItem("croy:direction", dir); } catch {} };
+
+  let calm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let anims = [];
+  let run = 0;
+  let playing = false;
+
+  // ── Name: split into letters at their kerned positions ───────
+  async function fontsFor(dir) {
+    const wait = document.fonts.load(DIRECTIONS[dir].font, "Croÿ").catch(() => {});
+    await Promise.race([wait, new Promise((r) => setTimeout(r, 1500))]);
+  }
+
+  function buildName() {
+    const word = $(".word");
+    word.removeAttribute("style");
+    word.textContent = "Croÿ";
+    const text = word.firstChild;
+    const style = getComputedStyle(word);
+    const size = parseFloat(style.fontSize);
+    const lineHeight = parseFloat(style.lineHeight);
+    const box = word.getBoundingClientRect();
+
+    // Probes find the baseline and the top of the x-height inside the line box.
+    const probe = (height) => {
+      const p = document.createElement("span");
+      p.style.cssText = `display:inline-block;width:0;height:${height};vertical-align:baseline`;
+      word.append(p);
+      const top = p.getBoundingClientRect().top - box.top;
+      p.remove();
+      return top;
+    };
+    const baseline = probe("0px");
+
+    const range = document.createRange();
+    const chars = [...text.data];
+    const lefts = chars.map((_, i) => {
+      range.setStart(text, i);
+      range.setEnd(text, i + 1);
+      return range.getBoundingClientRect().left - box.left;
+    });
+
+    const em = (px) => `${(px / size).toFixed(4)}em`;
+    // Everything above this line belongs to the dieresis, never to the body of the y.
+    const cut = baseline - dieresisGap(style) * size;
+    const keepBelow = em(lineHeight - cut);
+    word.textContent = "";
+    word.style.width = em(box.width);
+    word.style.height = em(lineHeight);
+
+    chars.forEach((c, i) => {
+      const ch = document.createElement("span");
+      ch.className = "ch";
+      ch.style.left = em(lefts[i]);
+      if (c === "ÿ") {
+        for (const side of ["left", "right"]) {
+          const dot = document.createElement("span");
+          dot.className = "dot";
+          dot.textContent = "ÿ";
+          dot.style.clipPath = side === "left"
+            ? `inset(-1em 50% ${keepBelow} -0.5em)`
+            : `inset(-1em -0.5em ${keepBelow} 50%)`;
+          ch.append(dot);
+        }
+      }
+      const glyph = document.createElement("span");
+      glyph.className = "glyph";
+      glyph.textContent = c === "ÿ" ? "y" : c;
+      ch.append(glyph);
+      word.append(ch);
+    });
+  }
+
+  // Height above the baseline, in em, of the middle of the gap between the dots of ÿ
+  // and the body of the y, read from the glyph pixels.
+  function dieresisGap(style) {
+    const px = 200;
+    const canvas = document.createElement("canvas");
+    canvas.width = 2 * px;
+    canvas.height = 2 * px;
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
+    ctx.font = `${style.fontStyle} ${style.fontWeight} ${px}px ${style.fontFamily}`;
+    const base = Math.round(1.5 * px);
+    const inkRows = (text) => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillText(text, px / 2, base);
+      const { data } = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const rows = new Array(canvas.height).fill(false);
+      for (let y = 0; y < canvas.height; y++) {
+        for (let x = 0; x < canvas.width; x++) {
+          if (data[(y * canvas.width + x) * 4 + 3] > 40) { rows[y] = true; break; }
+        }
+      }
+      return rows;
+    };
+    const plain = inkRows("y");
+    const dotted = inkRows("ÿ");
+    const bodyTop = plain.indexOf(true);
+    let gapBottom = bodyTop - 1;
+    while (gapBottom > 0 && !dotted[gapBottom]) gapBottom--;
+    if (bodyTop < 0 || gapBottom <= 0) return 0.62;
+    return (base - (gapBottom + bodyTop) / 2) / px;
+  }
+
+  // ── Opening sequence ──────────────────────────────────────────
+  function add(el, keyframes, options) {
+    const a = el.animate(keyframes, { fill: "both", ...options });
+    anims.push(a);
+    return a;
+  }
+
+  function stop() {
+    run++;
+    playing = false;
+    tilt.reset();
+    for (const a of anims) a.cancel();
+    anims = [];
+    $(".shield-clip").setAttribute("d", shieldPath(1));
+  }
+
+  function settle(id) {
+    if (id !== run) return;
+    playing = false;
+    root.classList.remove("intro", "intro-motion");
+    for (const a of anims) a.cancel();
+    anims = [];
+    $(".shield-clip").setAttribute("d", shieldPath(1));
+    session.mark();
+    tilt.enabled = !calm;
+  }
+
+  function playCalm() {
+    stop();
+    const id = run;
+    root.classList.remove("intro", "intro-motion");
+    const a = add($(".opening"), [{ opacity: 0 }, { opacity: 1 }], { duration: 320, easing: EASE_OUT });
+    a.finished.then(() => settle(id), () => {});
+  }
+
+  function playMotion() {
+    stop();
+    const id = run;
+    const cfg = DIRECTIONS[root.dataset.dir];
+    window.scrollTo(0, 0);
+    root.classList.add("intro");
+
+    const vw = innerWidth;
+    const vh = innerHeight;
+    const shield = $(".shield").getBoundingClientRect();
+    const from = cfg.start(vw, vh, shield);
+    const field = $(".intro-field");
+    Object.assign(field.style, { left: `${from.x}px`, top: `${from.y}px`, width: `${from.w}px`, height: `${from.h}px` });
+    root.classList.add("intro-motion");
+    playing = true;
+
+    // 1. Three red bands cross the screen from left to right, one after the other.
+    $$(".intro-field i").forEach((band, i) =>
+      add(band, [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }], {
+        duration: cfg.sweep.dur, delay: cfg.sweep.at + i * cfg.sweep.stagger, easing: cfg.sweep.easing,
+      }));
+
+    // 2. They tighten into the exact place of the fasces in the shield.
+    const to = `translate(${shield.left - from.x}px, ${shield.top - from.y}px) scale(${shield.width / from.w}, ${shield.height / from.h})`;
+    add(field, [{ transform: "none" }, { transform: to }], {
+      duration: cfg.contract.dur, delay: cfg.contract.at, easing: EASE_IN_OUT,
+    });
+
+    // 3. The real shield takes over: its outline closes around the bands and the base folds.
+    const handoff = cfg.contract.at + cfg.contract.dur;
+    add($(".intro-overlay"), [{ opacity: 1 }, { opacity: 0 }], { duration: 1, delay: handoff });
+    add($(".shield"), [{ opacity: 0 }, { opacity: 1 }], { duration: 1, delay: handoff });
+    add($(".shield-field"), [{ opacity: 0 }, { opacity: 1 }], { duration: 320, delay: handoff, easing: EASE_OUT });
+    $$(".shield-edge").forEach((edge) =>
+      add(edge, [{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], {
+        duration: cfg.fold.dur + 140, delay: handoff - 40, easing: EASE_OUT,
+      }));
+    const clock = add($(".fold-clock"), [{ opacity: 0 }, { opacity: 1 }], {
+      duration: cfg.fold.dur, delay: handoff, easing: EASE_OUT,
+    });
+    foldWith(clock, id);
+
+    // 4. The name rises letter by letter.
+    $$(".word .glyph").forEach((glyph, i) =>
+      add(glyph, [{ transform: "translateY(calc(100% + 0.35em))" }, { transform: "none" }], {
+        duration: cfg.letters.dur, delay: cfg.letters.at + i * cfg.letters.stagger, easing: EASE_OUT,
+      }));
+
+    // 5. The two dots of the ÿ fall last, in red.
+    $$(".word .dot").forEach((dot, i) => {
+      const at = cfg.dots.at + i * cfg.dots.stagger;
+      add(dot, [{ opacity: 0 }, { opacity: 1 }], { duration: 110, delay: at });
+      add(dot, DOT_FALL, { duration: cfg.dots.dur, delay: at });
+    });
+
+    // 6. The line and the way in.
+    $$(".lede > *, .cue").forEach((el, i) =>
+      add(el, [{ opacity: 0, transform: "translateY(0.6rem)" }, { opacity: 1, transform: "none" }], {
+        duration: cfg.lede.dur, delay: cfg.lede.at + i * cfg.lede.stagger, easing: EASE_OUT,
+      }));
+
+    Promise.all(anims.map((a) => a.finished)).then(() => settle(id), () => {});
+  }
+
+  function foldWith(clock, id) {
+    const clip = $(".shield-clip");
+    const target = $(".fold-clock");
+    const frame = () => {
+      if (id !== run) return;
+      clip.setAttribute("d", shieldPath(Number(getComputedStyle(target).opacity)));
+      if (clock.playState !== "finished") requestAnimationFrame(frame);
+    };
+    clip.setAttribute("d", shieldPath(0));
+    requestAnimationFrame(frame);
+  }
+
+  // One click, tap, scroll or key finishes the opening quickly instead of cutting it.
+  function skip() {
+    if (!playing) return;
+    playing = false;
+    for (const a of anims) a.updatePlaybackRate(7);
+  }
+  addEventListener("pointerdown", (e) => { if (!e.target.closest(".review")) skip(); }, { capture: true });
+  addEventListener("wheel", skip, { passive: true });
+  addEventListener("touchmove", skip, { passive: true });
+  addEventListener("keydown", (e) => { if (["Escape", "Enter", " ", "ArrowDown", "PageDown"].includes(e.key)) skip(); });
+  addEventListener("resize", () => { if (playing) skip(); });
+  $("#skip").addEventListener("click", skip);
+
+  // ── The shield follows the pointer or the phone's tilt ────────
+  // Critically damped springs (no overshoot), one per axis, response 0.45 s.
+  const spring = (response = 0.45) => ({
+    k: (2 * Math.PI / response) ** 2, c: 4 * Math.PI / response, x: 0, v: 0, to: 0,
+    step(dt) { const a = -this.k * (this.x - this.to) - this.c * this.v; this.v += a * dt; this.x += this.v * dt; },
+    still() { return Math.abs(this.x - this.to) < 1e-4 && Math.abs(this.v) < 1e-3; },
+  });
+  const tilt = {
+    enabled: false, x: spring(), y: spring(), raf: 0, last: 0, el: $(".shield-tilt"),
+    aim(nx, ny) {
+      if (!this.enabled) return;
+      this.x.to = Math.max(-1, Math.min(1, nx));
+      this.y.to = Math.max(-1, Math.min(1, ny));
+      if (!this.raf) { this.last = performance.now(); this.raf = requestAnimationFrame((t) => this.frame(t)); }
+    },
+    frame(now) {
+      const dt = Math.min(0.064, (now - this.last) / 1000);
+      this.last = now;
+      const n = Math.max(1, Math.ceil(dt * 240));
+      for (let i = 0; i < n; i++) { this.x.step(dt / n); this.y.step(dt / n); }
+      const max = DIRECTIONS[root.dataset.dir].tilt;
+      const still = this.x.still() && this.y.still();
+      this.el.style.transform = still && this.x.to === 0 && this.y.to === 0
+        ? ""
+        : `rotateX(${(-this.y.x * max).toFixed(3)}deg) rotateY(${(this.x.x * max).toFixed(3)}deg)`;
+      this.raf = still ? 0 : requestAnimationFrame((t) => this.frame(t));
+    },
+    reset() {
+      this.enabled = false;
+      cancelAnimationFrame(this.raf);
+      this.raf = 0;
+      for (const s of [this.x, this.y]) { s.x = 0; s.v = 0; s.to = 0; }
+      this.el.style.transform = "";
+    },
+  };
+  addEventListener("pointermove", (e) => {
+    if (e.pointerType === "touch" && !e.isPrimary) return;
+    tilt.aim((e.clientX / innerWidth) * 2 - 1, (e.clientY / innerHeight) * 2 - 1);
+  }, { passive: true });
+  const rest = () => tilt.aim(0, 0);
+  document.addEventListener("pointerleave", rest);
+  addEventListener("pointerup", (e) => { if (e.pointerType === "touch") rest(); });
+  addEventListener("pointercancel", rest);
+  addEventListener("blur", rest);
+
+  function onOrientation(e) {
+    if (e.gamma == null || e.beta == null) return;
+    const angle = (screen.orientation && screen.orientation.angle) || 0;
+    const [side, front] = angle === 90 ? [e.beta, -e.gamma] : angle === 270 || angle === -90 ? [-e.beta, e.gamma] : [e.gamma, e.beta - 40];
+    tilt.aim(side / 25, front / 25);
+  }
+  if ("DeviceOrientationEvent" in window) {
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      // iOS asks for permission; only when the visitor touches the shield.
+      $(".shield-slot").addEventListener("click", () => {
+        DeviceOrientationEvent.requestPermission()
+          .then((state) => { if (state === "granted") addEventListener("deviceorientation", onOrientation); })
+          .catch(() => {});
+      }, { once: true });
+    } else {
+      addEventListener("deviceorientation", onOrientation);
+    }
+  }
+
+  // ── Review toolbar ───────────────────────────────────────────
+  function syncToolbar() {
+    for (const b of $$(".review-dirs button")) b.setAttribute("aria-pressed", String(b.dataset.dir === root.dataset.dir));
+    $("#calm").setAttribute("aria-pressed", String(calm));
+  }
+
+  async function replay() {
+    syncToolbar();
+    if (calm) {
+      await fontsFor(root.dataset.dir);
+      buildName();
+      playCalm();
+      return;
+    }
+    stop();
+    root.classList.add("intro");
+    await fontsFor(root.dataset.dir);
+    buildName();
+    playMotion();
+  }
+
+  for (const b of $$(".review-dirs button")) {
+    b.addEventListener("click", () => {
+      root.dataset.dir = b.dataset.dir;
+      history.replaceState(null, "", `#${b.dataset.dir}`);
+      remember(b.dataset.dir);
+      replay();
+    });
+  }
+  $("#replay").addEventListener("click", replay);
+  $("#calm").addEventListener("click", () => { calm = !calm; replay(); });
+
+  // ── First load ───────────────────────────────────────────────
+  history.scrollRestoration = "manual";
+  (async () => {
+    syncToolbar();
+    await fontsFor(root.dataset.dir);
+    clearTimeout(window.__introSafety);
+    buildName();
+    if (root.classList.contains("intro")) playMotion();
+    else if (calm && !session.seen()) playCalm();
+    else { session.mark(); tilt.enabled = !calm; }
+  })();
+})();
+</script>
