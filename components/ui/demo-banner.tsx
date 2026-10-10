@@ -20,6 +20,7 @@ export async function DemoBanner() {
   return (
     <div
       role="note"
+      data-intro-hide
       className="page flex items-center gap-3 border-b border-croy/30 bg-paper-2 py-2.5 text-caption"
     >
       <Tremas className="text-[0.75rem]" />

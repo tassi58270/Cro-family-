@@ -21,7 +21,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 - [x] 2. Système de design (page `/fr/style`, clair et sombre, mobile et ordinateur)
 - [x] 3. Base de données et sécurité (migrations, RLS, tests vie privée)
 - [x] 4. Outils de saisie et jeu de démonstration fictif (assistant de démarrage, saisie dans l’arbre, import GEDCOM)
-- [ ] 5. Page d’accueil (proposer d’abord deux directions pour l’écran d’ouverture)
+- [x] 5. Page d’accueil (direction A, ouverture, chapitres sur la carte, titres, anecdotes, portes d’entrée)
 - [ ] 6. Arbre généalogique
 - [ ] 7. Armoiries et branches
 - [ ] 8. Histoires, puis page Photos (section 6.5)
@@ -132,6 +132,14 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - Jeu de démonstration : `lib/demo/dataset.ts`, famille « Exemple » visiblement fictive, `is_demo` partout, bandeau sur chaque page, suppression en un clic.
 - Formulaires : `useFormAction()` (`lib/hooks`) garde la saisie quand le serveur renvoie une erreur.
 - Dates floues : `lib/genealogie/dates.ts` lit « 1890 », « vers 1890 », « 12 mars 1890 », « um 1890 », les dates GEDCOM, et les écrit dans chaque langue.
+
+## Page d’accueil (étape 5)
+
+- Tout son contenu vient du tableau de bord (`/fr/admin/accueil`) : lignes sous le nom, résumé, chiffres (libres ou calculés par `public.home_counts()`), chapitres (avec prologue), anecdotes (histoires `anecdote = true`). Une rubrique vide n’apparaît pas.
+- Ouverture : `components/accueil/opening.tsx`. Le script de `<head>` (`openingScript`) décide avant l’affichage ; `html.intro` masque la page, `html.intro-motion` joue. Moins de 3 s, une fois par session (`sessionStorage`), accélérée par un clic, fondu simple avec mouvement réduit. Les éléments marqués `data-intro-hide` (menu, bandeau) attendent la fin.
+- Carte d’Europe : SVG statique `public/carte/europe.json` (Natural Earth, domaine public), généré par `node scripts/build-europe-map.mjs`, chargé à l’approche des chapitres ; projection côté serveur dans `lib/carte/project.ts`. Plus léger que MapLibre (réservé à la page Lieux).
+- Les textes de contenu français passent par `typeset()` (`lib/typography.ts`) : espaces fines et guillemets corrects même si la famille tape des espaces ordinaires.
+- Les tests de bout en bout tournent en mouvement réduit par défaut ; l’ouverture a ses propres tests (`home.spec.ts`).
 
 ## Système de design (étape 2)
 

@@ -6,6 +6,7 @@ import { Link, usePathname } from "@/lib/i18n/navigation";
 
 export const adminNav = [
   { href: "/admin", key: "overview" },
+  { href: "/admin/accueil", key: "home" },
   { href: "/admin/arbre", key: "tree" },
   { href: "/admin/import", key: "import" },
   { href: "/admin/demonstration", key: "demo" },

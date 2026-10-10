@@ -102,6 +102,7 @@ export const routing = defineRouting({
     },
     "/admin": "/admin",
     // The dashboard keeps the same addresses in every language.
+    "/admin/accueil": "/admin/accueil",
     "/admin/arbre": "/admin/arbre",
     "/admin/import": "/admin/import",
     "/admin/demonstration": "/admin/demonstration",

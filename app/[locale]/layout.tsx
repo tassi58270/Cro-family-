@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { PageTransition } from "@/components/ui/page-transition";
+import { openingScript } from "@/components/accueil/opening";
 import { themeScript } from "@/components/ui/theme-switcher";
 import { atkinson, bodoni } from "@/lib/design/fonts";
 import { getPathname } from "@/lib/i18n/navigation";
@@ -62,6 +63,7 @@ export default async function LocaleLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: openingScript }} />
       </head>
       <body className="flex min-h-full flex-col">
         <a

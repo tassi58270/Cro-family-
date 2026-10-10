@@ -9,18 +9,21 @@ async function expectAccessible(page: Page) {
 }
 
 const homes = [
-  { locale: "fr", title: "Neuf siècles d’une famille européenne" },
-  { locale: "en", title: "Nine centuries of a European family" },
-  { locale: "de", title: "Neun Jahrhunderte einer europäischen Familie" },
+  { locale: "fr", tagline: "Neuf siècles d’une famille européenne" },
+  { locale: "en", tagline: "Nine centuries of a European family" },
+  { locale: "de", tagline: "Neun Jahrhunderte einer europäischen Familie" },
 ] as const;
 
 test.describe("the three languages", () => {
-  for (const { locale, title } of homes) {
+  for (const { locale, tagline } of homes) {
     test(`/${locale} answers in its language`, async ({ page }) => {
       const response = await page.goto(`/${locale}`);
       expect(response?.status()).toBe(200);
       await expect(page.locator("html")).toHaveAttribute("lang", locale);
-      await expect(page.getByRole("heading", { level: 1 })).toHaveText(title);
+      await expect(
+        page.getByRole("heading", { level: 1 }),
+      ).toHaveAccessibleName("Croÿ");
+      await expect(page.getByText(tagline)).toBeVisible();
     });
 
     test(`/${locale} has no detectable accessibility issue`, async ({
@@ -52,9 +55,7 @@ test.describe("the three languages", () => {
       .getByRole("link", { name: "en", exact: true })
       .click();
     await expect(page).toHaveURL(/\/en$/);
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-      homes[1].title,
-    );
+    await expect(page.getByText(homes[1].tagline)).toBeVisible();
   });
 });
 

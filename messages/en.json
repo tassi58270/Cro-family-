@@ -115,10 +115,61 @@
     }
   },
   "home": {
-    "eyebrow": "House of Croÿ",
-    "title": "Nine centuries of a European family",
-    "status": "The site is being prepared.",
-    "body": "Soon you will be able to explore the history of the house, find everyone in the family tree and share your own memories."
+    "tagline": "Nine centuries of a European family",
+    "pronunciation": "pronounced “croo-ee”",
+    "cue": "Discover the story",
+    "skip": "Skip",
+    "summaryTitle": "In a few lines",
+    "figuresTitle": "In figures",
+    "chaptersTitle": "The story in a few chapters",
+    "treeLink": "See these people in the tree",
+    "prologue": "Prologue",
+    "titlesTitle": "The titles",
+    "titles": {
+      "createdBy": "created by",
+      "holders": "Successive holders",
+      "noHolder": "The holders have not been entered yet.",
+      "turn": "See the holders",
+      "back": "Turn the card back",
+      "previous": "Previous titles",
+      "next": "Next titles"
+    },
+    "anecdotesTitle": "Did you know?",
+    "readAnecdote": "Read the story",
+    "gatewaysTitle": "Explore",
+    "gateways": {
+      "tree": {
+        "title": "The family tree",
+        "body": "Find everyone, their parents, marriages and children."
+      },
+      "arms": {
+        "title": "Arms and branches",
+        "body": "Understand the coat of arms and follow the branches, from the origins to today."
+      },
+      "stories": {
+        "title": "Stories",
+        "body": "Memories and anecdotes told by the family."
+      },
+      "photos": {
+        "title": "Photos",
+        "body": "Faces for the tree: portraits, weddings, family gatherings."
+      },
+      "places": {
+        "title": "Places and events",
+        "body": "The map and the timeline of the moments that mattered."
+      },
+      "contribute": {
+        "title": "Contribute",
+        "body": "Add a photo, a story, a correction."
+      }
+    },
+    "counts": {
+      "people": "{count, plural, one {# person} other {# people}}",
+      "branches": "{count, plural, one {# branch} other {# branches}}",
+      "stories": "{count, plural, one {# story} other {# stories}}",
+      "photos": "{count, plural, one {# photo} other {# photos}}",
+      "places": "{count, plural, one {# place} other {# places}}"
+    }
   },
   "notFound": {
     "title": "Page not found",
@@ -260,7 +311,8 @@
       "overview": "Overview",
       "tree": "Tree entry",
       "import": "GEDCOM import",
-      "demo": "Demonstration"
+      "demo": "Demonstration",
+      "home": "Home page"
     },
     "overview": {
       "title": "Hello",
@@ -423,6 +475,92 @@
       "load": "Load the “Exemple” family",
       "remove": "Delete the demonstration data",
       "removeConfirm": "Delete the whole “Exemple” family? The family’s real profiles will not be touched."
+    },
+    "home": {
+      "title": "Home page",
+      "intro": "Everything the home page shows is written here. An empty section does not appear on the site.",
+      "language": "Language of the text",
+      "texts": "Under the name",
+      "textsIntro": "The two lines under “Croÿ”, then the “In a few lines” summary.",
+      "tagline": "Main line",
+      "pronunciation": "Pronunciation",
+      "pronunciationHint": "The word between quotes is shown in italics, for example: pronounced “croo-ee”.",
+      "summary": "In a few lines",
+      "summaryHint": "Three or four sentences, one per line: where the family comes from, how it rose, where it lives today.",
+      "save": "Save",
+      "saved": "Saved. The site is up to date.",
+      "figures": "In figures",
+      "figuresIntro": "Numbers you choose, or that the site counts in the tree itself.",
+      "addFigure": "Add a figure",
+      "chapters": "The story in chapters",
+      "chaptersIntro": "Four to eight chapters, told as one scrolls over the map of Europe.",
+      "addChapter": "Add a chapter",
+      "anecdotes": "Did you know?",
+      "anecdotesIntro": "Short anecdotes; three are drawn at random at every visit.",
+      "addAnecdote": "Add an anecdote",
+      "none": "Nothing yet.",
+      "draft": "draft",
+      "published": "Visible on the site",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this item? The journal keeps a record of it.",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "translations": "Translations (English, German)",
+      "itemTitle": "Title",
+      "panel": {
+        "figure": "A figure",
+        "chapter": "A chapter",
+        "anecdote": "An anecdote"
+      },
+      "figure": {
+        "kind": "Kind of figure",
+        "kindHint": "A free number, or a total counted from the tree, always up to date.",
+        "kinds": {
+          "number": "Free number",
+          "people": "People in the tree",
+          "generations": "Generations",
+          "countries": "Countries",
+          "photos": "Photos",
+          "branches": "Branches",
+          "titles": "Titles",
+          "stories": "Stories",
+          "places": "Places"
+        },
+        "value": "Number",
+        "label": "Label",
+        "labelHint": "What follows the number, for example: centuries of history."
+      },
+      "chapter": {
+        "prologue": "Prologue",
+        "prologueHint": "Shown before the first chapter, for example “At the origins, the Hungary of the Árpáds”.",
+        "dateLabel": "Large date",
+        "dateLabelHint": "For example 1397, or 12th–14th century.",
+        "body": "Text",
+        "bodyHint": "About four lines.",
+        "eraStart": "From the year",
+        "eraEnd": "To the year",
+        "place": "Place on the map",
+        "placeHint": "Only places already on the map can be chosen.",
+        "noPlace": "All of Europe",
+        "notLocated": "not on the map yet",
+        "zoom": "Framing",
+        "zooms": {
+          "1": "All of Europe",
+          "3": "A country",
+          "5": "A region",
+          "8": "A town"
+        }
+      },
+      "anecdote": {
+        "body": "Text of the anecdote"
+      },
+      "errors": {
+        "required": "This field is needed.",
+        "number": "Enter a whole number.",
+        "years": "The end year comes before the start year.",
+        "save": "Saving did not work. Please try again."
+      }
     }
   }
 }

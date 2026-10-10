@@ -1,0 +1,214 @@
+/*
+ * Opening screen of the home page (direction A « Monument »): shield, name
+ * and line, centred on white. See components/accueil/opening.tsx.
+ */
+
+.opening {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  min-height: calc(100svh - var(--header-h));
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.25rem, 3.6svh, 2.75rem);
+  padding-inline: var(--gutter);
+  padding-block: clamp(1.5rem, 5svh, 3.5rem) clamp(4.5rem, 10svh, 6rem);
+  text-align: center;
+}
+
+.opening .shield-slot {
+  flex: none;
+  width: clamp(5.25rem, 13svh, 9.25rem);
+  perspective: 700px;
+}
+.opening .shield-tilt {
+  transform-style: preserve-3d;
+}
+.opening .shield {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 100 / 120;
+  overflow: visible;
+}
+.opening .shield-field {
+  fill: var(--argent);
+}
+.opening .shield-fasces rect {
+  fill: var(--croy);
+}
+.opening .shield-edge {
+  fill: none;
+  stroke: var(--croy);
+  stroke-width: 1.4;
+  stroke-dasharray: 1;
+}
+
+.opening .name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-kerning: normal;
+  font-size: min(29vw, max(18vw, 6.5rem), 30svh);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+/* The script splits the word into letters at their kerned positions. */
+.opening .word {
+  position: relative;
+  display: block;
+  width: fit-content;
+  margin-inline: auto;
+  white-space: nowrap;
+  padding-bottom: 0.16em;
+}
+.opening .word .ch {
+  position: absolute;
+  top: 0;
+}
+.opening .word .glyph {
+  position: relative;
+  display: inline-block;
+}
+.opening .word .dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: var(--croy);
+}
+
+.opening .lede {
+  display: grid;
+  justify-items: center;
+  gap: 0.5rem;
+}
+.opening .tagline {
+  max-width: 30ch;
+  font-size: clamp(1.125rem, 1rem + 0.6vw, 1.625rem);
+  line-height: 1.3;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+.opening .pron {
+  color: var(--ink-muted);
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+}
+.opening .pron i {
+  color: var(--ink);
+  font-family: var(--font-display);
+}
+
+.opening .cue {
+  position: absolute;
+  bottom: clamp(1rem, 4svh, 2rem);
+  left: 50%;
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5em;
+  translate: -50% 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.opening .cue svg {
+  width: 0.9em;
+  height: 0.9em;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .opening .cue:hover svg {
+    transform: translateY(3px);
+  }
+}
+
+/* ── The sequence ───────────────────────────────────────────── */
+
+html.intro {
+  overflow: hidden;
+}
+html.intro .opening,
+html.intro .after-opening,
+html.intro [data-intro-hide] {
+  visibility: hidden;
+}
+html.intro-motion .opening {
+  visibility: visible;
+}
+html.intro-motion .opening .word {
+  clip-path: inset(-1.6em -0.3em 0 -0.3em);
+}
+[data-intro-hide] {
+  transition: opacity 400ms var(--ease-out);
+}
+html.intro [data-intro-hide] {
+  opacity: 0;
+}
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: none;
+  overflow: hidden;
+  pointer-events: none;
+}
+html.intro-motion .intro-overlay {
+  display: block;
+}
+.intro-field {
+  position: absolute;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+.intro-field i {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: calc(100% / 7);
+  background: var(--croy);
+  transform-origin: 0 50%;
+  will-change: transform;
+}
+.intro-field i:nth-child(1) {
+  top: calc(100% / 7);
+}
+.intro-field i:nth-child(2) {
+  top: calc(300% / 7);
+}
+.intro-field i:nth-child(3) {
+  top: calc(500% / 7);
+}
+.fold-clock {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  visibility: hidden;
+}
+
+.intro-skip {
+  position: fixed;
+  right: var(--gutter);
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 90;
+  display: none;
+  min-height: 2.75rem;
+  padding-inline: 1rem;
+  border: 0;
+  background: none;
+  color: var(--ink-muted);
+  font: 500 0.875rem/1 var(--font-sans);
+  cursor: pointer;
+}
+html.intro-motion .intro-skip {
+  display: inline-flex;
+  align-items: center;
+  animation: intro-appear 300ms var(--ease-out) 600ms both;
+}
+@keyframes intro-appear {
+  from {
+    opacity: 0;
+  }
+}

@@ -5,7 +5,7 @@ export type StartupStep = {
   key: "arms" | "home" | "ancestors" | "photos" | "cousins";
   done: boolean;
   /** Where to do it; null while the tool is built in a later step. */
-  href: "/admin/arbre" | "/admin/import" | null;
+  href: "/admin/arbre" | "/admin/import" | "/admin/accueil" | null;
 };
 
 /**
@@ -18,16 +18,18 @@ export async function startupSteps(q: Query): Promise<StartupStep[]> {
     people: number;
     media: number;
     invitations: number;
+    summary: boolean;
   }>(
     `select
        (select count(*) from public.arms where not is_demo) as arms,
        (select count(*) from public.people where not is_demo) as people,
        (select count(*) from public.media where not is_demo) as media,
-       (select count(*) from public.invitations) as invitations`,
+       (select count(*) from public.invitations) as invitations,
+       exists (select 1 from public.home_i18n where locale = 'fr' and coalesce(summary, '') <> '') as summary`,
   );
   return [
     { key: "arms", done: c.arms > 0, href: null },
-    { key: "home", done: false, href: null },
+    { key: "home", done: c.summary, href: "/admin/accueil" },
     { key: "ancestors", done: c.people >= 3, href: "/admin/arbre" },
     { key: "photos", done: c.media > 0, href: null },
     { key: "cousins", done: c.invitations >= 3, href: null },

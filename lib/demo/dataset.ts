@@ -442,3 +442,88 @@ export const demoSources = [
     people: ["albert"],
   },
 ] as const;
+
+/** Home page of the demonstration: chapters over the fictional places. */
+export const demoSummary =
+  "Ceci est un résumé d’exemple : il montre où la famille racontera, en trois ou quatre phrases, d’où elle vient.\nLa famille « Exemple » est inventée : ses dates, ses lieux et ses titres servent à essayer la page.\nElle disparaîtra en un clic, dès que la vraie famille aura écrit son propre résumé.";
+
+export const demoChapters = [
+  {
+    key: "prologue",
+    prologue: true,
+    dateLabel: "Avant 1850",
+    title: "Un prologue d’exemple",
+    body: "Texte d’exemple. Ici, la famille racontera ses origines, avant le premier chapitre.",
+    era: null,
+    place: null,
+    zoom: 1,
+  },
+  {
+    key: "exempleville",
+    prologue: false,
+    dateLabel: "1850",
+    title: "Exempleville (chapitre d’exemple)",
+    body: "Chapitre d’exemple. Albert Exemple naît dans un village inventé et y plante un verger.",
+    era: [1850, 1880],
+    place: "exempleville",
+    zoom: 5,
+  },
+  {
+    key: "modelebourg",
+    prologue: false,
+    dateLabel: "1912",
+    title: "Le baronnage de Modèlebourg (exemple)",
+    body: "Chapitre d’exemple. Émile s’installe à Modèlebourg ; la carte se déplace avec lui.",
+    era: [1900, 1960],
+    place: "modelebourg",
+    zoom: 4.5,
+  },
+  {
+    key: "chateau",
+    prologue: false,
+    dateLabel: "1936",
+    title: "Le château d’Exemple (exemple)",
+    body: "Chapitre d’exemple. Le château devient le lieu des réunions de famille.",
+    era: [1930, 1990],
+    place: "chateau",
+    zoom: 5,
+  },
+  {
+    key: "aujourdhui",
+    prologue: false,
+    dateLabel: "Aujourd’hui",
+    title: "Une famille d’exemple",
+    body: "Chapitre d’exemple. La famille vit aujourd’hui un peu partout en Europe : la carte s’élargit.",
+    era: [1990, 2026],
+    place: null,
+    zoom: 1,
+  },
+] as const;
+
+export const demoFigures = [
+  { auto: "people", label: "personnes dans l’arbre d’exemple" },
+  { auto: "generations", label: "générations" },
+  { auto: "places", label: "lieux d’exemple" },
+  { value: 2, label: "titres d’exemple" },
+] as const;
+
+export const demoAnecdotes = [
+  {
+    key: "pomme",
+    title: "La pomme d’or (anecdote d’exemple)",
+    excerpt:
+      "Anecdote d’exemple : chaque automne, la plus belle pomme du verger était offerte au plus jeune de la famille.",
+  },
+  {
+    key: "cheval",
+    title: "Le cheval qui savait compter (anecdote d’exemple)",
+    excerpt:
+      "Anecdote d’exemple, inventée pour tester les cartes rouges de « Le saviez-vous ? ».",
+  },
+  {
+    key: "portrait",
+    title: "Le portrait retrouvé (anecdote d’exemple)",
+    excerpt:
+      "Anecdote d’exemple : un portrait oublié dans un grenier, retrouvé des années plus tard.",
+  },
+] as const;

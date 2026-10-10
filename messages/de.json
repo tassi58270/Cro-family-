@@ -115,10 +115,61 @@
     }
   },
   "home": {
-    "eyebrow": "Haus Croÿ",
-    "title": "Neun Jahrhunderte einer europäischen Familie",
-    "status": "Die Website befindet sich im Aufbau.",
-    "body": "Bald können Sie hier die Geschichte des Hauses entdecken, jedes Familienmitglied im Stammbaum finden und Ihre eigenen Erinnerungen teilen."
+    "tagline": "Neun Jahrhunderte einer europäischen Familie",
+    "pronunciation": "gesprochen „Kru-i“",
+    "cue": "Die Geschichte entdecken",
+    "skip": "Überspringen",
+    "summaryTitle": "In wenigen Zeilen",
+    "figuresTitle": "In Zahlen",
+    "chaptersTitle": "Die Geschichte in einigen Kapiteln",
+    "treeLink": "Diese Personen im Stammbaum ansehen",
+    "prologue": "Prolog",
+    "titlesTitle": "Die Titel",
+    "titles": {
+      "createdBy": "verliehen von",
+      "holders": "Aufeinanderfolgende Träger",
+      "noHolder": "Die Träger wurden noch nicht erfasst.",
+      "turn": "Träger ansehen",
+      "back": "Karte umdrehen",
+      "previous": "Vorherige Titel",
+      "next": "Nächste Titel"
+    },
+    "anecdotesTitle": "Wussten Sie schon?",
+    "readAnecdote": "Geschichte lesen",
+    "gatewaysTitle": "Entdecken",
+    "gateways": {
+      "tree": {
+        "title": "Der Stammbaum",
+        "body": "Alle wiederfinden, mit Eltern, Ehen und Kindern."
+      },
+      "arms": {
+        "title": "Wappen und Linien",
+        "body": "Das Wappen verstehen und den Linien folgen, von den Anfängen bis heute."
+      },
+      "stories": {
+        "title": "Geschichten",
+        "body": "Erinnerungen und Anekdoten, von der Familie erzählt."
+      },
+      "photos": {
+        "title": "Fotos",
+        "body": "Gesichter für den Stammbaum: Porträts, Hochzeiten, Familientreffen."
+      },
+      "places": {
+        "title": "Orte und Ereignisse",
+        "body": "Karte und Zeitleiste der Momente, die zählten."
+      },
+      "contribute": {
+        "title": "Mitwirken",
+        "body": "Ein Foto, eine Geschichte, eine Korrektur beitragen."
+      }
+    },
+    "counts": {
+      "people": "{count, plural, one {# Person} other {# Personen}}",
+      "branches": "{count, plural, one {# Linie} other {# Linien}}",
+      "stories": "{count, plural, one {# Geschichte} other {# Geschichten}}",
+      "photos": "{count, plural, one {# Foto} other {# Fotos}}",
+      "places": "{count, plural, one {# Ort} other {# Orte}}"
+    }
   },
   "notFound": {
     "title": "Seite nicht gefunden",
@@ -260,7 +311,8 @@
       "overview": "Überblick",
       "tree": "Stammbaum erfassen",
       "import": "GEDCOM-Import",
-      "demo": "Beispieldaten"
+      "demo": "Beispieldaten",
+      "home": "Startseite"
     },
     "overview": {
       "title": "Guten Tag",
@@ -423,6 +475,92 @@
       "load": "Familie „Exemple“ laden",
       "remove": "Beispieldaten löschen",
       "removeConfirm": "Die ganze Familie „Exemple“ löschen? Die echten Profile der Familie bleiben unberührt."
+    },
+    "home": {
+      "title": "Startseite",
+      "intro": "Alles, was die Startseite zeigt, wird hier geschrieben. Ein leerer Bereich erscheint nicht auf der Seite.",
+      "language": "Sprache des Textes",
+      "texts": "Unter dem Namen",
+      "textsIntro": "Die zwei Zeilen unter „Croÿ“, dann die Zusammenfassung „In wenigen Zeilen“.",
+      "tagline": "Hauptzeile",
+      "pronunciation": "Aussprache",
+      "pronunciationHint": "Das Wort in Anführungszeichen erscheint kursiv, zum Beispiel: gesprochen „Kru-i“.",
+      "summary": "In wenigen Zeilen",
+      "summaryHint": "Drei oder vier Sätze, einer pro Zeile: woher die Familie kommt, wie sie aufstieg, wo sie heute lebt.",
+      "save": "Speichern",
+      "saved": "Gespeichert. Die Seite ist aktuell.",
+      "figures": "In Zahlen",
+      "figuresIntro": "Zahlen, die Sie wählen, oder die die Seite selbst im Stammbaum zählt.",
+      "addFigure": "Zahl hinzufügen",
+      "chapters": "Die Geschichte in Kapiteln",
+      "chaptersIntro": "Vier bis acht Kapitel, beim Scrollen über der Europakarte erzählt.",
+      "addChapter": "Kapitel hinzufügen",
+      "anecdotes": "Wussten Sie schon?",
+      "anecdotesIntro": "Kurze Anekdoten; drei werden bei jedem Besuch zufällig ausgewählt.",
+      "addAnecdote": "Anekdote hinzufügen",
+      "none": "Noch nichts.",
+      "draft": "Entwurf",
+      "published": "Auf der Seite sichtbar",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "deleteConfirm": "Dieses Element löschen? Das Protokoll behält eine Spur.",
+      "moveUp": "Nach oben",
+      "moveDown": "Nach unten",
+      "translations": "Übersetzungen (Englisch, Deutsch)",
+      "itemTitle": "Titel",
+      "panel": {
+        "figure": "Eine Zahl",
+        "chapter": "Ein Kapitel",
+        "anecdote": "Eine Anekdote"
+      },
+      "figure": {
+        "kind": "Art der Zahl",
+        "kindHint": "Eine freie Zahl oder eine aus dem Stammbaum gezählte Summe, immer aktuell.",
+        "kinds": {
+          "number": "Freie Zahl",
+          "people": "Personen im Stammbaum",
+          "generations": "Generationen",
+          "countries": "Länder",
+          "photos": "Fotos",
+          "branches": "Linien",
+          "titles": "Titel",
+          "stories": "Geschichten",
+          "places": "Orte"
+        },
+        "value": "Zahl",
+        "label": "Bezeichnung",
+        "labelHint": "Was auf die Zahl folgt, zum Beispiel: Jahrhunderte Geschichte."
+      },
+      "chapter": {
+        "prologue": "Prolog",
+        "prologueHint": "Vor dem ersten Kapitel gezeigt, zum Beispiel „Am Anfang das Ungarn der Árpáden“.",
+        "dateLabel": "Großes Datum",
+        "dateLabelHint": "Zum Beispiel 1397 oder 12.–14. Jahrhundert.",
+        "body": "Text",
+        "bodyHint": "Etwa vier Zeilen.",
+        "eraStart": "Ab dem Jahr",
+        "eraEnd": "Bis zum Jahr",
+        "place": "Ort auf der Karte",
+        "placeHint": "Nur bereits auf der Karte platzierte Orte sind wählbar.",
+        "noPlace": "Ganz Europa",
+        "notLocated": "noch nicht auf der Karte",
+        "zoom": "Ausschnitt",
+        "zooms": {
+          "1": "Ganz Europa",
+          "3": "Ein Land",
+          "5": "Eine Region",
+          "8": "Eine Stadt"
+        }
+      },
+      "anecdote": {
+        "body": "Text der Anekdote"
+      },
+      "errors": {
+        "required": "Dieses Feld wird benötigt.",
+        "number": "Geben Sie eine ganze Zahl an.",
+        "years": "Das Endjahr liegt vor dem Anfangsjahr.",
+        "save": "Das Speichern hat nicht geklappt. Bitte erneut versuchen."
+      }
     }
   }
 }

@@ -1,7 +1,11 @@
 import "server-only";
 import type { Query } from "@/lib/db";
 import {
+  demoAnecdotes,
   demoBranches,
+  demoChapters,
+  demoFigures,
+  demoSummary,
   demoChildren,
   demoEvents,
   demoPeople,
@@ -238,6 +242,8 @@ export async function loadDemo(q: Query, actor: string): Promise<void> {
     }
   }
 
+  await loadDemoHome(q, ids);
+
   for (const s of demoSources) {
     const id = await one(
       `insert into public.sources (kind, title, reference, repository, transcription, status, is_demo, created_by)
@@ -253,11 +259,63 @@ export async function loadDemo(q: Query, actor: string): Promise<void> {
   }
 }
 
+/** The home page of the demonstration; the family's own texts are kept. */
+async function loadDemoHome(q: Query, ids: Map<string, string>) {
+  await q(
+    `update public.home_i18n set summary = $1 where locale = 'fr' and coalesce(summary, '') = ''`,
+    [demoSummary],
+  );
+  for (const [i, c] of demoChapters.entries()) {
+    const [chapter] = await q<{ id: string }>(
+      `insert into public.home_chapters (sort_order, prologue, era_start, era_end, place_id, zoom, status, is_demo)
+       values ($1, $2, $3, $4, $5, $6, 'published', true) returning id`,
+      [
+        i,
+        c.prologue,
+        c.era?.[0] ?? null,
+        c.era?.[1] ?? null,
+        c.place ? ids.get(`place:${c.place}`) : null,
+        c.zoom,
+      ],
+    );
+    await q(
+      `insert into public.home_chapters_i18n (chapter_id, locale, date_label, title, body)
+       values ($1, 'fr', $2, $3, $4)`,
+      [chapter.id, c.dateLabel, c.title, c.body],
+    );
+  }
+  for (const [i, f] of demoFigures.entries()) {
+    const [figure] = await q<{ id: string }>(
+      `insert into public.home_figures (sort_order, value, auto, status, is_demo)
+       values ($1, $2, $3, 'published', true) returning id`,
+      [i, "value" in f ? f.value : null, "auto" in f ? f.auto : null],
+    );
+    await q(
+      `insert into public.home_figures_i18n (figure_id, locale, label) values ($1, 'fr', $2)`,
+      [figure.id, f.label],
+    );
+  }
+  for (const a of demoAnecdotes) {
+    const [story] = await q<{ id: string }>(
+      `insert into public.stories (slug, anecdote, original_locale, published_at, status, is_demo)
+       values ($1, true, 'fr', now(), 'published', true) returning id`,
+      [`exemple-anecdote-${a.key}`],
+    );
+    await q(
+      `insert into public.stories_i18n (story_id, locale, title, excerpt, body) values ($1, 'fr', $2, $3, $3)`,
+      [story.id, a.title, a.excerpt],
+    );
+  }
+}
+
 /** Removes every demonstration row; the family's own content is untouched. */
 export async function removeDemo(q: Query): Promise<void> {
-  await q(`
-    delete from public.stories where is_demo;
-  `);
+  await q("delete from public.stories where is_demo");
+  await q("delete from public.home_chapters where is_demo");
+  await q("delete from public.home_figures where is_demo");
+  await q("update public.home_i18n set summary = null where summary = $1", [
+    demoSummary,
+  ]);
   for (const table of [
     "events",
     "sources",

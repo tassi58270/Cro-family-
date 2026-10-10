@@ -110,6 +110,7 @@ export function SiteHeader() {
     <>
       <header
         ref={header}
+        data-intro-hide
         onFocusCapture={() => setHidden(false)}
         className={cn(
           "page fixed inset-x-0 top-0 z-40 flex h-(--header-h) items-center gap-4 bg-paper/95 backdrop-blur-md",

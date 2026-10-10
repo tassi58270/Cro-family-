@@ -90,7 +90,9 @@ describe("the demonstration family", () => {
 
   it("keeps the story that names living people for members", async () => {
     const titles = await as(db, visitor, (q) =>
-      q<{ slug: string }>("select slug from public.stories order by slug"),
+      q<{ slug: string }>(
+        "select slug from public.stories where not anecdote order by slug",
+      ),
     );
     expect(titles.map((t) => t.slug)).toEqual([
       "exemple-mariage",
@@ -116,7 +118,10 @@ describe("the demonstration family", () => {
         + (select count(*) from public.stories where is_demo)::int
         + (select count(*) from public.sources where is_demo)::int
         + (select count(*) from public.unions where is_demo)::int
-        + (select count(*) from public.parent_child where is_demo)::int as demo,
+        + (select count(*) from public.parent_child where is_demo)::int
+        + (select count(*) from public.home_chapters where is_demo)::int
+        + (select count(*) from public.home_figures where is_demo)::int
+        + (select count(*) from public.home_i18n where summary is not null)::int as demo,
         (select count(*) from public.people)::int as people
     `);
     expect(rows[0]).toEqual({ demo: 0, people: 1 });

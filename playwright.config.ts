@@ -23,6 +23,9 @@ export default defineConfig({
     baseURL,
     trace: "on-first-retry",
     launchOptions,
+    // The opening of the home page is tested on its own (home.spec.ts);
+    // elsewhere, pages are read as by someone who prefers reduced motion.
+    contextOptions: { reducedMotion: "reduce" },
   },
   projects: [
     {
