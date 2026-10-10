@@ -27,7 +27,9 @@
     "search": "Rechercher",
     "signIn": "Connexion",
     "openMenu": "Ouvrir le menu",
-    "closeMenu": "Fermer le menu"
+    "closeMenu": "Fermer le menu",
+    "dashboard": "Tableau de bord",
+    "account": "Mon compte"
   },
   "theme": {
     "label": "Apparence",
@@ -208,5 +210,219 @@
     "emptyIntro": "Une rubrique sans contenu invite à contribuer, jamais de trou ni de texte de remplissage.",
     "menuFooter": "Menu et pied de page",
     "menuFooterIntro": "Le menu est en haut de cette page ; le pied de page, en bas. Sous 1360 pixels de large, le menu s’ouvre en plein écran."
+  },
+  "auth": {
+    "title": "Connexion",
+    "intro": "Les membres de la famille reçoivent un lien par e-mail pour se connecter. Il n’y a pas de mot de passe à retenir.",
+    "emailLabel": "Votre adresse e-mail",
+    "emailHint": "Celle que vous avez donnée à la famille.",
+    "submit": "Recevoir le lien",
+    "noPassword": "Le lien est valable 20 minutes et ne sert qu’une fois.",
+    "invalidEmail": "Cette adresse ne semble pas complète. Vérifiez-la, par exemple prenom@exemple.fr.",
+    "sendError": "Le lien n’a pas pu être envoyé. Réessayez dans un instant.",
+    "sentTitle": "Regardez votre boîte e-mail",
+    "sentBody": "Si l’adresse {email} a accès au site, un lien de connexion vient de lui être envoyé.",
+    "devMode": "Mode développement : aucun e-mail n’est envoyé, voici le lien.",
+    "devLink": "Ouvrir le lien de connexion",
+    "devUnknown": "Mode développement : cette adresse n’a pas accès au site, aucun lien n’a été créé.",
+    "noAccess": "Pas encore d’accès ?",
+    "requestAccess": "Demander un accès famille",
+    "confirmTitle": "Se connecter",
+    "confirmBody": "Un clic pour terminer votre connexion.",
+    "confirmButton": "Me connecter",
+    "expiredTitle": "Ce lien n’est plus valable",
+    "expiredBody": "Il a déjà servi ou il a expiré. Demandez-en un nouveau, il arrive en quelques secondes.",
+    "newLink": "Recevoir un nouveau lien",
+    "email": {
+      "subject": "Votre lien de connexion · Maison de Croÿ",
+      "line1": "Bonjour,",
+      "line2": "Voici votre lien pour vous connecter au site de la famille. Il est valable {minutes} minutes et ne sert qu’une fois.",
+      "action": "Me connecter",
+      "footer": "Si vous n’avez rien demandé, ignorez simplement ce message."
+    }
+  },
+  "account": {
+    "title": "Mon compte",
+    "signedInAs": "Vous êtes connecté avec l’adresse {email}.",
+    "dashboard": "Ouvrir le tableau de bord",
+    "signOut": "Se déconnecter"
+  },
+  "demo": {
+    "bannerTitle": "Données de démonstration.",
+    "bannerBody": "La famille « Exemple » est fictive : elle sert à essayer le site et disparaîtra en un clic."
+  },
+  "admin": {
+    "title": "Tableau de bord",
+    "viewSite": "Voir le site",
+    "signOut": "Déconnexion",
+    "nav": {
+      "label": "Sections du tableau de bord",
+      "overview": "Vue d’ensemble",
+      "tree": "Saisie de l’arbre",
+      "import": "Import GEDCOM",
+      "demo": "Démonstration"
+    },
+    "overview": {
+      "title": "Bonjour",
+      "intro": "Le site est livré vide : c’est la famille qui le remplit, à son rythme. Voici par où commencer.",
+      "assistant": "Pour bien démarrer",
+      "assistantIntro": "Cinq gestes qui donnent vie au site.",
+      "progress": "{done} sur {total}",
+      "done": "fait",
+      "soon": "Bientôt disponible",
+      "gedcomHint": "Vous avez déjà un arbre dans un logiciel de généalogie ?",
+      "gedcomAction": "L’importer en une fois",
+      "figures": "En chiffres",
+      "counts": {
+        "people": "Personnes",
+        "living": "Personnes vivantes",
+        "drafts": "Fiches non publiées",
+        "suggestions": "Propositions en attente"
+      },
+      "steps": {
+        "arms": {
+          "title": "Déposer le blason",
+          "body": "Le fichier des armoiries en haute définition, pour l’accueil et la page Armoiries.",
+          "action": "Déposer"
+        },
+        "home": {
+          "title": "Écrire le résumé de l’accueil",
+          "body": "Trois ou quatre phrases : d’où vient la famille, comment elle s’est élevée, où elle vit aujourd’hui.",
+          "action": "Écrire"
+        },
+        "ancestors": {
+          "title": "Ajouter les premiers ancêtres",
+          "body": "Trois personnes suffisent pour voir l’arbre prendre forme.",
+          "action": "Ajouter"
+        },
+        "photos": {
+          "title": "Envoyer les premières photos",
+          "body": "Portraits, photos de famille : elles donnent des visages à l’arbre.",
+          "action": "Envoyer"
+        },
+        "cousins": {
+          "title": "Inviter trois cousins",
+          "body": "Chacun pourra proposer ses souvenirs, que vous validerez.",
+          "action": "Inviter"
+        }
+      }
+    },
+    "tree": {
+      "title": "Saisie de l’arbre",
+      "count": "{count, plural, =0 {Aucune personne} one {# personne} other {# personnes}}",
+      "emptyTitle": "Commencez par une personne",
+      "emptyBody": "Vous-même, un grand-parent ou l’ancêtre le plus ancien que vous connaissez : ajoutez ensuite ses parents, son conjoint et ses enfants d’un simple « + ».",
+      "addFirst": "Ajouter une personne",
+      "addUnlinked": "Ajouter une personne sans lien",
+      "unnamed": "Sans nom",
+      "draft": "non publiée",
+      "demo": "exemple",
+      "focusLabel": "Au centre",
+      "parents": "Parents",
+      "partners": "Conjoints",
+      "children": "Enfants",
+      "otherChildren": "Autres enfants",
+      "childrenWith": "Enfants avec {name}",
+      "siblings": "Frères et sœurs",
+      "withPartner": "Avec {name}",
+      "unknownPartner": "Conjoint inconnu",
+      "married": "mariage {date}",
+      "addParent": "Ajouter un parent",
+      "addPartner": "Ajouter un conjoint",
+      "addChild": "Ajouter un enfant",
+      "addParentOf": "Un parent de {name}",
+      "addPartnerOf": "Un conjoint de {name}",
+      "addChildOf": "Un enfant de {name}",
+      "edit": "Modifier {name}",
+      "editButton": "Modifier",
+      "delete": "Supprimer",
+      "deleteConfirm": "Supprimer {name} et ses liens ? Le journal garde une trace pour revenir en arrière."
+    },
+    "person": {
+      "givenNames": "Prénoms",
+      "surname": "Nom",
+      "sex": "Sexe",
+      "sexes": {
+        "female": "Femme",
+        "male": "Homme",
+        "unknown": "Inconnu"
+      },
+      "birth": "Naissance",
+      "birthPlace": "Lieu de naissance",
+      "death": "Décès",
+      "deathPlace": "Lieu de décès",
+      "dateHint": "Comme vous la connaissez : 1890, vers 1890, 12 mars 1890…",
+      "understood": "Compris : {date}",
+      "notUnderstood": "Date non comprise. Essayez 1890, vers 1890 ou 12/03/1890.",
+      "deceased": "Décédé(e)",
+      "deceasedHint": "À cocher même sans date de décès : une personne vivante reste invisible du public.",
+      "marriage": "Date du mariage",
+      "marriagePlace": "Lieu du mariage",
+      "optional": "facultatif",
+      "otherParent": "Avec qui ?",
+      "otherParentUnknown": "Autre parent inconnu",
+      "published": "Visible sur le site",
+      "publishedHint": "Décochez pour garder la fiche en brouillon.",
+      "add": "Ajouter",
+      "saveChanges": "Enregistrer",
+      "errors": {
+        "name": "Indiquez au moins un prénom ou un nom.",
+        "date": "Date non comprise. Essayez 1890, vers 1890 ou 12/03/1890.",
+        "order": "Le décès ne peut pas précéder la naissance.",
+        "save": "L’enregistrement n’a pas abouti. Réessayez."
+      }
+    },
+    "import": {
+      "title": "Importer un arbre",
+      "intro": "Un arbre déjà saisi dans un logiciel de généalogie se charge ici en une fois, au format GEDCOM. Rien n’est écrit avant votre confirmation.",
+      "file": "Fichier GEDCOM",
+      "fileHint": "Fichier .ged exporté depuis Geneanet, Heredis, Ancestry, Gramps…, 4 Mo au plus.",
+      "analyse": "Analyser le fichier",
+      "analyseAgain": "Analyser à nouveau",
+      "import": "{count, plural, one {Importer # personne} other {Importer # personnes}}",
+      "previewTitle": "Contenu de {file}",
+      "counts": {
+        "people": "Personnes",
+        "families": "Familles",
+        "places": "Lieux",
+        "living": "Vivantes, cachées au public"
+      },
+      "sample": "Premières personnes du fichier",
+      "duplicates": "{count, plural, one {# personne semble déjà présente dans l’arbre.} other {# personnes semblent déjà présentes dans l’arbre.}}",
+      "warningsTitle": "À savoir avant d’importer",
+      "warnings": {
+        "dates": "{count, plural, one {# date n’a pas été comprise et sera laissée vide :} other {# dates n’ont pas été comprises et seront laissées vides :}}",
+        "notes": "{count, plural, one {# note ne sera pas importée : elle pourrait contenir des informations privées.} other {# notes ne seront pas importées : elles pourraient contenir des informations privées.}}",
+        "missing": "{count, plural, one {# lien renvoie à une personne absente du fichier.} other {# liens renvoient à des personnes absentes du fichier.}}"
+      },
+      "publish": "Publier tout de suite",
+      "publishHint": "Les personnes vivantes restent cachées au public dans tous les cas.",
+      "reuse": "Relier aux personnes déjà présentes",
+      "reuseHint": "Même prénom, même nom et même année de naissance : la fiche existante est réutilisée au lieu d’être dupliquée.",
+      "doneTitle": "Import terminé",
+      "doneBody": "{people} personnes ajoutées, {unions} unions, {links} liens de filiation ; {reused} personnes déjà présentes réutilisées.",
+      "openTree": "Voir l’arbre",
+      "errors": {
+        "missing": "Choisissez un fichier.",
+        "size": "Ce fichier dépasse 4 Mo. Exportez l’arbre sans les médias.",
+        "format": "Ce fichier n’est pas au format GEDCOM.",
+        "server": "L’import n’a pas abouti. Rien n’a été modifié."
+      }
+    },
+    "demo": {
+      "title": "Données de démonstration",
+      "intro": "Pour essayer le site avant de le remplir, chargez une famille fictive : la famille « Exemple ».",
+      "points": {
+        "people": "Une vingtaine de personnes sur six générations, avec titres, branches, lieux, événements et histoires d’exemple.",
+        "living": "Cinq d’entre elles sont « vivantes » : vous verrez comment le public ne voit qu’une « Personne vivante ».",
+        "content": "Tout est clairement marqué comme exemple et un bandeau le signale sur chaque page.",
+        "removal": "Un clic suffit pour tout retirer : les fiches de la famille ne sont pas touchées."
+      },
+      "loaded": "La famille « Exemple » est chargée.",
+      "notLoaded": "Aucune donnée de démonstration.",
+      "load": "Charger la famille « Exemple »",
+      "remove": "Supprimer les données de démonstration",
+      "removeConfirm": "Supprimer toute la famille « Exemple » ? Les vraies fiches de la famille ne seront pas touchées."
+    }
   }
 }

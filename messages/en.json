@@ -27,7 +27,9 @@
     "search": "Search",
     "signIn": "Sign in",
     "openMenu": "Open the menu",
-    "closeMenu": "Close the menu"
+    "closeMenu": "Close the menu",
+    "dashboard": "Dashboard",
+    "account": "My account"
   },
   "theme": {
     "label": "Appearance",
@@ -208,5 +210,219 @@
     "emptyIntro": "A section without content invites people to contribute: never a hole, never filler text.",
     "menuFooter": "Menu and footer",
     "menuFooterIntro": "The menu is at the top of this page; the footer at the bottom. Below 1360 pixels wide, the menu opens full screen."
+  },
+  "auth": {
+    "title": "Sign in",
+    "intro": "Family members receive a link by email to sign in. There is no password to remember.",
+    "emailLabel": "Your email address",
+    "emailHint": "The one you gave to the family.",
+    "submit": "Send me the link",
+    "noPassword": "The link is valid for 20 minutes and works only once.",
+    "invalidEmail": "This address looks incomplete. Check it, for example name@example.com.",
+    "sendError": "The link could not be sent. Please try again in a moment.",
+    "sentTitle": "Check your inbox",
+    "sentBody": "If {email} has access to the site, a sign-in link has just been sent to it.",
+    "devMode": "Development mode: no email is sent, here is the link.",
+    "devLink": "Open the sign-in link",
+    "devUnknown": "Development mode: this address has no access to the site, no link was created.",
+    "noAccess": "No access yet?",
+    "requestAccess": "Request family access",
+    "confirmTitle": "Sign in",
+    "confirmBody": "One click to finish signing in.",
+    "confirmButton": "Sign me in",
+    "expiredTitle": "This link is no longer valid",
+    "expiredBody": "It has already been used or it has expired. Ask for a new one, it arrives within seconds.",
+    "newLink": "Send me a new link",
+    "email": {
+      "subject": "Your sign-in link · House of Croÿ",
+      "line1": "Hello,",
+      "line2": "Here is your link to sign in to the family site. It is valid for {minutes} minutes and works only once.",
+      "action": "Sign me in",
+      "footer": "If you did not ask for anything, simply ignore this message."
+    }
+  },
+  "account": {
+    "title": "My account",
+    "signedInAs": "You are signed in as {email}.",
+    "dashboard": "Open the dashboard",
+    "signOut": "Sign out"
+  },
+  "demo": {
+    "bannerTitle": "Demonstration data.",
+    "bannerBody": "The “Exemple” family is fictional: it is there to try out the site and goes away in one click."
+  },
+  "admin": {
+    "title": "Dashboard",
+    "viewSite": "View the site",
+    "signOut": "Sign out",
+    "nav": {
+      "label": "Dashboard sections",
+      "overview": "Overview",
+      "tree": "Tree entry",
+      "import": "GEDCOM import",
+      "demo": "Demonstration"
+    },
+    "overview": {
+      "title": "Hello",
+      "intro": "The site comes empty: the family fills it, at its own pace. Here is where to start.",
+      "assistant": "Getting started",
+      "assistantIntro": "Five steps that bring the site to life.",
+      "progress": "{done} of {total}",
+      "done": "done",
+      "soon": "Coming soon",
+      "gedcomHint": "Already have a tree in a genealogy program?",
+      "gedcomAction": "Import it in one go",
+      "figures": "In figures",
+      "counts": {
+        "people": "People",
+        "living": "Living people",
+        "drafts": "Unpublished profiles",
+        "suggestions": "Pending suggestions"
+      },
+      "steps": {
+        "arms": {
+          "title": "Upload the coat of arms",
+          "body": "The high-resolution arms file, for the home page and the Arms page.",
+          "action": "Upload"
+        },
+        "home": {
+          "title": "Write the home page summary",
+          "body": "Three or four sentences: where the family comes from, how it rose, where it lives today.",
+          "action": "Write"
+        },
+        "ancestors": {
+          "title": "Add the first ancestors",
+          "body": "Three people are enough to see the tree take shape.",
+          "action": "Add"
+        },
+        "photos": {
+          "title": "Send the first photos",
+          "body": "Portraits, family pictures: they give faces to the tree.",
+          "action": "Send"
+        },
+        "cousins": {
+          "title": "Invite three cousins",
+          "body": "Everyone can then suggest their memories, which you approve.",
+          "action": "Invite"
+        }
+      }
+    },
+    "tree": {
+      "title": "Tree entry",
+      "count": "{count, plural, =0 {No one} one {# person} other {# people}}",
+      "emptyTitle": "Start with one person",
+      "emptyBody": "Yourself, a grandparent or the oldest ancestor you know: then add their parents, partner and children with a simple “+”.",
+      "addFirst": "Add a person",
+      "addUnlinked": "Add an unrelated person",
+      "unnamed": "No name",
+      "draft": "unpublished",
+      "demo": "example",
+      "focusLabel": "In the centre",
+      "parents": "Parents",
+      "partners": "Partners",
+      "children": "Children",
+      "otherChildren": "Other children",
+      "childrenWith": "Children with {name}",
+      "siblings": "Brothers and sisters",
+      "withPartner": "With {name}",
+      "unknownPartner": "Unknown partner",
+      "married": "married {date}",
+      "addParent": "Add a parent",
+      "addPartner": "Add a partner",
+      "addChild": "Add a child",
+      "addParentOf": "A parent of {name}",
+      "addPartnerOf": "A partner of {name}",
+      "addChildOf": "A child of {name}",
+      "edit": "Edit {name}",
+      "editButton": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Delete {name} and their links? The journal keeps a record to undo it."
+    },
+    "person": {
+      "givenNames": "First names",
+      "surname": "Surname",
+      "sex": "Sex",
+      "sexes": {
+        "female": "Woman",
+        "male": "Man",
+        "unknown": "Unknown"
+      },
+      "birth": "Birth",
+      "birthPlace": "Place of birth",
+      "death": "Death",
+      "deathPlace": "Place of death",
+      "dateHint": "As you know it: 1890, about 1890, 12 March 1890…",
+      "understood": "Understood: {date}",
+      "notUnderstood": "Date not understood. Try 1890, about 1890 or 12/03/1890.",
+      "deceased": "Deceased",
+      "deceasedHint": "Tick it even without a date of death: a living person stays hidden from the public.",
+      "marriage": "Date of marriage",
+      "marriagePlace": "Place of marriage",
+      "optional": "optional",
+      "otherParent": "With whom?",
+      "otherParentUnknown": "Other parent unknown",
+      "published": "Visible on the site",
+      "publishedHint": "Untick to keep the profile as a draft.",
+      "add": "Add",
+      "saveChanges": "Save",
+      "errors": {
+        "name": "Give at least a first name or a surname.",
+        "date": "Date not understood. Try 1890, about 1890 or 12/03/1890.",
+        "order": "Death cannot come before birth.",
+        "save": "Saving did not work. Please try again."
+      }
+    },
+    "import": {
+      "title": "Import a tree",
+      "intro": "A tree already entered in a genealogy program can be loaded here in one go, as a GEDCOM file. Nothing is written before you confirm.",
+      "file": "GEDCOM file",
+      "fileHint": ".ged file exported from Geneanet, Heredis, Ancestry, Gramps…, 4 MB at most.",
+      "analyse": "Analyse the file",
+      "analyseAgain": "Analyse again",
+      "import": "{count, plural, one {Import # person} other {Import # people}}",
+      "previewTitle": "Contents of {file}",
+      "counts": {
+        "people": "People",
+        "families": "Families",
+        "places": "Places",
+        "living": "Living, hidden from the public"
+      },
+      "sample": "First people in the file",
+      "duplicates": "{count, plural, one {# person seems to be in the tree already.} other {# people seem to be in the tree already.}}",
+      "warningsTitle": "Good to know before importing",
+      "warnings": {
+        "dates": "{count, plural, one {# date was not understood and will be left empty:} other {# dates were not understood and will be left empty:}}",
+        "notes": "{count, plural, one {# note will not be imported: it might hold private information.} other {# notes will not be imported: they might hold private information.}}",
+        "missing": "{count, plural, one {# link points to a person missing from the file.} other {# links point to people missing from the file.}}"
+      },
+      "publish": "Publish right away",
+      "publishHint": "Living people stay hidden from the public in any case.",
+      "reuse": "Link to people already present",
+      "reuseHint": "Same first name, surname and year of birth: the existing profile is reused instead of duplicated.",
+      "doneTitle": "Import complete",
+      "doneBody": "{people} people added, {unions} unions, {links} parent links; {reused} people already present were reused.",
+      "openTree": "See the tree",
+      "errors": {
+        "missing": "Choose a file.",
+        "size": "This file is larger than 4 MB. Export the tree without media.",
+        "format": "This file is not in GEDCOM format.",
+        "server": "The import did not go through. Nothing was changed."
+      }
+    },
+    "demo": {
+      "title": "Demonstration data",
+      "intro": "To try the site before filling it, load a fictional family: the “Exemple” family.",
+      "points": {
+        "people": "About twenty people over six generations, with example titles, branches, places, events and stories.",
+        "living": "Five of them are “living”: you will see how the public only sees a “Living person”.",
+        "content": "Everything is clearly marked as an example and a banner says so on every page.",
+        "removal": "One click removes it all: the family’s own profiles are not touched."
+      },
+      "loaded": "The “Exemple” family is loaded.",
+      "notLoaded": "No demonstration data.",
+      "load": "Load the “Exemple” family",
+      "remove": "Delete the demonstration data",
+      "removeConfirm": "Delete the whole “Exemple” family? The family’s real profiles will not be touched."
+    }
   }
 }

@@ -59,6 +59,27 @@ jobs:
   e2e:
     name: Build and end-to-end tests
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: croy
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      # Test settings only: sign-in links are shown on screen, never emailed.
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/croy
+      ADMIN_EMAILS: admin@example.org
+      AUTH_DEV_LINKS: "on"
+      AUTH_LINKS_PER_HOUR: "1000"
+      E2E_RESET_DATABASE: "on"
+      NEXT_PUBLIC_SITE_URL: http://localhost:3100
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
@@ -66,6 +87,7 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      - run: node scripts/db.mjs reset
       - run: npm run build
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e

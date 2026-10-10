@@ -1,3 +1,4 @@
+import { DemoBanner } from "@/components/ui/demo-banner";
 import { SiteFooter } from "@/components/ui/site-footer";
 import { SiteHeader } from "@/components/ui/site-header";
 import { resolveLocale } from "@/lib/i18n/server";
@@ -12,7 +13,10 @@ export default async function PublicLayout({
   return (
     <>
       <SiteHeader />
-      <div className="flex flex-1 flex-col pt-(--header-h)">{children}</div>
+      <div className="flex flex-1 flex-col pt-(--header-h)">
+        <DemoBanner />
+        {children}
+      </div>
       <SiteFooter locale={locale} />
     </>
   );

@@ -67,9 +67,19 @@ export async function migrate(client, { log = console.log } = {}) {
   }
 }
 
-function isLocal(url) {
+export function isLocal(url) {
   const { hostname } = new URL(url);
   return ["localhost", "127.0.0.1", "::1"].includes(hostname);
+}
+
+/** Local only: drops everything and rebuilds the schema from the migrations. */
+export async function reset(client, options) {
+  await client.query(`
+    drop schema if exists public, app, private, auth, extensions, supabase_migrations cascade;
+    create schema public;
+  `);
+  await bootstrap(client);
+  await migrate(client, options);
 }
 
 async function main() {

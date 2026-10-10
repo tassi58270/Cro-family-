@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import { Shield } from "@/components/heraldique/shield";
 import { cn } from "@/lib/design/cn";
@@ -9,6 +9,21 @@ import { Link, usePathname } from "@/lib/i18n/navigation";
 import { Tremas } from "./bands";
 import { LanguageSwitcher } from "./language-switcher";
 import { ThemeSwitcher } from "./theme-switcher";
+
+/** « admin », « member » or null: set at sign-in, only to adapt the menu. */
+function readSignedIn(): "admin" | "member" | null {
+  const match = document.cookie.match(/(?:^|; )croy_membre=([^;]*)/);
+  const value = match?.[1];
+  return value === "admin" || value === "member" ? value : null;
+}
+
+function useSignedIn() {
+  return useSyncExternalStore(
+    () => () => {},
+    readSignedIn,
+    () => null,
+  );
+}
 
 function isCurrent(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -68,6 +83,7 @@ export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const header = useRef<HTMLElement>(null);
+  const signedIn = useSignedIn();
 
   useEffect(() => {
     let last = window.scrollY;
@@ -135,10 +151,20 @@ export function SiteHeader() {
           </Link>
           <LanguageSwitcher className="hidden nav:block" />
           <Link
-            href="/connexion"
+            href={
+              signedIn === "admin"
+                ? "/admin"
+                : signedIn
+                  ? "/compte"
+                  : "/connexion"
+            }
             className="ml-1 hidden min-h-11 items-center rounded-xs border border-ink px-4 text-caption font-medium transition-colors duration-(--duration-fast) hover:bg-ink hover:text-paper nav:inline-flex"
           >
-            {t("signIn")}
+            {signedIn === "admin"
+              ? t("dashboard")
+              : signedIn
+                ? t("account")
+                : t("signIn")}
           </Link>
           <button
             type="button"
@@ -164,6 +190,7 @@ export function SiteHeader() {
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
         pathname={pathname}
+        signedIn={signedIn}
       />
     </>
   );
@@ -173,10 +200,12 @@ function MobileMenu({
   open,
   onClose,
   pathname,
+  signedIn,
 }: {
   open: boolean;
   onClose: () => void;
   pathname: string;
+  signedIn: "admin" | "member" | null;
 }) {
   const t = useTranslations("nav");
   const ref = useRef<HTMLDialogElement>(null);
@@ -253,11 +282,21 @@ function MobileMenu({
         <div className="mt-10 grid gap-6 border-t border-hairline pt-6">
           <div className="flex flex-wrap items-center gap-3">
             <Link
-              href="/connexion"
+              href={
+                signedIn === "admin"
+                  ? "/admin"
+                  : signedIn
+                    ? "/compte"
+                    : "/connexion"
+              }
               onClick={onClose}
               className="inline-flex min-h-12 items-center rounded-xs border border-ink px-5 font-medium"
             >
-              {t("signIn")}
+              {signedIn === "admin"
+                ? t("dashboard")
+                : signedIn
+                  ? t("account")
+                  : t("signIn")}
             </Link>
             <Link
               href="/recherche"

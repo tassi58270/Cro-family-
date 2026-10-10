@@ -1,0 +1,275 @@
+import "server-only";
+import type { Query } from "@/lib/db";
+import {
+  demoBranches,
+  demoChildren,
+  demoEvents,
+  demoPeople,
+  demoPlaces,
+  demoSources,
+  demoStories,
+  demoTitles,
+  demoUnions,
+} from "./dataset";
+import { slugify } from "@/lib/slug";
+
+export async function demoLoaded(q: Query): Promise<boolean> {
+  const [row] = await q<{ loaded: boolean }>(
+    "select exists (select 1 from public.people where is_demo) as loaded",
+  );
+  return row.loaded;
+}
+
+/** Loads the fictional family, published, as the given administrator. */
+export async function loadDemo(q: Query, actor: string): Promise<void> {
+  if (await demoLoaded(q)) return;
+  const ids = new Map<string, string>();
+  const one = async (sql: string, params: unknown[]) =>
+    (await q<{ id: string }>(sql, params))[0].id;
+
+  for (const p of demoPlaces) {
+    const id = await one(
+      `insert into public.places (slug, lat, lng, kind, country_code, visitable, status, is_demo, created_by)
+       values ($1, $2, $3, $4, $5, $6, 'published', true, $7) returning id`,
+      [`exemple-${p.key}`, p.lat, p.lng, p.kind, p.country, p.visitable, actor],
+    );
+    ids.set(`place:${p.key}`, id);
+    await q(
+      `insert into public.places_i18n (place_id, locale, name, description) values ($1, 'fr', $2, $3)`,
+      [id, p.name, "Lieu d’exemple, inventé pour tester la carte."],
+    );
+  }
+
+  for (const [i, b] of demoBranches.entries()) {
+    const id = await one(
+      `insert into public.branches (slug, state, extinct_male_year, color, sort_order, status, is_demo, created_by)
+       values ($1, $2, $3, $4, $5, 'published', true, $6) returning id`,
+      [
+        `exemple-${b.key}`,
+        b.state,
+        "extinctMale" in b ? b.extinctMale : null,
+        b.color,
+        i,
+        actor,
+      ],
+    );
+    ids.set(`branch:${b.key}`, id);
+    await q(
+      `insert into public.branches_i18n (branch_id, locale, name, description, fate) values ($1, 'fr', $2, $3, $4)`,
+      [id, b.name, b.description, "fate" in b ? b.fate : null],
+    );
+  }
+
+  for (const p of demoPeople) {
+    const id = await one(
+      `insert into public.people
+         (slug, given_names, surname, sex, birth_date, birth_precision, birth_place_id,
+          death_date, death_precision, death_place_id, deceased, branch_id, origin_family,
+          status, is_demo, created_by)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 'published', true, $14)
+       returning id`,
+      [
+        slugify(`${p.given} ${p.surname} ${p.birth?.date.slice(0, 4) ?? ""}`),
+        p.given,
+        p.surname,
+        p.sex,
+        p.birth?.date ?? null,
+        p.birth?.precision ?? null,
+        p.birthPlace ? ids.get(`place:${p.birthPlace}`) : null,
+        p.death?.date ?? null,
+        p.death?.precision ?? null,
+        p.deathPlace ? ids.get(`place:${p.deathPlace}`) : null,
+        Boolean(p.death),
+        p.branch ? ids.get(`branch:${p.branch}`) : null,
+        p.originFamily ?? null,
+        actor,
+      ],
+    );
+    ids.set(`person:${p.key}`, id);
+    if (p.bio) {
+      await q(
+        `insert into public.people_i18n (person_id, locale, biography) values ($1, 'fr', $2)`,
+        [id, p.bio],
+      );
+    }
+  }
+
+  for (const b of demoBranches) {
+    await q(`update public.branches set founder_id = $1 where id = $2`, [
+      ids.get(`person:${b.founder}`),
+      ids.get(`branch:${b.key}`),
+    ]);
+  }
+
+  for (const u of demoUnions) {
+    const id = await one(
+      `insert into public.unions (partner_a, partner_b, marriage_date, marriage_precision, place_id, status, is_demo, created_by)
+       values ($1, $2, $3, $4, $5, 'published', true, $6) returning id`,
+      [
+        ids.get(`person:${u.a}`),
+        ids.get(`person:${u.b}`),
+        u.date.date,
+        u.date.precision,
+        "place" in u ? ids.get(`place:${u.place}`) : null,
+        actor,
+      ],
+    );
+    ids.set(`union:${u.key}`, id);
+  }
+
+  for (const c of demoChildren) {
+    const union = c.union ? demoUnions.find((u) => u.key === c.union)! : null;
+    const parents = union ? [union.a, union.b] : [c.parent!];
+    for (const parent of parents) {
+      await q(
+        `insert into public.parent_child (parent_id, child_id, union_id, certainty, status, is_demo, created_by)
+         values ($1, $2, $3, $4, 'published', true, $5)`,
+        [
+          ids.get(`person:${parent}`),
+          ids.get(`person:${c.child}`),
+          union ? ids.get(`union:${union.key}`) : null,
+          c.certainty ?? "attested",
+          actor,
+        ],
+      );
+    }
+  }
+
+  for (const [i, t] of demoTitles.entries()) {
+    const id = await one(
+      `insert into public.titles (slug, created_date, created_precision, creator, branch_id, sort_order, status, is_demo, created_by)
+       values ($1, $2, $3, $4, $5, $6, 'published', true, $7) returning id`,
+      [
+        `exemple-${t.key}`,
+        t.created.date,
+        t.created.precision,
+        t.creator,
+        ids.get(`branch:${t.branch}`),
+        i,
+        actor,
+      ],
+    );
+    await q(
+      `insert into public.titles_i18n (title_id, locale, name, description) values ($1, 'fr', $2, $3)`,
+      [id, t.name, "Titre d’exemple, inventé pour tester la frise des titres."],
+    );
+    for (const h of t.holders) {
+      await q(
+        `insert into public.people_titles
+           (person_id, title_id, start_date, start_precision, end_date, end_precision, rank, status, is_demo, created_by)
+         values ($1, $2, $3, $4, $5, $6, $7, 'published', true, $8)`,
+        [
+          ids.get(`person:${h.person}`),
+          id,
+          h.from.date,
+          h.from.precision,
+          h.to.date,
+          h.to.precision,
+          h.rank,
+          actor,
+        ],
+      );
+    }
+  }
+
+  for (const e of demoEvents) {
+    const id = await one(
+      `insert into public.events (slug, kind, event_date, event_precision, place_id, status, is_demo, created_by)
+       values ($1, $2, $3, $4, $5, 'published', true, $6) returning id`,
+      [
+        `exemple-${e.key}`,
+        e.kind,
+        e.date.date,
+        e.date.precision,
+        ids.get(`place:${e.place}`),
+        actor,
+      ],
+    );
+    ids.set(`event:${e.key}`, id);
+    await q(
+      `insert into public.events_i18n (event_id, locale, title, description) values ($1, 'fr', $2, $3)`,
+      [id, e.title, "Événement d’exemple, inventé pour tester la frise."],
+    );
+    for (const person of e.people) {
+      await q(
+        `insert into public.event_people (event_id, person_id) values ($1, $2)`,
+        [id, ids.get(`person:${person}`)],
+      );
+    }
+  }
+
+  for (const s of demoStories) {
+    const id = await one(
+      `insert into public.stories
+         (slug, era_start, era_end, author_name, themes, original_locale, featured,
+          published_at, status, is_demo)
+       values ($1, $2, $3, $4, $5::public.story_theme[], 'fr', $6, now(), 'published', true)
+       returning id`,
+      [
+        `exemple-${s.key}`,
+        s.era[0],
+        s.era[1],
+        "Famille Exemple",
+        s.themes,
+        s.featured,
+      ],
+    );
+    await q(
+      `insert into public.stories_i18n (story_id, locale, title, excerpt, body) values ($1, 'fr', $2, $3, $4)`,
+      [id, s.title, s.excerpt, s.body],
+    );
+    for (const person of s.people) {
+      await q(
+        `insert into public.story_people (story_id, person_id) values ($1, $2)`,
+        [id, ids.get(`person:${person}`)],
+      );
+    }
+    for (const place of s.places) {
+      await q(
+        `insert into public.story_places (story_id, place_id) values ($1, $2)`,
+        [id, ids.get(`place:${place}`)],
+      );
+    }
+    for (const event of s.events) {
+      await q(
+        `insert into public.story_events (story_id, event_id) values ($1, $2)`,
+        [id, ids.get(`event:${event}`)],
+      );
+    }
+  }
+
+  for (const s of demoSources) {
+    const id = await one(
+      `insert into public.sources (kind, title, reference, repository, transcription, status, is_demo, created_by)
+       values ($1, $2, $3, $4, $5, 'published', true, $6) returning id`,
+      [s.kind, s.title, s.reference, s.repository, s.transcription, actor],
+    );
+    for (const person of s.people) {
+      await q(
+        `insert into public.person_sources (source_id, person_id) values ($1, $2)`,
+        [id, ids.get(`person:${person}`)],
+      );
+    }
+  }
+}
+
+/** Removes every demonstration row; the family's own content is untouched. */
+export async function removeDemo(q: Query): Promise<void> {
+  await q(`
+    delete from public.stories where is_demo;
+  `);
+  for (const table of [
+    "events",
+    "sources",
+    "people_titles",
+    "titles",
+    "parent_child",
+    "unions",
+  ]) {
+    await q(`delete from public.${table} where is_demo`);
+  }
+  await q("update public.branches set founder_id = null where is_demo");
+  for (const table of ["people", "branches", "media", "albums", "places"]) {
+    await q(`delete from public.${table} where is_demo`);
+  }
+}

@@ -1,0 +1,50 @@
+0 HEAD
+1 SOUR TestProgramme
+1 GEDC
+2 VERS 5.5.1
+1 CHAR UTF-8
+0 @I1@ INDI
+1 NAME Albert /Exemple/
+1 SEX M
+1 BIRT
+2 DATE 2 APR 1850
+2 PLAC Exempleville
+1 DEAT
+2 DATE 1921
+1 FAMS @F1@
+1 NOTE Une note d’exemple, sur deux
+2 CONC  lignes.
+0 @I2@ INDI
+1 NAME Berthe /Modèle/
+2 GIVN Berthe
+2 SURN Modèle
+1 SEX F
+1 BIRT
+2 DATE ABT 1856
+1 DEAT Y
+1 FAMS @F1@
+0 @I3@ INDI
+1 NAME Charles /Exemple/ le Jeune
+1 SEX M
+1 BIRT
+2 DATE vers la fin de l’hiver
+1 FAMC @F1@
+0 @I4@ INDI
+1 NAME Hélène /Exemple/
+2 NICK la Sage
+1 SEX F
+1 BIRT
+2 DATE BET 1880 AND 1885
+1 BURI
+2 PLAC Château d’Exemple
+1 FAMC @F1@
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 CHIL @I3@
+1 CHIL @I4@
+1 CHIL @I99@
+1 MARR
+2 DATE 10 JUN 1878
+2 PLAC Exempleville
+0 TRLR

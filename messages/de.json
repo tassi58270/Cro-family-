@@ -27,7 +27,9 @@
     "search": "Suchen",
     "signIn": "Anmelden",
     "openMenu": "Menü öffnen",
-    "closeMenu": "Menü schließen"
+    "closeMenu": "Menü schließen",
+    "dashboard": "Verwaltung",
+    "account": "Mein Konto"
   },
   "theme": {
     "label": "Darstellung",
@@ -208,5 +210,219 @@
     "emptyIntro": "Ein Bereich ohne Inhalt lädt zum Mitwirken ein: nie eine Lücke, nie Fülltext.",
     "menuFooter": "Menü und Fußzeile",
     "menuFooterIntro": "Das Menü steht oben auf dieser Seite, die Fußzeile unten. Unter 1360 Pixel Breite öffnet sich das Menü im Vollbild."
+  },
+  "auth": {
+    "title": "Anmelden",
+    "intro": "Familienmitglieder erhalten zum Anmelden einen Link per E-Mail. Es gibt kein Passwort, das man sich merken muss.",
+    "emailLabel": "Ihre E-Mail-Adresse",
+    "emailHint": "Die Adresse, die Sie der Familie gegeben haben.",
+    "submit": "Link anfordern",
+    "noPassword": "Der Link ist 20 Minuten gültig und funktioniert nur einmal.",
+    "invalidEmail": "Diese Adresse scheint unvollständig. Bitte prüfen, zum Beispiel name@beispiel.de.",
+    "sendError": "Der Link konnte nicht gesendet werden. Bitte versuchen Sie es gleich noch einmal.",
+    "sentTitle": "Schauen Sie in Ihr Postfach",
+    "sentBody": "Wenn {email} Zugang zur Seite hat, wurde soeben ein Anmeldelink dorthin geschickt.",
+    "devMode": "Entwicklungsmodus: Es wird keine E-Mail gesendet, hier ist der Link.",
+    "devLink": "Anmeldelink öffnen",
+    "devUnknown": "Entwicklungsmodus: Diese Adresse hat keinen Zugang, es wurde kein Link erstellt.",
+    "noAccess": "Noch kein Zugang?",
+    "requestAccess": "Familienzugang anfragen",
+    "confirmTitle": "Anmelden",
+    "confirmBody": "Ein Klick, um die Anmeldung abzuschließen.",
+    "confirmButton": "Anmelden",
+    "expiredTitle": "Dieser Link ist nicht mehr gültig",
+    "expiredBody": "Er wurde bereits verwendet oder ist abgelaufen. Fordern Sie einen neuen an, er kommt in wenigen Sekunden.",
+    "newLink": "Neuen Link anfordern",
+    "email": {
+      "subject": "Ihr Anmeldelink · Haus Croÿ",
+      "line1": "Guten Tag,",
+      "line2": "hier ist Ihr Link zur Anmeldung auf der Seite der Familie. Er ist {minutes} Minuten gültig und funktioniert nur einmal.",
+      "action": "Anmelden",
+      "footer": "Wenn Sie nichts angefordert haben, ignorieren Sie diese Nachricht einfach."
+    }
+  },
+  "account": {
+    "title": "Mein Konto",
+    "signedInAs": "Sie sind mit der Adresse {email} angemeldet.",
+    "dashboard": "Verwaltung öffnen",
+    "signOut": "Abmelden"
+  },
+  "demo": {
+    "bannerTitle": "Beispieldaten.",
+    "bannerBody": "Die Familie „Exemple“ ist erfunden: Sie dient zum Ausprobieren der Seite und verschwindet mit einem Klick."
+  },
+  "admin": {
+    "title": "Verwaltung",
+    "viewSite": "Seite ansehen",
+    "signOut": "Abmelden",
+    "nav": {
+      "label": "Bereiche der Verwaltung",
+      "overview": "Überblick",
+      "tree": "Stammbaum erfassen",
+      "import": "GEDCOM-Import",
+      "demo": "Beispieldaten"
+    },
+    "overview": {
+      "title": "Guten Tag",
+      "intro": "Die Seite wird leer ausgeliefert: Die Familie füllt sie in ihrem eigenen Tempo. Hier fangen Sie an.",
+      "assistant": "Erste Schritte",
+      "assistantIntro": "Fünf Handgriffe, die die Seite zum Leben erwecken.",
+      "progress": "{done} von {total}",
+      "done": "erledigt",
+      "soon": "Bald verfügbar",
+      "gedcomHint": "Sie haben schon einen Stammbaum in einem Genealogieprogramm?",
+      "gedcomAction": "Auf einmal importieren",
+      "figures": "In Zahlen",
+      "counts": {
+        "people": "Personen",
+        "living": "Lebende Personen",
+        "drafts": "Unveröffentlichte Profile",
+        "suggestions": "Offene Vorschläge"
+      },
+      "steps": {
+        "arms": {
+          "title": "Das Wappen hochladen",
+          "body": "Die Wappendatei in hoher Auflösung, für die Startseite und die Wappenseite.",
+          "action": "Hochladen"
+        },
+        "home": {
+          "title": "Die Zusammenfassung der Startseite schreiben",
+          "body": "Drei oder vier Sätze: woher die Familie kommt, wie sie aufstieg, wo sie heute lebt.",
+          "action": "Schreiben"
+        },
+        "ancestors": {
+          "title": "Die ersten Vorfahren eintragen",
+          "body": "Drei Personen genügen, damit der Stammbaum Gestalt annimmt.",
+          "action": "Eintragen"
+        },
+        "photos": {
+          "title": "Die ersten Fotos senden",
+          "body": "Porträts, Familienfotos: Sie geben dem Stammbaum Gesichter.",
+          "action": "Senden"
+        },
+        "cousins": {
+          "title": "Drei Cousins einladen",
+          "body": "Jeder kann dann seine Erinnerungen vorschlagen, die Sie freigeben.",
+          "action": "Einladen"
+        }
+      }
+    },
+    "tree": {
+      "title": "Stammbaum erfassen",
+      "count": "{count, plural, =0 {Niemand} one {# Person} other {# Personen}}",
+      "emptyTitle": "Beginnen Sie mit einer Person",
+      "emptyBody": "Sie selbst, ein Großelternteil oder der älteste bekannte Vorfahre: Fügen Sie dann Eltern, Ehepartner und Kinder mit einem einfachen „+“ hinzu.",
+      "addFirst": "Person hinzufügen",
+      "addUnlinked": "Person ohne Verbindung hinzufügen",
+      "unnamed": "Ohne Namen",
+      "draft": "nicht veröffentlicht",
+      "demo": "Beispiel",
+      "focusLabel": "In der Mitte",
+      "parents": "Eltern",
+      "partners": "Ehepartner",
+      "children": "Kinder",
+      "otherChildren": "Weitere Kinder",
+      "childrenWith": "Kinder mit {name}",
+      "siblings": "Geschwister",
+      "withPartner": "Mit {name}",
+      "unknownPartner": "Unbekannter Partner",
+      "married": "Heirat {date}",
+      "addParent": "Elternteil hinzufügen",
+      "addPartner": "Ehepartner hinzufügen",
+      "addChild": "Kind hinzufügen",
+      "addParentOf": "Ein Elternteil von {name}",
+      "addPartnerOf": "Ein Ehepartner von {name}",
+      "addChildOf": "Ein Kind von {name}",
+      "edit": "{name} bearbeiten",
+      "editButton": "Bearbeiten",
+      "delete": "Löschen",
+      "deleteConfirm": "{name} und alle Verbindungen löschen? Das Protokoll behält eine Spur, um es rückgängig zu machen."
+    },
+    "person": {
+      "givenNames": "Vornamen",
+      "surname": "Nachname",
+      "sex": "Geschlecht",
+      "sexes": {
+        "female": "Frau",
+        "male": "Mann",
+        "unknown": "Unbekannt"
+      },
+      "birth": "Geburt",
+      "birthPlace": "Geburtsort",
+      "death": "Tod",
+      "deathPlace": "Sterbeort",
+      "dateHint": "So, wie Sie es wissen: 1890, um 1890, 12. März 1890…",
+      "understood": "Verstanden: {date}",
+      "notUnderstood": "Datum nicht verstanden. Versuchen Sie 1890, um 1890 oder 12.03.1890.",
+      "deceased": "Verstorben",
+      "deceasedHint": "Auch ohne Sterbedatum ankreuzen: Eine lebende Person bleibt für die Öffentlichkeit unsichtbar.",
+      "marriage": "Datum der Heirat",
+      "marriagePlace": "Ort der Heirat",
+      "optional": "freiwillig",
+      "otherParent": "Mit wem?",
+      "otherParentUnknown": "Anderer Elternteil unbekannt",
+      "published": "Auf der Seite sichtbar",
+      "publishedHint": "Abwählen, um das Profil als Entwurf zu behalten.",
+      "add": "Hinzufügen",
+      "saveChanges": "Speichern",
+      "errors": {
+        "name": "Geben Sie mindestens einen Vornamen oder einen Nachnamen an.",
+        "date": "Datum nicht verstanden. Versuchen Sie 1890, um 1890 oder 12.03.1890.",
+        "order": "Der Tod kann nicht vor der Geburt liegen.",
+        "save": "Das Speichern hat nicht geklappt. Bitte erneut versuchen."
+      }
+    },
+    "import": {
+      "title": "Stammbaum importieren",
+      "intro": "Ein bereits in einem Genealogieprogramm erfasster Stammbaum lässt sich hier auf einmal laden, als GEDCOM-Datei. Vor Ihrer Bestätigung wird nichts geschrieben.",
+      "file": "GEDCOM-Datei",
+      "fileHint": ".ged-Datei aus Geneanet, Heredis, Ancestry, Gramps…, höchstens 4 MB.",
+      "analyse": "Datei prüfen",
+      "analyseAgain": "Erneut prüfen",
+      "import": "{count, plural, one {# Person importieren} other {# Personen importieren}}",
+      "previewTitle": "Inhalt von {file}",
+      "counts": {
+        "people": "Personen",
+        "families": "Familien",
+        "places": "Orte",
+        "living": "Lebende, für die Öffentlichkeit verborgen"
+      },
+      "sample": "Erste Personen der Datei",
+      "duplicates": "{count, plural, one {# Person scheint schon im Stammbaum zu sein.} other {# Personen scheinen schon im Stammbaum zu sein.}}",
+      "warningsTitle": "Gut zu wissen vor dem Import",
+      "warnings": {
+        "dates": "{count, plural, one {# Datum wurde nicht verstanden und bleibt leer:} other {# Daten wurden nicht verstanden und bleiben leer:}}",
+        "notes": "{count, plural, one {# Notiz wird nicht importiert: Sie könnte private Angaben enthalten.} other {# Notizen werden nicht importiert: Sie könnten private Angaben enthalten.}}",
+        "missing": "{count, plural, one {# Verbindung verweist auf eine Person, die in der Datei fehlt.} other {# Verbindungen verweisen auf Personen, die in der Datei fehlen.}}"
+      },
+      "publish": "Sofort veröffentlichen",
+      "publishHint": "Lebende Personen bleiben für die Öffentlichkeit in jedem Fall verborgen.",
+      "reuse": "Mit vorhandenen Personen verbinden",
+      "reuseHint": "Gleicher Vorname, Nachname und gleiches Geburtsjahr: Das vorhandene Profil wird verwendet statt verdoppelt.",
+      "doneTitle": "Import abgeschlossen",
+      "doneBody": "{people} Personen hinzugefügt, {unions} Verbindungen, {links} Eltern-Kind-Verbindungen; {reused} vorhandene Personen wiederverwendet.",
+      "openTree": "Stammbaum ansehen",
+      "errors": {
+        "missing": "Wählen Sie eine Datei.",
+        "size": "Diese Datei ist größer als 4 MB. Exportieren Sie den Stammbaum ohne Medien.",
+        "format": "Diese Datei ist keine GEDCOM-Datei.",
+        "server": "Der Import hat nicht geklappt. Es wurde nichts geändert."
+      }
+    },
+    "demo": {
+      "title": "Beispieldaten",
+      "intro": "Um die Seite vor dem Befüllen auszuprobieren, laden Sie eine erfundene Familie: die Familie „Exemple“.",
+      "points": {
+        "people": "Rund zwanzig Personen über sechs Generationen, mit Beispieltiteln, Linien, Orten, Ereignissen und Geschichten.",
+        "living": "Fünf von ihnen sind „lebend“: Sie sehen, wie die Öffentlichkeit nur eine „Lebende Person“ sieht.",
+        "content": "Alles ist deutlich als Beispiel gekennzeichnet, ein Hinweisband steht auf jeder Seite.",
+        "removal": "Ein Klick entfernt alles: Die echten Profile der Familie bleiben unberührt."
+      },
+      "loaded": "Die Familie „Exemple“ ist geladen.",
+      "notLoaded": "Keine Beispieldaten.",
+      "load": "Familie „Exemple“ laden",
+      "remove": "Beispieldaten löschen",
+      "removeConfirm": "Die ganze Familie „Exemple“ löschen? Die echten Profile der Familie bleiben unberührt."
+    }
   }
 }

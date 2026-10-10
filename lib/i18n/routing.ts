@@ -90,12 +90,21 @@ export const routing = defineRouting({
       en: "/sign-in",
       de: "/anmelden",
     },
+    "/connexion/confirmer": {
+      fr: "/connexion/confirmer",
+      en: "/sign-in/confirm",
+      de: "/anmelden/bestaetigen",
+    },
     "/compte": {
       fr: "/compte",
       en: "/account",
       de: "/konto",
     },
     "/admin": "/admin",
+    // The dashboard keeps the same addresses in every language.
+    "/admin/arbre": "/admin/arbre",
+    "/admin/import": "/admin/import",
+    "/admin/demonstration": "/admin/demonstration",
     // Design system page (step 2), for the team; never indexed.
     "/style": "/style",
   },

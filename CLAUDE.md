@@ -20,7 +20,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 - [x] 1. Fondations : Next.js, TypeScript, Tailwind, i18n, lint, tests, CI
 - [x] 2. Système de design (page `/fr/style`, clair et sombre, mobile et ordinateur)
 - [x] 3. Base de données et sécurité (migrations, RLS, tests vie privée)
-- [ ] 4. Outils de saisie et jeu de démonstration fictif (assistant de démarrage, saisie dans l’arbre)
+- [x] 4. Outils de saisie et jeu de démonstration fictif (assistant de démarrage, saisie dans l’arbre, import GEDCOM)
 - [ ] 5. Page d’accueil (proposer d’abord deux directions pour l’écran d’ouverture)
 - [ ] 6. Arbre généalogique
 - [ ] 7. Armoiries et branches
@@ -60,6 +60,8 @@ Postgres local dans le conteneur : `pg_ctlcluster 16 main start` (utilisateur `p
 Dans un conteneur où Chromium est déjà installé (sans `playwright install`) :
 `PLAYWRIGHT_CHROMIUM_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome npm run test:e2e`.
 
+Tests de bout en bout avec la base (comme la CI) : exporter `DATABASE_URL` (locale), `ADMIN_EMAILS=admin@example.org`, `AUTH_DEV_LINKS=on`, `AUTH_LINKS_PER_HOUR=1000`, `E2E_RESET_DATABASE=on`, `NEXT_PUBLIC_SITE_URL=http://localhost:3100`, puis `npm run build` et `npm run test:e2e`. La base est remise à zéro au début.
+
 ## Pile technique
 
 Next.js 16 (App Router, Turbopack, `proxy.ts` remplace `middleware.ts`) · React 19 · TypeScript strict · Tailwind CSS 4 (configuration en CSS, `app/globals.css`) · next-intl 4 · Vitest · Playwright + axe · ESLint · Prettier.
@@ -74,9 +76,9 @@ app/
   [locale]/            layout racine réel (<html lang>), une page par langue
     (public)/          accueil, arbre, armoiries, branches, titres, histoires,
                        photos, lieux-et-evenements, recherche, contribuer
-    (membre)/compte    espace membre (à venir)
-    (admin)/admin      dashboard (à venir)
-    connexion/         (à venir)
+    (public)/connexion connexion par lien magique
+    (membre)/compte    espace membre
+    (admin)/admin      tableau de bord
   layout.tsx           simple passe-plat ; not-found.tsx = 404 de dernier recours
 components/ui/         composants de base : bouton, carte, pastille, champ, panneau
                        latéral, menu, pied de page, transition, état vide, terme expliqué
@@ -85,6 +87,11 @@ lib/design/            polices, palette, contrastes
 lib/i18n/              langues, adresses traduites, navigation, chargement des textes
 lib/site.ts            URL publique, indexation
 lib/db/                accès à Postgres sous le rôle du visiteur (withViewer)
+lib/auth/              sessions, liens de connexion, droits
+lib/data/              requêtes par sujet (famille, lieux, tableau de bord)
+lib/genealogie/        dates floues, noms, règle des vivants, GEDCOM
+lib/demo/              famille « Exemple » fictive
+components/admin/      écrans du tableau de bord
 supabase/migrations/   schéma, règles d’accès (RLS), journal
 scripts/db.mjs         applique les migrations
 messages/              fr.json, en.json, de.json : textes de l’interface
@@ -114,6 +121,17 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - Toute écriture passe dans `audit_log` (qui, quoi, avant, après) par trigger.
 - Comptes, sessions et liens de connexion dans le schéma `private`, illisible par le site. Les comptes sont gérés par le site (lien magique envoyé par Resend), pas par Supabase Auth : tout reste testable en local ; Supabase héberge Postgres et les fichiers.
 - Toute nouvelle table : RLS activée, politique explicite, test dans `tests/db`.
+
+## Comptes et tableau de bord (étape 4, complétés à l’étape 10)
+
+- Connexion par lien magique : `/fr/connexion` → e-mail (Resend) → `/fr/connexion/confirmer` → un clic (les antivirus qui ouvrent les liens ne les consomment pas). Session dans un cookie httpOnly, haché en base.
+- Peut recevoir un lien : `ADMIN_EMAILS`, un membre actif, une invitation, une demande d’accès approuvée. La réponse est la même pour une adresse inconnue.
+- Sans `RESEND_API_KEY`, en local ou en test avec `AUTH_DEV_LINKS=on`, le lien s’affiche à l’écran ; jamais sur Vercel.
+- Trois niveaux : `proxy.ts` (cookie absent → connexion), `requireAdmin()` / `requireMember()` côté serveur, RLS en base.
+- Tableau de bord `/fr/admin` : assistant de démarrage, saisie de l’arbre (une personne au centre, « + » parent, conjoint, enfant), import GEDCOM (analyse puis import), données de démonstration.
+- Jeu de démonstration : `lib/demo/dataset.ts`, famille « Exemple » visiblement fictive, `is_demo` partout, bandeau sur chaque page, suppression en un clic.
+- Formulaires : `useFormAction()` (`lib/hooks`) garde la saisie quand le serveur renvoie une erreur.
+- Dates floues : `lib/genealogie/dates.ts` lit « 1890 », « vers 1890 », « 12 mars 1890 », « um 1890 », les dates GEDCOM, et les écrit dans chaque langue.
 
 ## Système de design (étape 2)
 
