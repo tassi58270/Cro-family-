@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "siteName": "Haus Croÿ",
+    "description": "Geschichte, Stammbaum, Wappen und Orte des Hauses Croÿ – erzählt für die Familie."
+  },
+  "common": {
+    "skipToContent": "Zum Hauptinhalt springen",
+    "languageSwitcher": "Sprache der Website",
+    "languages": {
+      "fr": "Français",
+      "en": "English",
+      "de": "Deutsch"
+    }
+  },
+  "home": {
+    "eyebrow": "Haus Croÿ",
+    "title": "Neun Jahrhunderte einer europäischen Familie",
+    "status": "Die Website befindet sich im Aufbau.",
+    "body": "Bald können Sie hier die Geschichte des Hauses entdecken, jedes Familienmitglied im Stammbaum finden und Ihre eigenen Erinnerungen teilen."
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "body": "Unter dieser Adresse gibt es keine Seite. Vielleicht hat sie sich geändert, oder die Seite existiert noch nicht.",
+    "backHome": "Zurück zur Startseite"
+  }
+}

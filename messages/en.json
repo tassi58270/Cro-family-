@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "siteName": "House of Croÿ",
+    "description": "The history, family tree, coats of arms and places of the House of Croÿ, told for the family."
+  },
+  "common": {
+    "skipToContent": "Skip to main content",
+    "languageSwitcher": "Site language",
+    "languages": {
+      "fr": "Français",
+      "en": "English",
+      "de": "Deutsch"
+    }
+  },
+  "home": {
+    "eyebrow": "House of Croÿ",
+    "title": "Nine centuries of a European family",
+    "status": "The site is being prepared.",
+    "body": "Soon you will be able to explore the history of the house, find everyone in the family tree and share your own memories."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This address does not lead to any page. It may have changed, or the page does not exist yet.",
+    "backHome": "Back to the home page"
+  }
+}

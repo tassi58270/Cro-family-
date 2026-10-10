@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/*
+ * Starting tokens. The two colours come from the coat of arms
+ * (cahier des charges, section 3): argent (white) and gueules (red).
+ * The full design system (typography, spacing, motion) is built at step 2.
+ */
+:root {
+  color-scheme: light dark;
+  --paper: #ffffff;
+  --ink: #141414;
+  /* Darker than the spec's #8a8a86, which is below 4.5:1 on white for small text. */
+  --ink-muted: #5f5f5b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #141414;
+    --ink: #f4f4f2;
+    --ink-muted: #a3a39f;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-croy: #c8102e;
+  --color-croy-deep: #8e0b20;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+}

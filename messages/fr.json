@@ -1,0 +1,26 @@
+{
+  "metadata": {
+    "siteName": "Maison de Croÿ",
+    "description": "L’histoire, l’arbre, les armoiries et les lieux de la maison de Croÿ, racontés pour la famille."
+  },
+  "common": {
+    "skipToContent": "Aller au contenu principal",
+    "languageSwitcher": "Langue du site",
+    "languages": {
+      "fr": "Français",
+      "en": "English",
+      "de": "Deutsch"
+    }
+  },
+  "home": {
+    "eyebrow": "Maison de Croÿ",
+    "title": "Neuf siècles d’une famille européenne",
+    "status": "Le site est en préparation.",
+    "body": "Vous pourrez bientôt y parcourir l’histoire de la maison, retrouver chacun dans l’arbre et partager vos propres souvenirs."
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "body": "Cette adresse ne mène à aucune page. Elle a peut-être changé, ou la page n’existe pas encore.",
+    "backHome": "Revenir à l’accueil"
+  }
+}
