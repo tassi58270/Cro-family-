@@ -313,7 +313,8 @@
       "import": "GEDCOM-Import",
       "demo": "Beispieldaten",
       "home": "Startseite",
-      "lineages": "Einstiege und Abstammungslinien"
+      "lineages": "Einstiege und Abstammungslinien",
+      "arms": "Wappen und Linien"
     },
     "overview": {
       "title": "Guten Tag",
@@ -626,6 +627,82 @@
         "same": "Wählen Sie zwei verschiedene Personen.",
         "save": "Die Änderung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
       }
+    },
+    "arms": {
+      "title": "Wappen und Linien",
+      "intro": "Die Linien der Familie und ihre Wappen, wie sie auf der Seite „Wappen und Linien“ und im Stammbaum erscheinen.",
+      "published": "Veröffentlicht",
+      "draft": "Entwurf",
+      "branches": {
+        "title": "Linien",
+        "intro": "Jede Linie hat ihre Karte, ihre Farbe im Stammbaum und ihren Platz im Flussschema.",
+        "add": "Linie hinzufügen",
+        "edit": "Linie bearbeiten",
+        "empty": "Noch keine Linie.",
+        "from": "aus {name}",
+        "foundedBy": "gegründet von {name}",
+        "extinct": "erloschen {year}"
+      },
+      "branch": {
+        "name": "Name der Linie",
+        "parent": "Mutterlinie",
+        "noParent": "Keine: ein Stamm",
+        "founder": "Gründer oder Gründerin",
+        "description": "Vorstellung",
+        "descriptionHint": "Ein paar Sätze: woher die Linie kommt, was sie ausmacht.",
+        "extinct": "Diese Linie ist erloschen",
+        "extinctMale": "Im Mannesstamm erloschen",
+        "extinctFemale": "Im Frauenstamm erloschen",
+        "last": "Letzter Vertreter",
+        "fate": "Was aus Titeln und Gütern wurde",
+        "fateHint": "Zum Beispiel: wer das Erbe antrat.",
+        "color": "Farbe ihrer Linie im Stammbaum",
+        "autoColor": "Automatische Farbe"
+      },
+      "armsList": {
+        "title": "Wappen",
+        "intro": "Die Schilde der Familie, die der verbundenen Familien (im Stammbaum neben den Ehepartnern) und die der Gemeinden, die das Familienwappen übernahmen.",
+        "add": "Wappen hinzufügen",
+        "edit": "Wappen bearbeiten",
+        "empty": "Noch kein Wappen."
+      },
+      "arms": {
+        "name": "Name",
+        "nameHint": "Zum Beispiel „Wappen der Linie Chimay“.",
+        "kind": "Art",
+        "kinds": {
+          "family": "Wappen der Familie",
+          "alliance": "Verbundene Familie",
+          "commune": "Gemeinde"
+        },
+        "drawing": "Zeichnung",
+        "drawingHint": "Die bereits für die Website gezeichneten Schilde. Das Hochladen einer SVG-Datei kommt mit der Fotoseite.",
+        "noDrawing": "Leerer Schild",
+        "drawings": {
+          "croy": "Croÿ",
+          "croy-renty": "Croÿ-Renty",
+          "hongrie-ancienne": "Altungarn"
+        },
+        "blazon": "Blasonierung",
+        "blazonHint": "Die heraldische Beschreibung, etwa „in Silber drei rote Balken“.",
+        "explanation": "Erklärung in einfachen Worten",
+        "explanationHint": "Was der Schild zeigt, für jemanden ohne Heraldik-Kenntnisse.",
+        "periodStart": "Geführt ab",
+        "periodEnd": "Bis",
+        "branch": "Linie",
+        "noBranch": "Keine Linie",
+        "person": "Person, die es führt",
+        "familyName": "Familie",
+        "familyNameHint": "Bei einer verbundenen Familie: ihr Name.",
+        "bearers": "Träger",
+        "bearersHint": "In wenigen Worten, wenn weder Linie noch Person es sagen."
+      },
+      "errors": {
+        "required": "Dieses Feld wird benötigt.",
+        "year": "Schreiben Sie ein Jahr, etwa 1612.",
+        "order": "Das Ende liegt vor dem Beginn.",
+        "parent": "Eine Linie kann nicht ihre eigene Mutterlinie sein."
+      }
     }
   },
   "tree": {
@@ -797,6 +874,87 @@
       "privateBody": "Diesen Eintrag gibt es nicht, oder er ist nur für angemeldete Familienmitglieder sichtbar.",
       "signIn": "Anmelden",
       "loading": "Der Eintrag wird geladen …"
+    }
+  },
+  "armsPage": {
+    "eyebrow": "Heraldik und Genealogie",
+    "title": "Wappen und Linien",
+    "intro": "Wappen erzählen die Familie in Bildern: woher sie kommt, mit wem sie sich verband, wie sie sich in Linien teilte.",
+    "suggest": "Ergänzung vorschlagen",
+    "explainer": {
+      "title": "Das Wappen, Schritt für Schritt",
+      "intro": "Ein paar Wörter Heraldik genügen, um einen Schild zu lesen. Hier sind sie, eines nach dem anderen.",
+      "field": {
+        "title": "Ein silbernes Feld",
+        "body": "Alles beginnt mit dem Schild und der Farbe seines Feldes. Hier ist es <argent>Silber</argent>: weiß."
+      },
+      "fasces": {
+        "title": "Drei rote Balken",
+        "body": "Dann kommen drei <fasce>Balken</fasce>, waagrechte Streifen, in <gueules>Rot</gueules>. Das ist das Wappen von Croÿ."
+      },
+      "quartered": {
+        "title": "Geviert mit Renty",
+        "body": "Ein <ecartele>gevierter</ecartele> Schild ist in vier Felder geteilt. In Feld 1 und 4 Croÿ, in Feld 2 und 3 Renty: drei <doloire>Beile</doloire>, die oberen beiden voneinander abgewendet."
+      },
+      "shield": {
+        "field": "Silberner Schild",
+        "fasces": "In Silber drei rote Balken",
+        "quartered": "Geviert von Croÿ und Renty"
+      }
+    },
+    "gallery": {
+      "title": "Die Wappen der Familie",
+      "lead": "Jeder Schild mit seiner Blasonierung, seiner Bedeutung und seinen Trägern.",
+      "intro": "Wählen Sie bei einem Schild „Vergleichen“ und fahren Sie dann über einen anderen: Die Unterschiede leuchten rot auf.",
+      "hint": "Fahren Sie über einen anderen Schild, um zu sehen, was ihn von {name} unterscheidet, oder wählen Sie ihn, um beide nebeneinander zu vergleichen.",
+      "compare": "Vergleichen",
+      "compareWith": "Mit diesem vergleichen",
+      "panelTitle": "Zwei Schilde nebeneinander",
+      "differences": "Rot markiert, was sie unterscheidet.",
+      "same": "Diese beiden Schilde sind gleich.",
+      "bearers": "Geführt von",
+      "family": "Familie {name}",
+      "allied": "Verbundene Familien",
+      "demo": "Erfundenes Beispiel für die Vorführung",
+      "emptyTitle": "Die Wappen warten auf die Familie",
+      "emptyBody": "Die Wappen jeder Linie werden über das Dashboard ergänzt, mit Blasonierung und einer Erklärung in einfachen Worten."
+    },
+    "river": {
+      "legend": "Die Linien in der Reihenfolge des Schemas",
+      "today": "Heute",
+      "since": "seit {year}",
+      "extinct": "erloschen",
+      "people": "{count, plural, =0 {niemand} one {# Person} other {# Personen}}"
+    },
+    "branches": {
+      "title": "Die Linien",
+      "intro": "Vom Stamm bis zu den heutigen Zweigen: Jede Linie verlässt ihre Mutterlinie im Jahr ihrer Gründung, ihre Stärke folgt der Zahl ihrer Personen.",
+      "emptyTitle": "Die Linien sind noch nicht beschrieben",
+      "emptyBody": "Jede Linie erhält ihre Karte, ihren Gründer, ihre Geschichte und ihren Platz im Stammbaum, sobald die Familie sie ergänzt.",
+      "extant": "Blühend",
+      "extinct": "Erloschen",
+      "extinctIn": "Erloschen {year}",
+      "extinctBoth": "Im Mannesstamm {male}, im Frauenstamm {female} erloschen",
+      "since": "seit {year}",
+      "people": "{count, plural, =0 {niemand} one {# Person} other {# Personen}}",
+      "founder": "Gegründet von",
+      "last": "Letzter Vertreter",
+      "fate": "Was aus Titeln und Gütern wurde",
+      "inTree": "Im Stammbaum zeigen",
+      "details": "Die Linie im Einzelnen",
+      "parent": "Mutterlinie",
+      "children": "Zweige",
+      "members": "Die Personen der Linie",
+      "noMembers": "Mit dieser Linie ist noch niemand verbunden.",
+      "living": "{count, plural, one {Eine lebende Person ist nur für Familienmitglieder sichtbar.} other {# lebende Personen sind nur für Familienmitglieder sichtbar.}}"
+    },
+    "extinct": {
+      "title": "Erloschene Linien",
+      "intro": "Eine Karte je Linie: ihr Gründer, ihr letzter Vertreter, das Jahr, in dem sie im Mannes- und dann im Frauenstamm erlosch, und was aus ihren Titeln und Gütern wurde."
+    },
+    "communes": {
+      "title": "Gemeinden mit dem Wappen der Familie",
+      "intro": "Die Städte und Dörfer, die dieses Wappen in ihr eigenes übernahmen."
     }
   }
 }

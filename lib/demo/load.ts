@@ -108,10 +108,15 @@ export async function loadDemo(q: Query, actor: string): Promise<void> {
   }
 
   for (const b of demoBranches) {
-    await q(`update public.branches set founder_id = $1 where id = $2`, [
-      ids.get(`person:${b.founder}`),
-      ids.get(`branch:${b.key}`),
-    ]);
+    await q(
+      `update public.branches set founder_id = $1, last_person_id = $2, parent_id = $3 where id = $4`,
+      [
+        ids.get(`person:${b.founder}`),
+        "last" in b ? ids.get(`person:${b.last}`) : null,
+        "parent" in b ? ids.get(`branch:${b.parent}`) : null,
+        ids.get(`branch:${b.key}`),
+      ],
+    );
   }
 
   for (const u of demoUnions) {
@@ -283,23 +288,28 @@ export async function loadDemo(q: Query, actor: string): Promise<void> {
 
   for (const [i, a] of demoArms.entries()) {
     const id = await one(
-      `insert into public.arms (slug, builtin, branch_id, person_id, family_name, sort_order, status, is_demo, created_by)
-       values ($1, $2, $3, $4, $5, $6, 'published', true, $7) returning id`,
+      `insert into public.arms
+         (slug, builtin, kind, branch_id, person_id, family_name, period_start, period_end,
+          sort_order, status, is_demo, created_by)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, 'published', true, $10) returning id`,
       [
         `exemple-${a.key}`,
         a.builtin,
-        "branch" in a ? ids.get(`branch:${a.branch}`) : null,
-        "person" in a ? ids.get(`person:${a.person}`) : null,
-        "family" in a ? a.family : null,
+        a.kind,
+        a.branch ? ids.get(`branch:${a.branch}`) : null,
+        a.person ? ids.get(`person:${a.person}`) : null,
+        a.family ?? null,
+        a.period?.[0] ?? null,
+        a.period?.[1] ?? null,
         100 + i,
         actor,
       ],
     );
     await q(
-      `insert into public.arms_i18n (arms_id, locale, name) values ($1, 'fr', $2)`,
-      [id, a.name],
+      `insert into public.arms_i18n (arms_id, locale, name, blazon, explanation) values ($1, 'fr', $2, $3, $4)`,
+      [id, a.name, a.blazon, a.explanation],
     );
-    for (const person of "people" in a ? a.people : []) {
+    for (const person of a.people ?? []) {
       await q(`update public.people set origin_arms_id = $1 where id = $2`, [
         id,
         ids.get(`person:${person}`),

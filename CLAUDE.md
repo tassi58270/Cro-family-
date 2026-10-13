@@ -23,7 +23,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 - [x] 4. Outils de saisie et jeu de démonstration fictif (assistant de démarrage, saisie dans l’arbre, import GEDCOM)
 - [x] 5. Page d’accueil (direction A, ouverture, chapitres sur la carte, titres, anecdotes, portes d’entrée)
 - [x] 6. Arbre généalogique (vues, recherche, curseur du temps, filtres, lien de parenté, démonstration des lignées, fiche personne)
-- [ ] 7. Armoiries et branches
+- [x] 7. Armoiries et branches (blason expliqué pas à pas, galerie et comparaison, rivière des branches, cartes, communes, page par branche)
 - [ ] 8. Histoires, puis page Photos (section 6.5)
 - [ ] 9. Lieux et événements
 - [ ] 10. Comptes famille et contributions
@@ -150,6 +150,15 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - Points d’entrée et lignées à démontrer (certitude et preuves de chaque maillon) : `/fr/admin/lignees`. Une source qui touche un vivant reste invisible du public (RLS).
 - Écus dans l’arbre : `<symbol>` par armoiries (`ShieldArt`) ; `exemple` et `exemple-modele` sont fictifs, réservés à la démonstration.
 - Tests : `tests/e2e/tree.spec.ts` sert lui-même un arbre de 2 000 personnes (`syntheticTree`), indépendamment de la base.
+
+## Armoiries et branches (étape 7)
+
+- Page `/fr/armoiries` statique : blason expliqué pas à pas (`components/armoiries/blazon-explainer.tsx`, textes d’interface validés : Croÿ, Croÿ-Renty), galerie des armoiries de la famille et des familles alliées avec comparaison (différences calculées au pixel près, donc valables aussi pour les SVG déposés plus tard), rivière des branches (`lib/genealogie/river.ts`), une carte par branche (subsistantes puis éteintes) avec lien vers l’arbre, armoiries des communes.
+- Page `/fr/branches/[branche]` : présentation, fondateur, dernier représentant, devenir des titres et des terres, personnes de la branche.
+- Saisie : `/fr/admin/armoiries` (branches et armoiries, dessins intégrés ; dépôt de SVG à l’étape 8). Sortes d’armoiries : `family`, `alliance`, `commune`.
+- Les armoiries propres à une personne vivante restent invisibles du public (RLS).
+- Le contenu réel des branches (section 2) n’est jamais saisi par Claude : la famille l’entre ; le « terminé quand » est vérifié sur la famille « Exemple ».
+- Composants communs du tableau de bord : `components/admin/admin-kit.tsx` (choix d’une personne dans l’arbre, traductions, sections, suppression).
 
 ## Système de design (étape 2)
 

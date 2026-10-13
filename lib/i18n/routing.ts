@@ -106,6 +106,7 @@ export const routing = defineRouting({
     "/admin/arbre": "/admin/arbre",
     "/admin/import": "/admin/import",
     "/admin/lignees": "/admin/lignees",
+    "/admin/armoiries": "/admin/armoiries",
     "/admin/demonstration": "/admin/demonstration",
     // Design system page (step 2), for the team; never indexed.
     "/style": "/style",

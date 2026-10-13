@@ -484,6 +484,68 @@ html:has(dialog[open]:modal) {
   color: var(--paper);
 }
 
+/* The arms explained step by step (components/armoiries/blazon-explainer.tsx). */
+.blazon-field {
+  fill: var(--argent);
+}
+.blazon-fasces rect {
+  transform: scaleX(0);
+  transform-box: fill-box;
+  transform-origin: left center;
+  transition: transform 520ms var(--ease-in-out);
+}
+.blazon [data-stage="1"] .blazon-fasces rect,
+.blazon [data-stage="2"] .blazon-fasces rect {
+  transform: none;
+}
+.blazon-quartered {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 640ms var(--ease-in-out);
+}
+.blazon [data-stage="2"] .blazon-quartered {
+  clip-path: inset(0);
+}
+
+/* The river of branches (components/armoiries/branch-river.tsx). */
+.river-stream {
+  transition: opacity 200ms var(--ease-out);
+}
+.river:has(.river-stream[data-active]) .river-stream:not([data-active]) {
+  opacity: 0.18;
+}
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .river-line {
+      stroke-dasharray: 1;
+      animation: river-draw linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 45%;
+    }
+  }
+}
+@keyframes river-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Differences between two coats of arms (components/armoiries/arms-gallery.tsx). */
+.arms-diff {
+  animation: arms-diff 1.6s var(--ease-in-out) infinite;
+}
+@keyframes arms-diff {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
 /* Full-screen menu on phones and tablets (components/ui/site-header.tsx). */
 .menu-sheet {
   position: fixed;

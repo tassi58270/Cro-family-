@@ -76,6 +76,17 @@ export const demoBranches = [
     description:
       "Branche d’exemple éteinte en 1999, pour tester l’affichage des branches éteintes.",
     fate: "Exemple : le titre de baron de Modèlebourg s’éteint avec elle.",
+    last: "gaston",
+  },
+  {
+    key: "rameau",
+    name: "Rameau d’Hélène (exemple)",
+    founder: "helene",
+    parent: "ainee",
+    state: "extant",
+    color: "#d94f66",
+    description:
+      "Rameau d’exemple, issu de la branche aînée, pour tester le schéma des branches.",
   },
 ] as const;
 
@@ -187,7 +198,7 @@ export const demoPeople: DemoPerson[] = [
     sex: "female",
     birth: year(1912),
     death: year(2005),
-    branch: "ainee",
+    branch: "rameau",
   },
   {
     key: "igor",
@@ -498,23 +509,53 @@ export const demoSources: {
   },
 ];
 
-/** Fictional arms, so that the tree shows its small shields. */
-export const demoArms = [
+/** Fictional arms, so that the tree and the arms page show their shields. */
+export const demoArms: {
+  key: string;
+  builtin: "exemple" | "exemple-modele";
+  kind: "family" | "alliance" | "commune";
+  name: string;
+  blazon: string;
+  explanation: string;
+  period?: [number, number | null];
+  branch?: string;
+  person?: string;
+  family?: string;
+  people?: string[];
+}[] = [
   {
     key: "exemple",
     builtin: "exemple",
+    kind: "family",
     name: "Armoiries d’exemple de la famille Exemple",
+    blazon: "D’argent à la bande de gueules (blason d’exemple)",
+    explanation:
+      "Un fond blanc traversé d’une bande rouge en diagonale. Armoiries inventées pour la démonstration.",
+    period: [1850, null],
     branch: "ainee",
     person: "albert",
   },
   {
     key: "modele",
     builtin: "exemple-modele",
+    kind: "alliance",
     name: "Armoiries d’exemple de la famille Modèle",
+    blazon: "D’argent au chef de gueules (blason d’exemple)",
+    explanation:
+      "Un fond blanc dont le haut est rouge. Armoiries inventées pour la démonstration.",
     family: "Modèle",
     people: ["berthe"],
   },
-] as const;
+  {
+    key: "commune",
+    builtin: "exemple",
+    kind: "commune",
+    name: "Armoiries d’exemple de la commune d’Exempleville",
+    blazon: "D’argent à la bande de gueules (blason d’exemple)",
+    explanation:
+      "Une commune fictive qui a repris les armes de la famille Exemple.",
+  },
+];
 
 /** Where the demonstration tree opens. */
 export const demoEntryPoints = [

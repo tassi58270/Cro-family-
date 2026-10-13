@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  use,
-  useEffect,
-  useMemo,
-  useState,
-  useTransition,
-  type ReactNode,
-} from "react";
+import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import {
   addLinkProof,
@@ -20,7 +12,6 @@ import {
   setLinkCertainty,
   type TreeSettingsState,
 } from "@/app/[locale]/(admin)/admin/lignees/actions";
-import { PersonSearch } from "@/components/arbre/person-search";
 import { Button } from "@/components/ui/button";
 import { StatusChip } from "@/components/ui/chip";
 import {
@@ -35,10 +26,18 @@ import type {
   AdminLineage,
   AdminLineageStep,
 } from "@/lib/data/admin-tree";
-import type { TreeData } from "@/lib/data/tree";
-import { buildModel, type TreeModel } from "@/lib/genealogie/tree-model";
 import { useFormAction } from "@/lib/hooks/use-form-action";
 import { useRouter } from "@/lib/i18n/navigation";
+import {
+  AdminSection,
+  DeleteButton,
+  FormFooter,
+  PersonPicker,
+  Translations,
+  TreeProvider,
+  useFormWords,
+  useSaved,
+} from "./admin-kit";
 
 const initial: TreeSettingsState = { status: "idle" };
 
@@ -46,100 +45,6 @@ type Panel =
   | { kind: "entry"; item?: AdminEntryPoint }
   | { kind: "lineage"; item?: AdminLineage }
   | { kind: "proof"; step: AdminLineageStep };
-
-/** The whole tree, as the administrator sees it, to pick people from. */
-const TreeContext = createContext<{ data: TreeData; model: TreeModel } | null>(
-  null,
-);
-
-function useSaved(state: TreeSettingsState, onSaved: () => void) {
-  useEffect(() => {
-    if (state.status === "saved") onSaved();
-  }, [state.savedAt]); // eslint-disable-line react-hooks/exhaustive-deps
-}
-
-function PersonPicker({
-  name,
-  label,
-  initialId,
-  error,
-  locale,
-}: {
-  name: string;
-  label: string;
-  initialId?: string;
-  error?: string;
-  locale: string;
-}) {
-  const tree = use(TreeContext);
-  const [chosen, setChosen] = useState(initialId ?? "");
-  const index = tree ? tree.model.byId.get(chosen) : undefined;
-  return (
-    <div className="grid gap-2">
-      <p className="font-medium" aria-hidden="true">
-        {label}
-      </p>
-      <input type="hidden" name={name} value={chosen} />
-      {tree ? (
-        <PersonSearch
-          data={tree.data}
-          model={tree.model}
-          locale={locale}
-          label={label}
-          placeholder={label}
-          size="small"
-          value={index ?? null}
-          onPick={(p) => setChosen(tree.data.people[p].id)}
-        />
-      ) : (
-        <div className="h-11 animate-pulse rounded-full bg-paper-2" />
-      )}
-      {error && (
-        <p className="text-caption font-medium text-croy-text">{error}</p>
-      )}
-    </div>
-  );
-}
-
-function Translations({ children }: { children: ReactNode }) {
-  const t = useTranslations("admin.lineages");
-  return (
-    <details className="group border-t border-hairline pt-4">
-      <summary className="flex min-h-11 cursor-pointer items-center gap-2 font-medium">
-        <span
-          aria-hidden="true"
-          className="transition-transform group-open:rotate-90"
-        >
-          ›
-        </span>
-        {t("translations")}
-      </summary>
-      <div className="mt-4 grid gap-6">{children}</div>
-    </details>
-  );
-}
-
-function FormFooter({
-  pending,
-  state,
-}: {
-  pending: boolean;
-  state: TreeSettingsState;
-}) {
-  const t = useTranslations("admin.lineages");
-  return (
-    <div className="flex flex-wrap items-center gap-4">
-      <Button type="submit" busy={pending}>
-        {t("save")}
-      </Button>
-      {state.status === "error" && (
-        <p role="alert" className="text-caption text-croy-text">
-          {t("errors.save")}
-        </p>
-      )}
-    </div>
-  );
-}
 
 function EntryForm({
   item,
@@ -154,6 +59,7 @@ function EntryForm({
   const tLang = useTranslations("common.languages");
   const [state, onSubmit, pending] = useFormAction(saveEntryPoint, initial);
   useSaved(state, onSaved);
+  const words = useFormWords();
   const error = (field: string) =>
     state.errors?.[field] ? t(`errors.${state.errors[field]}`) : undefined;
   return (
@@ -178,7 +84,7 @@ function EntryForm({
         label={t("entries.isDefault")}
         defaultChecked={item?.isDefault ?? false}
       />
-      <Translations>
+      <Translations label={words.translations}>
         {(["en", "de"] as const).map((l) => (
           <TextField
             key={l}
@@ -189,7 +95,12 @@ function EntryForm({
           />
         ))}
       </Translations>
-      <FormFooter pending={pending} state={state} />
+      <FormFooter
+        pending={pending}
+        state={state}
+        save={words.save}
+        error={words.error}
+      />
     </form>
   );
 }
@@ -207,6 +118,7 @@ function LineageForm({
   const tLang = useTranslations("common.languages");
   const [state, onSubmit, pending] = useFormAction(saveLineage, initial);
   useSaved(state, onSaved);
+  const words = useFormWords();
   const error = (field: string) =>
     state.errors?.[field] ? t(`errors.${state.errors[field]}`) : undefined;
   return (
@@ -239,7 +151,7 @@ function LineageForm({
         rows={3}
         defaultValue={item?.intros.fr ?? ""}
       />
-      <Translations>
+      <Translations label={words.translations}>
         {(["en", "de"] as const).map((l) => (
           <fieldset key={l} lang={l} className="grid gap-4">
             <legend className="mb-2 text-caption font-medium text-ink-muted">
@@ -259,7 +171,12 @@ function LineageForm({
           </fieldset>
         ))}
       </Translations>
-      <FormFooter pending={pending} state={state} />
+      <FormFooter
+        pending={pending}
+        state={state}
+        save={words.save}
+        error={words.error}
+      />
     </form>
   );
 }
@@ -275,6 +192,7 @@ function ProofForm({
   const tKinds = useTranslations("tree.proofs.kinds");
   const [state, onSubmit, pending] = useFormAction(addLinkProof, initial);
   useSaved(state, onSaved);
+  const words = useFormWords();
   return (
     <form onSubmit={onSubmit} className="grid gap-6">
       <input type="hidden" name="parent" value={step.parent.id} />
@@ -315,7 +233,12 @@ function ProofForm({
         hint={t("proof.noteHint")}
         name="note"
       />
-      <FormFooter pending={pending} state={state} />
+      <FormFooter
+        pending={pending}
+        state={state}
+        save={words.save}
+        error={words.error}
+      />
     </form>
   );
 }
@@ -410,69 +333,6 @@ function Step({
   );
 }
 
-function Section({
-  id,
-  title,
-  intro,
-  action,
-  children,
-}: {
-  id: string;
-  title: string;
-  intro: string;
-  action: ReactNode;
-  children: ReactNode;
-}) {
-  return (
-    <section
-      aria-labelledby={id}
-      className="grid gap-5 border-t border-hairline pt-8"
-    >
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <div className="grid gap-1">
-          <h2 id={id} className="font-display text-title-sm">
-            {title}
-          </h2>
-          <p className="max-w-2xl text-caption text-ink-muted">{intro}</p>
-        </div>
-        {action}
-      </div>
-      {children}
-    </section>
-  );
-}
-
-function DeleteButton({
-  action,
-  id,
-  label,
-  confirm,
-}: {
-  action: (form: FormData) => Promise<void>;
-  id: string;
-  label: string;
-  confirm: string;
-}) {
-  const router = useRouter();
-  return (
-    <form
-      action={async (form) => {
-        if (!window.confirm(confirm)) return;
-        await action(form);
-        router.refresh();
-      }}
-    >
-      <input type="hidden" name="id" value={id} />
-      <button
-        type="submit"
-        className="link min-h-11 text-caption text-ink-muted"
-      >
-        {label}
-      </button>
-    </form>
-  );
-}
-
 export function TreeSettings({
   entries,
   lineages,
@@ -485,19 +345,6 @@ export function TreeSettings({
   const t = useTranslations("admin.lineages");
   const router = useRouter();
   const [panel, setPanel] = useState<Panel | null>(null);
-  const [tree, setTree] = useState<TreeData | null>(null);
-  const context = useMemo(
-    () => (tree ? { data: tree, model: buildModel(tree) } : null),
-    [tree],
-  );
-
-  useEffect(() => {
-    fetch(`/api/arbre/${locale}/membres`, { cache: "no-store" })
-      .then((r) => (r.ok ? (r.json() as Promise<TreeData>) : null))
-      .then(setTree)
-      .catch(() => setTree(null));
-  }, [locale]);
-
   const close = () => setPanel(null);
   const savedAndClose = () => {
     setPanel(null);
@@ -505,14 +352,14 @@ export function TreeSettings({
   };
 
   return (
-    <TreeContext value={context}>
+    <TreeProvider locale={locale}>
       <div className="grid gap-12">
         <header className="grid gap-2">
           <h1 className="font-display text-title">{t("title")}</h1>
           <p className="max-w-2xl text-ink-muted">{t("intro")}</p>
         </header>
 
-        <Section
+        <AdminSection
           id="entrees"
           title={t("entries.title")}
           intro={t("entries.intro")}
@@ -565,9 +412,9 @@ export function TreeSettings({
           ) : (
             <p className="text-ink-muted">{t("entries.empty")}</p>
           )}
-        </Section>
+        </AdminSection>
 
-        <Section
+        <AdminSection
           id="lignees"
           title={t("lineages.title")}
           intro={t("lineages.intro")}
@@ -635,7 +482,7 @@ export function TreeSettings({
           ) : (
             <p className="text-ink-muted">{t("lineages.empty")}</p>
           )}
-        </Section>
+        </AdminSection>
       </div>
 
       <SidePanel
@@ -677,6 +524,6 @@ export function TreeSettings({
           />
         )}
       </SidePanel>
-    </TreeContext>
+    </TreeProvider>
   );
 }

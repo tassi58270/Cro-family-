@@ -313,7 +313,8 @@
       "import": "Import GEDCOM",
       "demo": "Démonstration",
       "home": "Page d’accueil",
-      "lineages": "Entrées et lignées"
+      "lineages": "Entrées et lignées",
+      "arms": "Armoiries et branches"
     },
     "overview": {
       "title": "Bonjour",
@@ -626,6 +627,82 @@
         "same": "Choisissez deux personnes différentes.",
         "save": "L’enregistrement n’a pas abouti. Réessayez."
       }
+    },
+    "arms": {
+      "title": "Armoiries et branches",
+      "intro": "Les branches de la famille et leurs armoiries, telles qu’elles apparaissent sur la page « Armoiries et branches » et dans l’arbre.",
+      "published": "Publié",
+      "draft": "Brouillon",
+      "branches": {
+        "title": "Branches",
+        "intro": "Chaque branche a sa carte, sa couleur dans l’arbre et sa place dans le schéma en rivière.",
+        "add": "Ajouter une branche",
+        "edit": "Modifier la branche",
+        "empty": "Aucune branche pour l’instant.",
+        "from": "issue de {name}",
+        "foundedBy": "fondée par {name}",
+        "extinct": "éteinte en {year}"
+      },
+      "branch": {
+        "name": "Nom de la branche",
+        "parent": "Branche mère",
+        "noParent": "Aucune : c’est une souche",
+        "founder": "Fondateur ou fondatrice",
+        "description": "Présentation",
+        "descriptionHint": "Quelques phrases : d’où vient la branche, ce qui la caractérise.",
+        "extinct": "Cette branche est éteinte",
+        "extinctMale": "Éteinte par les hommes en",
+        "extinctFemale": "Éteinte par les femmes en",
+        "last": "Dernier représentant",
+        "fate": "Devenir des titres et des terres",
+        "fateHint": "Par exemple : à qui l’héritage est passé.",
+        "color": "Couleur de son trait dans l’arbre",
+        "autoColor": "Couleur automatique"
+      },
+      "armsList": {
+        "title": "Armoiries",
+        "intro": "Les écus de la famille, ceux des familles alliées (affichés à côté des conjoints dans l’arbre) et ceux des communes qui ont repris les armes de la famille.",
+        "add": "Ajouter des armoiries",
+        "edit": "Modifier les armoiries",
+        "empty": "Aucune armoirie pour l’instant."
+      },
+      "arms": {
+        "name": "Nom",
+        "nameHint": "Par exemple « Armes de la branche de Chimay ».",
+        "kind": "Sorte",
+        "kinds": {
+          "family": "Armoiries de la famille",
+          "alliance": "Famille alliée",
+          "commune": "Commune"
+        },
+        "drawing": "Dessin",
+        "drawingHint": "Les écus déjà dessinés pour le site. Le dépôt d’un fichier SVG arrivera avec la page Photos.",
+        "noDrawing": "Écu vide",
+        "drawings": {
+          "croy": "Croÿ",
+          "croy-renty": "Croÿ-Renty",
+          "hongrie-ancienne": "Hongrie ancienne"
+        },
+        "blazon": "Blasonnement",
+        "blazonHint": "La description héraldique, par exemple « d’argent à trois fasces de gueules ».",
+        "explanation": "Explication en mots simples",
+        "explanationHint": "Ce que l’écu représente, pour quelqu’un qui ne connaît pas l’héraldique.",
+        "periodStart": "Portées à partir de",
+        "periodEnd": "Jusqu’en",
+        "branch": "Branche",
+        "noBranch": "Aucune branche",
+        "person": "Personne qui les porte",
+        "familyName": "Famille",
+        "familyNameHint": "Pour une famille alliée : son nom.",
+        "bearers": "Porteurs",
+        "bearersHint": "En quelques mots, si aucune branche ni personne ne suffit à le dire."
+      },
+      "errors": {
+        "required": "Ce champ est nécessaire.",
+        "year": "Écrivez une année, par exemple 1612.",
+        "order": "La fin vient avant le début.",
+        "parent": "Une branche ne peut pas être sa propre branche mère."
+      }
     }
   },
   "tree": {
@@ -797,6 +874,87 @@
       "privateBody": "Cette fiche n’existe pas, ou elle n’est visible que des membres de la famille connectés.",
       "signIn": "Se connecter",
       "loading": "Chargement de la fiche…"
+    }
+  },
+  "armsPage": {
+    "eyebrow": "Héraldique et généalogie",
+    "title": "Armoiries et branches",
+    "intro": "Les armoiries racontent la famille en images : d’où elle vient, avec qui elle s’est alliée, comment elle s’est divisée en branches.",
+    "suggest": "Proposer un ajout",
+    "explainer": {
+      "title": "Le blason, pas à pas",
+      "intro": "Quelques mots d’héraldique suffisent à lire un écu. Les voici, l’un après l’autre.",
+      "field": {
+        "title": "Un fond d’argent",
+        "body": "Tout commence par l’écu, le bouclier, et sa couleur de fond. Ici, il est <argent>d’argent</argent> : blanc."
+      },
+      "fasces": {
+        "title": "Trois fasces de gueules",
+        "body": "Viennent trois <fasce>fasces</fasce>, des bandes horizontales, de <gueules>gueules</gueules>, c’est-à-dire rouges. Ce sont les armes de Croÿ."
+      },
+      "quartered": {
+        "title": "Écartelé avec Renty",
+        "body": "L’écu <ecartele>écartelé</ecartele> est partagé en quatre. Aux quartiers 1 et 4, Croÿ ; aux quartiers 2 et 3, Renty : trois <doloire>doloires</doloire>, des fers de hache, les deux du haut dos à dos."
+      },
+      "shield": {
+        "field": "Écu d’argent",
+        "fasces": "Écu d’argent à trois fasces de gueules",
+        "quartered": "Écu écartelé de Croÿ et de Renty"
+      }
+    },
+    "gallery": {
+      "title": "Les armoiries de la famille",
+      "lead": "Chaque écu avec son blasonnement, ce qu’il veut dire et celles et ceux qui l’ont porté.",
+      "intro": "Choisissez « Comparer » sur un écu, puis survolez-en un autre : leurs différences s’allument en rouge.",
+      "hint": "Survolez un autre écu pour voir ce qui le distingue de {name}, ou choisissez-le pour les comparer côte à côte.",
+      "compare": "Comparer",
+      "compareWith": "Comparer avec celui-ci",
+      "panelTitle": "Deux écus côte à côte",
+      "differences": "En rouge, ce qui les distingue.",
+      "same": "Ces deux écus sont identiques.",
+      "bearers": "Portées par",
+      "family": "famille {name}",
+      "allied": "Familles alliées",
+      "demo": "Exemple fictif, pour la démonstration",
+      "emptyTitle": "Les écus attendent la famille",
+      "emptyBody": "Les armoiries de chaque branche seront ajoutées depuis le tableau de bord, avec leur blasonnement et leur explication en mots simples."
+    },
+    "river": {
+      "legend": "Les branches, dans l’ordre du schéma",
+      "today": "Aujourd’hui",
+      "since": "depuis {year}",
+      "extinct": "éteinte",
+      "people": "{count, plural, =0 {aucune personne} one {# personne} other {# personnes}}"
+    },
+    "branches": {
+      "title": "Les branches",
+      "intro": "De la souche aux rameaux d’aujourd’hui : chaque ligne quitte sa branche mère l’année de sa fondation, et son épaisseur suit le nombre de personnes.",
+      "emptyTitle": "Les branches ne sont pas encore décrites",
+      "emptyBody": "Chaque branche aura sa carte, son fondateur, son histoire et sa place dans l’arbre, dès que la famille l’aura ajoutée.",
+      "extant": "Subsistante",
+      "extinct": "Éteinte",
+      "extinctIn": "Éteinte en {year}",
+      "extinctBoth": "Éteinte par les hommes en {male}, par les femmes en {female}",
+      "since": "depuis {year}",
+      "people": "{count, plural, =0 {aucune personne} one {# personne} other {# personnes}}",
+      "founder": "Fondée par",
+      "last": "Dernier représentant",
+      "fate": "Devenir des titres et des terres",
+      "inTree": "Voir dans l’arbre",
+      "details": "La branche en détail",
+      "parent": "Branche mère",
+      "children": "Rameaux",
+      "members": "Les personnes de la branche",
+      "noMembers": "Aucune personne n’est encore rattachée à cette branche.",
+      "living": "{count, plural, one {Une personne vivante n’est visible que des membres de la famille.} other {# personnes vivantes ne sont visibles que des membres de la famille.}}"
+    },
+    "extinct": {
+      "title": "Les branches éteintes",
+      "intro": "Une carte par branche : son fondateur, son dernier représentant, l’année où elle s’est éteinte par les hommes puis par les femmes, et ce que sont devenus ses titres et ses terres."
+    },
+    "communes": {
+      "title": "Des communes aux armes de la famille",
+      "intro": "Les villes et villages qui ont repris ces armes dans les leurs."
     }
   }
 }

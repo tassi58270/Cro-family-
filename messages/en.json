@@ -313,7 +313,8 @@
       "import": "GEDCOM import",
       "demo": "Demonstration",
       "home": "Home page",
-      "lineages": "Entry points and lineages"
+      "lineages": "Entry points and lineages",
+      "arms": "Arms and branches"
     },
     "overview": {
       "title": "Hello",
@@ -626,6 +627,82 @@
         "same": "Choose two different people.",
         "save": "The change could not be saved. Please try again."
       }
+    },
+    "arms": {
+      "title": "Arms and branches",
+      "intro": "The family’s branches and their coats of arms, as shown on the “Arms and branches” page and in the tree.",
+      "published": "Published",
+      "draft": "Draft",
+      "branches": {
+        "title": "Branches",
+        "intro": "Each branch has its card, its colour in the tree and its place in the river diagram.",
+        "add": "Add a branch",
+        "edit": "Edit the branch",
+        "empty": "No branch yet.",
+        "from": "from {name}",
+        "foundedBy": "founded by {name}",
+        "extinct": "extinct in {year}"
+      },
+      "branch": {
+        "name": "Name of the branch",
+        "parent": "Parent branch",
+        "noParent": "None: it is a stock",
+        "founder": "Founder",
+        "description": "Presentation",
+        "descriptionHint": "A few sentences: where the branch comes from, what sets it apart.",
+        "extinct": "This branch is extinct",
+        "extinctMale": "Extinct in the male line in",
+        "extinctFemale": "Extinct in the female line in",
+        "last": "Last representative",
+        "fate": "What became of its titles and lands",
+        "fateHint": "For example: who inherited.",
+        "color": "Colour of its line in the tree",
+        "autoColor": "Automatic colour"
+      },
+      "armsList": {
+        "title": "Coats of arms",
+        "intro": "The family’s shields, those of allied families (shown next to spouses in the tree) and those of towns that took up the family’s arms.",
+        "add": "Add a coat of arms",
+        "edit": "Edit the coat of arms",
+        "empty": "No coat of arms yet."
+      },
+      "arms": {
+        "name": "Name",
+        "nameHint": "For example “Arms of the Chimay branch”.",
+        "kind": "Kind",
+        "kinds": {
+          "family": "Family arms",
+          "alliance": "Allied family",
+          "commune": "Town"
+        },
+        "drawing": "Drawing",
+        "drawingHint": "The shields already drawn for the site. Uploading an SVG file will come with the Photos page.",
+        "noDrawing": "Blank shield",
+        "drawings": {
+          "croy": "Croÿ",
+          "croy-renty": "Croÿ-Renty",
+          "hongrie-ancienne": "Ancient Hungary"
+        },
+        "blazon": "Blazon",
+        "blazonHint": "The heraldic description, for example “argent, three bars gules”.",
+        "explanation": "Plain explanation",
+        "explanationHint": "What the shield shows, for someone who knows no heraldry.",
+        "periodStart": "Borne from",
+        "periodEnd": "Until",
+        "branch": "Branch",
+        "noBranch": "No branch",
+        "person": "Person who bears them",
+        "familyName": "Family",
+        "familyNameHint": "For an allied family: its name.",
+        "bearers": "Bearers",
+        "bearersHint": "In a few words, when no branch or person says it."
+      },
+      "errors": {
+        "required": "This field is needed.",
+        "year": "Write a year, for example 1612.",
+        "order": "The end comes before the start.",
+        "parent": "A branch cannot be its own parent branch."
+      }
     }
   },
   "tree": {
@@ -797,6 +874,87 @@
       "privateBody": "This record does not exist, or it is only visible to signed-in family members.",
       "signIn": "Sign in",
       "loading": "Loading the record…"
+    }
+  },
+  "armsPage": {
+    "eyebrow": "Heraldry and genealogy",
+    "title": "Arms and branches",
+    "intro": "Coats of arms tell the family’s story in pictures: where it comes from, whom it married into, how it divided into branches.",
+    "suggest": "Suggest an addition",
+    "explainer": {
+      "title": "The arms, step by step",
+      "intro": "A few words of heraldry are enough to read a shield. Here they are, one after the other.",
+      "field": {
+        "title": "A field argent",
+        "body": "It all starts with the shield and the colour of its field. Here the field is <argent>argent</argent>: white."
+      },
+      "fasces": {
+        "title": "Three bars gules",
+        "body": "Then come three <fasce>bars</fasce>, horizontal bands, <gueules>gules</gueules>, that is, red. These are the arms of Croÿ."
+      },
+      "quartered": {
+        "title": "Quartered with Renty",
+        "body": "A <ecartele>quartered</ecartele> shield is divided into four. In the 1st and 4th quarters, Croÿ; in the 2nd and 3rd, Renty: three <doloire>axe heads</doloire>, the upper two back to back."
+      },
+      "shield": {
+        "field": "A shield argent",
+        "fasces": "Argent, three bars gules",
+        "quartered": "Quarterly, Croÿ and Renty"
+      }
+    },
+    "gallery": {
+      "title": "The family’s arms",
+      "lead": "Each shield with its blazon, what it means and who bore it.",
+      "intro": "Choose “Compare” on a shield, then hover over another one: what sets them apart lights up in red.",
+      "hint": "Hover over another shield to see how it differs from {name}, or choose it to compare them side by side.",
+      "compare": "Compare",
+      "compareWith": "Compare with this one",
+      "panelTitle": "Two shields side by side",
+      "differences": "In red, what sets them apart.",
+      "same": "These two shields are identical.",
+      "bearers": "Borne by",
+      "family": "{name} family",
+      "allied": "Allied families",
+      "demo": "Fictional example, for the demonstration",
+      "emptyTitle": "The shields are waiting for the family",
+      "emptyBody": "The arms of each branch will be added from the dashboard, with their blazon and a plain explanation."
+    },
+    "river": {
+      "legend": "The branches, in the order of the diagram",
+      "today": "Today",
+      "since": "since {year}",
+      "extinct": "extinct",
+      "people": "{count, plural, =0 {no one} one {# person} other {# people}}"
+    },
+    "branches": {
+      "title": "The branches",
+      "intro": "From the stock to today’s offshoots: each line leaves its parent branch the year it was founded, and its thickness follows its number of people.",
+      "emptyTitle": "The branches are not described yet",
+      "emptyBody": "Each branch will have its card, its founder, its story and its place in the tree as soon as the family adds it.",
+      "extant": "Still living",
+      "extinct": "Extinct",
+      "extinctIn": "Extinct in {year}",
+      "extinctBoth": "Extinct in the male line in {male}, in the female line in {female}",
+      "since": "since {year}",
+      "people": "{count, plural, =0 {no one} one {# person} other {# people}}",
+      "founder": "Founded by",
+      "last": "Last representative",
+      "fate": "What became of its titles and lands",
+      "inTree": "See in the tree",
+      "details": "The branch in detail",
+      "parent": "Parent branch",
+      "children": "Offshoots",
+      "members": "The people of the branch",
+      "noMembers": "No one is linked to this branch yet.",
+      "living": "{count, plural, one {One living person is only visible to family members.} other {# living people are only visible to family members.}}"
+    },
+    "extinct": {
+      "title": "Extinct branches",
+      "intro": "One card per branch: its founder, its last representative, the year it died out in the male and then the female line, and what became of its titles and lands."
+    },
+    "communes": {
+      "title": "Towns bearing the family’s arms",
+      "intro": "The towns and villages that took these arms into their own."
     }
   }
 }

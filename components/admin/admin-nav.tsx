@@ -9,6 +9,7 @@ export const adminNav = [
   { href: "/admin/accueil", key: "home" },
   { href: "/admin/arbre", key: "tree" },
   { href: "/admin/lignees", key: "lineages" },
+  { href: "/admin/armoiries", key: "arms" },
   { href: "/admin/import", key: "import" },
   { href: "/admin/demonstration", key: "demo" },
 ] as const;

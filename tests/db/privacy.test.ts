@@ -168,6 +168,13 @@ const fixtures = `
     ('a5000000-0000-4000-8000-000000000001', 'fr', 'Lignée publique'),
     ('a5000000-0000-4000-8000-000000000002', 'fr', 'SECRET lignée');
 
+  insert into public.arms (id, slug, person_id, status) values
+    ('a6000000-0000-4000-8000-000000000001', 'armes-publiques', '${ids.dead}', 'published'),
+    ('a6000000-0000-4000-8000-000000000002', 'armes-vivante', '${ids.livingYoung}', 'published');
+  insert into public.arms_i18n (arms_id, locale, name) values
+    ('a6000000-0000-4000-8000-000000000001', 'fr', 'Armes publiques'),
+    ('a6000000-0000-4000-8000-000000000002', 'fr', 'SECRET armes');
+
   insert into public.suggestions (author_id, kind, payload) values
     ('${ids.otherMember}', 'correction', '{"note": "SECRET suggestion"}');
 `;
@@ -292,6 +299,13 @@ describe("a visitor", () => {
       entries: "Depuis le plus ancien",
       lineages: "Lignée publique",
     });
+  });
+
+  it("does not see the personal arms of a living person", async () => {
+    const rows = await as(db, visitor, (q) =>
+      q<{ slug: string }>("select slug from public.arms order by slug"),
+    );
+    expect(rows.map((r) => r.slug)).toEqual(["armes-publiques"]);
   });
 
   it("cannot read accounts, profiles, suggestions, requests or the journal", async () => {
