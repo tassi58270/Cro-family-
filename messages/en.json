@@ -312,7 +312,8 @@
       "tree": "Tree entry",
       "import": "GEDCOM import",
       "demo": "Demonstration",
-      "home": "Home page"
+      "home": "Home page",
+      "lineages": "Entry points and lineages"
     },
     "overview": {
       "title": "Hello",
@@ -561,6 +562,241 @@
         "years": "The end year comes before the start year.",
         "save": "Saving did not work. Please try again."
       }
+    },
+    "lineages": {
+      "title": "Entry points and lineages",
+      "intro": "Set where the tree opens and which lineages the “See the demonstration” button unfolds, link by link, with the proof of each.",
+      "translations": "Translations (English, German)",
+      "save": "Save",
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirmDelete": "Delete this item? It can be restored from the journal.",
+      "demoBadge": "Demonstration",
+      "entries": {
+        "title": "Entry points of the tree",
+        "intro": "The buttons at the top of the tree, for example “From the kings of Hungary” and “From Picardy”. The tree opens on the default one.",
+        "add": "Add an entry point",
+        "edit": "Edit the entry point",
+        "empty": "No entry point: the tree opens on the ancestor with the most descendants.",
+        "person": "Starting person",
+        "label": "Button text",
+        "labelHint": "Short and clear, for example “From Picardy”.",
+        "isDefault": "The tree opens on this entry point",
+        "default": "Default"
+      },
+      "lineages": {
+        "title": "Lineages to demonstrate",
+        "intro": "“See the demonstration” unfolds a lineage link by link and shows the proof of each. If historians debate it, say so in one honest sentence.",
+        "add": "Add a lineage",
+        "edit": "Edit the lineage",
+        "empty": "No lineage yet.",
+        "titleField": "Title",
+        "start": "First person of the lineage",
+        "end": "Last person of the lineage",
+        "introField": "Introductory sentence",
+        "introHint": "One sentence, for example to mention a debate among historians.",
+        "fromTo": "From {start} to {end}",
+        "notConnected": "These two people are not yet connected from parent to child in the tree: add the missing links in the tree editor.",
+        "steps": "Links of the lineage"
+      },
+      "step": {
+        "parentOf": "parent of",
+        "certainty": "Certainty of the link",
+        "noProof": "No proof for this link.",
+        "addProof": "Add a proof",
+        "removeProof": "Remove"
+      },
+      "proof": {
+        "about": "Proof of the link between {parent} and {child}.",
+        "kind": "Kind of source",
+        "title": "Title of the document",
+        "titleHint": "For example “Charter of 1209” or “Genealogy of …”.",
+        "reference": "Shelfmark or reference",
+        "referenceHint": "Where to find it: register, folio, page.",
+        "repository": "Archive or library",
+        "url": "Link to the document online",
+        "transcription": "Transcription",
+        "translation": "Translation",
+        "note": "Note on this link",
+        "noteHint": "What the document says exactly about this link."
+      },
+      "errors": {
+        "required": "This field is needed.",
+        "person": "Choose a person from the tree.",
+        "same": "Choose two different people.",
+        "save": "The change could not be saved. Please try again."
+      }
+    }
+  },
+  "tree": {
+    "title": "Family tree",
+    "tools": "Tree tools",
+    "loading": "Loading the tree…",
+    "error": "The tree could not be loaded. Please try again in a moment.",
+    "retry": "Try again",
+    "living": "Living person",
+    "search": {
+      "label": "Find a person",
+      "placeholder": "Name, first name, title, place or year",
+      "noResult": "No one matches. Try another name, a title or a year."
+    },
+    "views": {
+      "label": "View",
+      "descendants": "Descendants",
+      "ancestors": "Ancestors",
+      "branches": "Branches",
+      "list": "List"
+    },
+    "depth": {
+      "label": "Generations"
+    },
+    "filters": {
+      "button": "Filters",
+      "title": "Filter the tree",
+      "branch": "Branch",
+      "century": "Century",
+      "titleHeld": "Title held",
+      "photo": "Photo",
+      "any": "All",
+      "withPhoto": "With a photo",
+      "withoutPhoto": "Without a photo",
+      "clear": "Clear filters",
+      "show": "{count, plural, =0 {No one} one {Show # person} other {Show # people}}"
+    },
+    "link": {
+      "button": "How are they related?",
+      "title": "How are they related?",
+      "first": "First person",
+      "second": "Second person",
+      "close": "Close",
+      "intro": "Choose two people: the path between them lights up in the tree.",
+      "none": "No known relationship between these two people in the tree.",
+      "self": "This is the same person.",
+      "is": " is the ",
+      "of": " of "
+    },
+    "me": {
+      "button": "Find me",
+      "notLinked": "Your account is not linked to a person in the tree yet. An administrator can do it from the dashboard."
+    },
+    "demo": {
+      "button": "See the demonstration",
+      "eyebrow": "Demonstration",
+      "close": "Close the demonstration",
+      "error": "The demonstration could not be loaded.",
+      "loading": "Loading the lineage…",
+      "notConnected": "This lineage is not yet connected from end to end in the tree.",
+      "step": "Link {n} of {total}",
+      "parentOf": "parent of",
+      "proofs": "Proof of this link",
+      "noProof": "No proof has been attached to this link yet.",
+      "previous": "Previous",
+      "next": "Next",
+      "living": "Living person"
+    },
+    "canvas": {
+      "label": "Family tree",
+      "keys": "Arrows: move from person to person · Enter: open the record · + and −: expand, collapse"
+    },
+    "card": {
+      "repeat": "{name}, already shown higher up in the tree",
+      "collapse": "Collapse the family of {name}",
+      "showParents": "Show the parents of {name}",
+      "showChildren": "{count, plural, one {Show the child of {name}} other {Show the # children of {name}}}",
+      "up": "Go up one generation"
+    },
+    "branch": {
+      "extinctIn": "Extinct in {year}",
+      "extinct": "Extinct",
+      "people": "{count, plural, =0 {No one} one {# person} other {# people}}"
+    },
+    "legend": {
+      "title": "Legend",
+      "extinct": "Extinct branch, with the year",
+      "photo": "Has a photo"
+    },
+    "time": {
+      "label": "Time slider",
+      "year": "Year",
+      "value": "People alive in {year}"
+    },
+    "controls": {
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "fit": "See the whole tree"
+    },
+    "sheet": {
+      "fullPage": "Open the record’s page",
+      "livingHidden": "Living people are only visible to signed-in family members.",
+      "error": "The record could not be loaded."
+    },
+    "list": {
+      "count": "{count, plural, =0 {No one} one {# person} other {# people}}",
+      "sort": "Sort",
+      "byName": "by name",
+      "byBirth": "by date of birth",
+      "more": "Show {count} more",
+      "living": "{count, plural, one {One living person is not shown in the list.} other {# living people are not shown in the list.}}"
+    },
+    "certainty": {
+      "attested": "Attested",
+      "tradition": "Tradition",
+      "debated": "Debated",
+      "attestedHint": "Link established by documents.",
+      "traditionHint": "Link handed down by family tradition, without direct proof.",
+      "debatedHint": "Link debated by historians."
+    },
+    "proofs": {
+      "kinds": {
+        "document": "Document",
+        "book": "Book",
+        "archive": "Archive",
+        "website": "Website",
+        "oral": "Oral account",
+        "other": "Other source"
+      },
+      "open": "Open the source",
+      "transcription": "Transcription",
+      "translation": "Translation",
+      "intro": "The documents behind this record and each link with the parents.",
+      "aboutPerson": "About this person",
+      "filiation": "Link with {name}",
+      "certainty": "Certainty:"
+    },
+    "noArms": "No arms recorded yet",
+    "born": "Born{precision, select, day { on} month { in} year { in} other {}} {date}",
+    "died": "Died{precision, select, day { on} month { in} year { in} other {}} {date}",
+    "deceased": "Deceased, date unknown",
+    "at": "in {place}",
+    "livingBadge": "Living",
+    "draft": "Not published yet",
+    "demoBadge": "Demonstration record",
+    "tabs": "Sections of the record",
+    "tabSheet": "Record",
+    "tabProofs": "Proofs ({count})",
+    "titles": "Titles",
+    "rank": "{rank, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} holder",
+    "roles": "Roles and offices",
+    "works": "Works and achievements",
+    "biography": "Biography",
+    "readMore": "Read more",
+    "marriage": "Marriage",
+    "marriageNumber": "{order, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} marriage",
+    "family": "{name} family",
+    "childrenOfUnion": "Children of this marriage",
+    "parents": "Parents",
+    "siblings": "Brothers and sisters",
+    "children": "Children",
+    "stories": "Stories",
+    "placesAndEvents": "Places and events",
+    "suggest": "Suggest a correction",
+    "page": {
+      "back": "Family tree",
+      "viewInTree": "See in the tree",
+      "privateTitle": "Private record",
+      "privateBody": "This record does not exist, or it is only visible to signed-in family members.",
+      "signIn": "Sign in",
+      "loading": "Loading the record…"
     }
   }
 }

@@ -128,6 +128,43 @@ test("the demonstration family is flagged everywhere and leaves in one click", a
     "Données de démonstration",
   );
 
+  // Its lineage is set in the dashboard, link by link with the proofs…
+  await page.goto("/fr/admin/lignees");
+  await expect(
+    page.getByRole("heading", {
+      name: "D’Albert à Jacques (lignée d’exemple)",
+    }),
+  ).toBeVisible();
+  await expect(
+    page
+      .getByRole("list", { name: "Maillons de la lignée" })
+      .locator(":scope > li"),
+  ).toHaveCount(3);
+
+  // …and the tree shows it step by step.
+  await expect(async () => {
+    await page.goto("/fr/arbre");
+    await page
+      .getByRole("button", { name: "Voir la démonstration" })
+      .click({ timeout: 2_000 });
+  }).toPass({ timeout: 15_000 });
+  await expect(page.getByText("Maillon 1 sur 3")).toBeVisible();
+  await expect(
+    page.getByText("Acte de baptême de Charles Exemple (source d’exemple)"),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Suivant" }).click();
+  await expect(page.getByText("Maillon 2 sur 3")).toBeVisible();
+
+  // Each person has a page of their own.
+  await page.goto("/fr/arbre/albert-exemple-1850");
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Albert Exemple" }),
+  ).toBeVisible();
+  await page.getByRole("tab", { name: /Preuves/ }).click();
+  await expect(
+    page.getByText("Registre paroissial d’Exempleville (source d’exemple)"),
+  ).toBeVisible();
+
   await page.goto("/fr/admin/demonstration");
   page.once("dialog", (dialog) => dialog.accept());
   await page

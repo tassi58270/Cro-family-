@@ -2,6 +2,9 @@ import "server-only";
 import type { Query } from "@/lib/db";
 import {
   demoAnecdotes,
+  demoArms,
+  demoEntryPoints,
+  demoLineages,
   demoBranches,
   demoChapters,
   demoFigures,
@@ -15,7 +18,7 @@ import {
   demoTitles,
   demoUnions,
 } from "./dataset";
-import { slugify } from "@/lib/slug";
+import { slugify, uniqueSlug } from "@/lib/slug";
 
 export async function demoLoaded(q: Query): Promise<boolean> {
   const [row] = await q<{ loaded: boolean }>(
@@ -73,7 +76,13 @@ export async function loadDemo(q: Query, actor: string): Promise<void> {
        values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, 'published', true, $14)
        returning id`,
       [
-        slugify(`${p.given} ${p.surname} ${p.birth?.date.slice(0, 4) ?? ""}`),
+        // The family may already have someone with the same address.
+        await uniqueSlug(
+          slugify(`${p.given} ${p.surname} ${p.birth?.date.slice(0, 4) ?? ""}`),
+          async (slug) =>
+            (await q("select 1 from public.people where slug = $1", [slug]))
+              .length > 0,
+        ),
         p.given,
         p.surname,
         p.sex,
@@ -246,9 +255,17 @@ export async function loadDemo(q: Query, actor: string): Promise<void> {
 
   for (const s of demoSources) {
     const id = await one(
-      `insert into public.sources (kind, title, reference, repository, transcription, status, is_demo, created_by)
-       values ($1, $2, $3, $4, $5, 'published', true, $6) returning id`,
-      [s.kind, s.title, s.reference, s.repository, s.transcription, actor],
+      `insert into public.sources (kind, title, reference, repository, transcription, translation, status, is_demo, created_by)
+       values ($1, $2, $3, $4, $5, $6, 'published', true, $7) returning id`,
+      [
+        s.kind,
+        s.title,
+        s.reference,
+        s.repository,
+        s.transcription,
+        s.translation ?? null,
+        actor,
+      ],
     );
     for (const person of s.people) {
       await q(
@@ -256,6 +273,66 @@ export async function loadDemo(q: Query, actor: string): Promise<void> {
         [id, ids.get(`person:${person}`)],
       );
     }
+    for (const [parent, child] of s.filiations ?? []) {
+      await q(
+        `insert into public.filiation_sources (source_id, parent_id, child_id) values ($1, $2, $3)`,
+        [id, ids.get(`person:${parent}`), ids.get(`person:${child}`)],
+      );
+    }
+  }
+
+  for (const [i, a] of demoArms.entries()) {
+    const id = await one(
+      `insert into public.arms (slug, builtin, branch_id, person_id, family_name, sort_order, status, is_demo, created_by)
+       values ($1, $2, $3, $4, $5, $6, 'published', true, $7) returning id`,
+      [
+        `exemple-${a.key}`,
+        a.builtin,
+        "branch" in a ? ids.get(`branch:${a.branch}`) : null,
+        "person" in a ? ids.get(`person:${a.person}`) : null,
+        "family" in a ? a.family : null,
+        100 + i,
+        actor,
+      ],
+    );
+    await q(
+      `insert into public.arms_i18n (arms_id, locale, name) values ($1, 'fr', $2)`,
+      [id, a.name],
+    );
+    for (const person of "people" in a ? a.people : []) {
+      await q(`update public.people set origin_arms_id = $1 where id = $2`, [
+        id,
+        ids.get(`person:${person}`),
+      ]);
+    }
+  }
+
+  for (const [i, e] of demoEntryPoints.entries()) {
+    // The family's own default entry point stays the default.
+    const [{ taken }] = await q<{ taken: boolean }>(
+      "select exists (select 1 from public.tree_entry_points where is_default) as taken",
+    );
+    const id = await one(
+      `insert into public.tree_entry_points (person_id, sort_order, is_default, status, is_demo)
+       values ($1, $2, $3, 'published', true) returning id`,
+      [ids.get(`person:${e.person}`), 100 + i, e.isDefault && !taken],
+    );
+    await q(
+      `insert into public.tree_entry_points_i18n (entry_id, locale, label) values ($1, 'fr', $2)`,
+      [id, e.label],
+    );
+  }
+
+  for (const [i, l] of demoLineages.entries()) {
+    const id = await one(
+      `insert into public.lineages (start_person_id, end_person_id, sort_order, status, is_demo)
+       values ($1, $2, $3, 'published', true) returning id`,
+      [ids.get(`person:${l.start}`), ids.get(`person:${l.end}`), 100 + i],
+    );
+    await q(
+      `insert into public.lineages_i18n (lineage_id, locale, title, intro) values ($1, 'fr', $2, $3)`,
+      [id, l.title, l.intro],
+    );
   }
 }
 
@@ -310,6 +387,9 @@ async function loadDemoHome(q: Query, ids: Map<string, string>) {
 
 /** Removes every demonstration row; the family's own content is untouched. */
 export async function removeDemo(q: Query): Promise<void> {
+  await q("delete from public.tree_entry_points where is_demo");
+  await q("delete from public.lineages where is_demo");
+  await q("delete from public.arms where is_demo");
   await q("delete from public.stories where is_demo");
   await q("delete from public.home_chapters where is_demo");
   await q("delete from public.home_figures where is_demo");

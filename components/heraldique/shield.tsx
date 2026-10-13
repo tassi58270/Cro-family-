@@ -11,7 +11,14 @@ export const SHIELD_PATH =
   "M0 0 L100 0 L100 68.571 C100 98 78 112 50 120 C22 112 0 98 0 68.571 Z";
 
 /** Built-in arms. Blazons are in `messages/*.json` under `arms`. */
-export const builtInArms = ["croy", "croy-renty", "hongrie-ancienne"] as const;
+export const builtInArms = [
+  "croy",
+  "croy-renty",
+  "hongrie-ancienne",
+  // Fictional, for the demonstration family « Exemple » only.
+  "exemple",
+  "exemple-modele",
+] as const;
 export type BuiltInArms = (typeof builtInArms)[number];
 
 /** Three fasces: the field cut in seven equal bands, the 2nd, 4th and 6th red. */
@@ -86,6 +93,10 @@ const fields: Record<BuiltInArms, () => ReactNode> = {
       <Fasces x={50} y={QUARTER_Y} width={50} height={120 - QUARTER_Y} />
     </>
   ),
+  // Demonstration only: d’argent à la bande de gueules.
+  exemple: () => <path d="M0 0 H26 L100 88 V120 H74 L0 32 Z" />,
+  // Demonstration only: d’argent au chef de gueules.
+  "exemple-modele": () => <rect width={100} height={36} />,
   // Fascé de gueules et d’argent de huit pièces (Árpád).
   "hongrie-ancienne": () => (
     <g data-part="burelles">
@@ -106,9 +117,6 @@ type ShieldProps = {
 };
 
 export function Shield({ arms, label, decorative, className }: ShieldProps) {
-  const clipId = useId();
-  const Field = arms ? fields[arms] : null;
-
   return (
     <svg
       viewBox="0 0 100 120"
@@ -118,6 +126,28 @@ export function Shield({ arms, label, decorative, className }: ShieldProps) {
       aria-hidden={decorative ? true : undefined}
       focusable="false"
     >
+      <ShieldArt arms={arms} />
+    </svg>
+  );
+}
+
+/**
+ * The drawing alone, on the 100 × 120 grid, to place inside another SVG: the
+ * family tree defines each coat of arms once as a <symbol> and reuses it.
+ * There the outline scales with the shield, so that it stays in proportion
+ * when the tree is zoomed out.
+ */
+export function ShieldArt({
+  arms,
+  scalingStroke = false,
+}: {
+  arms?: BuiltInArms;
+  scalingStroke?: boolean;
+}) {
+  const clipId = useId();
+  const Field = arms ? fields[arms] : null;
+  return (
+    <>
       <defs>
         <clipPath id={clipId}>
           <path d={SHIELD_PATH} />
@@ -145,10 +175,10 @@ export function Shield({ arms, label, decorative, className }: ShieldProps) {
         d={SHIELD_PATH}
         fill="none"
         stroke={arms ? "var(--croy)" : "var(--hairline-strong)"}
-        strokeWidth={arms ? 1.4 : 1.2}
-        strokeDasharray={arms ? undefined : "3 3"}
-        vectorEffect="non-scaling-stroke"
+        strokeWidth={scalingStroke ? (arms ? 5 : 4) : arms ? 1.4 : 1.2}
+        strokeDasharray={arms ? undefined : scalingStroke ? "10 8" : "3 3"}
+        vectorEffect={scalingStroke ? undefined : "non-scaling-stroke"}
       />
-    </svg>
+    </>
   );
 }

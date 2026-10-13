@@ -312,7 +312,8 @@
       "tree": "Saisie de l’arbre",
       "import": "Import GEDCOM",
       "demo": "Démonstration",
-      "home": "Page d’accueil"
+      "home": "Page d’accueil",
+      "lineages": "Entrées et lignées"
     },
     "overview": {
       "title": "Bonjour",
@@ -561,6 +562,241 @@
         "years": "L’année de fin précède l’année de début.",
         "save": "L’enregistrement n’a pas abouti. Réessayez."
       }
+    },
+    "lineages": {
+      "title": "Entrées et lignées",
+      "intro": "Réglez où l’arbre s’ouvre et quelles lignées le bouton « Voir la démonstration » déroule, maillon par maillon, avec la preuve de chacun.",
+      "translations": "Traductions (anglais, allemand)",
+      "save": "Enregistrer",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "confirmDelete": "Supprimer cet élément ? Il pourra être rétabli depuis le journal.",
+      "demoBadge": "Démonstration",
+      "entries": {
+        "title": "Points d’entrée de l’arbre",
+        "intro": "Les boutons en haut de l’arbre, par exemple « Depuis les rois de Hongrie » et « Depuis la Picardie ». L’arbre s’ouvre sur celui par défaut.",
+        "add": "Ajouter un point d’entrée",
+        "edit": "Modifier le point d’entrée",
+        "empty": "Aucun point d’entrée : l’arbre s’ouvre sur l’ancêtre qui a le plus de descendants.",
+        "person": "Personne de départ",
+        "label": "Texte du bouton",
+        "labelHint": "Court et parlant, par exemple « Depuis la Picardie ».",
+        "isDefault": "L’arbre s’ouvre sur ce point d’entrée",
+        "default": "Par défaut"
+      },
+      "lineages": {
+        "title": "Lignées à démontrer",
+        "intro": "« Voir la démonstration » déroule une lignée maillon par maillon et affiche la preuve de chacun. S’il y a un débat historique, dites-le en une phrase honnête.",
+        "add": "Ajouter une lignée",
+        "edit": "Modifier la lignée",
+        "empty": "Aucune lignée pour l’instant.",
+        "titleField": "Titre",
+        "start": "Première personne de la lignée",
+        "end": "Dernière personne de la lignée",
+        "introField": "Phrase d’introduction",
+        "introHint": "Une phrase, par exemple pour mentionner un débat entre historiens.",
+        "fromTo": "De {start} à {end}",
+        "notConnected": "Ces deux personnes ne sont pas encore reliées de parent à enfant dans l’arbre : complétez les maillons manquants depuis la saisie de l’arbre.",
+        "steps": "Maillons de la lignée"
+      },
+      "step": {
+        "parentOf": "parent de",
+        "certainty": "Certitude du lien",
+        "noProof": "Aucune preuve pour ce maillon.",
+        "addProof": "Ajouter une preuve",
+        "removeProof": "Retirer"
+      },
+      "proof": {
+        "about": "Preuve du lien entre {parent} et {child}.",
+        "kind": "Type de source",
+        "title": "Titre du document",
+        "titleHint": "Par exemple « Charte de 1209 » ou « Généalogie de … ».",
+        "reference": "Cote ou référence",
+        "referenceHint": "Où le retrouver : registre, folio, page.",
+        "repository": "Archives ou bibliothèque",
+        "url": "Lien vers le document en ligne",
+        "transcription": "Transcription",
+        "translation": "Traduction",
+        "note": "Note sur ce maillon",
+        "noteHint": "Ce que le document dit exactement de ce lien."
+      },
+      "errors": {
+        "required": "Ce champ est nécessaire.",
+        "person": "Choisissez une personne de l’arbre.",
+        "same": "Choisissez deux personnes différentes.",
+        "save": "L’enregistrement n’a pas abouti. Réessayez."
+      }
+    }
+  },
+  "tree": {
+    "title": "Arbre généalogique",
+    "tools": "Outils de l’arbre",
+    "loading": "L’arbre se charge…",
+    "error": "L’arbre n’a pas pu être chargé. Réessayez dans un instant.",
+    "retry": "Réessayer",
+    "living": "Personne vivante",
+    "search": {
+      "label": "Chercher une personne",
+      "placeholder": "Nom, prénom, titre, lieu ou année",
+      "noResult": "Aucune personne ne correspond. Essayez un autre nom, un titre ou une année."
+    },
+    "views": {
+      "label": "Vue",
+      "descendants": "Descendance",
+      "ancestors": "Ascendance",
+      "branches": "Branches",
+      "list": "Liste"
+    },
+    "depth": {
+      "label": "Générations"
+    },
+    "filters": {
+      "button": "Filtres",
+      "title": "Filtrer l’arbre",
+      "branch": "Branche",
+      "century": "Siècle",
+      "titleHeld": "Titre porté",
+      "photo": "Photo",
+      "any": "Toutes",
+      "withPhoto": "Avec photo",
+      "withoutPhoto": "Sans photo",
+      "clear": "Effacer les filtres",
+      "show": "{count, plural, =0 {Aucune personne} one {Voir # personne} other {Voir # personnes}}"
+    },
+    "link": {
+      "button": "Quel est le lien ?",
+      "title": "Quel est le lien ?",
+      "first": "Première personne",
+      "second": "Seconde personne",
+      "close": "Fermer",
+      "intro": "Choisissez deux personnes : le chemin qui les relie s’allume dans l’arbre.",
+      "none": "Aucun lien connu entre ces deux personnes dans l’arbre.",
+      "self": "C’est la même personne.",
+      "is": " est ",
+      "of": " de "
+    },
+    "me": {
+      "button": "Me retrouver",
+      "notLinked": "Votre compte n’est pas encore relié à une fiche de l’arbre. Un administrateur peut le faire depuis le tableau de bord."
+    },
+    "demo": {
+      "button": "Voir la démonstration",
+      "eyebrow": "Démonstration",
+      "close": "Fermer la démonstration",
+      "error": "La démonstration n’a pas pu être chargée.",
+      "loading": "Chargement de la lignée…",
+      "notConnected": "Cette lignée n’est pas encore reliée de bout en bout dans l’arbre.",
+      "step": "Maillon {n} sur {total}",
+      "parentOf": "parent de",
+      "proofs": "Preuve de ce maillon",
+      "noProof": "Aucune preuve n’est encore jointe à ce maillon.",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "living": "Personne vivante"
+    },
+    "canvas": {
+      "label": "Arbre généalogique",
+      "keys": "Flèches : passer d’une personne à l’autre · Entrée : ouvrir la fiche · + et − : déplier, replier"
+    },
+    "card": {
+      "repeat": "{name}, déjà présent plus haut dans l’arbre",
+      "collapse": "Replier la famille de {name}",
+      "showParents": "Afficher les parents de {name}",
+      "showChildren": "{count, plural, one {Afficher l’enfant de {name}} other {Afficher les # enfants de {name}}}",
+      "up": "Remonter d’une génération"
+    },
+    "branch": {
+      "extinctIn": "Éteinte en {year}",
+      "extinct": "Éteinte",
+      "people": "{count, plural, =0 {Aucune personne} one {# personne} other {# personnes}}"
+    },
+    "legend": {
+      "title": "Légende",
+      "extinct": "Branche éteinte, avec l’année",
+      "photo": "A une photo"
+    },
+    "time": {
+      "label": "Curseur du temps",
+      "year": "Année",
+      "value": "Personnes en vie en {year}"
+    },
+    "controls": {
+      "zoomIn": "Zoomer",
+      "zoomOut": "Dézoomer",
+      "fit": "Voir tout l’arbre"
+    },
+    "sheet": {
+      "fullPage": "Ouvrir la page de la fiche",
+      "livingHidden": "Les personnes vivantes ne sont visibles que des membres de la famille connectés.",
+      "error": "La fiche n’a pas pu être chargée."
+    },
+    "list": {
+      "count": "{count, plural, =0 {Aucune personne} one {# personne} other {# personnes}}",
+      "sort": "Trier",
+      "byName": "par nom",
+      "byBirth": "par date de naissance",
+      "more": "Afficher {count} de plus",
+      "living": "{count, plural, one {Une personne vivante n’apparaît pas dans la liste.} other {# personnes vivantes n’apparaissent pas dans la liste.}}"
+    },
+    "certainty": {
+      "attested": "Attesté",
+      "tradition": "Tradition",
+      "debated": "Débattu",
+      "attestedHint": "Lien établi par des documents.",
+      "traditionHint": "Lien rapporté par la tradition familiale, sans preuve directe.",
+      "debatedHint": "Lien discuté par les historiens."
+    },
+    "proofs": {
+      "kinds": {
+        "document": "Document",
+        "book": "Livre",
+        "archive": "Archive",
+        "website": "Site web",
+        "oral": "Témoignage oral",
+        "other": "Autre source"
+      },
+      "open": "Ouvrir la source",
+      "transcription": "Transcription",
+      "translation": "Traduction",
+      "intro": "Les documents qui établissent cette fiche et chacun des liens avec les parents.",
+      "aboutPerson": "Sur cette personne",
+      "filiation": "Lien avec {name}",
+      "certainty": "Certitude :"
+    },
+    "noArms": "Pas encore d’armoiries",
+    "born": "{sex, select, female {Née} male {Né} other {Naissance}}{precision, select, day { le} month { en} year { en} other {}} {date}",
+    "died": "{sex, select, female {Morte} male {Mort} other {Décès}}{precision, select, day { le} month { en} year { en} other {}} {date}",
+    "deceased": "{sex, select, female {Décédée} male {Décédé} other {Décès}}, date inconnue",
+    "at": "à {place}",
+    "livingBadge": "En vie",
+    "draft": "Pas encore publiée",
+    "demoBadge": "Fiche de démonstration",
+    "tabs": "Sections de la fiche",
+    "tabSheet": "Fiche",
+    "tabProofs": "Preuves ({count})",
+    "titles": "Titres",
+    "rank": "{rank, selectordinal, one {#er} other {#e}} titulaire",
+    "roles": "Rôles et fonctions",
+    "works": "Travaux et réalisations",
+    "biography": "Biographie",
+    "readMore": "Lire la suite",
+    "marriage": "Mariage",
+    "marriageNumber": "{order, selectordinal, one {#er} other {#e}} mariage",
+    "family": "famille {name}",
+    "childrenOfUnion": "Enfants de cette union",
+    "parents": "Parents",
+    "siblings": "Frères et sœurs",
+    "children": "Enfants",
+    "stories": "Histoires",
+    "placesAndEvents": "Lieux et événements",
+    "suggest": "Proposer une correction",
+    "page": {
+      "back": "Arbre généalogique",
+      "viewInTree": "Voir dans l’arbre",
+      "privateTitle": "Fiche réservée",
+      "privateBody": "Cette fiche n’existe pas, ou elle n’est visible que des membres de la famille connectés.",
+      "signIn": "Se connecter",
+      "loading": "Chargement de la fiche…"
     }
   }
 }

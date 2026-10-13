@@ -155,6 +155,19 @@ const fixtures = `
   insert into public.union_sources (source_id, union_id) values
     ('a3000000-0000-4000-8000-000000000004', 'e0000000-0000-4000-8000-000000000002');
 
+  insert into public.tree_entry_points (id, person_id, is_default, status) values
+    ('a4000000-0000-4000-8000-000000000001', '${ids.dead}', true, 'published'),
+    ('a4000000-0000-4000-8000-000000000002', '${ids.livingYoung}', false, 'published');
+  insert into public.tree_entry_points_i18n (entry_id, locale, label) values
+    ('a4000000-0000-4000-8000-000000000001', 'fr', 'Depuis le plus ancien'),
+    ('a4000000-0000-4000-8000-000000000002', 'fr', 'SECRET entrée');
+  insert into public.lineages (id, start_person_id, end_person_id, status) values
+    ('a5000000-0000-4000-8000-000000000001', '${ids.dead}', '${ids.bornLongAgo}', 'published'),
+    ('a5000000-0000-4000-8000-000000000002', '${ids.dead}', '${ids.livingYoung}', 'published');
+  insert into public.lineages_i18n (lineage_id, locale, title) values
+    ('a5000000-0000-4000-8000-000000000001', 'fr', 'Lignée publique'),
+    ('a5000000-0000-4000-8000-000000000002', 'fr', 'SECRET lignée');
+
   insert into public.suggestions (author_id, kind, payload) values
     ('${ids.otherMember}', 'correction', '{"note": "SECRET suggestion"}');
 `;
@@ -267,6 +280,20 @@ describe("a visitor", () => {
     expect(links.filter((l) => l.kind === "parent")).toHaveLength(2);
   });
 
+  it("does not see entry points or lineages that lead to the living", async () => {
+    const rows = await as(db, visitor, (q) =>
+      q<Record<string, string>>(`
+        select
+          (select string_agg(label, ',') from public.tree_entry_points_i18n) as entries,
+          (select string_agg(title, ',') from public.lineages_i18n) as lineages
+      `),
+    );
+    expect(rows[0]).toEqual({
+      entries: "Depuis le plus ancien",
+      lineages: "Lignée publique",
+    });
+  });
+
   it("cannot read accounts, profiles, suggestions, requests or the journal", async () => {
     for (const table of [
       "private.accounts",
@@ -345,7 +372,9 @@ describe("a member", () => {
           (select count(*) from public.people) as people,
           (select biography from public.people_i18n where person_id = '${ids.livingYoung}') as bio,
           (select count(*) from public.media where status = 'published') as media,
-          (select count(*) from public.events) as events
+          (select count(*) from public.events) as events,
+          (select count(*) from public.tree_entry_points) as entries,
+          (select count(*) from public.lineages_i18n) as lineages
       `),
     );
     expect(rows[0]).toEqual({
@@ -353,6 +382,8 @@ describe("a member", () => {
       bio: "SECRET biographie.",
       media: "2",
       events: "2",
+      entries: "2",
+      lineages: "2",
     });
   });
 

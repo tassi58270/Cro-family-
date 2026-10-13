@@ -14,6 +14,11 @@ type SidePanelProps = {
   /** Sticky actions at the bottom of the panel. */
   footer?: ReactNode;
   className?: string;
+  /**
+   * False keeps the page usable while the panel is open (the family tree on
+   * large screens): no backdrop, no focus trap, the panel sits below the menu.
+   */
+  modal?: boolean;
 };
 
 /**
@@ -29,6 +34,7 @@ export function SidePanel({
   children,
   footer,
   className,
+  modal = true,
 }: SidePanelProps) {
   const t = useTranslations("common");
   const ref = useRef<HTMLDialogElement>(null);
@@ -37,16 +43,26 @@ export function SidePanel({
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog) return;
-    if (open && !dialog.open) dialog.showModal();
+    if (open && !dialog.open) {
+      if (modal) dialog.showModal();
+      else dialog.show();
+    }
     if (!open && dialog.open) dialog.close();
-  }, [open]);
+  }, [open, modal]);
 
   return (
     <dialog
       ref={ref}
       aria-labelledby={titleId}
-      className={cn("side-panel", className)}
+      className={cn("side-panel", !modal && "side-panel-docked", className)}
       onClose={onClose}
+      onKeyDown={(event) => {
+        // A modal dialog closes on Escape by itself (cancel event).
+        if (!modal && event.key === "Escape") {
+          event.preventDefault();
+          onClose();
+        }
+      }}
       onCancel={(event) => {
         event.preventDefault();
         onClose();

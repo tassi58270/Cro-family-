@@ -22,7 +22,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 - [x] 3. Base de données et sécurité (migrations, RLS, tests vie privée)
 - [x] 4. Outils de saisie et jeu de démonstration fictif (assistant de démarrage, saisie dans l’arbre, import GEDCOM)
 - [x] 5. Page d’accueil (direction A, ouverture, chapitres sur la carte, titres, anecdotes, portes d’entrée)
-- [ ] 6. Arbre généalogique
+- [x] 6. Arbre généalogique (vues, recherche, curseur du temps, filtres, lien de parenté, démonstration des lignées, fiche personne)
 - [ ] 7. Armoiries et branches
 - [ ] 8. Histoires, puis page Photos (section 6.5)
 - [ ] 9. Lieux et événements
@@ -140,6 +140,16 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - Carte d’Europe : SVG statique `public/carte/europe.json` (Natural Earth, domaine public), généré par `node scripts/build-europe-map.mjs`, chargé à l’approche des chapitres ; projection côté serveur dans `lib/carte/project.ts`. Plus léger que MapLibre (réservé à la page Lieux).
 - Les textes de contenu français passent par `typeset()` (`lib/typography.ts`) : espaces fines et guillemets corrects même si la famille tape des espaces ordinaires.
 - Les tests de bout en bout tournent en mouvement réduit par défaut ; l’ouverture a ses propres tests (`home.spec.ts`).
+
+## Arbre (étape 6)
+
+- Page `/fr/arbre` statique ; l’arbre arrive en un fichier compact : `/api/arbre/{langue}` (public, sans les vivants, régénéré par `contentChanged()`) ou `/api/arbre/{langue}/membres` (membres, jamais en cache). Format : `lib/data/tree.ts` (personnes par index).
+- Logique pure et testée : `lib/genealogie/layout.ts` (positions), `tree-model.ts` (recherche, curseur du temps, filtres, point de départ), `relationship.ts` (« Quel est le lien ? » en FR/EN/DE), `lib/search/normalize.ts` (Croÿ/Croy/Crouy, accents).
+- Dessin : `components/arbre/tree-canvas.tsx` (SVG + d3-zoom, seules les cartes proches de l’écran sont dessinées, cartes réduites en vue lointaine, flèches du clavier). Page : `tree-app.tsx` ; l’état est dans l’adresse (`vue`, `depuis`, `personne`, `annee`, `lien`).
+- Fiche : panneau latéral (non modal sur ordinateur) et page `/fr/arbre/[personne]`, construite d’avance pour le public ; un membre qui ouvre un vivant la charge dans le navigateur, jamais indexée.
+- Points d’entrée et lignées à démontrer (certitude et preuves de chaque maillon) : `/fr/admin/lignees`. Une source qui touche un vivant reste invisible du public (RLS).
+- Écus dans l’arbre : `<symbol>` par armoiries (`ShieldArt`) ; `exemple` et `exemple-modele` sont fictifs, réservés à la démonstration.
+- Tests : `tests/e2e/tree.spec.ts` sert lui-même un arbre de 2 000 personnes (`syntheticTree`), indépendamment de la base.
 
 ## Système de design (étape 2)
 

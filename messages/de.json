@@ -312,7 +312,8 @@
       "tree": "Stammbaum erfassen",
       "import": "GEDCOM-Import",
       "demo": "Beispieldaten",
-      "home": "Startseite"
+      "home": "Startseite",
+      "lineages": "Einstiege und Abstammungslinien"
     },
     "overview": {
       "title": "Guten Tag",
@@ -561,6 +562,241 @@
         "years": "Das Endjahr liegt vor dem Anfangsjahr.",
         "save": "Das Speichern hat nicht geklappt. Bitte erneut versuchen."
       }
+    },
+    "lineages": {
+      "title": "Einstiege und Abstammungslinien",
+      "intro": "Legen Sie fest, wo sich der Stammbaum öffnet und welche Abstammungslinien die Schaltfläche „Beweisführung ansehen“ Glied für Glied mit ihrem Beleg zeigt.",
+      "translations": "Übersetzungen (Englisch, Deutsch)",
+      "save": "Speichern",
+      "edit": "Bearbeiten",
+      "delete": "Löschen",
+      "confirmDelete": "Diesen Eintrag löschen? Er kann über das Protokoll wiederhergestellt werden.",
+      "demoBadge": "Beispiel",
+      "entries": {
+        "title": "Einstiege in den Stammbaum",
+        "intro": "Die Schaltflächen oben im Stammbaum, etwa „Von den Königen Ungarns“ und „Aus der Picardie“. Der Stammbaum öffnet sich beim Standardeinstieg.",
+        "add": "Einstieg hinzufügen",
+        "edit": "Einstieg bearbeiten",
+        "empty": "Kein Einstieg: Der Stammbaum öffnet sich beim Vorfahren mit den meisten Nachkommen.",
+        "person": "Ausgangsperson",
+        "label": "Text der Schaltfläche",
+        "labelHint": "Kurz und klar, etwa „Aus der Picardie“.",
+        "isDefault": "Der Stammbaum öffnet sich bei diesem Einstieg",
+        "default": "Standard"
+      },
+      "lineages": {
+        "title": "Abstammungslinien mit Belegen",
+        "intro": "„Beweisführung ansehen“ zeigt eine Abstammungslinie Glied für Glied mit dem Beleg jedes Glieds. Ist sie unter Historikern umstritten, sagen Sie es in einem ehrlichen Satz.",
+        "add": "Abstammungslinie hinzufügen",
+        "edit": "Abstammungslinie bearbeiten",
+        "empty": "Noch keine Abstammungslinie.",
+        "titleField": "Titel",
+        "start": "Erste Person der Linie",
+        "end": "Letzte Person der Linie",
+        "introField": "Einleitender Satz",
+        "introHint": "Ein Satz, etwa um eine Debatte unter Historikern zu erwähnen.",
+        "fromTo": "Von {start} bis {end}",
+        "notConnected": "Diese beiden Personen sind im Stammbaum noch nicht von Eltern zu Kind verbunden: Ergänzen Sie die fehlenden Glieder in der Stammbaum-Erfassung.",
+        "steps": "Glieder der Abstammungslinie"
+      },
+      "step": {
+        "parentOf": "Elternteil von",
+        "certainty": "Gewissheit der Verbindung",
+        "noProof": "Kein Beleg für dieses Glied.",
+        "addProof": "Beleg hinzufügen",
+        "removeProof": "Entfernen"
+      },
+      "proof": {
+        "about": "Beleg für die Verbindung zwischen {parent} und {child}.",
+        "kind": "Art der Quelle",
+        "title": "Titel des Dokuments",
+        "titleHint": "Etwa „Urkunde von 1209“ oder „Genealogie von …“.",
+        "reference": "Signatur oder Fundstelle",
+        "referenceHint": "Wo es zu finden ist: Register, Folio, Seite.",
+        "repository": "Archiv oder Bibliothek",
+        "url": "Link zum Dokument im Netz",
+        "transcription": "Transkription",
+        "translation": "Übersetzung",
+        "note": "Anmerkung zu diesem Glied",
+        "noteHint": "Was das Dokument genau über diese Verbindung sagt."
+      },
+      "errors": {
+        "required": "Dieses Feld wird benötigt.",
+        "person": "Wählen Sie eine Person aus dem Stammbaum.",
+        "same": "Wählen Sie zwei verschiedene Personen.",
+        "save": "Die Änderung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
+      }
+    }
+  },
+  "tree": {
+    "title": "Stammbaum",
+    "tools": "Werkzeuge des Stammbaums",
+    "loading": "Der Stammbaum wird geladen …",
+    "error": "Der Stammbaum konnte nicht geladen werden. Bitte versuchen Sie es gleich noch einmal.",
+    "retry": "Erneut versuchen",
+    "living": "Lebende Person",
+    "search": {
+      "label": "Eine Person suchen",
+      "placeholder": "Name, Vorname, Titel, Ort oder Jahr",
+      "noResult": "Niemand passt dazu. Versuchen Sie einen anderen Namen, einen Titel oder ein Jahr."
+    },
+    "views": {
+      "label": "Ansicht",
+      "descendants": "Nachkommen",
+      "ancestors": "Vorfahren",
+      "branches": "Linien",
+      "list": "Liste"
+    },
+    "depth": {
+      "label": "Generationen"
+    },
+    "filters": {
+      "button": "Filter",
+      "title": "Stammbaum filtern",
+      "branch": "Linie",
+      "century": "Jahrhundert",
+      "titleHeld": "Getragener Titel",
+      "photo": "Foto",
+      "any": "Alle",
+      "withPhoto": "Mit Foto",
+      "withoutPhoto": "Ohne Foto",
+      "clear": "Filter zurücksetzen",
+      "show": "{count, plural, =0 {Niemand} one {# Person anzeigen} other {# Personen anzeigen}}"
+    },
+    "link": {
+      "button": "Wie sind sie verwandt?",
+      "title": "Wie sind sie verwandt?",
+      "first": "Erste Person",
+      "second": "Zweite Person",
+      "close": "Schließen",
+      "intro": "Wählen Sie zwei Personen: Der Weg zwischen ihnen leuchtet im Stammbaum auf.",
+      "none": "Zwischen diesen beiden Personen ist im Stammbaum keine Verwandtschaft bekannt.",
+      "self": "Das ist dieselbe Person.",
+      "is": " ist ",
+      "of": " von "
+    },
+    "me": {
+      "button": "Mich finden",
+      "notLinked": "Ihr Konto ist noch mit keiner Person im Stammbaum verbunden. Ein Administrator kann das im Dashboard tun."
+    },
+    "demo": {
+      "button": "Beweisführung ansehen",
+      "eyebrow": "Beweisführung",
+      "close": "Beweisführung schließen",
+      "error": "Die Beweisführung konnte nicht geladen werden.",
+      "loading": "Die Abstammungslinie wird geladen …",
+      "notConnected": "Diese Abstammungslinie ist im Stammbaum noch nicht durchgehend verbunden.",
+      "step": "Glied {n} von {total}",
+      "parentOf": "Elternteil von",
+      "proofs": "Beleg für dieses Glied",
+      "noProof": "Für dieses Glied ist noch kein Beleg hinterlegt.",
+      "previous": "Zurück",
+      "next": "Weiter",
+      "living": "Lebende Person"
+    },
+    "canvas": {
+      "label": "Stammbaum",
+      "keys": "Pfeiltasten: von Person zu Person · Eingabe: Eintrag öffnen · + und −: aufklappen, zuklappen"
+    },
+    "card": {
+      "repeat": "{name}, bereits weiter oben im Stammbaum",
+      "collapse": "Familie von {name} zuklappen",
+      "showParents": "Eltern von {name} anzeigen",
+      "showChildren": "{count, plural, one {Kind von {name} anzeigen} other {Die # Kinder von {name} anzeigen}}",
+      "up": "Eine Generation nach oben"
+    },
+    "branch": {
+      "extinctIn": "Erloschen {year}",
+      "extinct": "Erloschen",
+      "people": "{count, plural, =0 {Niemand} one {# Person} other {# Personen}}"
+    },
+    "legend": {
+      "title": "Legende",
+      "extinct": "Erloschene Linie, mit Jahr",
+      "photo": "Hat ein Foto"
+    },
+    "time": {
+      "label": "Zeitleiste",
+      "year": "Jahr",
+      "value": "Im Jahr {year} lebende Personen"
+    },
+    "controls": {
+      "zoomIn": "Vergrößern",
+      "zoomOut": "Verkleinern",
+      "fit": "Ganzen Stammbaum zeigen"
+    },
+    "sheet": {
+      "fullPage": "Seite des Eintrags öffnen",
+      "livingHidden": "Lebende Personen sind nur für angemeldete Familienmitglieder sichtbar.",
+      "error": "Der Eintrag konnte nicht geladen werden."
+    },
+    "list": {
+      "count": "{count, plural, =0 {Niemand} one {# Person} other {# Personen}}",
+      "sort": "Sortieren",
+      "byName": "nach Name",
+      "byBirth": "nach Geburtsdatum",
+      "more": "{count} weitere anzeigen",
+      "living": "{count, plural, one {Eine lebende Person erscheint nicht in der Liste.} other {# lebende Personen erscheinen nicht in der Liste.}}"
+    },
+    "certainty": {
+      "attested": "Belegt",
+      "tradition": "Überlieferung",
+      "debated": "Umstritten",
+      "attestedHint": "Durch Dokumente belegte Verbindung.",
+      "traditionHint": "Durch die Familienüberlieferung weitergegebene Verbindung, ohne direkten Beleg.",
+      "debatedHint": "Von Historikern diskutierte Verbindung."
+    },
+    "proofs": {
+      "kinds": {
+        "document": "Dokument",
+        "book": "Buch",
+        "archive": "Archiv",
+        "website": "Website",
+        "oral": "Mündlicher Bericht",
+        "other": "Andere Quelle"
+      },
+      "open": "Quelle öffnen",
+      "transcription": "Transkription",
+      "translation": "Übersetzung",
+      "intro": "Die Dokumente zu diesem Eintrag und zu jeder Verbindung mit den Eltern.",
+      "aboutPerson": "Zu dieser Person",
+      "filiation": "Verbindung mit {name}",
+      "certainty": "Gewissheit:"
+    },
+    "noArms": "Noch kein Wappen erfasst",
+    "born": "Geboren{precision, select, day { am} month { im} other {}} {date}",
+    "died": "Gestorben{precision, select, day { am} month { im} other {}} {date}",
+    "deceased": "Verstorben, Datum unbekannt",
+    "at": "in {place}",
+    "livingBadge": "Lebend",
+    "draft": "Noch nicht veröffentlicht",
+    "demoBadge": "Beispieleintrag",
+    "tabs": "Abschnitte des Eintrags",
+    "tabSheet": "Eintrag",
+    "tabProofs": "Belege ({count})",
+    "titles": "Titel",
+    "rank": "{rank}. Inhaber",
+    "roles": "Ämter und Aufgaben",
+    "works": "Werke und Leistungen",
+    "biography": "Biografie",
+    "readMore": "Weiterlesen",
+    "marriage": "Ehe",
+    "marriageNumber": "{order}. Ehe",
+    "family": "Familie {name}",
+    "childrenOfUnion": "Kinder aus dieser Ehe",
+    "parents": "Eltern",
+    "siblings": "Geschwister",
+    "children": "Kinder",
+    "stories": "Geschichten",
+    "placesAndEvents": "Orte und Ereignisse",
+    "suggest": "Korrektur vorschlagen",
+    "page": {
+      "back": "Stammbaum",
+      "viewInTree": "Im Stammbaum zeigen",
+      "privateTitle": "Geschützter Eintrag",
+      "privateBody": "Diesen Eintrag gibt es nicht, oder er ist nur für angemeldete Familienmitglieder sichtbar.",
+      "signIn": "Anmelden",
+      "loading": "Der Eintrag wird geladen …"
     }
   }
 }

@@ -121,6 +121,9 @@ describe("the demonstration family", () => {
         + (select count(*) from public.parent_child where is_demo)::int
         + (select count(*) from public.home_chapters where is_demo)::int
         + (select count(*) from public.home_figures where is_demo)::int
+        + (select count(*) from public.arms where is_demo)::int
+        + (select count(*) from public.tree_entry_points where is_demo)::int
+        + (select count(*) from public.lineages where is_demo)::int
         + (select count(*) from public.home_i18n where summary is not null)::int as demo,
         (select count(*) from public.people)::int as people
     `);
@@ -135,6 +138,42 @@ describe("the demonstration family", () => {
     );
     expect(rows[0].n).toBeGreaterThan(demoPeople.length * 2);
     expect(rows[0].by_admin).toBe(true);
+  });
+
+  it("loads even when the family already has someone of the same name", async () => {
+    await asAdmin((q) =>
+      q(
+        `insert into public.people (slug, given_names, surname, status)
+         values ('albert-exemple-1850', 'Albert', 'Exemple', 'published')`,
+      ),
+    );
+    await asAdmin((q) => loadDemo(q, admin));
+    const { rows } = await db.query(
+      "select slug, is_demo from public.people where slug like 'albert-exemple-1850%' order by slug",
+    );
+    expect(rows).toEqual([
+      { slug: "albert-exemple-1850", is_demo: false },
+      { slug: "albert-exemple-1850-2", is_demo: true },
+    ]);
+    await asAdmin(removeDemo);
+    await asAdmin((q) =>
+      q("delete from public.people where slug = 'albert-exemple-1850'"),
+    );
+  });
+
+  it("opens the tree on its entry point and demonstrates its lineage with proofs", async () => {
+    await asAdmin((q) => loadDemo(q, admin));
+    const rows = await as(db, visitor, (q) =>
+      q<{ entries: number; lineages: number; proofs: number }>(`
+        select
+          (select count(*)::int from public.tree_entry_points) as entries,
+          (select count(*)::int from public.lineages) as lineages,
+          (select count(*)::int from public.filiation_sources) as proofs
+      `),
+    );
+    // The proofs about living people stay hidden from visitors.
+    expect(rows[0]).toEqual({ entries: 2, lineages: 1, proofs: 4 });
+    await asAdmin(removeDemo);
   });
 });
 

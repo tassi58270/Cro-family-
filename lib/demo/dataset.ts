@@ -430,7 +430,18 @@ export const demoStories = [
   },
 ] as const;
 
-export const demoSources = [
+export const demoSources: {
+  key: string;
+  title: string;
+  kind: "archive" | "document" | "book";
+  reference: string;
+  repository: string;
+  transcription: string;
+  translation?: string;
+  people: string[];
+  /** Parent-child links this source proves: [parent, child]. */
+  filiations?: [string, string][];
+}[] = [
   {
     key: "registre",
     title: "Registre paroissial d’Exempleville (source d’exemple)",
@@ -440,6 +451,90 @@ export const demoSources = [
     transcription:
       "Texte d’exemple : « L’an mil huit cent cinquante, le deux avril, est né Albert… » (transcription fictive)",
     people: ["albert"],
+  },
+  {
+    key: "bapteme-charles",
+    title: "Acte de baptême de Charles Exemple (source d’exemple)",
+    kind: "document",
+    reference: "Exemple, registre 1880, folio 3",
+    repository: "Archives d’exemple",
+    transcription:
+      "Texte d’exemple : « Charles, fils d’Albert Exemple et de Berthe Modèle… » (transcription fictive)",
+    people: ["charles"],
+    filiations: [
+      ["albert", "charles"],
+      ["berthe", "charles"],
+    ],
+  },
+  {
+    key: "livre-de-famille",
+    title: "Livre de famille d’exemple",
+    kind: "book",
+    reference: "Exemple, pages 1 à 4",
+    repository: "Collection d’exemple",
+    transcription:
+      "Texte d’exemple : quelques lignes fictives d’un livre de famille, pour tester l’onglet « Preuves ».",
+    translation:
+      "Example text: a few fictional lines, to test a translation next to the transcription.",
+    people: [],
+    filiations: [
+      ["charles", "francois"],
+      ["francois", "jacques"],
+    ],
+  },
+  {
+    // About living people: visible to members only, like any such source.
+    key: "livret-recent",
+    title: "Livret de famille récent (source d’exemple)",
+    kind: "document",
+    reference: "Exemple, livret 1966",
+    repository: "Papiers de famille d’exemple",
+    transcription: "Texte d’exemple, visible des seuls membres connectés.",
+    people: [],
+    filiations: [
+      ["jacques", "laurent"],
+      ["laurent", "noe"],
+    ],
+  },
+];
+
+/** Fictional arms, so that the tree shows its small shields. */
+export const demoArms = [
+  {
+    key: "exemple",
+    builtin: "exemple",
+    name: "Armoiries d’exemple de la famille Exemple",
+    branch: "ainee",
+    person: "albert",
+  },
+  {
+    key: "modele",
+    builtin: "exemple-modele",
+    name: "Armoiries d’exemple de la famille Modèle",
+    family: "Modèle",
+    people: ["berthe"],
+  },
+] as const;
+
+/** Where the demonstration tree opens. */
+export const demoEntryPoints = [
+  { person: "albert", label: "Depuis Albert (exemple)", isDefault: true },
+  {
+    person: "emile",
+    label: "Depuis la branche cadette (exemple)",
+    isDefault: false,
+  },
+] as const;
+
+/** A lineage to show link by link, as the family will do from Hungary. */
+export const demoLineages = [
+  {
+    start: "albert",
+    // Ends with someone the public may see, so that visitors can try it too.
+    end: "jacques",
+    title: "D’Albert à Jacques (lignée d’exemple)",
+    intro:
+      "Lignée d’exemple, inventée pour essayer la démonstration : chaque maillon affiche sa preuve.",
   },
 ] as const;
 
