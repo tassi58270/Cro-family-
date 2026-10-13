@@ -217,3 +217,73 @@ export function useFormWords() {
     translations: t("translations"),
   };
 }
+
+/** Several people from the tree: chips to remove, a search to add. */
+export function PeoplePicker({
+  name,
+  label,
+  hint,
+  initialIds,
+  locale,
+}: {
+  name: string;
+  label: string;
+  hint?: string;
+  initialIds: string[];
+  locale: string;
+}) {
+  const tree = use(TreeContext);
+  const remove = useTranslations("common");
+  const [chosen, setChosen] = useState(initialIds);
+  const nameOf = (id: string) => {
+    const i = tree?.model.byId.get(id);
+    const p = i === undefined ? undefined : tree!.data.people[i];
+    if (!p) return "…";
+    return [p.given, p.surname].filter(Boolean).join(" ") || "—";
+  };
+  return (
+    <div className="grid gap-2">
+      <p className="font-medium" aria-hidden="true">
+        {label}
+      </p>
+      {hint && <p className="-mt-1 text-caption text-ink-muted">{hint}</p>}
+      {chosen.map((id) => (
+        <input key={id} type="hidden" name={name} value={id} />
+      ))}
+      {chosen.length > 0 && (
+        <ul className="flex flex-wrap gap-2">
+          {chosen.map((id) => (
+            <li key={id}>
+              <button
+                type="button"
+                onClick={() => setChosen((c) => c.filter((x) => x !== id))}
+                className="inline-flex min-h-9 items-center gap-2 rounded-full border border-hairline-strong py-1 pr-3 pl-3.5 text-caption font-medium hover:border-ink"
+              >
+                {nameOf(id)}
+                <span aria-hidden="true">×</span>
+                <span className="sr-only">{remove("close")}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      {tree ? (
+        <PersonSearch
+          key={chosen.length}
+          data={tree.data}
+          model={tree.model}
+          locale={locale}
+          label={label}
+          placeholder={label}
+          size="small"
+          onPick={(p) => {
+            const id = tree.data.people[p].id;
+            setChosen((c) => (c.includes(id) ? c : [...c, id]));
+          }}
+        />
+      ) : (
+        <div className="h-11 animate-pulse rounded-full bg-paper-2" />
+      )}
+    </div>
+  );
+}

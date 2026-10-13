@@ -10,6 +10,7 @@ export const adminNav = [
   { href: "/admin/arbre", key: "tree" },
   { href: "/admin/lignees", key: "lineages" },
   { href: "/admin/armoiries", key: "arms" },
+  { href: "/admin/histoires", key: "stories" },
   { href: "/admin/import", key: "import" },
   { href: "/admin/demonstration", key: "demo" },
 ] as const;

@@ -35,6 +35,9 @@ export default async function AccountPage({
         </p>
       </header>
       <div className="flex flex-wrap gap-3">
+        <ButtonLink href="/compte/histoires" variant="secondary">
+          {t("myStories")}
+        </ButtonLink>
         {session.role === "admin" && (
           <ButtonLink href="/admin">{t("dashboard")}</ButtonLink>
         )}

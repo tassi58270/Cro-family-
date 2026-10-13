@@ -296,7 +296,8 @@
     "title": "Mein Konto",
     "signedInAs": "Sie sind mit der Adresse {email} angemeldet.",
     "dashboard": "Verwaltung öffnen",
-    "signOut": "Abmelden"
+    "signOut": "Abmelden",
+    "myStories": "Meine Geschichten"
   },
   "demo": {
     "bannerTitle": "Beispieldaten.",
@@ -314,7 +315,8 @@
       "demo": "Beispieldaten",
       "home": "Startseite",
       "lineages": "Einstiege und Abstammungslinien",
-      "arms": "Wappen und Linien"
+      "arms": "Wappen und Linien",
+      "stories": "Geschichten"
     },
     "overview": {
       "title": "Guten Tag",
@@ -955,6 +957,111 @@
     "communes": {
       "title": "Gemeinden mit dem Wappen der Familie",
       "intro": "Die Städte und Dörfer, die dieses Wappen in ihr eigenes übernahmen."
+    }
+  },
+  "stories": {
+    "eyebrow": "Familiengeschichten",
+    "title": "Geschichten",
+    "intro": "Was sich die Familie erzählt: Schlachten und Gesandtschaften, Hochzeiten, Reisen und Erinnerungen aus dem Alltag. Jede Geschichte führt zu den Personen, die sie nennt.",
+    "write": "Eine Geschichte erzählen",
+    "emptyTitle": "Die Geschichten warten auf ihre Erzähler",
+    "emptyBody": "Familienmitglieder können eine Geschichte schreiben; ein Administrator liest sie, bevor sie veröffentlicht wird.",
+    "all": "Alle Geschichten",
+    "people": "Personen dieser Geschichte",
+    "morePeople": "{count, plural, one {und eine weitere} other {und # weitere}}",
+    "demo": "Beispielgeschichte",
+    "themes": {
+      "war": "Krieg",
+      "court": "Hof",
+      "travel": "Reise",
+      "love": "Liebe",
+      "daily": "Alltag"
+    },
+    "filters": {
+      "theme": "Thema",
+      "allThemes": "Alle Themen",
+      "person": "Person",
+      "branch": "Linie",
+      "era": "Epoche",
+      "language": "Originalsprache",
+      "anyone": "Alle",
+      "any": "Alle",
+      "count": "{count, plural, =0 {Keine Geschichte} one {# Geschichte} other {# Geschichten}}",
+      "clear": "Filter zurücksetzen",
+      "none": "Keine Geschichte passt zu diesen Filtern."
+    },
+    "by": "Erzählt von {name}",
+    "anonymous": "Anonym",
+    "writtenIn": "auf {language} geschrieben",
+    "notPublished": "Noch nicht veröffentlicht",
+    "inThisStory": "In dieser Geschichte",
+    "openSheet": "Eintrag öffnen",
+    "source": "Quelle:",
+    "placesAndEvents": "Orte und Ereignisse",
+    "neighbours": "Weiterlesen",
+    "loading": "Die Geschichte wird geladen …",
+    "privateTitle": "Geschützte Geschichte",
+    "privateBody": "Diese Geschichte gibt es nicht, oder sie ist nur für angemeldete Familienmitglieder sichtbar.",
+    "signIn": "Anmelden"
+  },
+  "storyEditor": {
+    "mine": "Meine Geschichten",
+    "mineIntro": "Ihre Entwürfe, die zur Prüfung gesendeten und die bereits veröffentlichten Geschichten.",
+    "account": "Mein Konto",
+    "new": "Eine Geschichte schreiben",
+    "newIntro": "Erzählen Sie auf Ihre Weise. Speichern Sie jederzeit einen Entwurf und senden Sie die Geschichte dann zur Prüfung an einen Administrator.",
+    "editTitle": "Geschichte bearbeiten",
+    "adminTitle": "Geschichten",
+    "adminIntro": "Die von Mitgliedern gesendeten Geschichten zum Prüfen und Veröffentlichen, dann alle anderen.",
+    "title": "Titel",
+    "body": "Text",
+    "bodyHint": "Lassen Sie zwischen zwei Absätzen eine Zeile frei.",
+    "excerpt": "Vorspann",
+    "excerptHint": "Ein oder zwei Sätze, die Lust aufs Lesen machen. Sonst der Anfang des Textes.",
+    "optional": "freiwillig",
+    "eraStart": "Zeit: von",
+    "eraEnd": "bis",
+    "eraHint": "Ein Jahr, etwa 1415.",
+    "themes": "Themen",
+    "people": "Betroffene Personen",
+    "peopleHint": "Suchen Sie sie im Stammbaum nach Namen: Die Geschichte erscheint dann in ihrem Eintrag.",
+    "places": "Orte",
+    "source": "Quelle",
+    "sourceHint": "Woher die Geschichte stammt: ein Buch, ein Brief, eine Familienerinnerung.",
+    "language": "Sprache der Geschichte",
+    "languageHint": "Die Sprache, in der Sie schreiben.",
+    "anonymous": "Ohne meinen Namen veröffentlichen",
+    "anonymousHint": "Ihr Name erscheint nicht unter der Geschichte.",
+    "featured": "Auf die Titelseite",
+    "photosLater": "Fotos zu einer Geschichte kommen mit der Fotoseite.",
+    "publish": "Veröffentlichen",
+    "submit": "Zur Prüfung senden",
+    "saveDraft": "Entwurf speichern",
+    "draftSaved": "Entwurf gespeichert.",
+    "validationNote": "Ein Administrator liest jede Geschichte vor der Veröffentlichung. Bis dahin können Sie sie ändern.",
+    "published": "Diese Geschichte ist veröffentlicht. Um sie zu ändern, schlagen Sie eine Korrektur vor.",
+    "none": "Noch keine Geschichte.",
+    "byline": "von {name}",
+    "status": {
+      "draft": "Entwurf",
+      "pending": "Zu prüfen",
+      "published": "Veröffentlicht",
+      "rejected": "Abgelehnt"
+    },
+    "featuredChip": "Titelseite",
+    "read": "Lesen",
+    "edit": "Bearbeiten",
+    "reject": "Ablehnen",
+    "feature": "Auf die Titelseite",
+    "unfeature": "Von der Titelseite nehmen",
+    "delete": "Löschen",
+    "confirmDelete": "Diese Geschichte löschen? Sie kann über das Protokoll wiederhergestellt werden.",
+    "errors": {
+      "required": "Dieses Feld wird benötigt.",
+      "year": "Schreiben Sie ein Jahr, etwa 1415.",
+      "order": "Das Ende liegt vor dem Beginn.",
+      "form": "Prüfen Sie die markierten Felder.",
+      "save": "Die Änderung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut."
     }
   }
 }

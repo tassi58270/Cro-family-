@@ -296,7 +296,8 @@
     "title": "My account",
     "signedInAs": "You are signed in as {email}.",
     "dashboard": "Open the dashboard",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "myStories": "My stories"
   },
   "demo": {
     "bannerTitle": "Demonstration data.",
@@ -314,7 +315,8 @@
       "demo": "Demonstration",
       "home": "Home page",
       "lineages": "Entry points and lineages",
-      "arms": "Arms and branches"
+      "arms": "Arms and branches",
+      "stories": "Stories"
     },
     "overview": {
       "title": "Hello",
@@ -955,6 +957,111 @@
     "communes": {
       "title": "Towns bearing the family’s arms",
       "intro": "The towns and villages that took these arms into their own."
+    }
+  },
+  "stories": {
+    "eyebrow": "Family tales",
+    "title": "Stories",
+    "intro": "What the family tells itself: battles and embassies, weddings, journeys and everyday memories. Each story leads to the people it mentions.",
+    "write": "Tell a story",
+    "emptyTitle": "The stories are waiting for their tellers",
+    "emptyBody": "Family members can write a story; an administrator reads it before it is published.",
+    "all": "All stories",
+    "people": "People in this story",
+    "morePeople": "{count, plural, one {and one more} other {and # more}}",
+    "demo": "Demonstration story",
+    "themes": {
+      "war": "War",
+      "court": "Court",
+      "travel": "Travel",
+      "love": "Love",
+      "daily": "Everyday life"
+    },
+    "filters": {
+      "theme": "Theme",
+      "allThemes": "All themes",
+      "person": "Person",
+      "branch": "Branch",
+      "era": "Era",
+      "language": "Original language",
+      "anyone": "Everyone",
+      "any": "All",
+      "count": "{count, plural, =0 {No story} one {# story} other {# stories}}",
+      "clear": "Clear filters",
+      "none": "No story matches these filters."
+    },
+    "by": "Told by {name}",
+    "anonymous": "Anonymous author",
+    "writtenIn": "written in {language}",
+    "notPublished": "Not published yet",
+    "inThisStory": "In this story",
+    "openSheet": "Open the record",
+    "source": "Source:",
+    "placesAndEvents": "Places and events",
+    "neighbours": "Read next",
+    "loading": "Loading the story…",
+    "privateTitle": "Private story",
+    "privateBody": "This story does not exist, or it is only visible to signed-in family members.",
+    "signIn": "Sign in"
+  },
+  "storyEditor": {
+    "mine": "My stories",
+    "mineIntro": "Your drafts, the stories sent for validation and those already published.",
+    "account": "My account",
+    "new": "Write a story",
+    "newIntro": "Tell it your way. Save a draft whenever you like, then send the story for an administrator to read.",
+    "editTitle": "Edit the story",
+    "adminTitle": "Stories",
+    "adminIntro": "Stories sent by members, to read and publish, then all the others.",
+    "title": "Title",
+    "body": "Text",
+    "bodyHint": "Leave an empty line between two paragraphs.",
+    "excerpt": "Standfirst",
+    "excerptHint": "One or two sentences that make people want to read. Otherwise, the beginning of the text.",
+    "optional": "optional",
+    "eraStart": "Era: from",
+    "eraEnd": "to",
+    "eraHint": "A year, for example 1415.",
+    "themes": "Themes",
+    "people": "People concerned",
+    "peopleHint": "Find them in the tree by name: the story will appear on their records.",
+    "places": "Places",
+    "source": "Source",
+    "sourceHint": "Where the story comes from: a book, a letter, a family memory.",
+    "language": "Language of the story",
+    "languageHint": "The language you write it in.",
+    "anonymous": "Publish without my name",
+    "anonymousHint": "Your name will not appear under the story.",
+    "featured": "Feature on the front page",
+    "photosLater": "Adding photos to a story comes with the Photos page.",
+    "publish": "Publish",
+    "submit": "Send for validation",
+    "saveDraft": "Save the draft",
+    "draftSaved": "Draft saved.",
+    "validationNote": "An administrator reads every story before it is published. You can edit it until it is.",
+    "published": "This story is published. To change it, suggest a correction.",
+    "none": "No story yet.",
+    "byline": "by {name}",
+    "status": {
+      "draft": "Draft",
+      "pending": "To validate",
+      "published": "Published",
+      "rejected": "Declined"
+    },
+    "featuredChip": "Featured",
+    "read": "Read",
+    "edit": "Edit",
+    "reject": "Decline",
+    "feature": "Feature",
+    "unfeature": "Unfeature",
+    "delete": "Delete",
+    "confirmDelete": "Delete this story? It can be restored from the journal.",
+    "errors": {
+      "required": "This field is needed.",
+      "year": "Write a year, for example 1415.",
+      "order": "The end comes before the start.",
+      "form": "Check the fields marked.",
+      "save": "The change could not be saved. Please try again."
     }
   }
 }

@@ -24,7 +24,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 - [x] 5. Page d’accueil (direction A, ouverture, chapitres sur la carte, titres, anecdotes, portes d’entrée)
 - [x] 6. Arbre généalogique (vues, recherche, curseur du temps, filtres, lien de parenté, démonstration des lignées, fiche personne)
 - [x] 7. Armoiries et branches (blason expliqué pas à pas, galerie et comparaison, rivière des branches, cartes, communes, page par branche)
-- [ ] 8. Histoires, puis page Photos (section 6.5)
+- [ ] 8. Histoires, puis page Photos (section 6.5) — histoires faites (8a), photos en cours (8b)
 - [ ] 9. Lieux et événements
 - [ ] 10. Comptes famille et contributions
 - [ ] 11. Dashboard administrateur
@@ -159,6 +159,13 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - Les armoiries propres à une personne vivante restent invisibles du public (RLS).
 - Le contenu réel des branches (section 2) n’est jamais saisi par Claude : la famille l’entre ; le « terminé quand » est vérifié sur la famille « Exemple ».
 - Composants communs du tableau de bord : `components/admin/admin-kit.tsx` (choix d’une personne dans l’arbre, traductions, sections, suppression).
+
+## Histoires (étape 8a)
+
+- `/fr/histoires` (magazine : une à la une, cartes de tailles variées, filtres personne, branche, époque, thème, langue d’origine) et `/fr/histoires/[histoire]` (lecture, personnes en marge avec leur fiche au survol, lieux et événements, histoires voisines). Pages statiques pour le public ; les membres reçoivent aussi les histoires qui citent des vivants (`/api/histoires/{langue}`, `/api/histoire/[slug]`).
+- Écriture : `/fr/compte/histoires` (mes histoires), `/nouvelle`, `/[id]` ; brouillon puis « Envoyer pour validation » (`pending`). Publication par un administrateur : `/fr/admin/histoires`. La base refuse qu’un membre publie ou modifie une histoire publiée.
+- Une histoire apparaît d’elle-même sur la fiche de chaque personne citée (`story_people`) : test en base et de bout en bout.
+- Les tableaux d’énumérations Postgres reviennent en texte brut : les lire avec `::text[]`. Un même paramètre utilisé pour une énumération et une comparaison doit être typé (`$7::public.content_status`).
 
 ## Système de design (étape 2)
 

@@ -268,6 +268,61 @@ test("an administrator adds a branch and its arms, shown on the arms page", asyn
   }
 });
 
+test("a story sent for validation, once published, appears on the sheet of each person it cites", async ({
+  page,
+}) => {
+  await signIn(page);
+  await page.goto("/fr/compte/histoires/nouvelle");
+  await page.getByLabel("Titre").fill("Le jardin de Paul");
+  await page
+    .getByLabel("Texte")
+    .fill("Une histoire écrite pour le test.\n\nDeuxième paragraphe.");
+  await page.getByLabel("Époque : de").fill("1920");
+  await page
+    .locator("label")
+    .filter({ hasText: /^Vie quotidienne$/ })
+    .click();
+  const people = page.getByRole("combobox", { name: "Personnes concernées" });
+  await people.fill("Paul Test");
+  await page.getByRole("option", { name: /Paul Testeur/ }).click();
+  await expect(
+    page.getByRole("button", { name: /Paul Testeur/ }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Envoyer pour validation" }).click();
+  await page.waitForURL(/\/compte\/histoires$/);
+  const mine = page
+    .getByRole("listitem")
+    .filter({ hasText: "Le jardin de Paul" });
+  await expect(mine.getByText("À valider")).toBeVisible();
+
+  await page.goto("/fr/admin/histoires");
+  await page
+    .getByRole("listitem")
+    .filter({ hasText: "Le jardin de Paul" })
+    .getByRole("button", { name: "Publier" })
+    .click();
+  await expect(
+    page
+      .getByRole("listitem")
+      .filter({ hasText: "Le jardin de Paul" })
+      .getByText("Publiée"),
+  ).toBeVisible();
+
+  await expect(async () => {
+    await page.goto("/fr/arbre/paul-testeur-1900");
+    await expect(
+      page.getByRole("link", { name: /Le jardin de Paul/ }),
+    ).toBeVisible({ timeout: 2_000 });
+  }).toPass({ timeout: 20_000 });
+  await page.getByRole("link", { name: /Le jardin de Paul/ }).click();
+  await expect(
+    page.getByRole("heading", { level: 1, name: "Le jardin de Paul" }),
+  ).toBeVisible();
+  await expect(
+    page.locator(".story-body").getByText("Deuxième paragraphe."),
+  ).toBeVisible();
+});
+
 test("a GEDCOM file is analysed, then imported", async ({ page }) => {
   await signIn(page);
   await page.goto("/fr/admin/import");
