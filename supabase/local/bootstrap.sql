@@ -1,17 +1,25 @@
 -- Local and CI only: recreates the parts of Supabase that the migrations rely
 -- on, so that they run unchanged on a plain Postgres. Never run on Supabase.
 
+-- Roles belong to the whole server: test files that start together may both
+-- try to create them, so the loser of that race simply carries on.
 do $$
+declare
+  r record;
 begin
-  if not exists (select 1 from pg_roles where rolname = 'anon') then
-    create role anon nologin noinherit;
-  end if;
-  if not exists (select 1 from pg_roles where rolname = 'authenticated') then
-    create role authenticated nologin noinherit;
-  end if;
-  if not exists (select 1 from pg_roles where rolname = 'service_role') then
-    create role service_role nologin noinherit bypassrls;
-  end if;
+  for r in select * from (values
+    ('anon', 'nologin noinherit'),
+    ('authenticated', 'nologin noinherit'),
+    ('service_role', 'nologin noinherit bypassrls')
+  ) as roles(name, options) loop
+    if not exists (select 1 from pg_roles where rolname = r.name) then
+      begin
+        execute format('create role %I %s', r.name, r.options);
+      exception when duplicate_object or unique_violation then
+        null;
+      end;
+    end if;
+  end loop;
 end
 $$;
 
