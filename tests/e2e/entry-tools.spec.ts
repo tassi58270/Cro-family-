@@ -1,5 +1,6 @@
 import path from "node:path";
 import { expect, test } from "@playwright/test";
+import sharp from "sharp";
 import { expectAccessible, hasDatabase, signIn } from "./helpers";
 
 /**
@@ -321,6 +322,52 @@ test("a story sent for validation, once published, appears on the sheet of each 
   await expect(
     page.locator(".story-body").getByText("Deuxième paragraphe."),
   ).toBeVisible();
+});
+
+test("a photo sent with the people on it appears on their sheet and on the wall", async ({
+  page,
+}) => {
+  await signIn(page);
+  await page.goto("/fr/compte/photos");
+  const image = await sharp({
+    create: { width: 640, height: 480, channels: 3, background: "#8a7a62" },
+  })
+    .jpeg()
+    .toBuffer();
+  await page.locator("#photos-input").setInputFiles({
+    name: "essai.jpg",
+    mimeType: "image/jpeg",
+    buffer: image,
+  });
+  await page.getByLabel("Légende").fill("Photo d’essai");
+  await page.getByLabel("Date").fill("vers 1950");
+  await expect(page.getByText("Compris : vers 1950")).toBeVisible();
+  await page
+    .getByRole("combobox", { name: "Personnes présentes" })
+    .fill("Paul Test");
+  await page.getByRole("option", { name: /Paul Testeur/ }).click();
+  await page.getByRole("button", { name: "Envoyer la photo" }).click();
+  await expect(page.getByText("Une photo publiée.")).toBeVisible({
+    timeout: 15_000,
+  });
+
+  await expect(async () => {
+    await page.goto("/fr/arbre/paul-testeur-1900");
+    await expect(page.getByRole("img", { name: "Photo d’essai" })).toBeVisible({
+      timeout: 2_000,
+    });
+  }).toPass({ timeout: 20_000 });
+
+  await page.getByRole("img", { name: "Photo d’essai" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Photo d’essai" }),
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: "Paul Testeur" })).toBeVisible();
+  const src = await page
+    .getByRole("img", { name: "Photo d’essai" })
+    .getAttribute("src");
+  const response = await page.request.get(src!);
+  expect(response.headers()["content-type"]).toBe("image/webp");
 });
 
 test("a GEDCOM file is analysed, then imported", async ({ page }) => {

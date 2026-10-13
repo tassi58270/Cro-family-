@@ -24,7 +24,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 - [x] 5. Page d’accueil (direction A, ouverture, chapitres sur la carte, titres, anecdotes, portes d’entrée)
 - [x] 6. Arbre généalogique (vues, recherche, curseur du temps, filtres, lien de parenté, démonstration des lignées, fiche personne)
 - [x] 7. Armoiries et branches (blason expliqué pas à pas, galerie et comparaison, rivière des branches, cartes, communes, page par branche)
-- [ ] 8. Histoires, puis page Photos (section 6.5) — histoires faites (8a), photos en cours (8b)
+- [x] 8. Histoires (magazine, lecture, écriture et validation), puis page Photos (mur, albums, visionneuse, envoi groupé, visages, propositions)
 - [ ] 9. Lieux et événements
 - [ ] 10. Comptes famille et contributions
 - [ ] 11. Dashboard administrateur
@@ -166,6 +166,16 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - Écriture : `/fr/compte/histoires` (mes histoires), `/nouvelle`, `/[id]` ; brouillon puis « Envoyer pour validation » (`pending`). Publication par un administrateur : `/fr/admin/histoires`. La base refuse qu’un membre publie ou modifie une histoire publiée.
 - Une histoire apparaît d’elle-même sur la fiche de chaque personne citée (`story_people`) : test en base et de bout en bout.
 - Les tableaux d’énumérations Postgres reviennent en texte brut : les lire avec `::text[]`. Un même paramètre utilisé pour une énumération et une comparaison doit être typé (`$7::public.content_status`).
+
+## Photos (étape 8b)
+
+- Fichiers : `lib/storage` (dossier local `STORAGE_DIR`, `.data/fichiers` par défaut, ou Supabase Storage si `SUPABASE_URL` et `SUPABASE_SERVICE_ROLE_KEY`). Clés vérifiées par `isSafeKey`.
+- Tout fichier passe par `/fichiers/[...chemin]` : la route lit la ligne `media` sous le rôle du visiteur (RLS), donc une photo en attente ou d’une personne vivante n’est jamais servie au public. `?l=` (160, 320, 640, 1280, 2048) renvoie une copie WebP redimensionnée, gardée dans `tailles/`.
+- Envoi : `/fr/compte/photos` (plusieurs à la fois, allégées dans le navigateur, métadonnées retirées au serveur, 3 200 px max.) → `POST /api/photos/envoi`. Un membre envoie en attente ; un administrateur publie directement.
+- `/fr/photos` : mur justifié (`lib/photos/justify.ts`), filtres, visages ; `/fr/photos/[photo]` (visionneuse, cadres des visages au survol des noms, « Qui est-ce ? », demande de retrait → `suggestions`) ; `/fr/photos/albums/[album]` et diaporama.
+- Administration `/fr/admin/photos` : photos à valider, propositions de noms et demandes de retrait, albums ; `/fr/admin/photos/[photo]` : description et visages (glisser sur l’image pour entourer un visage).
+- Une histoire peut porter des photos (`story_media`, la première sert de couverture).
+- Démonstration : images dessinées par `lib/demo/photos.ts` (silhouettes, aucune vraie personne), supprimées avec leurs copies.
 
 ## Système de design (étape 2)
 

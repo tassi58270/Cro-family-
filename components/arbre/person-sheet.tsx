@@ -475,6 +475,31 @@ export function PersonSheet({
             </Block>
           )}
 
+          {person.photos.length > 0 && (
+            <Block title={t("photos")}>
+              <ul className="grid grid-cols-3 gap-2">
+                {person.photos.slice(0, 9).map((photo) => (
+                  <li key={photo.id}>
+                    <Link
+                      href={{
+                        pathname: "/photos/[photo]",
+                        params: { photo: photo.id },
+                      }}
+                      className="block aspect-square overflow-hidden rounded-xs bg-paper-2"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element -- sized by /fichiers. */}
+                      <img
+                        src={`${photo.url}?l=320`}
+                        alt={photo.caption ?? ""}
+                        loading="lazy"
+                        className="size-full object-cover transition-transform duration-(--duration-slow) ease-out hover:scale-[1.04]"
+                      />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Block>
+          )}
           {person.stories.length > 0 && (
             <Block title={t("stories")}>
               <ul className="grid gap-3">

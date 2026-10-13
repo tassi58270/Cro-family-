@@ -41,5 +41,12 @@ export type StoryDetail = StoryCard & {
   places: { slug: string; name: string }[];
   events: { slug: string; title: string; year: number | null }[];
   neighbours: StoryCard[];
+  photos: {
+    id: string;
+    url: string;
+    caption: string | null;
+    width: number | null;
+    height: number | null;
+  }[];
   status: string;
 };

@@ -115,6 +115,11 @@ export const routing = defineRouting({
       en: "/account/stories/[histoire]",
       de: "/konto/geschichten/[histoire]",
     },
+    "/compte/photos": {
+      fr: "/compte/photos",
+      en: "/account/photos",
+      de: "/konto/fotos",
+    },
     "/admin": "/admin",
     // The dashboard keeps the same addresses in every language.
     "/admin/accueil": "/admin/accueil",
@@ -124,6 +129,8 @@ export const routing = defineRouting({
     "/admin/armoiries": "/admin/armoiries",
     "/admin/histoires": "/admin/histoires",
     "/admin/histoires/[histoire]": "/admin/histoires/[histoire]",
+    "/admin/photos": "/admin/photos",
+    "/admin/photos/[photo]": "/admin/photos/[photo]",
     "/admin/demonstration": "/admin/demonstration",
     // Design system page (step 2), for the team; never indexed.
     "/style": "/style",

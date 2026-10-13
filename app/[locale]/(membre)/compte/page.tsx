@@ -38,6 +38,9 @@ export default async function AccountPage({
         <ButtonLink href="/compte/histoires" variant="secondary">
           {t("myStories")}
         </ButtonLink>
+        <ButtonLink href="/compte/photos" variant="secondary">
+          {t("myPhotos")}
+        </ButtonLink>
         {session.role === "admin" && (
           <ButtonLink href="/admin">{t("dashboard")}</ButtonLink>
         )}

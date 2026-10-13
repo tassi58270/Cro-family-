@@ -88,6 +88,23 @@ describe("the demonstration family", () => {
     ).toBe(true);
   });
 
+  it("shows its photos to visitors, except the one with living people", async () => {
+    const visible = await as(db, visitor, (q) =>
+      q<{ storage_path: string }>(
+        "select storage_path from public.media order by 1",
+      ),
+    );
+    expect(visible.map((m) => m.storage_path)).not.toContain(
+      "photos/exemple/reunion.jpg",
+    );
+    expect(visible).toHaveLength(5);
+    const faces = await as(db, visitor, (q) =>
+      q<{ box: number[] | null }>("select box from public.media_people"),
+    );
+    expect(faces.length).toBeGreaterThanOrEqual(5);
+    expect(faces.every((f) => f.box === null || f.box.length === 4)).toBe(true);
+  });
+
   it("keeps the story that names living people for members", async () => {
     const titles = await as(db, visitor, (q) =>
       q<{ slug: string }>(

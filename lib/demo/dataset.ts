@@ -557,6 +557,85 @@ export const demoArms: {
   },
 ];
 
+/** Drawn pictures (lib/demo/photos.ts) and what the family would say of them. */
+export const demoPhotos: {
+  picture: string;
+  kind: "photo" | "portrait";
+  caption: string;
+  date: D;
+  place?: string;
+  event?: string;
+  /** In the order of the figures drawn, left to right. */
+  people: string[];
+  portraitOf?: string;
+  unidentified?: boolean;
+  album?: boolean;
+  /** Demo stories (by key) that show this picture, the first as cover. */
+  stories?: string[];
+}[] = [
+  {
+    picture: "portrait-albert",
+    kind: "portrait",
+    caption: "Albert Exemple (portrait d’exemple)",
+    date: about(1900),
+    people: ["albert"],
+    portraitOf: "albert",
+  },
+  {
+    picture: "mariage",
+    kind: "photo",
+    caption: "Le mariage de Charles et Denise (photo d’exemple)",
+    date: year(1908),
+    place: "essai",
+    people: ["charles", "denise"],
+    album: true,
+    stories: ["mariage"],
+  },
+  {
+    picture: "groupe",
+    kind: "photo",
+    caption:
+      "François, Gabrielle et une personne à reconnaître (photo d’exemple)",
+    date: about(1937),
+    people: ["francois", "gabrielle"],
+    unidentified: true,
+    album: true,
+  },
+  {
+    picture: "reunion",
+    kind: "photo",
+    caption: "La réunion de famille (photo d’exemple)",
+    date: day("2010-07-14"),
+    place: "chateau",
+    event: "reunion",
+    people: ["karine", "laurent"],
+    album: true,
+  },
+  {
+    picture: "verger",
+    kind: "photo",
+    caption: "Le verger d’Exempleville (photo d’exemple)",
+    date: about(1920),
+    place: "exempleville",
+    people: [],
+    stories: ["verger"],
+  },
+  {
+    picture: "chateau",
+    kind: "photo",
+    caption: "Le château d’Exemple (photo d’exemple)",
+    date: about(1950),
+    place: "chateau",
+    people: [],
+    album: true,
+  },
+];
+
+export const demoAlbum = {
+  title: "Album d’exemple",
+  description: "Album fictif, pour essayer le diaporama.",
+};
+
 /** Where the demonstration tree opens. */
 export const demoEntryPoints = [
   { person: "albert", label: "Depuis Albert (exemple)", isDefault: true },

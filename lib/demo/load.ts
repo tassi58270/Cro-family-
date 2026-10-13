@@ -1,7 +1,12 @@
 import "server-only";
 import type { Query } from "@/lib/db";
+import { fileStore } from "@/lib/storage";
+import { variantKey, WIDTHS } from "@/lib/storage/images";
+import { demoPictures, faceBox, renderDemoPicture } from "./photos";
 import {
+  demoAlbum,
   demoAnecdotes,
+  demoPhotos,
   demoArms,
   demoEntryPoints,
   demoLineages,
@@ -317,6 +322,8 @@ export async function loadDemo(q: Query, actor: string): Promise<void> {
     }
   }
 
+  await loadDemoPhotos(q, ids, actor);
+
   for (const [i, e] of demoEntryPoints.entries()) {
     // The family's own default entry point stays the default.
     const [{ taken }] = await q<{ taken: boolean }>(
@@ -343,6 +350,84 @@ export async function loadDemo(q: Query, actor: string): Promise<void> {
       `insert into public.lineages_i18n (lineage_id, locale, title, intro) values ($1, 'fr', $2, $3)`,
       [id, l.title, l.intro],
     );
+  }
+}
+
+/** Drawn pictures, an album, the people on them and the outline of their faces. */
+async function loadDemoPhotos(
+  q: Query,
+  ids: Map<string, string>,
+  actor: string,
+) {
+  const [album] = await q<{ id: string }>(
+    `insert into public.albums (slug, status, is_demo, created_by, sort_order)
+     values ('exemple-album', 'published', true, $1, 100) returning id`,
+    [actor],
+  );
+  await q(
+    `insert into public.albums_i18n (album_id, locale, title, description) values ($1, 'fr', $2, $3)`,
+    [album.id, demoAlbum.title, demoAlbum.description],
+  );
+  const store = fileStore();
+  for (const photo of demoPhotos) {
+    const picture = demoPictures.find((p) => p.key === photo.picture)!;
+    const data = await renderDemoPicture(picture);
+    const key = `photos/exemple/${picture.key}.jpg`;
+    await store.put(key, data, "image/jpeg");
+    const [media] = await q<{ id: string }>(
+      `insert into public.media
+         (storage_path, kind, mime_type, width, height, bytes, provenance, taken_date, taken_precision,
+          place_id, event_id, album_id, unidentified, uploaded_by, status, is_demo)
+       values ($1, $2, 'image/jpeg', 1200, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, 'published', true)
+       on conflict (storage_path) do update set status = 'published'
+       returning id`,
+      [
+        key,
+        photo.kind,
+        picture.height,
+        data.length,
+        "Image dessinée pour la démonstration",
+        photo.date.date,
+        photo.date.precision,
+        photo.place ? ids.get(`place:${photo.place}`) : null,
+        photo.event ? ids.get(`event:${photo.event}`) : null,
+        photo.album ? album.id : null,
+        Boolean(photo.unidentified),
+        actor,
+      ],
+    );
+    await q(
+      `insert into public.media_i18n (media_id, locale, caption) values ($1, 'fr', $2)`,
+      [media.id, photo.caption],
+    );
+    for (const [i, person] of photo.people.entries()) {
+      const figure = picture.figures[i];
+      await q(
+        `insert into public.media_people (media_id, person_id, box) values ($1, $2, $3)`,
+        [
+          media.id,
+          ids.get(`person:${person}`),
+          figure ? faceBox(figure, picture.height) : null,
+        ],
+      );
+    }
+    for (const story of photo.stories ?? []) {
+      await q(
+        `insert into public.story_media (story_id, media_id, position)
+         select id, $2, 0 from public.stories where slug = $1`,
+        [`exemple-${story}`, media.id],
+      );
+      await q(
+        `update public.stories set cover_id = $2 where slug = $1 and cover_id is null`,
+        [`exemple-${story}`, media.id],
+      );
+    }
+    if (photo.portraitOf) {
+      await q(`update public.people set portrait_id = $1 where id = $2`, [
+        media.id,
+        ids.get(`person:${photo.portraitOf}`),
+      ]);
+    }
   }
 }
 
@@ -397,6 +482,10 @@ async function loadDemoHome(q: Query, ids: Map<string, string>) {
 
 /** Removes every demonstration row; the family's own content is untouched. */
 export async function removeDemo(q: Query): Promise<void> {
+  const files = await q<{ storage_path: string }>(
+    "select storage_path from public.media where is_demo",
+  );
+  await q("update public.people set portrait_id = null where is_demo");
   await q("delete from public.tree_entry_points where is_demo");
   await q("delete from public.lineages where is_demo");
   await q("delete from public.arms where is_demo");
@@ -419,5 +508,10 @@ export async function removeDemo(q: Query): Promise<void> {
   await q("update public.branches set founder_id = null where is_demo");
   for (const table of ["people", "branches", "media", "albums", "places"]) {
     await q(`delete from public.${table} where is_demo`);
+  }
+  for (const { storage_path: key } of files) {
+    await fileStore().remove(key);
+    for (const width of WIDTHS)
+      await fileStore().remove(variantKey(key, width));
   }
 }

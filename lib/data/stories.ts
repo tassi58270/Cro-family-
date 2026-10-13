@@ -225,6 +225,20 @@ export const loadStory = cache(
          where se.story_id = $1 order by e.event_date nulls last`,
         [story.id, locale],
       );
+      const photos = await q<{
+        id: string;
+        path: string;
+        caption: string | null;
+        width: number | null;
+        height: number | null;
+      }>(
+        `select m.id, m.storage_path as path, m.width, m.height,
+                (select caption from public.media_i18n i where i.media_id = m.id
+                 order by (i.locale = $2) desc, (i.locale = 'fr') desc limit 1) as caption
+         from public.story_media sm join public.media m on m.id = sm.media_id
+         where sm.story_id = $1 and m.status = 'published' order by sm.position`,
+        [story.id, locale],
+      );
       const { cards: others } = await cards(
         q,
         locale,
@@ -254,6 +268,13 @@ export const loadStory = cache(
           year: e.event_date ? Number(e.event_date.slice(0, 4)) : null,
         })),
         neighbours,
+        photos: photos.map((m) => ({
+          id: m.id,
+          url: `/fichiers/${m.path}`,
+          caption: m.caption,
+          width: m.width,
+          height: m.height,
+        })),
         status: row.status,
       };
     });

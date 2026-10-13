@@ -165,6 +165,45 @@ export function StoryReader({
         </div>
       </div>
 
+      {story.photos.length > (story.cover ? 1 : 0) && (
+        <section
+          aria-labelledby="photos"
+          className="mx-auto grid w-full max-w-5xl gap-4"
+        >
+          <h2 id="photos" className="text-caption font-medium text-ink-muted">
+            {t("photos")}
+          </h2>
+          <ul className="grid grid-cols-2 gap-3 md:grid-cols-3">
+            {story.photos.slice(story.cover ? 1 : 0).map((photo) => (
+              <li key={photo.id}>
+                <Link
+                  href={{
+                    pathname: "/photos/[photo]",
+                    params: { photo: photo.id },
+                  }}
+                  className="group grid gap-2"
+                >
+                  <span className="block aspect-[4/3] overflow-hidden rounded-xs bg-paper-2">
+                    {/* eslint-disable-next-line @next/next/no-img-element -- sized by /fichiers. */}
+                    <img
+                      src={`${photo.url}?l=640`}
+                      alt={photo.caption ?? ""}
+                      loading="lazy"
+                      className="size-full object-cover transition-transform duration-(--duration-slow) ease-out group-hover:scale-[1.03]"
+                    />
+                  </span>
+                  {photo.caption && (
+                    <span className="text-caption text-ink-muted">
+                      {photo.caption}
+                    </span>
+                  )}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {(story.places.length > 0 || story.events.length > 0) && (
         <section
           aria-labelledby="lieux"

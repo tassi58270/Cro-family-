@@ -60,6 +60,7 @@ function sheetOf(data: TreeData, i: number): PersonDetail {
     unions: [],
     otherChildren: [],
     stories: [],
+    photos: [],
     places: [],
     events: [],
     sources: [],

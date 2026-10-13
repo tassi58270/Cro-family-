@@ -153,6 +153,19 @@ export async function saveStory(
           [id, person],
         );
       }
+      const photos = ids(form, "photos");
+      await q("delete from public.story_media where story_id = $1", [id]);
+      for (const [position, media] of photos.entries()) {
+        await q(
+          "insert into public.story_media (story_id, media_id, position) values ($1, $2, $3)",
+          [id, media, position],
+        );
+      }
+      // The first photo is the cover of the story.
+      await q("update public.stories set cover_id = $1 where id = $2", [
+        photos[0] ?? null,
+        id,
+      ]);
       await q("delete from public.story_places where story_id = $1", [id]);
       for (const place of ids(form, "places")) {
         await q(

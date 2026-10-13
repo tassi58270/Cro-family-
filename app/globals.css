@@ -44,6 +44,11 @@
   --branch-4: #9a5a66;
   --branch-5: #5f5f5b;
   --branch-extinct: #8a8a86;
+
+  /* Text laid over a photograph, the same in both themes. */
+  --on-photo: #ffffff;
+  --photo-scrim: rgb(0 0 0 / 0.62);
+  --cinema: #0b0b0b;
 }
 
 /* Dark theme: ink background, identical red (section 3). */
@@ -105,6 +110,9 @@
   --color-argent: var(--argent);
   --color-scrim: var(--scrim);
   --color-chrome: var(--chrome);
+  --color-on-photo: var(--on-photo);
+  --color-photo-scrim: var(--photo-scrim);
+  --color-cinema: var(--cinema);
 
   --font-display: var(--font-bodoni), "Bodoni 72", Didot, Georgia, serif;
   --font-sans:

@@ -18,6 +18,7 @@ import type { EditableStory } from "@/lib/data/story-editor";
 import { THEMES_LIST } from "@/lib/data/story-types";
 import { useFormAction } from "@/lib/hooks/use-form-action";
 import { useRouter } from "@/lib/i18n/navigation";
+import { PhotoPicker } from "./photo-picker";
 
 const initial: StoryFormState = { status: "idle" };
 
@@ -212,7 +213,11 @@ export function StoryEditor({
               defaultChecked={story?.featured ?? false}
             />
           )}
-          <p className="text-caption text-ink-muted">{t("photosLater")}</p>
+          <PhotoPicker
+            name="photos"
+            initialIds={story?.photos ?? []}
+            locale={locale}
+          />
 
           <div className="flex flex-wrap items-center gap-3 border-t border-hairline pt-6">
             {mode === "admin" ? (

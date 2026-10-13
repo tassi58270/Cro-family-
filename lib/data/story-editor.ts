@@ -21,6 +21,7 @@ export type EditableStory = {
   source: string;
   people: string[];
   places: string[];
+  photos: string[];
   authorName: string | null;
   updatedAt: string;
 };
@@ -79,6 +80,10 @@ export async function editableStory(
     "select person_id from public.story_people where story_id = $1",
     [id],
   );
+  const photos = await q<{ media_id: string }>(
+    "select media_id from public.story_media where story_id = $1 order by position",
+    [id],
+  );
   const places = await q<{ place_id: string }>(
     "select place_id from public.story_places where story_id = $1",
     [id],
@@ -99,6 +104,7 @@ export async function editableStory(
     source: s.source ?? "",
     people: people.map((p) => p.person_id),
     places: places.map((p) => p.place_id),
+    photos: photos.map((p) => p.media_id),
     authorName: s.author_name,
     updatedAt: s.updated_at,
   };
@@ -111,5 +117,30 @@ export async function placeChoices(q: Query, locale: Locale) {
                    order by (i.locale = $1) desc, (i.locale = 'fr') desc limit 1) as name
      from public.places p order by 2`,
     [locale],
+  );
+}
+
+/** Albums to file photos in. */
+export async function albumChoices(q: Query, locale: Locale) {
+  return q<{ id: string; title: string }>(
+    `select a.id, coalesce((select title from public.albums_i18n i where i.album_id = a.id
+                            order by (i.locale = $1) desc, (i.locale = 'fr') desc limit 1), a.slug) as title
+     from public.albums a order by a.sort_order, a.created_at`,
+    [locale],
+  );
+}
+
+/** Photos a member sent, with their state. */
+export async function myPhotos(q: Query, accountId: string) {
+  return q<{
+    id: string;
+    path: string;
+    status: string;
+    caption: string | null;
+  }>(
+    `select m.id, m.storage_path as path, m.status,
+            (select caption from public.media_i18n i where i.media_id = m.id limit 1) as caption
+     from public.media m where m.uploaded_by = $1 order by m.created_at desc`,
+    [accountId],
   );
 }

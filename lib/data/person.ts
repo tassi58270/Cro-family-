@@ -79,6 +79,14 @@ export type PersonDetail = {
   }[];
   otherChildren: Relative[];
   stories: { slug: string; title: string; excerpt: string | null }[];
+  /** Photos and portraits where the person is identified. */
+  photos: {
+    id: string;
+    url: string;
+    caption: string | null;
+    width: number | null;
+    height: number | null;
+  }[];
   places: { slug: string; name: string; role: string | null }[];
   events: {
     slug: string;
@@ -332,6 +340,23 @@ async function detail(
 
   const inUnion = new Set(unions.flatMap((u) => u.children.map((c) => c.id)));
 
+  const photos = await q<{
+    id: string;
+    path: string;
+    width: number | null;
+    height: number | null;
+    caption: string | null;
+  }>(
+    `select m.id, m.storage_path as path, m.width, m.height,
+            (select caption from public.media_i18n i where i.media_id = m.id
+             order by (i.locale = $2) desc, (i.locale = 'fr') desc limit 1) as caption
+     from public.media_people mp join public.media m on m.id = mp.media_id
+     where mp.person_id = $1 and m.status = 'published' and m.kind <> 'arms'
+     order by (m.id = (select portrait_id from public.people where id = $1)) desc,
+              m.taken_date nulls last`,
+    [p.id, locale],
+  );
+
   const stories = await q<{ id: string; slug: string }>(
     `select s.id, s.slug from public.story_people sp join public.stories s on s.id = sp.story_id
      where sp.person_id = $1 and s.status = 'published' order by s.era_start nulls last`,
@@ -468,6 +493,13 @@ async function detail(
         excerpt: text?.excerpt ?? null,
       };
     }),
+    photos: photos.map((m) => ({
+      id: m.id,
+      url: `/fichiers/${m.path}`,
+      caption: m.caption,
+      width: m.width,
+      height: m.height,
+    })),
     places,
     events: events.map((e) => ({
       slug: e.slug,
