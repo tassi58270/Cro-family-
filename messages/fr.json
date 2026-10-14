@@ -298,7 +298,47 @@
     "dashboard": "Ouvrir le tableau de bord",
     "signOut": "Se déconnecter",
     "myStories": "Mes histoires",
-    "myPhotos": "Mes photos"
+    "myPhotos": "Mes photos",
+    "intro": "Votre profil, vos propositions et ce que vous avez envoyé au site.",
+    "profile": "Mon profil",
+    "displayName": "Votre nom",
+    "displayNameHint": "Comme il apparaîtra aux administrateurs et sous vos histoires.",
+    "language": "Langue des e-mails",
+    "save": "Enregistrer",
+    "saved": "Enregistré.",
+    "email": "Adresse e-mail",
+    "me": "Vous dans l’arbre",
+    "meIs": "Vous êtes {name} dans l’arbre.",
+    "meNone": "Vous n’êtes pas encore relié à une personne de l’arbre.",
+    "claim": "C’est moi",
+    "claimHint": "Cherchez-vous dans l’arbre : un administrateur confirmera.",
+    "claimSent": "Demande envoyée : un administrateur va confirmer.",
+    "claimSearch": "Me chercher dans l’arbre",
+    "myBranch": "Ma branche",
+    "myAncestors": "Mes ancêtres directs",
+    "myPlace": "Ma place dans l’arbre",
+    "proposals": "Mes propositions",
+    "noProposals": "Vous n’avez encore rien proposé.",
+    "propose": "Proposer quelque chose",
+    "states": {
+      "sent": "Envoyée",
+      "reviewing": "En cours d’examen",
+      "accepted": "Acceptée",
+      "rejected": "Refusée"
+    },
+    "kinds": {
+      "correction": "Correction",
+      "person": "Nouvelle personne",
+      "place": "Lieu",
+      "event": "Événement",
+      "claim": "C’est moi",
+      "identification": "Qui est sur la photo",
+      "removal": "Demande de retrait",
+      "photo": "Photo",
+      "story": "Histoire"
+    },
+    "reply": "Réponse : {reply}",
+    "sentOn": "Envoyée le {date}"
   },
   "demo": {
     "bannerTitle": "Données de démonstration.",
@@ -319,7 +359,9 @@
       "arms": "Armoiries et branches",
       "stories": "Histoires",
       "photos": "Photos",
-      "places": "Lieux et événements"
+      "places": "Lieux et événements",
+      "proposals": "Propositions",
+      "members": "Membres"
     },
     "overview": {
       "title": "Bonjour",
@@ -822,6 +864,87 @@
         "order": "La fin vient après le début.",
         "coordinates": "Deux nombres : latitude puis longitude.",
         "date": "Date non comprise. Essayez « 1415 » ou « vers 1415 »."
+      }
+    },
+    "proposals": {
+      "title": "Propositions",
+      "intro": "Ce que les membres proposent. Rien ne change sur le site avant votre décision ; l’auteur est prévenu par e-mail.",
+      "photosNote": "Les noms proposés sur les photos et les demandes de retrait se traitent dans Photos.",
+      "open": "À traiter",
+      "closed": "Déjà traitées",
+      "none": "Aucune proposition à traiter.",
+      "noneClosed": "Aucune proposition traitée pour l’instant.",
+      "from": "de {name}",
+      "back": "Toutes les propositions",
+      "about": "Sur",
+      "content": "Contenu",
+      "source": "Source",
+      "attachments": "Pièces jointes",
+      "fields": {
+        "text": "Texte",
+        "givenNames": "Prénoms",
+        "surname": "Nom",
+        "birth": "Naissance",
+        "birthPlace": "Lieu de naissance",
+        "death": "Décès",
+        "deathPlace": "Lieu de décès",
+        "relation": "Lien",
+        "name": "Nom",
+        "location": "Situation",
+        "title": "Titre",
+        "date": "Date",
+        "place": "Lieu"
+      },
+      "claimNote": "Accepter relie ce compte à cette personne de l’arbre.",
+      "applyNote": "Accepter ne modifie pas l’arbre de lui-même : faites la modification dans l’écran concerné, puis acceptez pour prévenir l’auteur.",
+      "reply": "Un mot pour l’auteur",
+      "replyHint": "Il le recevra par e-mail avec votre décision.",
+      "review": "Je m’en occupe",
+      "accept": "Accepter",
+      "reject": "Refuser",
+      "decided": "{state} le {date}",
+      "openTree": "Ouvrir la saisie de l’arbre"
+    },
+    "members": {
+      "title": "Membres",
+      "intro": "Qui a accès au site. Un membre lit tout, vivants compris, et propose ; un administrateur valide et publie.",
+      "requests": "Demandes d’accès",
+      "requestsIntro": "Les personnes qui ont demandé un accès depuis la page Contribuer.",
+      "noRequests": "Aucune demande en attente.",
+      "approve": "Accepter",
+      "reject": "Refuser",
+      "invite": "Inviter quelqu’un",
+      "inviteIntro": "Un e-mail part avec un lien de connexion valable une semaine.",
+      "inviteName": "Nom",
+      "inviteEmail": "Adresse e-mail",
+      "inviteRole": "Rôle",
+      "inviteLanguage": "Langue de l’e-mail",
+      "inviteMessage": "Un mot personnel",
+      "inviteSubmit": "Envoyer l’invitation",
+      "invited": "Invitation envoyée à {email}.",
+      "devLink": "Mode développement : voici le lien qui aurait été envoyé.",
+      "pending": "Invitations en attente",
+      "noPending": "Aucune invitation en attente.",
+      "cancel": "Annuler",
+      "invitedOn": "invité le {date}",
+      "members": "Comptes",
+      "roles": {
+        "member": "Membre",
+        "admin": "Administrateur"
+      },
+      "lastLogin": "dernière connexion le {date}",
+      "never": "jamais connecté",
+      "disabled": "Désactivé",
+      "disable": "Désactiver",
+      "enable": "Réactiver",
+      "makeAdmin": "Nommer administrateur",
+      "makeMember": "Repasser membre",
+      "you": "vous",
+      "person": "Dans l’arbre : {name}",
+      "errors": {
+        "email": "Cette adresse ne semble pas complète.",
+        "required": "À remplir.",
+        "error": "L’opération n’a pas pu aboutir. Réessayez dans un instant."
       }
     }
   },
@@ -1398,5 +1521,168 @@
       "privateTitle": "Lieu"
     },
     "placeLinkNamed": "Fiche du lieu : {name}"
+  },
+  "emails": {
+    "footer": "Vous recevez ce message parce que vous participez au site de la maison de Croÿ.",
+    "footerAdmin": "Vous recevez ce message parce que vous êtes administrateur du site de la maison de Croÿ.",
+    "hello": "Bonjour {name},",
+    "helloNoName": "Bonjour,",
+    "kinds": {
+      "correction": "une correction",
+      "person": "une nouvelle personne",
+      "place": "un lieu",
+      "event": "un événement",
+      "claim": "« C’est moi » dans l’arbre"
+    },
+    "suggestion": {
+      "subject": "Nouvelle proposition de {name}",
+      "line1": "{name} propose {kind}.",
+      "summary": "« {summary} »",
+      "action": "Lire la proposition"
+    },
+    "received": {
+      "subject": "Votre proposition est bien arrivée",
+      "line1": "Merci ! Votre proposition est arrivée chez les administrateurs du site.",
+      "line2": "Rien ne change sur le site avant leur relecture. Vous recevrez un message dès qu’elle aura été acceptée ou refusée.",
+      "action": "Suivre mes propositions"
+    },
+    "decision": {
+      "acceptedSubject": "Votre proposition a été acceptée",
+      "rejectedSubject": "Réponse à votre proposition",
+      "accepted": "Votre proposition « {summary} » a été acceptée. Merci de faire vivre l’histoire de la famille.",
+      "rejected": "Votre proposition « {summary} » n’a pas été retenue cette fois.",
+      "reply": "Le mot de l’administrateur : {reply}",
+      "action": "Voir mes propositions"
+    },
+    "accessRequest": {
+      "subject": "Demande d’accès de {name}",
+      "line1": "{name} ({email}) demande un accès famille.",
+      "relation": "Son lien avec la famille : {relation}",
+      "action": "Répondre à la demande"
+    },
+    "invitation": {
+      "subject": "Invitation au site de la maison de Croÿ",
+      "line1": "Vous êtes invité à rejoindre le site de la famille : l’arbre, les histoires, les photos, et la possibilité d’y contribuer.",
+      "line2": "Ce lien vous connecte directement. Il est valable {days} jours ; ensuite, demandez simplement un nouveau lien depuis la page de connexion.",
+      "action": "Rejoindre le site"
+    },
+    "approved": {
+      "subject": "Votre accès au site de la maison de Croÿ",
+      "line1": "Votre demande d’accès a été acceptée. Bienvenue !",
+      "line2": "Ce lien vous connecte directement. Il est valable {days} jours ; ensuite, demandez simplement un nouveau lien depuis la page de connexion.",
+      "action": "Me connecter"
+    }
+  },
+  "contribute": {
+    "eyebrow": "Contribuer",
+    "title": "Le site se construit avec la famille",
+    "intro": "Une date à corriger, un ancêtre oublié, une photo dans un tiroir, une histoire qu’on se raconte aux repas : tout ce que vous savez peut enrichir l’histoire commune.",
+    "how": {
+      "title": "Comment ça se passe",
+      "one": "Vous proposez",
+      "oneBody": "Une correction, une personne, un lieu, un événement, une photo ou une histoire, avec sa source si vous l’avez.",
+      "two": "Un administrateur relit",
+      "twoBody": "Rien ne change sur le site avant sa relecture. Il peut vous répondre d’un mot.",
+      "three": "C’est publié",
+      "threeBody": "Vous êtes prévenu par e-mail, et votre contribution prend sa place dans l’arbre et les pages."
+    },
+    "signedOut": {
+      "title": "Vous êtes de la famille ?",
+      "body": "Pour proposer quelque chose, il faut un accès famille. Demandez-le ci-dessous : un administrateur vous répondra.",
+      "already": "Vous avez déjà un accès ?",
+      "signIn": "Se connecter"
+    },
+    "access": {
+      "title": "Demander un accès famille",
+      "name": "Votre nom",
+      "email": "Votre adresse e-mail",
+      "emailHint": "Le lien de connexion vous sera envoyé à cette adresse.",
+      "relation": "Votre lien avec la famille",
+      "relationHint": "Par exemple : petite-fille de Marie, de la branche aînée ; ou cousin par alliance.",
+      "message": "Un mot pour les administrateurs",
+      "submit": "Envoyer la demande",
+      "sentTitle": "Demande envoyée",
+      "sentBody": "Merci. Un administrateur va lire votre demande ; vous recevrez un e-mail dès qu’elle sera acceptée.",
+      "error": "La demande n’a pas pu être envoyée. Réessayez dans un instant.",
+      "required": "À remplir."
+    },
+    "form": {
+      "title": "Proposer quelque chose",
+      "steps": {
+        "label": "Étapes",
+        "what": "Quoi",
+        "about": "Sur qui ou sur quoi",
+        "content": "Le contenu"
+      },
+      "stepOf": "Étape {current} sur {total}",
+      "what": "Que voulez-vous proposer ?",
+      "kinds": {
+        "correction": "Une correction",
+        "correctionHint": "Une date, un nom, un lien de parenté à rectifier.",
+        "person": "Une nouvelle personne",
+        "personHint": "Quelqu’un qui manque dans l’arbre.",
+        "photo": "Des photos",
+        "photoHint": "Des portraits, des lieux, des moments de famille.",
+        "story": "Une histoire",
+        "storyHint": "Un souvenir, une anecdote, un récit.",
+        "place": "Un lieu",
+        "placeHint": "Un château, une ville, une maison de famille.",
+        "event": "Un événement",
+        "eventHint": "Un moment qui a compté, même daté approximativement."
+      },
+      "photoGo": "Les photos s’envoient depuis votre espace, plusieurs à la fois.",
+      "photoAction": "Envoyer des photos",
+      "storyGo": "Les histoires s’écrivent dans votre espace : vous pouvez garder un brouillon avant de l’envoyer.",
+      "storyAction": "Écrire une histoire",
+      "aboutPerson": "La personne concernée",
+      "aboutPersonHint": "Cherchez-la dans l’arbre par son nom. Laissez vide si elle n’y est pas.",
+      "relativeOf": "Parente de",
+      "relativeHint": "Une personne de l’arbre à laquelle la rattacher, si vous la connaissez.",
+      "relation": "Lien",
+      "relations": {
+        "none": "Je ne sais pas",
+        "parent": "Son père ou sa mère",
+        "child": "Son enfant",
+        "spouse": "Son époux ou épouse",
+        "sibling": "Son frère ou sa sœur"
+      },
+      "fields": {
+        "text": "Ce qu’il faut savoir",
+        "textCorrection": "Ce qui est à corriger",
+        "textCorrectionHint": "Dites ce qui est inexact et ce qui serait juste.",
+        "textHint": "Tout ce qui peut aider l’administrateur.",
+        "givenNames": "Prénoms",
+        "surname": "Nom",
+        "birth": "Naissance",
+        "birthPlace": "Lieu de naissance",
+        "death": "Décès",
+        "deathPlace": "Lieu de décès",
+        "dateHint": "« 1890 », « vers 1890 », « 12 mars 1890 ».",
+        "name": "Nom du lieu",
+        "location": "Où se trouve-t-il ?",
+        "locationHint": "Ville et pays, ou une adresse.",
+        "title": "L’événement",
+        "date": "Date",
+        "place": "Lieu"
+      },
+      "source": "Source",
+      "sourceHint": "D’où vient cette information : un acte, un livre, un souvenir de famille…",
+      "attachments": "Pièces jointes",
+      "attachmentsHint": "Photos ou PDF d’un document (6 au plus). Ils ne sont visibles que des administrateurs.",
+      "addFile": "Joindre un fichier",
+      "uploading": "Envoi…",
+      "uploadError": "Ce fichier n’a pas pu être joint (une image ou un PDF de 8 Mo au plus).",
+      "removeFile": "Retirer {name}",
+      "next": "Continuer",
+      "back": "Retour",
+      "submit": "Envoyer la proposition",
+      "required": "À remplir pour continuer.",
+      "requiredPerson": "Indiquez au moins un prénom ou un nom.",
+      "error": "La proposition n’a pas pu être envoyée. Réessayez dans un instant.",
+      "sentTitle": "Merci, c’est envoyé",
+      "sentBody": "Un administrateur va relire votre proposition. Vous recevrez un e-mail dès qu’elle aura été acceptée ou refusée, et vous pouvez la suivre dans votre espace.",
+      "another": "Proposer autre chose",
+      "follow": "Suivre mes propositions"
+    }
   }
 }

@@ -53,9 +53,14 @@ test.describe("with places entered in the dashboard", () => {
     page,
   }) => {
     const marker = page.locator('.map-marker[aria-label="Azincourt"]');
+    // The page is rebuilt in the background after each change: wait for the
+    // version that has both the place and its event.
     await expect(async () => {
       await page.goto("/fr/lieux-et-evenements");
       await expect(marker).toBeVisible({ timeout: 3_000 });
+      await expect(
+        page.locator("[data-event]", { hasText: "Bataille d’essai" }),
+      ).toBeVisible({ timeout: 1_000 });
     }).toPass({ timeout: 30_000 });
 
     // The place lights up its events on the timeline.

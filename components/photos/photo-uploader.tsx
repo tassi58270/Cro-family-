@@ -8,6 +8,7 @@ import { Checkbox, SelectField, TextField } from "@/components/ui/field";
 import { cn } from "@/lib/design/cn";
 import { parseFuzzyDate, formatFuzzyDate } from "@/lib/genealogie/dates";
 import { useRouter } from "@/lib/i18n/navigation";
+import { lighter } from "@/lib/photos/lighter";
 
 /**
  * Sending several photos at once, from a phone or a computer (6.5): what
@@ -22,31 +23,6 @@ type Item = {
   caption: string;
   state: "ready" | "sending" | "sent" | "error";
 };
-
-const MAX_SIDE = 2560;
-
-async function lighter(file: File): Promise<Blob> {
-  try {
-    const bitmap = await createImageBitmap(file, {
-      imageOrientation: "from-image",
-    });
-    const scale = Math.min(1, MAX_SIDE / Math.max(bitmap.width, bitmap.height));
-    const canvas = document.createElement("canvas");
-    canvas.width = Math.round(bitmap.width * scale);
-    canvas.height = Math.round(bitmap.height * scale);
-    canvas
-      .getContext("2d")!
-      .drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-    bitmap.close();
-    const blob = await new Promise<Blob | null>((resolve) =>
-      canvas.toBlob(resolve, "image/jpeg", 0.9),
-    );
-    return blob ?? file;
-  } catch {
-    // A format the browser cannot read: the server will try.
-    return file;
-  }
-}
 
 export function PhotoUploader({
   locale,

@@ -298,7 +298,47 @@
     "dashboard": "Open the dashboard",
     "signOut": "Sign out",
     "myStories": "My stories",
-    "myPhotos": "My photos"
+    "myPhotos": "My photos",
+    "intro": "Your profile, your proposals and what you have sent to the site.",
+    "profile": "My profile",
+    "displayName": "Your name",
+    "displayNameHint": "As the administrators will see it, and under your stories.",
+    "language": "Language of emails",
+    "save": "Save",
+    "saved": "Saved.",
+    "email": "Email address",
+    "me": "You in the tree",
+    "meIs": "You are {name} in the tree.",
+    "meNone": "You are not linked to a person of the tree yet.",
+    "claim": "This is me",
+    "claimHint": "Find yourself in the tree: an administrator will confirm.",
+    "claimSent": "Request sent: an administrator will confirm.",
+    "claimSearch": "Find me in the tree",
+    "myBranch": "My branch",
+    "myAncestors": "My direct ancestors",
+    "myPlace": "My place in the tree",
+    "proposals": "My proposals",
+    "noProposals": "You have not proposed anything yet.",
+    "propose": "Propose something",
+    "states": {
+      "sent": "Sent",
+      "reviewing": "Being reviewed",
+      "accepted": "Accepted",
+      "rejected": "Declined"
+    },
+    "kinds": {
+      "correction": "Correction",
+      "person": "New person",
+      "place": "Place",
+      "event": "Event",
+      "claim": "This is me",
+      "identification": "Who is in the photo",
+      "removal": "Removal request",
+      "photo": "Photo",
+      "story": "Story"
+    },
+    "reply": "Answer: {reply}",
+    "sentOn": "Sent on {date}"
   },
   "demo": {
     "bannerTitle": "Demonstration data.",
@@ -319,7 +359,9 @@
       "arms": "Arms and branches",
       "stories": "Stories",
       "photos": "Photos",
-      "places": "Places and events"
+      "places": "Places and events",
+      "proposals": "Proposals",
+      "members": "Members"
     },
     "overview": {
       "title": "Hello",
@@ -822,6 +864,87 @@
         "order": "The end comes after the start.",
         "coordinates": "Two numbers: latitude then longitude.",
         "date": "Date not understood. Try “1415” or “about 1415”."
+      }
+    },
+    "proposals": {
+      "title": "Proposals",
+      "intro": "What members propose. Nothing changes on the site before your decision; the author is told by email.",
+      "photosNote": "Names proposed on photos and removal requests are handled in Photos.",
+      "open": "To handle",
+      "closed": "Already handled",
+      "none": "No proposal to handle.",
+      "noneClosed": "No proposal handled yet.",
+      "from": "from {name}",
+      "back": "All proposals",
+      "about": "About",
+      "content": "Content",
+      "source": "Source",
+      "attachments": "Attachments",
+      "fields": {
+        "text": "Text",
+        "givenNames": "Given names",
+        "surname": "Surname",
+        "birth": "Birth",
+        "birthPlace": "Place of birth",
+        "death": "Death",
+        "deathPlace": "Place of death",
+        "relation": "Link",
+        "name": "Name",
+        "location": "Location",
+        "title": "Title",
+        "date": "Date",
+        "place": "Place"
+      },
+      "claimNote": "Accepting links this account to this person of the tree.",
+      "applyNote": "Accepting does not change the tree by itself: make the change in the right screen, then accept to tell the author.",
+      "reply": "A word for the author",
+      "replyHint": "They will receive it by email with your decision.",
+      "review": "I’ll handle it",
+      "accept": "Accept",
+      "reject": "Decline",
+      "decided": "{state} on {date}",
+      "openTree": "Open tree entry"
+    },
+    "members": {
+      "title": "Members",
+      "intro": "Who has access to the site. A member reads everything, living relatives included, and proposes; an administrator approves and publishes.",
+      "requests": "Access requests",
+      "requestsIntro": "People who asked for access from the Contribute page.",
+      "noRequests": "No pending request.",
+      "approve": "Accept",
+      "reject": "Decline",
+      "invite": "Invite someone",
+      "inviteIntro": "An email is sent with a sign-in link valid for a week.",
+      "inviteName": "Name",
+      "inviteEmail": "Email address",
+      "inviteRole": "Role",
+      "inviteLanguage": "Language of the email",
+      "inviteMessage": "A personal word",
+      "inviteSubmit": "Send the invitation",
+      "invited": "Invitation sent to {email}.",
+      "devLink": "Development mode: here is the link that would have been sent.",
+      "pending": "Pending invitations",
+      "noPending": "No pending invitation.",
+      "cancel": "Cancel",
+      "invitedOn": "invited on {date}",
+      "members": "Accounts",
+      "roles": {
+        "member": "Member",
+        "admin": "Administrator"
+      },
+      "lastLogin": "last signed in on {date}",
+      "never": "never signed in",
+      "disabled": "Disabled",
+      "disable": "Disable",
+      "enable": "Enable again",
+      "makeAdmin": "Make administrator",
+      "makeMember": "Make member again",
+      "you": "you",
+      "person": "In the tree: {name}",
+      "errors": {
+        "email": "This address does not look complete.",
+        "required": "Required.",
+        "error": "This could not be done. Please try again in a moment."
       }
     }
   },
@@ -1398,5 +1521,168 @@
       "privateTitle": "Place"
     },
     "placeLinkNamed": "Page of {name}"
+  },
+  "emails": {
+    "footer": "You receive this message because you take part in the website of the House of Croÿ.",
+    "footerAdmin": "You receive this message because you are an administrator of the website of the House of Croÿ.",
+    "hello": "Hello {name},",
+    "helloNoName": "Hello,",
+    "kinds": {
+      "correction": "a correction",
+      "person": "a new person",
+      "place": "a place",
+      "event": "an event",
+      "claim": "“This is me” in the tree"
+    },
+    "suggestion": {
+      "subject": "New proposal from {name}",
+      "line1": "{name} proposes {kind}.",
+      "summary": "“{summary}”",
+      "action": "Read the proposal"
+    },
+    "received": {
+      "subject": "Your proposal has arrived",
+      "line1": "Thank you! Your proposal has reached the administrators of the site.",
+      "line2": "Nothing changes on the site before they have read it. You will receive a message as soon as it is accepted or declined.",
+      "action": "Follow my proposals"
+    },
+    "decision": {
+      "acceptedSubject": "Your proposal has been accepted",
+      "rejectedSubject": "About your proposal",
+      "accepted": "Your proposal “{summary}” has been accepted. Thank you for keeping the family’s history alive.",
+      "rejected": "Your proposal “{summary}” was not kept this time.",
+      "reply": "A word from the administrator: {reply}",
+      "action": "See my proposals"
+    },
+    "accessRequest": {
+      "subject": "Access request from {name}",
+      "line1": "{name} ({email}) asks for family access.",
+      "relation": "Their link with the family: {relation}",
+      "action": "Answer the request"
+    },
+    "invitation": {
+      "subject": "Invitation to the website of the House of Croÿ",
+      "line1": "You are invited to join the family’s website: the tree, the stories, the photos, and the chance to contribute.",
+      "line2": "This link signs you in directly. It is valid for {days} days; after that, simply ask for a new link from the sign-in page.",
+      "action": "Join the site"
+    },
+    "approved": {
+      "subject": "Your access to the website of the House of Croÿ",
+      "line1": "Your access request has been accepted. Welcome!",
+      "line2": "This link signs you in directly. It is valid for {days} days; after that, simply ask for a new link from the sign-in page.",
+      "action": "Sign in"
+    }
+  },
+  "contribute": {
+    "eyebrow": "Contribute",
+    "title": "The site is built with the family",
+    "intro": "A date to correct, a forgotten ancestor, a photo in a drawer, a story told over dinner: everything you know can enrich the shared history.",
+    "how": {
+      "title": "How it works",
+      "one": "You propose",
+      "oneBody": "A correction, a person, a place, an event, a photo or a story, with its source if you have it.",
+      "two": "An administrator reads it",
+      "twoBody": "Nothing changes on the site before it has been read. They may answer you with a word.",
+      "three": "It is published",
+      "threeBody": "You are told by email, and your contribution takes its place in the tree and the pages."
+    },
+    "signedOut": {
+      "title": "Are you family?",
+      "body": "To propose something, you need family access. Ask for it below: an administrator will answer you.",
+      "already": "Already have access?",
+      "signIn": "Sign in"
+    },
+    "access": {
+      "title": "Ask for family access",
+      "name": "Your name",
+      "email": "Your email address",
+      "emailHint": "The sign-in link will be sent to this address.",
+      "relation": "Your link with the family",
+      "relationHint": "For example: granddaughter of Marie, of the elder branch; or cousin by marriage.",
+      "message": "A word for the administrators",
+      "submit": "Send the request",
+      "sentTitle": "Request sent",
+      "sentBody": "Thank you. An administrator will read your request; you will receive an email as soon as it is accepted.",
+      "error": "The request could not be sent. Please try again in a moment.",
+      "required": "Required."
+    },
+    "form": {
+      "title": "Propose something",
+      "steps": {
+        "label": "Steps",
+        "what": "What",
+        "about": "About whom or what",
+        "content": "The content"
+      },
+      "stepOf": "Step {current} of {total}",
+      "what": "What would you like to propose?",
+      "kinds": {
+        "correction": "A correction",
+        "correctionHint": "A date, a name, a family link to put right.",
+        "person": "A new person",
+        "personHint": "Someone missing from the tree.",
+        "photo": "Photos",
+        "photoHint": "Portraits, places, family moments.",
+        "story": "A story",
+        "storyHint": "A memory, an anecdote, a tale.",
+        "place": "A place",
+        "placeHint": "A castle, a town, a family house.",
+        "event": "An event",
+        "eventHint": "A moment that mattered, even roughly dated."
+      },
+      "photoGo": "Photos are sent from your space, several at once.",
+      "photoAction": "Send photos",
+      "storyGo": "Stories are written in your space: you can keep a draft before sending it.",
+      "storyAction": "Write a story",
+      "aboutPerson": "The person concerned",
+      "aboutPersonHint": "Search the tree by name. Leave empty if they are not in it.",
+      "relativeOf": "Relative of",
+      "relativeHint": "A person of the tree to attach them to, if you know one.",
+      "relation": "Link",
+      "relations": {
+        "none": "I don’t know",
+        "parent": "Their father or mother",
+        "child": "Their child",
+        "spouse": "Their husband or wife",
+        "sibling": "Their brother or sister"
+      },
+      "fields": {
+        "text": "What should be known",
+        "textCorrection": "What needs correcting",
+        "textCorrectionHint": "Say what is wrong and what would be right.",
+        "textHint": "Anything that can help the administrator.",
+        "givenNames": "Given names",
+        "surname": "Surname",
+        "birth": "Birth",
+        "birthPlace": "Place of birth",
+        "death": "Death",
+        "deathPlace": "Place of death",
+        "dateHint": "“1890”, “about 1890”, “12 March 1890”.",
+        "name": "Name of the place",
+        "location": "Where is it?",
+        "locationHint": "Town and country, or an address.",
+        "title": "The event",
+        "date": "Date",
+        "place": "Place"
+      },
+      "source": "Source",
+      "sourceHint": "Where this comes from: a record, a book, a family memory…",
+      "attachments": "Attachments",
+      "attachmentsHint": "Photos or PDFs of a document (6 at most). Only the administrators can see them.",
+      "addFile": "Attach a file",
+      "uploading": "Sending…",
+      "uploadError": "This file could not be attached (an image or a PDF of 8 MB at most).",
+      "removeFile": "Remove {name}",
+      "next": "Continue",
+      "back": "Back",
+      "submit": "Send the proposal",
+      "required": "Required to continue.",
+      "requiredPerson": "Give at least a given name or a surname.",
+      "error": "The proposal could not be sent. Please try again in a moment.",
+      "sentTitle": "Thank you, it is sent",
+      "sentBody": "An administrator will read your proposal. You will receive an email as soon as it is accepted or declined, and you can follow it in your space.",
+      "another": "Propose something else",
+      "follow": "Follow my proposals"
+    }
   }
 }

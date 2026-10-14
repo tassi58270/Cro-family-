@@ -298,7 +298,47 @@
     "dashboard": "Verwaltung öffnen",
     "signOut": "Abmelden",
     "myStories": "Meine Geschichten",
-    "myPhotos": "Meine Fotos"
+    "myPhotos": "Meine Fotos",
+    "intro": "Ihr Profil, Ihre Vorschläge und was Sie an die Website gesendet haben.",
+    "profile": "Mein Profil",
+    "displayName": "Ihr Name",
+    "displayNameHint": "So sehen ihn die Verwalter, und unter Ihren Geschichten.",
+    "language": "Sprache der E-Mails",
+    "save": "Speichern",
+    "saved": "Gespeichert.",
+    "email": "E-Mail-Adresse",
+    "me": "Sie im Stammbaum",
+    "meIs": "Sie sind {name} im Stammbaum.",
+    "meNone": "Sie sind noch mit keiner Person des Stammbaums verbunden.",
+    "claim": "Das bin ich",
+    "claimHint": "Suchen Sie sich im Stammbaum: Ein Verwalter bestätigt es.",
+    "claimSent": "Anfrage gesendet: Ein Verwalter wird bestätigen.",
+    "claimSearch": "Mich im Stammbaum suchen",
+    "myBranch": "Mein Zweig",
+    "myAncestors": "Meine direkten Vorfahren",
+    "myPlace": "Mein Platz im Stammbaum",
+    "proposals": "Meine Vorschläge",
+    "noProposals": "Sie haben noch nichts vorgeschlagen.",
+    "propose": "Etwas vorschlagen",
+    "states": {
+      "sent": "Gesendet",
+      "reviewing": "In Prüfung",
+      "accepted": "Angenommen",
+      "rejected": "Abgelehnt"
+    },
+    "kinds": {
+      "correction": "Korrektur",
+      "person": "Neue Person",
+      "place": "Ort",
+      "event": "Ereignis",
+      "claim": "Das bin ich",
+      "identification": "Wer ist auf dem Foto",
+      "removal": "Bitte um Entfernung",
+      "photo": "Foto",
+      "story": "Geschichte"
+    },
+    "reply": "Antwort: {reply}",
+    "sentOn": "Gesendet am {date}"
   },
   "demo": {
     "bannerTitle": "Beispieldaten.",
@@ -319,7 +359,9 @@
       "arms": "Wappen und Linien",
       "stories": "Geschichten",
       "photos": "Fotos",
-      "places": "Orte und Ereignisse"
+      "places": "Orte und Ereignisse",
+      "proposals": "Vorschläge",
+      "members": "Mitglieder"
     },
     "overview": {
       "title": "Guten Tag",
@@ -822,6 +864,87 @@
         "order": "Das Ende kommt nach dem Anfang.",
         "coordinates": "Zwei Zahlen: Breite, dann Länge.",
         "date": "Datum nicht verstanden. Versuchen Sie „1415“ oder „um 1415“."
+      }
+    },
+    "proposals": {
+      "title": "Vorschläge",
+      "intro": "Was die Mitglieder vorschlagen. Auf der Website ändert sich nichts vor Ihrer Entscheidung; der Verfasser wird per E-Mail benachrichtigt.",
+      "photosNote": "Namensvorschläge zu Fotos und Bitten um Entfernung werden unter Fotos bearbeitet.",
+      "open": "Zu bearbeiten",
+      "closed": "Bereits bearbeitet",
+      "none": "Kein Vorschlag zu bearbeiten.",
+      "noneClosed": "Noch kein Vorschlag bearbeitet.",
+      "from": "von {name}",
+      "back": "Alle Vorschläge",
+      "about": "Betrifft",
+      "content": "Inhalt",
+      "source": "Quelle",
+      "attachments": "Anhänge",
+      "fields": {
+        "text": "Text",
+        "givenNames": "Vornamen",
+        "surname": "Nachname",
+        "birth": "Geburt",
+        "birthPlace": "Geburtsort",
+        "death": "Tod",
+        "deathPlace": "Sterbeort",
+        "relation": "Verbindung",
+        "name": "Name",
+        "location": "Lage",
+        "title": "Titel",
+        "date": "Datum",
+        "place": "Ort"
+      },
+      "claimNote": "Annehmen verbindet dieses Konto mit dieser Person des Stammbaums.",
+      "applyNote": "Annehmen ändert den Stammbaum nicht von selbst: Nehmen Sie die Änderung im passenden Bereich vor und nehmen Sie dann an, um den Verfasser zu benachrichtigen.",
+      "reply": "Ein Wort an den Verfasser",
+      "replyHint": "Er erhält es per E-Mail mit Ihrer Entscheidung.",
+      "review": "Ich kümmere mich darum",
+      "accept": "Annehmen",
+      "reject": "Ablehnen",
+      "decided": "{state} am {date}",
+      "openTree": "Stammbaum-Eingabe öffnen"
+    },
+    "members": {
+      "title": "Mitglieder",
+      "intro": "Wer Zugang zur Website hat. Ein Mitglied liest alles, Lebende eingeschlossen, und schlägt vor; ein Verwalter prüft und veröffentlicht.",
+      "requests": "Zugangsanfragen",
+      "requestsIntro": "Personen, die über die Seite Mitwirken um Zugang gebeten haben.",
+      "noRequests": "Keine offene Anfrage.",
+      "approve": "Annehmen",
+      "reject": "Ablehnen",
+      "invite": "Jemanden einladen",
+      "inviteIntro": "Eine E-Mail mit einem eine Woche gültigen Anmeldelink wird verschickt.",
+      "inviteName": "Name",
+      "inviteEmail": "E-Mail-Adresse",
+      "inviteRole": "Rolle",
+      "inviteLanguage": "Sprache der E-Mail",
+      "inviteMessage": "Ein persönliches Wort",
+      "inviteSubmit": "Einladung senden",
+      "invited": "Einladung an {email} gesendet.",
+      "devLink": "Entwicklungsmodus: Dies ist der Link, der gesendet worden wäre.",
+      "pending": "Offene Einladungen",
+      "noPending": "Keine offene Einladung.",
+      "cancel": "Zurückziehen",
+      "invitedOn": "eingeladen am {date}",
+      "members": "Konten",
+      "roles": {
+        "member": "Mitglied",
+        "admin": "Verwalter"
+      },
+      "lastLogin": "zuletzt angemeldet am {date}",
+      "never": "nie angemeldet",
+      "disabled": "Deaktiviert",
+      "disable": "Deaktivieren",
+      "enable": "Wieder aktivieren",
+      "makeAdmin": "Zum Verwalter machen",
+      "makeMember": "Wieder Mitglied",
+      "you": "Sie",
+      "person": "Im Stammbaum: {name}",
+      "errors": {
+        "email": "Diese Adresse scheint unvollständig.",
+        "required": "Pflichtfeld.",
+        "error": "Das hat nicht geklappt. Versuchen Sie es gleich noch einmal."
       }
     }
   },
@@ -1398,5 +1521,168 @@
       "privateTitle": "Ort"
     },
     "placeLinkNamed": "Seite von {name}"
+  },
+  "emails": {
+    "footer": "Sie erhalten diese Nachricht, weil Sie an der Website des Hauses Croÿ mitwirken.",
+    "footerAdmin": "Sie erhalten diese Nachricht, weil Sie die Website des Hauses Croÿ verwalten.",
+    "hello": "Guten Tag {name},",
+    "helloNoName": "Guten Tag,",
+    "kinds": {
+      "correction": "eine Korrektur",
+      "person": "eine neue Person",
+      "place": "einen Ort",
+      "event": "ein Ereignis",
+      "claim": "„Das bin ich“ im Stammbaum"
+    },
+    "suggestion": {
+      "subject": "Neuer Vorschlag von {name}",
+      "line1": "{name} schlägt {kind} vor.",
+      "summary": "„{summary}“",
+      "action": "Vorschlag lesen"
+    },
+    "received": {
+      "subject": "Ihr Vorschlag ist angekommen",
+      "line1": "Danke! Ihr Vorschlag ist bei den Verwaltern der Website angekommen.",
+      "line2": "Auf der Website ändert sich nichts, bevor er gelesen wurde. Sie erhalten eine Nachricht, sobald er angenommen oder abgelehnt ist.",
+      "action": "Meine Vorschläge verfolgen"
+    },
+    "decision": {
+      "acceptedSubject": "Ihr Vorschlag wurde angenommen",
+      "rejectedSubject": "Antwort auf Ihren Vorschlag",
+      "accepted": "Ihr Vorschlag „{summary}“ wurde angenommen. Danke, dass Sie die Geschichte der Familie lebendig halten.",
+      "rejected": "Ihr Vorschlag „{summary}“ wurde diesmal nicht übernommen.",
+      "reply": "Ein Wort des Verwalters: {reply}",
+      "action": "Meine Vorschläge ansehen"
+    },
+    "accessRequest": {
+      "subject": "Zugangsanfrage von {name}",
+      "line1": "{name} ({email}) bittet um Familienzugang.",
+      "relation": "Verbindung zur Familie: {relation}",
+      "action": "Anfrage beantworten"
+    },
+    "invitation": {
+      "subject": "Einladung zur Website des Hauses Croÿ",
+      "line1": "Sie sind eingeladen, der Website der Familie beizutreten: Stammbaum, Geschichten, Fotos und die Möglichkeit, beizutragen.",
+      "line2": "Dieser Link meldet Sie direkt an. Er ist {days} Tage gültig; danach fordern Sie einfach auf der Anmeldeseite einen neuen Link an.",
+      "action": "Der Website beitreten"
+    },
+    "approved": {
+      "subject": "Ihr Zugang zur Website des Hauses Croÿ",
+      "line1": "Ihre Zugangsanfrage wurde angenommen. Willkommen!",
+      "line2": "Dieser Link meldet Sie direkt an. Er ist {days} Tage gültig; danach fordern Sie einfach auf der Anmeldeseite einen neuen Link an.",
+      "action": "Anmelden"
+    }
+  },
+  "contribute": {
+    "eyebrow": "Mitwirken",
+    "title": "Die Website entsteht mit der Familie",
+    "intro": "Ein Datum zu berichtigen, ein vergessener Vorfahre, ein Foto in einer Schublade, eine Geschichte, die man sich bei Tisch erzählt: Alles, was Sie wissen, kann die gemeinsame Geschichte bereichern.",
+    "how": {
+      "title": "So funktioniert es",
+      "one": "Sie schlagen vor",
+      "oneBody": "Eine Korrektur, eine Person, einen Ort, ein Ereignis, ein Foto oder eine Geschichte, mit Quelle, wenn Sie eine haben.",
+      "two": "Ein Verwalter liest",
+      "twoBody": "Auf der Website ändert sich nichts, bevor er gelesen hat. Er kann Ihnen mit einem Wort antworten.",
+      "three": "Es wird veröffentlicht",
+      "threeBody": "Sie werden per E-Mail benachrichtigt, und Ihr Beitrag findet seinen Platz im Stammbaum und auf den Seiten."
+    },
+    "signedOut": {
+      "title": "Gehören Sie zur Familie?",
+      "body": "Um etwas vorzuschlagen, brauchen Sie einen Familienzugang. Fragen Sie ihn unten an: Ein Verwalter wird Ihnen antworten.",
+      "already": "Sie haben schon Zugang?",
+      "signIn": "Anmelden"
+    },
+    "access": {
+      "title": "Familienzugang anfragen",
+      "name": "Ihr Name",
+      "email": "Ihre E-Mail-Adresse",
+      "emailHint": "Der Anmeldelink wird an diese Adresse geschickt.",
+      "relation": "Ihre Verbindung zur Familie",
+      "relationHint": "Zum Beispiel: Enkelin von Marie, aus dem älteren Zweig; oder angeheirateter Cousin.",
+      "message": "Ein Wort an die Verwalter",
+      "submit": "Anfrage senden",
+      "sentTitle": "Anfrage gesendet",
+      "sentBody": "Danke. Ein Verwalter wird Ihre Anfrage lesen; Sie erhalten eine E-Mail, sobald sie angenommen ist.",
+      "error": "Die Anfrage konnte nicht gesendet werden. Versuchen Sie es gleich noch einmal.",
+      "required": "Pflichtfeld."
+    },
+    "form": {
+      "title": "Etwas vorschlagen",
+      "steps": {
+        "label": "Schritte",
+        "what": "Was",
+        "about": "Über wen oder was",
+        "content": "Der Inhalt"
+      },
+      "stepOf": "Schritt {current} von {total}",
+      "what": "Was möchten Sie vorschlagen?",
+      "kinds": {
+        "correction": "Eine Korrektur",
+        "correctionHint": "Ein Datum, ein Name, eine Verwandtschaft zu berichtigen.",
+        "person": "Eine neue Person",
+        "personHint": "Jemand, der im Stammbaum fehlt.",
+        "photo": "Fotos",
+        "photoHint": "Porträts, Orte, Familienmomente.",
+        "story": "Eine Geschichte",
+        "storyHint": "Eine Erinnerung, eine Anekdote, eine Erzählung.",
+        "place": "Einen Ort",
+        "placeHint": "Ein Schloss, eine Stadt, ein Familienhaus.",
+        "event": "Ein Ereignis",
+        "eventHint": "Ein wichtiger Moment, auch ungefähr datiert."
+      },
+      "photoGo": "Fotos werden aus Ihrem Bereich gesendet, mehrere auf einmal.",
+      "photoAction": "Fotos senden",
+      "storyGo": "Geschichten werden in Ihrem Bereich geschrieben: Sie können einen Entwurf behalten, bevor Sie ihn senden.",
+      "storyAction": "Eine Geschichte schreiben",
+      "aboutPerson": "Die betroffene Person",
+      "aboutPersonHint": "Suchen Sie sie im Stammbaum nach dem Namen. Leer lassen, wenn sie nicht darin ist.",
+      "relativeOf": "Verwandt mit",
+      "relativeHint": "Eine Person des Stammbaums, an die sie anzuschließen ist, wenn Sie eine kennen.",
+      "relation": "Verbindung",
+      "relations": {
+        "none": "Ich weiß es nicht",
+        "parent": "Vater oder Mutter",
+        "child": "Kind",
+        "spouse": "Ehemann oder Ehefrau",
+        "sibling": "Bruder oder Schwester"
+      },
+      "fields": {
+        "text": "Was man wissen sollte",
+        "textCorrection": "Was zu berichtigen ist",
+        "textCorrectionHint": "Sagen Sie, was falsch ist und was richtig wäre.",
+        "textHint": "Alles, was dem Verwalter helfen kann.",
+        "givenNames": "Vornamen",
+        "surname": "Nachname",
+        "birth": "Geburt",
+        "birthPlace": "Geburtsort",
+        "death": "Tod",
+        "deathPlace": "Sterbeort",
+        "dateHint": "„1890“, „um 1890“, „12. März 1890“.",
+        "name": "Name des Ortes",
+        "location": "Wo liegt er?",
+        "locationHint": "Stadt und Land oder eine Adresse.",
+        "title": "Das Ereignis",
+        "date": "Datum",
+        "place": "Ort"
+      },
+      "source": "Quelle",
+      "sourceHint": "Woher die Angabe stammt: eine Urkunde, ein Buch, eine Familienerinnerung …",
+      "attachments": "Anhänge",
+      "attachmentsHint": "Fotos oder PDFs eines Dokuments (höchstens 6). Nur die Verwalter sehen sie.",
+      "addFile": "Datei anhängen",
+      "uploading": "Wird gesendet …",
+      "uploadError": "Diese Datei konnte nicht angehängt werden (ein Bild oder ein PDF bis 8 MB).",
+      "removeFile": "{name} entfernen",
+      "next": "Weiter",
+      "back": "Zurück",
+      "submit": "Vorschlag senden",
+      "required": "Zum Fortfahren ausfüllen.",
+      "requiredPerson": "Geben Sie mindestens einen Vornamen oder einen Nachnamen an.",
+      "error": "Der Vorschlag konnte nicht gesendet werden. Versuchen Sie es gleich noch einmal.",
+      "sentTitle": "Danke, es ist gesendet",
+      "sentBody": "Ein Verwalter wird Ihren Vorschlag lesen. Sie erhalten eine E-Mail, sobald er angenommen oder abgelehnt ist, und können ihn in Ihrem Bereich verfolgen.",
+      "another": "Etwas anderes vorschlagen",
+      "follow": "Meine Vorschläge verfolgen"
+    }
   }
 }

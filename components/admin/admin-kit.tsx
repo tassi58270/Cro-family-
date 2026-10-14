@@ -168,7 +168,9 @@ export function AdminSection({
           <h2 id={id} className="font-display text-title-sm">
             {title}
           </h2>
-          <p className="max-w-2xl text-caption text-ink-muted">{intro}</p>
+          {intro && (
+            <p className="max-w-2xl text-caption text-ink-muted">{intro}</p>
+          )}
         </div>
         {action}
       </div>

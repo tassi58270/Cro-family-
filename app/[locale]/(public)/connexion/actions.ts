@@ -86,6 +86,7 @@ export async function requestSignInLink(
     await sendEmail(
       simpleEmail({
         to: email,
+        topic: "login",
         subject: t("subject"),
         lines: [t("line1"), t("line2", { minutes: LINK_MINUTES })],
         action: { label: t("action"), url },
@@ -135,13 +136,18 @@ export async function confirmSignIn(
       [email],
     );
     const [profile] = await q<{ role: "admin" | "member"; disabled: boolean }>(
-      `insert into public.profiles (id, role, preferred_locale)
-       values ($1, $2, $3)
+      `insert into public.profiles (id, role, preferred_locale, display_name)
+       values ($1, $2, $3, coalesce(
+         (select full_name from public.invitations
+          where email = $4 and full_name is not null order by created_at desc limit 1),
+         (select full_name from public.access_requests
+          where email = $4 and state = 'approved' order by created_at desc limit 1)))
        on conflict (id) do update
          set role = case when excluded.role = 'admin' then 'admin'::public.member_role
-                         else public.profiles.role end
+                         else public.profiles.role end,
+             display_name = coalesce(public.profiles.display_name, excluded.display_name)
        returning role, disabled_at is not null as disabled`,
-      [account.id, role, locale],
+      [account.id, role, locale, email],
     );
     if (profile.disabled) return null;
     await q(

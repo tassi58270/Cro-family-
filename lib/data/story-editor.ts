@@ -140,7 +140,8 @@ export async function myPhotos(q: Query, accountId: string) {
   }>(
     `select m.id, m.storage_path as path, m.status,
             (select caption from public.media_i18n i where i.media_id = m.id limit 1) as caption
-     from public.media m where m.uploaded_by = $1 order by m.created_at desc`,
+     from public.media m where m.uploaded_by = $1 and m.storage_path not like 'propositions/%'
+     order by m.created_at desc`,
     [accountId],
   );
 }

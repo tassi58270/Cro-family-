@@ -27,7 +27,10 @@ export async function SiteFooter({ locale }: { locale: Locale }) {
           <p className="max-w-prose text-ink-muted">{t("invitationBody")}</p>
           <div className="mt-1 flex flex-wrap gap-3">
             <ButtonLink href="/contribuer">{t("contribute")}</ButtonLink>
-            <ButtonLink href="/connexion" variant="secondary">
+            <ButtonLink
+              href={{ pathname: "/contribuer", hash: "acces" }}
+              variant="secondary"
+            >
               {t("requestAccess")}
             </ButtonLink>
           </div>

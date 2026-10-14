@@ -1,10 +1,13 @@
 import "server-only";
+import { hasDatabase, withSystem } from "@/lib/db";
 
 export type Email = {
   to: string;
   subject: string;
   text: string;
   html: string;
+  /** What the email is about, for the log: « login », « suggestion »… */
+  topic?: string;
 };
 
 /**
@@ -28,11 +31,30 @@ export function deliveryMode(): "resend" | "screen" | "log" {
   return "log";
 }
 
+/**
+ * Sends an email, or writes it to the log when there is no email service,
+ * and keeps a trace of it in private.emails (never readable by the site).
+ */
 export async function sendEmail(email: Email): Promise<void> {
-  if (deliveryMode() !== "resend") {
-    console.info(`[email] to ${email.to}: ${email.subject}\n${email.text}`);
-    return;
+  let delivery: "sent" | "logged" | "failed" = "logged";
+  let error: string | null = null;
+  try {
+    if (deliveryMode() === "resend") {
+      await deliver(email);
+      delivery = "sent";
+    } else {
+      console.info(`[email] to ${email.to}: ${email.subject}\n${email.text}`);
+    }
+  } catch (cause) {
+    delivery = "failed";
+    error = String(cause).slice(0, 500);
+    throw cause;
+  } finally {
+    await record(email, delivery, error);
   }
+}
+
+async function deliver(email: Email) {
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -54,6 +76,33 @@ export async function sendEmail(email: Email): Promise<void> {
   }
 }
 
+async function record(
+  email: Email,
+  delivery: "sent" | "logged" | "failed",
+  error: string | null,
+) {
+  if (!hasDatabase()) return;
+  try {
+    await withSystem((q) =>
+      q(
+        `insert into private.emails (recipient, subject, body, topic, delivery, error)
+         values ($1, $2, $3, $4, $5, $6)`,
+        [
+          email.to,
+          email.subject,
+          // Sign-in links are only kept as hashes: never in the log.
+          email.text.replace(/jeton=[^\s&]+/g, "jeton=…"),
+          email.topic ?? "other",
+          delivery,
+          error,
+        ],
+      ),
+    );
+  } catch (cause) {
+    console.error("[email] not recorded", cause);
+  }
+}
+
 function escape(text: string) {
   return text.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 }
@@ -68,8 +117,10 @@ export function simpleEmail({
   lines,
   action,
   footer,
+  topic,
 }: {
   to: string;
+  topic?: string;
   subject: string;
   lines: string[];
   action?: { label: string; url: string };
@@ -91,5 +142,5 @@ ${action ? `<p style="margin:28px 0"><a href="${escape(action.url)}" style="disp
 ${footer ? `<p style="font-family:Arial,sans-serif;font-size:13px;line-height:1.5;color:#5f5f5b;margin:32px 0 0">${escape(footer)}</p>` : ""}
 </div></body></html>`;
 
-  return { to, subject, text, html };
+  return { to, subject, text, html, topic };
 }

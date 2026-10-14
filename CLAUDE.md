@@ -26,7 +26,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 - [x] 7. Armoiries et branches (blason expliqué pas à pas, galerie et comparaison, rivière des branches, cartes, communes, page par branche)
 - [x] 8. Histoires (magazine, lecture, écriture et validation), puis page Photos (mur, albums, visionneuse, envoi groupé, visages, propositions)
 - [x] 9. Lieux et événements (carte MapLibre, frise, liaison dans les deux sens, lecture, page par lieu, saisie)
-- [ ] 10. Comptes famille et contributions
+- [x] 10. Comptes famille et contributions (invitations, demandes d’accès, page Contribuer, propositions, espace membre, e-mails)
 - [ ] 11. Dashboard administrateur
 - [ ] 12. Traductions, finitions, mise en ligne
 
@@ -132,6 +132,15 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - Jeu de démonstration : `lib/demo/dataset.ts`, famille « Exemple » visiblement fictive, `is_demo` partout, bandeau sur chaque page, suppression en un clic.
 - Formulaires : `useFormAction()` (`lib/hooks`) garde la saisie quand le serveur renvoie une erreur.
 - Dates floues : `lib/genealogie/dates.ts` lit « 1890 », « vers 1890 », « 12 mars 1890 », « um 1890 », les dates GEDCOM, et les écrit dans chaque langue.
+
+## Contributions et membres (étape 10)
+
+- `/fr/contribuer` (statique) : explication en trois temps ; visiteur → demande d’accès (`access_requests`, e-mail aux administrateurs) ; membre → formulaire guidé en trois étapes (quoi, sur qui ou sur quoi, contenu avec source et pièces jointes). Photos et histoires renvoient à leurs propres formulaires. Le navigateur choisit le formulaire d’après le cookie `croy_membre`.
+- Propositions : table `suggestions` ; sortes et contenu dans `lib/contributions/kinds.ts` (`correction`, `person`, `place`, `event`, `claim` = « C’est moi »). Pièces jointes : `POST /api/propositions/piece` → `media` en brouillon sous `propositions/`, visibles de l’auteur et des administrateurs seulement.
+- E-mails : `lib/contributions/notify.ts` (aux administrateurs dans leur langue, confirmation au membre, décision avec le mot de l’administrateur, invitation et accès accepté avec un lien valable 7 jours). Chaque e-mail est consigné dans `private.emails` (jamais lisible par le site ; les jetons de connexion y sont masqués) : c’est là que les tests vérifient l’envoi.
+- Espace membre `/fr/compte` : moi dans l’arbre (« C’est moi », ma place, mes ancêtres, ma branche), mes propositions avec leur état et la réponse, mon profil (nom, langue des e-mails).
+- Tableau de bord : `/fr/admin/propositions` (file d’attente, détail, accepter ou refuser avec un mot ; accepter « C’est moi » relie le compte à la personne ; les autres propositions s’appliquent à la main dans l’écran concerné), `/fr/admin/membres` (demandes d’accès, invitations, rôles, désactivation ; un administrateur ne peut ni se rétrograder ni se désactiver). Les adresses viennent de `public.admin_members()`, réservée aux administrateurs.
+- Tests : `tests/db/contributions.test.ts`, `tests/e2e/contribute.spec.ts` (le « terminé quand » : un membre propose une correction, l’administrateur reçoit l’e-mail).
 
 ## Page d’accueil (étape 5)
 

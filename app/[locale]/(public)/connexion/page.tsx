@@ -32,7 +32,10 @@ export default async function SignInPage({
       <SignInForm />
       <p className="border-t border-hairline pt-6 text-ink-muted">
         {t("noAccess")}{" "}
-        <Link href="/contribuer" className="link text-ink">
+        <Link
+          href={{ pathname: "/contribuer", hash: "acces" }}
+          className="link text-ink"
+        >
           {t("requestAccess")}
         </Link>
       </p>
