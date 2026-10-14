@@ -536,7 +536,15 @@ export function PersonSheet({
                       {e.year ?? "—"}
                     </span>
                     <span>
-                      {e.title}
+                      <Link
+                        href={{
+                          pathname: "/lieux-et-evenements",
+                          query: { evenement: e.slug },
+                        }}
+                        className="link"
+                      >
+                        {e.title}
+                      </Link>
                       {e.place && (
                         <span className="text-caption text-ink-muted">
                           {" "}

@@ -35,6 +35,8 @@ export const demoPlaces = [
     kind: "castle",
     country: "BE",
     visitable: true,
+    visit:
+      "Informations de visite d’exemple : ce château n’existe pas, il sert à tester la mention « se visite aujourd’hui ».",
   },
   {
     key: "modelebourg",

@@ -10,6 +10,7 @@ export const adminNav = [
   { href: "/admin/arbre", key: "tree" },
   { href: "/admin/lignees", key: "lineages" },
   { href: "/admin/armoiries", key: "arms" },
+  { href: "/admin/lieux", key: "places" },
   { href: "/admin/histoires", key: "stories" },
   { href: "/admin/photos", key: "photos" },
   { href: "/admin/import", key: "import" },

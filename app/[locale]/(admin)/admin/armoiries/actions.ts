@@ -1,11 +1,7 @@
 "use server";
 
-import { getSession, viewerOf, type Session } from "@/lib/auth/session";
-import { contentChanged } from "@/lib/data/revalidate";
-import { withViewer, type Query } from "@/lib/db";
+import { asAdmin, id, newSlug, saveTexts, text, year } from "@/lib/admin/form";
 import { BRANCH_COLORS } from "@/lib/design/branch-colors";
-import { routing } from "@/lib/i18n/routing";
-import { slugify, uniqueSlug } from "@/lib/slug";
 
 /**
  * Branches and coats of arms (cahier des charges, 6.3), entered by an
@@ -19,73 +15,10 @@ export type ArmsFormState = {
   savedAt?: number;
 };
 
-const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const BUILTIN = ["croy", "croy-renty", "hongrie-ancienne"];
 const KINDS = ["family", "alliance", "commune"];
 
-function text(form: FormData, name: string) {
-  return String(form.get(name) ?? "").trim();
-}
-
-function id(form: FormData, name: string) {
-  const value = text(form, name);
-  return UUID.test(value) ? value : null;
-}
-
-function year(form: FormData, name: string): number | null | "invalid" {
-  const raw = text(form, name);
-  if (!raw) return null;
-  const value = Number(raw);
-  return Number.isInteger(value) && value > 0 && value < 3000
-    ? value
-    : "invalid";
-}
-
-async function asAdmin<T>(fn: (q: Query, session: Session) => Promise<T>) {
-  const session = await getSession();
-  if (!session || session.role !== "admin") throw new Error("forbidden");
-  const result = await withViewer(viewerOf(session), (q) => fn(q, session));
-  contentChanged();
-  return result;
-}
-
 const saved = (): ArmsFormState => ({ status: "saved", savedAt: Date.now() });
-
-async function saveTexts(
-  q: Query,
-  table: string,
-  key: string,
-  rowId: string,
-  form: FormData,
-  fields: string[],
-) {
-  for (const locale of routing.locales) {
-    const values = fields.map((f) => text(form, `${f}_${locale}`) || null);
-    if (!values[0]) {
-      await q(`delete from public.${table} where ${key} = $1 and locale = $2`, [
-        rowId,
-        locale,
-      ]);
-      continue;
-    }
-    await q(
-      `insert into public.${table} (${key}, locale, ${fields.join(", ")}, translation)
-       values ($1, $2, ${fields.map((_, i) => `$${i + 3}`).join(", ")}, $${fields.length + 3})
-       on conflict (${key}, locale) do update set
-         ${fields.map((f) => `${f} = excluded.${f}`).join(", ")}, translation = excluded.translation`,
-      [rowId, locale, ...values, locale === "fr" ? "original" : "reviewed"],
-    );
-  }
-}
-
-async function newSlug(q: Query, table: string, name: string) {
-  return uniqueSlug(
-    slugify(name) || table,
-    async (s) =>
-      (await q(`select 1 from public.${table} where slug = $1`, [s])).length >
-      0,
-  );
-}
 
 export async function saveBranch(
   _previous: ArmsFormState,

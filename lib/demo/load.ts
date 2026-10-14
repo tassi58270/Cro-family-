@@ -47,8 +47,13 @@ export async function loadDemo(q: Query, actor: string): Promise<void> {
     );
     ids.set(`place:${p.key}`, id);
     await q(
-      `insert into public.places_i18n (place_id, locale, name, description) values ($1, 'fr', $2, $3)`,
-      [id, p.name, "Lieu d’exemple, inventé pour tester la carte."],
+      `insert into public.places_i18n (place_id, locale, name, description, visit_info) values ($1, 'fr', $2, $3, $4)`,
+      [
+        id,
+        p.name,
+        "Lieu d’exemple, inventé pour tester la carte.",
+        "visit" in p ? p.visit : null,
+      ],
     );
   }
 

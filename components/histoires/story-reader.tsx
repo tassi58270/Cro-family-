@@ -220,7 +220,15 @@ export function StoryReader({
                     {e.year}
                   </span>
                 )}
-                <span>{e.title}</span>
+                <Link
+                  href={{
+                    pathname: "/lieux-et-evenements",
+                    query: { evenement: e.slug },
+                  }}
+                  className="link"
+                >
+                  {e.title}
+                </Link>
               </li>
             ))}
             {story.places.map((p) => (

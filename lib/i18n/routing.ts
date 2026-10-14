@@ -127,6 +127,7 @@ export const routing = defineRouting({
     "/admin/import": "/admin/import",
     "/admin/lignees": "/admin/lignees",
     "/admin/armoiries": "/admin/armoiries",
+    "/admin/lieux": "/admin/lieux",
     "/admin/histoires": "/admin/histoires",
     "/admin/histoires/[histoire]": "/admin/histoires/[histoire]",
     "/admin/photos": "/admin/photos",

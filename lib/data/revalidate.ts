@@ -13,5 +13,6 @@ export function contentChanged() {
   for (const locale of routing.locales) {
     revalidatePath(`/api/arbre/${locale}`);
     revalidatePath(`/api/photos/${locale}`);
+    revalidatePath(`/api/lieux/${locale}`);
   }
 }

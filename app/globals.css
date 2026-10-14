@@ -838,3 +838,106 @@ html:has(dialog[open]:modal) {
     transform: rotate(90deg);
   }
 }
+
+/* Places on the map: the dieresis of the ÿ (components/carte/map-view.tsx). */
+.map-marker {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  cursor: pointer;
+  border-radius: 9999px;
+  -webkit-tap-highlight-color: transparent;
+}
+.map-marker:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: -6px;
+}
+.map-marker-dots {
+  position: relative;
+  display: inline-flex;
+  gap: 3px;
+  padding: 4px 5px;
+  border-radius: 9999px;
+  background: var(--paper);
+  box-shadow:
+    0 0 0 1px var(--hairline-strong),
+    0 1px 3px rgb(0 0 0 / 0.18);
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+.map-marker-dots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: var(--croy);
+  transition: background-color var(--duration-base) var(--ease-out);
+}
+.map-marker-label {
+  position: absolute;
+  top: calc(50% + 0.9rem);
+  left: 50%;
+  translate: -50% 0;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--hairline-strong);
+  color: var(--ink);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+@media (hover: hover) {
+  .map-marker:hover .map-marker-dots {
+    transform: scale(1.15);
+  }
+  .map-marker:hover .map-marker-label {
+    opacity: 1;
+  }
+}
+.map-marker:focus-visible .map-marker-label,
+.map-marker[data-active] .map-marker-label {
+  opacity: 1;
+}
+.map-marker[data-active] .map-marker-dots {
+  transform: scale(1.35);
+  box-shadow:
+    0 0 0 2px var(--croy),
+    0 2px 6px rgb(0 0 0 / 0.22);
+}
+/* Filtered out, or not yet reached by the reading: unlit. */
+.map-marker[data-dim] .map-marker-dots {
+  box-shadow: 0 0 0 1px var(--hairline-strong);
+}
+.map-marker[data-dim] .map-marker-dots i {
+  background: var(--hairline-strong);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .map-marker[data-active] .map-marker-dots::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 2px var(--croy);
+    animation: map-ping 900ms var(--ease-out) 1 forwards;
+  }
+}
+@keyframes map-ping {
+  from {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2.2);
+  }
+}
+.maplibregl-canvas:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: -2px;
+}

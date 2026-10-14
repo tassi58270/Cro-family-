@@ -7,3 +7,5 @@ coverage
 next-env.d.ts
 docs/cahier-des-charges.md
 docs/prototypes
+# Generated map backgrounds, kept minified (scripts/build-map-background.mjs)
+public/carte/fond*.json

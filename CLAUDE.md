@@ -25,7 +25,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 - [x] 6. Arbre généalogique (vues, recherche, curseur du temps, filtres, lien de parenté, démonstration des lignées, fiche personne)
 - [x] 7. Armoiries et branches (blason expliqué pas à pas, galerie et comparaison, rivière des branches, cartes, communes, page par branche)
 - [x] 8. Histoires (magazine, lecture, écriture et validation), puis page Photos (mur, albums, visionneuse, envoi groupé, visages, propositions)
-- [ ] 9. Lieux et événements
+- [x] 9. Lieux et événements (carte MapLibre, frise, liaison dans les deux sens, lecture, page par lieu, saisie)
 - [ ] 10. Comptes famille et contributions
 - [ ] 11. Dashboard administrateur
 - [ ] 12. Traductions, finitions, mise en ligne
@@ -64,8 +64,8 @@ Tests de bout en bout avec la base (comme la CI) : exporter `DATABASE_URL` (loca
 
 ## Pile technique
 
-Next.js 16 (App Router, Turbopack, `proxy.ts` remplace `middleware.ts`) · React 19 · TypeScript strict · Tailwind CSS 4 (configuration en CSS, `app/globals.css`) · next-intl 4 · Vitest · Playwright + axe · ESLint · Prettier.
-À venir : Supabase (Postgres, lien magique, stockage, RLS), Motion et GSAP ScrollTrigger, D3 (arbre), MapLibre GL (carte), Resend (e-mails), Vercel (hébergement, région `cdg1`).
+Next.js 16 (App Router, Turbopack, `proxy.ts` remplace `middleware.ts`) · React 19 · TypeScript strict · Tailwind CSS 4 (configuration en CSS, `app/globals.css`) · next-intl 4 · D3 (arbre) · MapLibre GL (carte) · sharp (images) · Vitest · Playwright + axe · ESLint · Prettier.
+À venir : Supabase (Postgres, stockage), Resend (e-mails), Vercel (hébergement, région `cdg1`).
 
 Next.js 16 diffère de ce que tu connais peut-être : lis le guide concerné dans `node_modules/next/dist/docs/` avant d’utiliser une API.
 
@@ -176,6 +176,16 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - Administration `/fr/admin/photos` : photos à valider, propositions de noms et demandes de retrait, albums ; `/fr/admin/photos/[photo]` : description et visages (glisser sur l’image pour entourer un visage).
 - Une histoire peut porter des photos (`story_media`, la première sert de couverture).
 - Démonstration : images dessinées par `lib/demo/photos.ts` (silhouettes, aucune vraie personne), supprimées avec leurs copies.
+
+## Lieux et événements (étape 9)
+
+- `/fr/lieux-et-evenements` : carte et frise côte à côte (carte en haut sur téléphone). Un lieu touché ouvre sa carte (photo, période, « se visite aujourd’hui », événements, personnes, histoires) et marque ses événements dans la frise des deux points rouges ; un événement fait voler la carte vers son lieu. Filtres siècle, branche, type ; onglet « Lieux » ; « Lecture » parcourt les événements datés dans l’ordre, les lieux s’allument un à un. L’état est dans l’adresse (`lieu`, `evenement`, `vue`).
+- Carte : `components/carte/map-view.tsx` (MapLibre GL, chargé à la demande). Fond dessiné par nous, sans serveur de tuiles ni clé : `public/carte/fond.json` (1:50m) puis `fond-detail.json` (1:10m) au-delà du zoom 5, générés par `node scripts/build-map-background.mjs` (Natural Earth). Couleurs lues dans les jetons, thème sombre compris. Le conteneur de `MapView` doit être positionné.
+- Logique pure et testée : `lib/carte/timeline.ts` (siècles, filtres, ordre de lecture), `lib/carte/coordinates.ts` (coordonnées collées depuis une carte en ligne).
+- Données : `lib/data/places.ts` (`/api/lieux/{langue}` public et régénéré, `/api/lieux/{langue}/membres`, `/api/lieu/[slug]`). Un événement qui touche un vivant, ou un vivant lié à un lieu, reste réservé aux membres (RLS).
+- `/fr/lieux/[lieu]` : description, visite, événements, personnes liées, nées et mortes sur place, histoires, photos (`media.place_id`), petite carte de situation.
+- Saisie : `/fr/admin/lieux` (lieux placés d’un clic sur la carte ou par coordonnées collées, événements à date floue, personnes, branche). Aides communes des formulaires : `lib/admin/form.ts`.
+- Tests : `tests/e2e/places.spec.ts` vérifie le « terminé quand » (Azincourt ↔ 1415) sur des données de test saisies par le tableau de bord.
 
 ## Système de design (étape 2)
 
