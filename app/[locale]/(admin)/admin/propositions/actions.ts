@@ -3,6 +3,11 @@
 import { asAdmin, id, text } from "@/lib/admin/form";
 import { summarize, type ProposalPayload } from "@/lib/contributions/kinds";
 import { absoluteUrl, tell } from "@/lib/contributions/notify";
+import { savePerson } from "@/app/[locale]/(admin)/admin/arbre/actions";
+import {
+  saveEvent,
+  savePlace,
+} from "@/app/[locale]/(admin)/admin/lieux/actions";
 import { routing, type Locale } from "@/lib/i18n/routing";
 
 /**
@@ -14,6 +19,12 @@ import { routing, type Locale } from "@/lib/i18n/routing";
 
 export type DecisionState = {
   status: "idle" | "saved" | "error";
+  savedAt?: number;
+};
+
+export type ApplyState = {
+  status: "idle" | "saved" | "invalid" | "error";
+  errors?: Record<string, string>;
   savedAt?: number;
 };
 
@@ -37,9 +48,51 @@ export async function decide(
   const decision = text(form, "decision");
   if (!proposal || !["accept", "reject"].includes(decision))
     return { status: "error" };
-  const reply = text(form, "reply").slice(0, 2000) || null;
-  const state = decision === "accept" ? "accepted" : "rejected";
+  return conclude(
+    proposal,
+    decision === "accept" ? "accepted" : "rejected",
+    text(form, "reply").slice(0, 2000) || null,
+  );
+}
 
+/**
+ * « Modifier puis accepter »: the proposal, corrected by the administrator,
+ * becomes a person, a place or an event of the site; then it is accepted.
+ */
+export async function acceptWithChanges(
+  _previous: ApplyState,
+  form: FormData,
+): Promise<ApplyState> {
+  const proposal = id(form, "id");
+  const kind = text(form, "proposalKind");
+  if (!proposal) return { status: "error" };
+  const saved =
+    kind === "person"
+      ? await savePerson({ status: "idle" }, form)
+      : kind === "place"
+        ? await savePlace({ status: "idle" }, form)
+        : kind === "event"
+          ? await saveEvent({ status: "idle" }, form)
+          : null;
+  if (!saved) return { status: "error" };
+  if (saved.status !== "saved")
+    return {
+      status: saved.status === "invalid" ? "invalid" : "error",
+      errors: saved.errors,
+    };
+  const result = await conclude(
+    proposal,
+    "accepted",
+    text(form, "reply").slice(0, 2000) || null,
+  );
+  return { ...result, errors: undefined };
+}
+
+async function conclude(
+  proposal: string,
+  state: "accepted" | "rejected",
+  reply: string | null,
+): Promise<DecisionState> {
   try {
     const author = await asAdmin(async (q, session) => {
       const [row] = await q<{

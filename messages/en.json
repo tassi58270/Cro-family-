@@ -12,7 +12,8 @@
       "de": "Deutsch"
     },
     "close": "Close",
-    "loading": "Loading…"
+    "loading": "Loading…",
+    "edit": "Edit"
   },
   "nav": {
     "label": "Main menu",
@@ -352,7 +353,7 @@
       "label": "Dashboard sections",
       "overview": "Overview",
       "tree": "Tree entry",
-      "import": "GEDCOM import",
+      "import": "Import and export",
       "demo": "Demonstration",
       "home": "Home page",
       "lineages": "Entry points and lineages",
@@ -361,7 +362,10 @@
       "photos": "Photos",
       "places": "Places and events",
       "proposals": "Proposals",
-      "members": "Members"
+      "members": "Members",
+      "journal": "Journal",
+      "translations": "Translations",
+      "people": "People"
     },
     "overview": {
       "title": "Hello",
@@ -406,7 +410,22 @@
           "body": "Everyone can then suggest their memories, which you approve.",
           "action": "Invite"
         }
-      }
+      },
+      "todo": "To handle",
+      "todoNone": "Nothing is waiting for your decision.",
+      "todos": {
+        "proposals": "{count, plural, one {# proposal} other {# proposals}} from members",
+        "photoProposals": "{count, plural, one {# name proposed} other {# names proposed}} on photos",
+        "requests": "{count, plural, one {# access request} other {# access requests}}",
+        "photos": "{count, plural, one {# photo} other {# photos}} to approve",
+        "stories": "{count, plural, one {# story} other {# stories}} to read"
+      },
+      "complete": "To complete",
+      "incomplete": "{count, plural, =0 {Every sheet is complete} one {# incomplete sheet} other {# incomplete sheets}}",
+      "untranslated": "{count, plural, =0 {Everything is translated} one {# text to translate or review} other {# texts to translate or review}}",
+      "recent": "Latest changes",
+      "journalLink": "The whole journal",
+      "open": "Open"
     },
     "tree": {
       "title": "Tree entry",
@@ -544,9 +563,6 @@
       "chapters": "The story in chapters",
       "chaptersIntro": "Four to eight chapters, told as one scrolls over the map of Europe.",
       "addChapter": "Add a chapter",
-      "anecdotes": "Did you know?",
-      "anecdotesIntro": "Short anecdotes; three are drawn at random at every visit.",
-      "addAnecdote": "Add an anecdote",
       "none": "Nothing yet.",
       "draft": "draft",
       "published": "Visible on the site",
@@ -559,8 +575,7 @@
       "itemTitle": "Title",
       "panel": {
         "figure": "A figure",
-        "chapter": "A chapter",
-        "anecdote": "An anecdote"
+        "chapter": "A chapter"
       },
       "figure": {
         "kind": "Kind of figure",
@@ -600,9 +615,6 @@
           "5": "A region",
           "8": "A town"
         }
-      },
-      "anecdote": {
-        "body": "Text of the anecdote"
       },
       "errors": {
         "required": "This field is needed.",
@@ -742,13 +754,18 @@
         "familyName": "Family",
         "familyNameHint": "For an allied family: its name.",
         "bearers": "Bearers",
-        "bearersHint": "In a few words, when no branch or person says it."
+        "bearersHint": "In a few words, when no branch or person says it.",
+        "file": "Or your own file",
+        "fileHint": "An SVG (best) or a high-resolution PNG, 3 MB at most. It replaces the drawing chosen above.",
+        "removeFile": "Remove the uploaded file",
+        "currentFile": "Uploaded file"
       },
       "errors": {
         "required": "This field is needed.",
         "year": "Write a year, for example 1612.",
         "order": "The end comes before the start.",
-        "parent": "A branch cannot be its own parent branch."
+        "parent": "A branch cannot be its own parent branch.",
+        "file": "This file could not be read: an SVG or an image of 3 MB at most."
       }
     },
     "photos": {
@@ -812,7 +829,13 @@
       "state": "State",
       "saved": "Saved.",
       "delete": "Delete this photo for good",
-      "confirmDelete": "Delete this photo and its file?"
+      "confirmDelete": "Delete this photo and its file?",
+      "library": "Library",
+      "libraryIntro": "Every photo of the site, newest first. Tap one to describe it or name the people on it.",
+      "librarySearch": "Search the captions",
+      "libraryNone": "No photo.",
+      "noCaption": "No caption",
+      "peopleCount": "{count, plural, one {# person} other {# people}}"
     },
     "places": {
       "title": "Places and events",
@@ -903,7 +926,29 @@
       "accept": "Accept",
       "reject": "Decline",
       "decided": "{state} on {date}",
-      "openTree": "Open tree entry"
+      "current": "The sheet today",
+      "proposed": "What is proposed",
+      "editPerson": "Edit this sheet",
+      "facts": {
+        "birth": "Birth",
+        "death": "Death",
+        "branch": "Branch"
+      },
+      "applyFormNote": "The form below creates what is proposed, with your corrections, and tells the author. “Accept” alone tells them without creating anything.",
+      "apply": {
+        "title": {
+          "person": "Add this person to the tree",
+          "place": "Add this place",
+          "event": "Add this event"
+        },
+        "intro": "Prefilled from the proposal: correct what is needed, then accept.",
+        "sibling": "The proposal is about a brother or sister: link them to their parents afterwards in tree entry.",
+        "placeWas": "Place given by the author: {place}",
+        "publish": "Publish at once",
+        "submit": "Create and accept",
+        "check": "Check the fields marked.",
+        "error": "This could not be done."
+      }
     },
     "members": {
       "title": "Members",
@@ -945,6 +990,271 @@
         "email": "This address does not look complete.",
         "required": "Required.",
         "error": "This could not be done. Please try again in a moment."
+      }
+    },
+    "journal": {
+      "title": "Journal",
+      "intro": "Every change made to the site, newest first. Each one can be undone.",
+      "empty": "No change yet.",
+      "actions": {
+        "insert": "Added",
+        "update": "Changed",
+        "delete": "Deleted"
+      },
+      "undoOf": "Undoing the change of {date}",
+      "by": "by {name}",
+      "bySite": "by the site",
+      "more": "{count, plural, one {# more item} other {# more items}}",
+      "details": "Show details",
+      "undo": "Undo this change",
+      "confirm": "Undo this change? The site will go back to how it was before.",
+      "undone": "Undone",
+      "done": "Change undone.",
+      "later": "Not possible: a later change touches the same items. Undo it first.",
+      "error": "The change could not be undone.",
+      "older": "Older changes",
+      "newest": "Back to the newest",
+      "before": "Before",
+      "after": "After",
+      "tables": {
+        "access_requests": "Access request",
+        "albums": "Album",
+        "albums_i18n": "Album text",
+        "arms": "Arms",
+        "arms_i18n": "Arms text",
+        "branches": "Branch",
+        "branches_i18n": "Branch text",
+        "event_people": "Person of an event",
+        "events": "Event",
+        "events_i18n": "Event text",
+        "filiation_sources": "Proof of filiation",
+        "home_chapters": "Home chapter",
+        "home_chapters_i18n": "Chapter text",
+        "home_figures": "Home figure",
+        "home_figures_i18n": "Figure text",
+        "home_i18n": "Home text",
+        "invitations": "Invitation",
+        "lineages": "Lineage",
+        "lineages_i18n": "Lineage text",
+        "media": "Photo or document",
+        "media_i18n": "Caption",
+        "media_people": "Person in a photo",
+        "parent_child": "Filiation link",
+        "people": "Person",
+        "people_i18n": "Biography",
+        "people_titles": "Title held",
+        "person_sources": "Source of a person",
+        "place_people": "Person of a place",
+        "places": "Place",
+        "places_i18n": "Place text",
+        "profiles": "Account",
+        "sources": "Source",
+        "stories": "Story",
+        "stories_i18n": "Story text",
+        "story_events": "Event of a story",
+        "story_media": "Photo of a story",
+        "story_people": "Person of a story",
+        "story_places": "Place of a story",
+        "suggestions": "Proposal",
+        "titles": "Title",
+        "titles_i18n": "Title text",
+        "tree_entry_points": "Tree entry point",
+        "tree_entry_points_i18n": "Entry point text",
+        "union_sources": "Proof of union",
+        "unions": "Union"
+      },
+      "fields": {
+        "given_names": "Given names",
+        "surname": "Surname",
+        "epithet": "Epithet",
+        "sex": "Sex",
+        "birth_date": "Birth",
+        "birth_precision": "Birth precision",
+        "birth_place_id": "Place of birth",
+        "death_date": "Death",
+        "death_precision": "Death precision",
+        "death_place_id": "Place of death",
+        "deceased": "Deceased",
+        "branch_id": "Branch",
+        "status": "Status",
+        "title": "Title",
+        "name": "Name",
+        "body": "Text",
+        "excerpt": "Standfirst",
+        "biography": "Biography",
+        "description": "Description",
+        "caption": "Caption",
+        "slug": "Address",
+        "role": "Role",
+        "disabled_at": "Disabled on",
+        "person_id": "Person",
+        "place_id": "Place",
+        "event_date": "Date",
+        "kind": "Kind",
+        "lat": "Latitude",
+        "lng": "Longitude",
+        "visitable": "Open to visitors",
+        "featured": "Featured",
+        "portrait_id": "Portrait",
+        "state": "State",
+        "admin_reply": "Answer"
+      }
+    },
+    "anecdotes": {
+      "title": "Anecdotes",
+      "intro": "An anecdote is told in a few lines. Link it to the people it concerns: it will appear on their sheet and in “Did you know?” on the home page.",
+      "add": "Add an anecdote",
+      "edit": "Edit the anecdote",
+      "none": "No anecdote yet.",
+      "titleField": "Title",
+      "titleHint": "A sentence that makes people want to read.",
+      "body": "The anecdote",
+      "bodyHint": "A few lines are enough.",
+      "people": "People concerned",
+      "peopleHint": "Search for them in the tree by name.",
+      "places": "Places",
+      "published": "Published",
+      "publishedHint": "Unticked, the anecdote stays a draft the public cannot see.",
+      "featured": "Featured on the home page",
+      "featuredHint": "Shown first in “Did you know?”.",
+      "featuredChip": "Featured",
+      "draft": "Draft",
+      "required": "Required."
+    },
+    "translations": {
+      "title": "Translations",
+      "intro": "The family’s texts in French, English and German, side by side. French is the reference; on the site, a missing translation falls back on French.",
+      "filter": "Kind of content",
+      "allKinds": "All",
+      "onlyMissing": "Only what remains to translate",
+      "showAll": "Show everything, even translated",
+      "none": "Everything is translated.",
+      "kinds": {
+        "people": "Biographies",
+        "stories": "Stories",
+        "places": "Places",
+        "events": "Events",
+        "branches": "Branches",
+        "arms": "Arms",
+        "titles": "Titles",
+        "albums": "Albums",
+        "photos": "Captions"
+      },
+      "states": {
+        "missing": "to translate",
+        "machine": "to review",
+        "original": "original",
+        "reviewed": "reviewed"
+      },
+      "fields": {
+        "biography": "Biography",
+        "roles": "Roles and offices",
+        "works": "Works and achievements",
+        "title": "Title",
+        "excerpt": "Standfirst",
+        "body": "Text",
+        "name": "Name",
+        "description": "Description",
+        "visit_info": "Visiting",
+        "fate": "Fate",
+        "blazon": "Blazon",
+        "explanation": "Explanation",
+        "bearers": "Bearers",
+        "caption": "Caption",
+        "alt": "Description for screen readers"
+      },
+      "propose": "Propose an automatic translation ({language})",
+      "noMachine": "Automatic translation needs a DeepL key, to be provided when the site goes live.",
+      "machineError": "The automatic translation did not answer. Please try again in a moment.",
+      "reviewHint": "Read the translation before saving: what is saved here counts as reviewed.",
+      "save": "Save",
+      "required": "Required, or leave the whole language empty.",
+      "error": "This could not be saved."
+    },
+    "people": {
+      "title": "People",
+      "intro": "Everyone in the tree, what each sheet still lacks, and possible duplicates to merge.",
+      "add": "Add in the tree",
+      "views": "View",
+      "all": "All ({count})",
+      "incomplete": "To complete ({count})",
+      "duplicates": "Possible duplicates ({count})",
+      "search": "Search by name or year",
+      "lacks": "Missing: {list}",
+      "missing": {
+        "dates": "dates",
+        "portrait": "a portrait",
+        "biography": "a biography",
+        "translations": "translations"
+      },
+      "draft": "Draft",
+      "edit": "Edit",
+      "sheet": "Sheet",
+      "more": "Show more ({count})",
+      "none": "Nobody matches.",
+      "duplicatesIntro": "Same name and same year of birth: these may be the same person. Choose the sheet to keep; everything pointing at the other will be attached to it, and what it lacks will be taken from the other. The merge can be undone from the journal.",
+      "keepWhich": "Sheet to keep",
+      "merge": "Merge",
+      "mergeConfirm": "Merge these sheets into one? You can undo it from the journal.",
+      "mergeError": "The merge could not be done.",
+      "noDuplicates": "No duplicate found."
+    },
+    "export": {
+      "title": "Export",
+      "intro": "To keep a copy, or to open the tree in a genealogy program.",
+      "demoNote": "The demonstration family “Exemple” is never exported. The photos themselves stay in storage; the backup holds their descriptions.",
+      "files": {
+        "arbre": {
+          "title": "The tree (GEDCOM)",
+          "body": "People, unions and filiations, readable by every genealogy program."
+        },
+        "personnes": {
+          "title": "People (spreadsheet)",
+          "body": "One line per person: names, dates, places, branch."
+        },
+        "lieux": {
+          "title": "Places (spreadsheet)",
+          "body": "Names, coordinates, periods, descriptions."
+        },
+        "evenements": {
+          "title": "Events (spreadsheet)",
+          "body": "Titles, dates, places, descriptions."
+        },
+        "sauvegarde": {
+          "title": "Full backup (JSON)",
+          "body": "Every content of the site, in every language, with proposals and accounts (without email addresses)."
+        }
+      }
+    },
+    "titles": {
+      "title": "Titles",
+      "intro": "The family’s titles and, in order, those who held them.",
+      "add": "Add a title",
+      "edit": "Edit the title",
+      "none": "No title yet.",
+      "name": "Name of the title",
+      "nameHint": "As it is written, for example “Duke of …”.",
+      "created": "Created in",
+      "dateHint": "“1533”, “about 1533”, “9 February 1533”.",
+      "creator": "Created by",
+      "creatorHint": "The sovereign or the act, as written.",
+      "branch": "Branch",
+      "noBranch": "None",
+      "description": "Description",
+      "holders": "Successive holders",
+      "holdersHint": "In order: the first holder first. The rank is the number (3 for the 3rd duke).",
+      "holder": "Holder {n}",
+      "rank": "Rank",
+      "from": "From",
+      "to": "To",
+      "addHolder": "Add a holder",
+      "removeHolder": "Remove this holder",
+      "holdersCount": "{count, plural, =0 {no holder} one {# holder} other {# holders}}",
+      "published": "Published",
+      "draft": "Draft",
+      "errors": {
+        "required": "Required.",
+        "date": "Date not understood."
       }
     }
   },
@@ -1312,7 +1622,8 @@
     "choosePhotos": "Choose photos",
     "hidePhotos": "Close the choice",
     "searchPhotos": "Search by caption, person or place",
-    "noPhotos": "No photo matches."
+    "noPhotos": "No photo matches.",
+    "storiesTitle": "Stories"
   },
   "photos": {
     "eyebrow": "Faces of the family",

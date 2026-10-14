@@ -14,6 +14,15 @@ export type PendingPhoto = {
   createdAt: string;
 };
 
+/** Every photo of the site, for the library (section 7, « Médias »). */
+export type LibraryPhoto = {
+  id: string;
+  path: string;
+  status: "draft" | "pending" | "published" | "rejected";
+  caption: string | null;
+  people: number;
+};
+
 export type Proposal = {
   id: string;
   kind: "identification" | "removal";
@@ -140,7 +149,17 @@ export async function photoQueue(q: Query) {
     }
     return { ...a, titles, descriptions };
   });
-  return { pending, proposals, albums };
+  const library = await q<LibraryPhoto>(
+    `select m.id, m.storage_path as path, m.status,
+            (select caption from public.media_i18n i where i.media_id = m.id
+             order by (i.locale = 'fr') desc limit 1) as caption,
+            (select count(*)::int from public.media_people mp where mp.media_id = m.id) as people
+     from public.media m
+     where m.kind <> 'arms' and m.mime_type like 'image/%'
+       and m.storage_path not like 'propositions/%'
+     order by m.created_at desc limit 500`,
+  );
+  return { pending, proposals, albums, library };
 }
 
 export async function editablePhoto(

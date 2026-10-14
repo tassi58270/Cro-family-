@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { JournalView } from "@/components/admin/journal-view";
 import { ButtonLink } from "@/components/ui/button";
 import { requireAdmin, viewerOf } from "@/lib/auth/session";
-import { overviewCounts, startupSteps } from "@/lib/data/admin";
+import { overviewCounts, overviewTodo, startupSteps } from "@/lib/data/admin";
+import { loadJournal } from "@/lib/data/journal";
+import { untranslatedCount } from "@/lib/data/translations";
 import { cn } from "@/lib/design/cn";
 import { withViewer } from "@/lib/db";
+import { Link } from "@/lib/i18n/navigation";
 import { resolveLocale } from "@/lib/i18n/server";
 
 export async function generateMetadata({
@@ -21,10 +25,25 @@ export default async function AdminOverview({
   const locale = await resolveLocale(params);
   const session = await requireAdmin(locale);
   const t = await getTranslations({ locale, namespace: "admin.overview" });
-  const { steps, counts } = await withViewer(viewerOf(session), async (q) => ({
-    steps: await startupSteps(q),
-    counts: await overviewCounts(q),
-  }));
+  const { steps, counts, todo, untranslated, recent } = await withViewer(
+    viewerOf(session),
+    async (q) => ({
+      steps: await startupSteps(q),
+      counts: await overviewCounts(q),
+      todo: await overviewTodo(q),
+      untranslated: await untranslatedCount(q),
+      recent: await loadJournal(q, { limit: 6 }),
+    }),
+  );
+  const tasks = (
+    [
+      ["proposals", todo.proposals, "/admin/propositions"],
+      ["photoProposals", todo.photoProposals, "/admin/photos"],
+      ["requests", todo.requests, "/admin/membres"],
+      ["photos", todo.photos, "/admin/photos"],
+      ["stories", todo.stories, "/admin/histoires"],
+    ] as const
+  ).filter(([, count]) => count > 0);
   const done = steps.filter((s) => s.done).length;
   const number = new Intl.NumberFormat(locale);
 
@@ -34,6 +53,37 @@ export default async function AdminOverview({
         <h1 className="font-display text-title-lg">{t("title")}</h1>
         <p className="max-w-2xl text-lead text-ink-muted">{t("intro")}</p>
       </header>
+
+      <section aria-labelledby="a-traiter" className="grid gap-4">
+        <h2 id="a-traiter" className="font-display text-title-sm">
+          {t("todo")}
+        </h2>
+        {tasks.length ? (
+          <ul className="grid gap-px border-y border-hairline bg-hairline">
+            {tasks.map(([key, count, href]) => (
+              <li key={key} className="bg-paper">
+                <Link
+                  href={href}
+                  className="flex min-h-14 items-center justify-between gap-4 py-3 transition-colors duration-(--duration-fast) hover:bg-paper-2 md:px-3"
+                >
+                  <span className="flex items-center gap-3 font-medium">
+                    <span
+                      aria-hidden="true"
+                      className="size-2 rounded-full bg-croy"
+                    />
+                    {t(`todos.${key}`, { count })}
+                  </span>
+                  <span className="text-caption text-ink-muted">
+                    {t("open")} →
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-ink-muted">{t("todoNone")}</p>
+        )}
+      </section>
 
       <section aria-labelledby="assistant" className="grid gap-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
@@ -141,6 +191,39 @@ export default async function AdminOverview({
             </div>
           ))}
         </dl>
+      </section>
+
+      <section aria-labelledby="completer" className="grid gap-4">
+        <h2 id="completer" className="font-display text-title-sm">
+          {t("complete")}
+        </h2>
+        <ul className="grid gap-2">
+          <li>
+            <Link href="/admin/personnes" className="link min-h-11 font-medium">
+              {t("incomplete", { count: todo.incomplete })}
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/admin/traductions"
+              className="link min-h-11 font-medium"
+            >
+              {t("untranslated", { count: untranslated })}
+            </Link>
+          </li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="recentes" className="grid gap-4">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <h2 id="recentes" className="font-display text-title-sm">
+            {t("recent")}
+          </h2>
+          <Link href="/admin/journal" className="link text-caption font-medium">
+            {t("journalLink")}
+          </Link>
+        </div>
+        <JournalView changes={recent} locale={locale} compact />
       </section>
     </div>
   );

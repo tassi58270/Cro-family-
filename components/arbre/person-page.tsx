@@ -6,6 +6,7 @@ import { ButtonLink } from "@/components/ui/button";
 import type { PersonDetail } from "@/lib/data/person";
 import { Link } from "@/lib/i18n/navigation";
 import { PersonSheet } from "./person-sheet";
+import { EditLink } from "@/components/ui/edit-link";
 
 /**
  * The full page of a person. Visitors get the version built in advance;
@@ -55,6 +56,11 @@ export function PersonPage({
 
   return (
     <div className="mx-auto grid max-w-3xl gap-8 px-(--gutter) pt-8 pb-24 md:pt-14">
+      {person && (
+        <EditLink
+          href={{ pathname: "/admin/arbre", query: { personne: person.id } }}
+        />
+      )}
       <nav className="flex flex-wrap items-center justify-between gap-3 text-caption">
         <Link
           href="/arbre"

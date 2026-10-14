@@ -5,6 +5,7 @@ import { loadPhoto, publicPhotoIds } from "@/lib/data/photos";
 import { VISITOR } from "@/lib/db";
 import { resolveLocale } from "@/lib/i18n/server";
 import { isIndexable } from "@/lib/site";
+import { EditLink } from "@/components/ui/edit-link";
 
 export async function generateStaticParams() {
   return (await publicPhotoIds()).map((photo) => ({ photo }));
@@ -38,6 +39,9 @@ export default async function Page({
   const item = await loadPhoto(VISITOR, photo, locale);
   return (
     <main id="contenu" className="page px-(--gutter) pt-8 pb-28 md:pt-12">
+      <EditLink
+        href={{ pathname: "/admin/photos/[photo]", params: { photo } }}
+      />
       <PhotoPage id={photo} locale={locale} initial={item} />
     </main>
   );

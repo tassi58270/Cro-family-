@@ -5,13 +5,15 @@ import type { Anecdote } from "@/lib/data/home";
 import { Tremas } from "@/components/ui/bands";
 import { Link } from "@/lib/i18n/navigation";
 
+/** Those put « à la une » first, then a random draw among the others. */
 function pickThree(items: Anecdote[]) {
-  const copy = [...items];
+  const featured = items.filter((a) => a.featured);
+  const copy = items.filter((a) => !a.featured);
   for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
-  return copy.slice(0, 3);
+  return [...featured, ...copy].slice(0, 3);
 }
 
 /**

@@ -28,6 +28,8 @@ export type AdminArms = {
   slug: string;
   kind: "family" | "alliance" | "commune";
   builtin: string | null;
+  /** A file of the family's (SVG or picture), shown instead of a drawing. */
+  filePath: string | null;
   branchId: string | null;
   personId: string | null;
   familyName: string | null;
@@ -99,7 +101,12 @@ export async function loadAdminArms(q: Query) {
     period_end: number | null;
     status: string;
     is_demo: boolean;
-  }>("select * from public.arms order by sort_order, created_at");
+    file_path: string | null;
+  }>(
+    `select a.*, m.storage_path as file_path
+     from public.arms a left join public.media m on m.id = a.svg_id
+     order by a.sort_order, a.created_at`,
+  );
   const armsTexts = await q<{
     arms_id: string;
     locale: Locale;
@@ -137,6 +144,7 @@ export async function loadAdminArms(q: Query) {
     slug: a.slug,
     kind: a.kind,
     builtin: a.builtin,
+    filePath: a.file_path,
     branchId: a.branch_id,
     personId: a.person_id,
     familyName: a.family_name,

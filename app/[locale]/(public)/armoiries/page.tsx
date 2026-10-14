@@ -10,6 +10,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { loadArmsPage } from "@/lib/data/arms";
 import { resolveLocale } from "@/lib/i18n/server";
+import { EditLink } from "@/components/ui/edit-link";
 
 export async function generateMetadata({
   params,
@@ -81,6 +82,7 @@ export default async function ArmsPage({
       id="contenu"
       className="page grid gap-20 px-(--gutter) pt-10 pb-28 md:gap-28 md:pt-16"
     >
+      <EditLink href="/admin/armoiries" />
       <header className="grid max-w-4xl gap-5">
         <p className="text-caption font-medium text-croy-text">
           {t("eyebrow")}

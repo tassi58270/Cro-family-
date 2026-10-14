@@ -5,7 +5,7 @@ import { StoryEditor } from "@/components/histoires/story-editor";
 import { requireAdmin, viewerOf } from "@/lib/auth/session";
 import { editableStory, placeChoices } from "@/lib/data/story-editor";
 import { withViewer } from "@/lib/db";
-import { Link } from "@/lib/i18n/navigation";
+import { Link, redirect } from "@/lib/i18n/navigation";
 import { resolveLocale } from "@/lib/i18n/server";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -25,7 +25,25 @@ export default async function AdminStoryPage({
   const locale = await resolveLocale(params);
   const session = await requireAdmin(locale);
   const { histoire } = await params;
-  if (!UUID.test(histoire)) notFound();
+  // From « Modifier » on a public page, the story comes by its address.
+  if (!UUID.test(histoire)) {
+    const [found] = await withViewer(viewerOf(session), (q) =>
+      q<{ id: string; anecdote: boolean }>(
+        "select id, anecdote from public.stories where slug = $1",
+        [histoire],
+      ),
+    );
+    if (!found) notFound();
+    redirect({
+      href: found.anecdote
+        ? "/admin/histoires"
+        : {
+            pathname: "/admin/histoires/[histoire]",
+            params: { histoire: found.id },
+          },
+      locale,
+    });
+  }
   const t = await getTranslations({ locale, namespace: "storyEditor" });
   const { story, places } = await withViewer(viewerOf(session), async (q) => ({
     story: await editableStory(q, histoire),

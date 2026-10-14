@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { AnecdotesAdmin } from "@/components/admin/anecdotes-admin";
 import { StoryList } from "@/components/histoires/story-list";
 import { ButtonLink } from "@/components/ui/button";
 import { requireAdmin, viewerOf } from "@/lib/auth/session";
-import { storyList } from "@/lib/data/story-editor";
+import { loadAnecdotes } from "@/lib/data/anecdotes";
+import { placeChoices, storyList } from "@/lib/data/story-editor";
 import { withViewer } from "@/lib/db";
 import { resolveLocale } from "@/lib/i18n/server";
 
@@ -22,7 +24,14 @@ export default async function AdminStoriesPage({
   const locale = await resolveLocale(params);
   const session = await requireAdmin(locale);
   const t = await getTranslations({ locale, namespace: "storyEditor" });
-  const stories = await withViewer(viewerOf(session), (q) => storyList(q));
+  const { stories, anecdotes, places } = await withViewer(
+    viewerOf(session),
+    async (q) => ({
+      stories: await storyList(q),
+      anecdotes: await loadAnecdotes(q),
+      places: await placeChoices(q, locale),
+    }),
+  );
   return (
     <div className="grid gap-10">
       <header className="flex flex-wrap items-end justify-between gap-6">
@@ -34,7 +43,16 @@ export default async function AdminStoriesPage({
           {t("new")}
         </ButtonLink>
       </header>
-      <StoryList stories={stories} mode="admin" />
+      <AnecdotesAdmin anecdotes={anecdotes} places={places} locale={locale} />
+      <section
+        aria-labelledby="histoires"
+        className="grid gap-5 border-t border-hairline pt-8"
+      >
+        <h2 id="histoires" className="font-display text-title-sm">
+          {t("storiesTitle")}
+        </h2>
+        <StoryList stories={stories} mode="admin" />
+      </section>
     </div>
   );
 }

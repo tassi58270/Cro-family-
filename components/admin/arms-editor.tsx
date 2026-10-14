@@ -283,6 +283,38 @@ function ArmsForm({
           </div>
         </fieldset>
       )}
+      {!item?.isDemo && (
+        <div className="grid gap-3">
+          {item?.filePath && (
+            <div className="flex items-center gap-4">
+              {/* eslint-disable-next-line @next/next/no-img-element -- the family's own file. */}
+              <img
+                src={`/fichiers/${item.filePath}`}
+                alt={t("arms.currentFile")}
+                className="h-16 w-auto"
+              />
+              <Checkbox name="removeFile" label={t("arms.removeFile")} />
+            </div>
+          )}
+          <label className="grid gap-1">
+            <span className="font-medium">{t("arms.file")}</span>
+            <span className="text-caption text-ink-muted">
+              {t("arms.fileHint")}
+            </span>
+            <input
+              type="file"
+              name="file"
+              accept=".svg,image/svg+xml,image/png,image/jpeg"
+              className="mt-1 text-caption file:mr-3 file:min-h-11 file:rounded-full file:border file:border-hairline-strong file:bg-paper file:px-4 file:font-medium"
+            />
+          </label>
+          {error("file") && (
+            <p role="alert" className="text-caption font-medium text-croy-text">
+              {error("file")}
+            </p>
+          )}
+        </div>
+      )}
       <TextField
         label={t("arms.blazon")}
         hint={t("arms.blazonHint")}
@@ -513,11 +545,20 @@ export function ArmsEditor({
                   className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-hairline py-3 max-sm:[&>*:first-child]:basis-full"
                 >
                   <span className="flex min-w-0 flex-1 items-center gap-3">
-                    <Shield
-                      arms={drawing(a.builtin)}
-                      decorative
-                      className="w-8 shrink-0"
-                    />
+                    {a.filePath ? (
+                      // eslint-disable-next-line @next/next/no-img-element -- the family's own file.
+                      <img
+                        src={`/fichiers/${a.filePath}`}
+                        alt=""
+                        className="w-8 shrink-0"
+                      />
+                    ) : (
+                      <Shield
+                        arms={drawing(a.builtin)}
+                        decorative
+                        className="w-8 shrink-0"
+                      />
+                    )}
                     <span className="grid min-w-0">
                       <span className="font-medium">
                         {a.texts.fr.name || a.slug}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useDeferredValue, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   answerProposal,
@@ -14,6 +14,7 @@ import { TextArea, TextField } from "@/components/ui/field";
 import { SidePanel } from "@/components/ui/side-panel";
 import type {
   AdminAlbum,
+  LibraryPhoto,
   PendingPhoto,
   Proposal,
 } from "@/lib/data/admin-photos";
@@ -124,14 +125,78 @@ function AlbumForm({
   );
 }
 
+function Library({ photos }: { photos: LibraryPhoto[] }) {
+  const t = useTranslations("admin.photos");
+  const tStatus = useTranslations("status");
+  const [search, setSearch] = useState("");
+  const query = useDeferredValue(search.trim().toLowerCase());
+  const shown = photos.filter(
+    (p) => !query || (p.caption ?? "").toLowerCase().includes(query),
+  );
+  return (
+    <AdminSection
+      id="bibliotheque"
+      title={t("library")}
+      intro={t("libraryIntro")}
+      action={null}
+    >
+      <label className="grid max-w-md gap-1">
+        <span className="text-caption font-medium">{t("librarySearch")}</span>
+        <input
+          type="search"
+          value={search}
+          onChange={(event) => setSearch(event.target.value)}
+          className="min-h-12 rounded-full border border-hairline-strong bg-paper px-5"
+        />
+      </label>
+      {shown.length ? (
+        <ul className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
+          {shown.map((p) => (
+            <li key={p.id} className="grid gap-1">
+              <Link
+                href={{
+                  pathname: "/admin/photos/[photo]",
+                  params: { photo: p.id },
+                }}
+                className="relative block aspect-square overflow-hidden rounded-xs bg-paper-2"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element -- sized by /fichiers. */}
+                <img
+                  src={`/fichiers/${p.path}?l=320`}
+                  alt={p.caption ?? ""}
+                  loading="lazy"
+                  className="size-full object-cover"
+                />
+                {p.status !== "published" && (
+                  <span className="absolute top-1.5 left-1.5 rounded-full bg-paper px-2 text-[0.75rem] font-medium">
+                    {tStatus(p.status)}
+                  </span>
+                )}
+              </Link>
+              <p className="truncate text-caption text-ink-muted">
+                {p.caption || t("noCaption")}
+                {p.people > 0 && ` · ${t("peopleCount", { count: p.people })}`}
+              </p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-ink-muted">{t("libraryNone")}</p>
+      )}
+    </AdminSection>
+  );
+}
+
 export function PhotosAdmin({
   pending,
   proposals,
   albums,
+  library,
 }: {
   pending: PendingPhoto[];
   proposals: Proposal[];
   albums: AdminAlbum[];
+  library: LibraryPhoto[];
 }) {
   const t = useTranslations("admin.photos");
   const tCommon = useTranslations("admin.lineages");
@@ -332,6 +397,8 @@ export function PhotosAdmin({
           <p className="text-ink-muted">{t("noAlbums")}</p>
         )}
       </AdminSection>
+
+      <Library photos={library} />
 
       <SidePanel
         open={panel !== null}

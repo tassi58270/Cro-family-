@@ -29,7 +29,6 @@ export type AdminHome = {
     status: string;
     i18n: I18n<"date_label" | "title" | "body">;
   }[];
-  anecdotes: { id: string; i18n: I18n<"title" | "body"> }[];
   places: { id: string; name: string; located: boolean }[];
 };
 
@@ -131,27 +130,11 @@ export async function adminHome(q: Query): Promise<AdminHome> {
     i18n: chapterI18n.get(c.id) ?? {},
   }));
 
-  const anecdoteRows = await q<{ id: string }>(
-    "select id from public.stories where anecdote order by created_at desc",
-  );
-  const anecdoteI18n = group(
-    await q<{ story_id: string; locale: Locale }>(
-      "select * from public.stories_i18n where story_id = any($1::uuid[])",
-      [anecdoteRows.map((a) => a.id)],
-    ),
-    "story_id",
-    ["title", "body"],
-  );
-  const anecdotes = anecdoteRows.map((a) => ({
-    id: a.id,
-    i18n: anecdoteI18n.get(a.id) ?? {},
-  }));
-
   const places = await q<{ id: string; name: string; located: boolean }>(
     `select p.id, pn.name, p.lat is not null as located
      from public.places p join public.places_i18n pn on pn.place_id = p.id and pn.locale = 'fr'
      order by pn.name`,
   );
 
-  return { texts, figures, chapters, anecdotes, places };
+  return { texts, figures, chapters, places };
 }

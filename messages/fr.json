@@ -12,7 +12,8 @@
       "de": "Deutsch"
     },
     "close": "Fermer",
-    "loading": "Chargement…"
+    "loading": "Chargement…",
+    "edit": "Modifier"
   },
   "nav": {
     "label": "Menu principal",
@@ -352,7 +353,7 @@
       "label": "Sections du tableau de bord",
       "overview": "Vue d’ensemble",
       "tree": "Saisie de l’arbre",
-      "import": "Import GEDCOM",
+      "import": "Import et export",
       "demo": "Démonstration",
       "home": "Page d’accueil",
       "lineages": "Entrées et lignées",
@@ -361,7 +362,10 @@
       "photos": "Photos",
       "places": "Lieux et événements",
       "proposals": "Propositions",
-      "members": "Membres"
+      "members": "Membres",
+      "journal": "Journal",
+      "translations": "Traductions",
+      "people": "Personnes"
     },
     "overview": {
       "title": "Bonjour",
@@ -406,7 +410,22 @@
           "body": "Chacun pourra proposer ses souvenirs, que vous validerez.",
           "action": "Inviter"
         }
-      }
+      },
+      "todo": "À traiter",
+      "todoNone": "Rien n’attend votre décision.",
+      "todos": {
+        "proposals": "{count, plural, one {# proposition} other {# propositions}} des membres",
+        "photoProposals": "{count, plural, one {# nom proposé} other {# noms proposés}} sur les photos",
+        "requests": "{count, plural, one {# demande} other {# demandes}} d’accès",
+        "photos": "{count, plural, one {# photo} other {# photos}} à valider",
+        "stories": "{count, plural, one {# histoire} other {# histoires}} à relire"
+      },
+      "complete": "À compléter",
+      "incomplete": "{count, plural, =0 {Toutes les fiches sont complètes} one {# fiche incomplète} other {# fiches incomplètes}}",
+      "untranslated": "{count, plural, =0 {Tout est traduit} one {# texte à traduire ou à relire} other {# textes à traduire ou à relire}}",
+      "recent": "Dernières modifications",
+      "journalLink": "Tout le journal",
+      "open": "Ouvrir"
     },
     "tree": {
       "title": "Saisie de l’arbre",
@@ -544,9 +563,6 @@
       "chapters": "L’histoire en chapitres",
       "chaptersIntro": "Quatre à huit chapitres, racontés au fil du défilement sur la carte d’Europe.",
       "addChapter": "Ajouter un chapitre",
-      "anecdotes": "Le saviez-vous ?",
-      "anecdotesIntro": "De courtes anecdotes ; trois sont tirées au hasard à chaque visite.",
-      "addAnecdote": "Ajouter une anecdote",
       "none": "Rien pour l’instant.",
       "draft": "brouillon",
       "published": "Visible sur le site",
@@ -559,8 +575,7 @@
       "itemTitle": "Titre",
       "panel": {
         "figure": "Un chiffre",
-        "chapter": "Un chapitre",
-        "anecdote": "Une anecdote"
+        "chapter": "Un chapitre"
       },
       "figure": {
         "kind": "Type de chiffre",
@@ -600,9 +615,6 @@
           "5": "Une région",
           "8": "Une ville"
         }
-      },
-      "anecdote": {
-        "body": "Texte de l’anecdote"
       },
       "errors": {
         "required": "Ce champ est nécessaire.",
@@ -742,13 +754,18 @@
         "familyName": "Famille",
         "familyNameHint": "Pour une famille alliée : son nom.",
         "bearers": "Porteurs",
-        "bearersHint": "En quelques mots, si aucune branche ni personne ne suffit à le dire."
+        "bearersHint": "En quelques mots, si aucune branche ni personne ne suffit à le dire.",
+        "file": "Ou votre propre fichier",
+        "fileHint": "Un SVG (le mieux) ou une image PNG de bonne définition, 3 Mo au plus. Il remplace le dessin choisi ci-dessus.",
+        "removeFile": "Retirer le fichier déposé",
+        "currentFile": "Fichier déposé"
       },
       "errors": {
         "required": "Ce champ est nécessaire.",
         "year": "Écrivez une année, par exemple 1612.",
         "order": "La fin vient avant le début.",
-        "parent": "Une branche ne peut pas être sa propre branche mère."
+        "parent": "Une branche ne peut pas être sa propre branche mère.",
+        "file": "Ce fichier n’a pas pu être lu : un SVG ou une image de 3 Mo au plus."
       }
     },
     "photos": {
@@ -812,7 +829,13 @@
       "state": "État",
       "saved": "Enregistré.",
       "delete": "Supprimer définitivement cette photo",
-      "confirmDelete": "Supprimer cette photo et son fichier ?"
+      "confirmDelete": "Supprimer cette photo et son fichier ?",
+      "library": "Bibliothèque",
+      "libraryIntro": "Toutes les photos du site, les plus récentes d’abord. Touchez-en une pour la décrire ou nommer les personnes.",
+      "librarySearch": "Chercher dans les légendes",
+      "libraryNone": "Aucune photo.",
+      "noCaption": "Sans légende",
+      "peopleCount": "{count, plural, one {# personne} other {# personnes}}"
     },
     "places": {
       "title": "Lieux et événements",
@@ -903,7 +926,29 @@
       "accept": "Accepter",
       "reject": "Refuser",
       "decided": "{state} le {date}",
-      "openTree": "Ouvrir la saisie de l’arbre"
+      "current": "La fiche aujourd’hui",
+      "proposed": "Ce qui est proposé",
+      "editPerson": "Modifier cette fiche",
+      "facts": {
+        "birth": "Naissance",
+        "death": "Décès",
+        "branch": "Branche"
+      },
+      "applyFormNote": "Le formulaire ci-dessous crée ce qui est proposé, après vos corrections, et prévient l’auteur. « Accepter » seul le prévient sans rien créer.",
+      "apply": {
+        "title": {
+          "person": "Ajouter cette personne à l’arbre",
+          "place": "Ajouter ce lieu",
+          "event": "Ajouter cet événement"
+        },
+        "intro": "Prérempli d’après la proposition : corrigez ce qu’il faut, puis acceptez.",
+        "sibling": "La proposition parle d’un frère ou d’une sœur : reliez-la ensuite à ses parents dans la saisie de l’arbre.",
+        "placeWas": "Lieu indiqué par l’auteur : {place}",
+        "publish": "Publier tout de suite",
+        "submit": "Créer et accepter",
+        "check": "Vérifiez les champs signalés.",
+        "error": "L’opération n’a pas pu aboutir."
+      }
     },
     "members": {
       "title": "Membres",
@@ -945,6 +990,271 @@
         "email": "Cette adresse ne semble pas complète.",
         "required": "À remplir.",
         "error": "L’opération n’a pas pu aboutir. Réessayez dans un instant."
+      }
+    },
+    "journal": {
+      "title": "Journal",
+      "intro": "Toutes les modifications du site, de la plus récente à la plus ancienne. Chacune peut être annulée.",
+      "empty": "Aucune modification pour l’instant.",
+      "actions": {
+        "insert": "Ajout",
+        "update": "Modification",
+        "delete": "Suppression"
+      },
+      "undoOf": "Annulation de la modification du {date}",
+      "by": "par {name}",
+      "bySite": "par le site",
+      "more": "{count, plural, one {# autre élément} other {# autres éléments}}",
+      "details": "Voir le détail",
+      "undo": "Annuler cette modification",
+      "confirm": "Annuler cette modification ? Le site reviendra à l’état d’avant.",
+      "undone": "Annulée",
+      "done": "Modification annulée.",
+      "later": "Impossible : une modification plus récente touche les mêmes éléments. Annulez-la d’abord.",
+      "error": "L’annulation n’a pas pu aboutir.",
+      "older": "Modifications plus anciennes",
+      "newest": "Revenir aux plus récentes",
+      "before": "Avant",
+      "after": "Après",
+      "tables": {
+        "access_requests": "Demande d’accès",
+        "albums": "Album",
+        "albums_i18n": "Texte d’album",
+        "arms": "Armoiries",
+        "arms_i18n": "Texte d’armoiries",
+        "branches": "Branche",
+        "branches_i18n": "Texte de branche",
+        "event_people": "Personne d’un événement",
+        "events": "Événement",
+        "events_i18n": "Texte d’événement",
+        "filiation_sources": "Preuve de filiation",
+        "home_chapters": "Chapitre de l’accueil",
+        "home_chapters_i18n": "Texte de chapitre",
+        "home_figures": "Chiffre de l’accueil",
+        "home_figures_i18n": "Texte de chiffre",
+        "home_i18n": "Texte de l’accueil",
+        "invitations": "Invitation",
+        "lineages": "Lignée",
+        "lineages_i18n": "Texte de lignée",
+        "media": "Photo ou document",
+        "media_i18n": "Légende",
+        "media_people": "Personne sur une photo",
+        "parent_child": "Lien de filiation",
+        "people": "Personne",
+        "people_i18n": "Biographie",
+        "people_titles": "Titre porté",
+        "person_sources": "Source d’une personne",
+        "place_people": "Personne d’un lieu",
+        "places": "Lieu",
+        "places_i18n": "Texte de lieu",
+        "profiles": "Compte",
+        "sources": "Source",
+        "stories": "Histoire",
+        "stories_i18n": "Texte d’histoire",
+        "story_events": "Événement d’une histoire",
+        "story_media": "Photo d’une histoire",
+        "story_people": "Personne d’une histoire",
+        "story_places": "Lieu d’une histoire",
+        "suggestions": "Proposition",
+        "titles": "Titre",
+        "titles_i18n": "Texte de titre",
+        "tree_entry_points": "Point d’entrée de l’arbre",
+        "tree_entry_points_i18n": "Texte de point d’entrée",
+        "union_sources": "Preuve d’union",
+        "unions": "Union"
+      },
+      "fields": {
+        "given_names": "Prénoms",
+        "surname": "Nom",
+        "epithet": "Surnom",
+        "sex": "Sexe",
+        "birth_date": "Naissance",
+        "birth_precision": "Précision de la naissance",
+        "birth_place_id": "Lieu de naissance",
+        "death_date": "Décès",
+        "death_precision": "Précision du décès",
+        "death_place_id": "Lieu de décès",
+        "deceased": "Décédé",
+        "branch_id": "Branche",
+        "status": "Statut",
+        "title": "Titre",
+        "name": "Nom",
+        "body": "Texte",
+        "excerpt": "Chapeau",
+        "biography": "Biographie",
+        "description": "Description",
+        "caption": "Légende",
+        "slug": "Adresse",
+        "role": "Rôle",
+        "disabled_at": "Désactivé le",
+        "person_id": "Personne",
+        "place_id": "Lieu",
+        "event_date": "Date",
+        "kind": "Sorte",
+        "lat": "Latitude",
+        "lng": "Longitude",
+        "visitable": "Se visite",
+        "featured": "À la une",
+        "portrait_id": "Portrait",
+        "state": "État",
+        "admin_reply": "Réponse"
+      }
+    },
+    "anecdotes": {
+      "title": "Anecdotes",
+      "intro": "Une anecdote se raconte en quelques lignes. Reliez-la aux personnes qu’elle concerne : elle apparaîtra sur leur fiche et dans « Le saviez-vous ? » de l’accueil.",
+      "add": "Ajouter une anecdote",
+      "edit": "Modifier l’anecdote",
+      "none": "Aucune anecdote pour l’instant.",
+      "titleField": "Titre",
+      "titleHint": "Une phrase qui donne envie de lire.",
+      "body": "L’anecdote",
+      "bodyHint": "Quelques lignes suffisent.",
+      "people": "Personnes concernées",
+      "peopleHint": "Cherchez-les dans l’arbre par leur nom.",
+      "places": "Lieux",
+      "published": "Publiée",
+      "publishedHint": "Décochée, l’anecdote reste un brouillon invisible du public.",
+      "featured": "À la une de l’accueil",
+      "featuredHint": "Montrée en premier dans « Le saviez-vous ? ».",
+      "featuredChip": "À la une",
+      "draft": "Brouillon",
+      "required": "À remplir."
+    },
+    "translations": {
+      "title": "Traductions",
+      "intro": "Les textes de la famille en français, anglais et allemand, côte à côte. Le français fait foi ; une traduction manquante retombe sur le français sur le site.",
+      "filter": "Sorte de contenu",
+      "allKinds": "Tout",
+      "onlyMissing": "Seulement ce qui reste à traduire",
+      "showAll": "Tout afficher, même traduit",
+      "none": "Tout est traduit.",
+      "kinds": {
+        "people": "Biographies",
+        "stories": "Histoires",
+        "places": "Lieux",
+        "events": "Événements",
+        "branches": "Branches",
+        "arms": "Armoiries",
+        "titles": "Titres",
+        "albums": "Albums",
+        "photos": "Légendes"
+      },
+      "states": {
+        "missing": "à traduire",
+        "machine": "à relire",
+        "original": "original",
+        "reviewed": "relu"
+      },
+      "fields": {
+        "biography": "Biographie",
+        "roles": "Rôles et fonctions",
+        "works": "Travaux et réalisations",
+        "title": "Titre",
+        "excerpt": "Chapeau",
+        "body": "Texte",
+        "name": "Nom",
+        "description": "Description",
+        "visit_info": "Pour le visiter",
+        "fate": "Devenir",
+        "blazon": "Blasonnement",
+        "explanation": "Explication",
+        "bearers": "Porteurs",
+        "caption": "Légende",
+        "alt": "Description pour les lecteurs d’écran"
+      },
+      "propose": "Proposer une traduction automatique ({language})",
+      "noMachine": "La traduction automatique demande une clé DeepL, à fournir lors de la mise en ligne.",
+      "machineError": "La traduction automatique n’a pas répondu. Réessayez dans un instant.",
+      "reviewHint": "Relisez la traduction avant d’enregistrer : ce qui est enregistré ici est considéré comme relu.",
+      "save": "Enregistrer",
+      "required": "À remplir, ou laissez toute la langue vide.",
+      "error": "L’enregistrement n’a pas pu aboutir."
+    },
+    "people": {
+      "title": "Personnes",
+      "intro": "Toutes les personnes de l’arbre, ce qui manque à chaque fiche, et les doublons possibles à fusionner.",
+      "add": "Ajouter dans l’arbre",
+      "views": "Affichage",
+      "all": "Toutes ({count})",
+      "incomplete": "À compléter ({count})",
+      "duplicates": "Doublons possibles ({count})",
+      "search": "Chercher par nom ou par année",
+      "lacks": "Il manque : {list}",
+      "missing": {
+        "dates": "les dates",
+        "portrait": "un portrait",
+        "biography": "une biographie",
+        "translations": "les traductions"
+      },
+      "draft": "Brouillon",
+      "edit": "Modifier",
+      "sheet": "Fiche",
+      "more": "Afficher la suite ({count})",
+      "none": "Personne ne correspond.",
+      "duplicatesIntro": "Même nom et même année de naissance : ce sont peut-être les mêmes personnes. Choisissez la fiche à garder ; tout ce qui pointe vers l’autre lui sera rattaché, et ce qui lui manque sera repris de l’autre. La fusion peut être annulée depuis le journal.",
+      "keepWhich": "Fiche à garder",
+      "merge": "Fusionner",
+      "mergeConfirm": "Fusionner ces fiches en une seule ? Vous pourrez annuler depuis le journal.",
+      "mergeError": "La fusion n’a pas pu aboutir.",
+      "noDuplicates": "Aucun doublon repéré."
+    },
+    "export": {
+      "title": "Exporter",
+      "intro": "Pour garder une copie, ou ouvrir l’arbre dans un logiciel de généalogie.",
+      "demoNote": "La famille « Exemple » de démonstration n’est jamais exportée. Les photos elles-mêmes restent dans le stockage ; la sauvegarde contient leurs descriptions.",
+      "files": {
+        "arbre": {
+          "title": "L’arbre (GEDCOM)",
+          "body": "Personnes, unions et filiations, lisibles par tous les logiciels de généalogie."
+        },
+        "personnes": {
+          "title": "Les personnes (tableur)",
+          "body": "Une ligne par personne : noms, dates, lieux, branche."
+        },
+        "lieux": {
+          "title": "Les lieux (tableur)",
+          "body": "Noms, coordonnées, périodes, descriptions."
+        },
+        "evenements": {
+          "title": "Les événements (tableur)",
+          "body": "Titres, dates, lieux, descriptions."
+        },
+        "sauvegarde": {
+          "title": "Sauvegarde complète (JSON)",
+          "body": "Tous les contenus du site, dans toutes les langues, avec les propositions et les comptes (sans les adresses e-mail)."
+        }
+      }
+    },
+    "titles": {
+      "title": "Titres",
+      "intro": "Les titres de la famille et, dans l’ordre, ceux qui les ont portés.",
+      "add": "Ajouter un titre",
+      "edit": "Modifier le titre",
+      "none": "Aucun titre pour l’instant.",
+      "name": "Nom du titre",
+      "nameHint": "Tel qu’on l’écrit, par exemple « Duc de … ».",
+      "created": "Créé en",
+      "dateHint": "« 1533 », « vers 1533 », « 9 février 1533 ».",
+      "creator": "Créé par",
+      "creatorHint": "Le souverain ou l’acte, tel qu’on l’écrit.",
+      "branch": "Branche",
+      "noBranch": "Aucune",
+      "description": "Description",
+      "holders": "Porteurs successifs",
+      "holdersHint": "Dans l’ordre : le premier porteur d’abord. Le rang est le numéro (3 pour le 3ᵉ duc).",
+      "holder": "Porteur {n}",
+      "rank": "Rang",
+      "from": "De",
+      "to": "À",
+      "addHolder": "Ajouter un porteur",
+      "removeHolder": "Retirer ce porteur",
+      "holdersCount": "{count, plural, =0 {aucun porteur} one {# porteur} other {# porteurs}}",
+      "published": "Publié",
+      "draft": "Brouillon",
+      "errors": {
+        "required": "À remplir.",
+        "date": "Date non comprise."
       }
     }
   },
@@ -1312,7 +1622,8 @@
     "choosePhotos": "Choisir des photos",
     "hidePhotos": "Fermer le choix",
     "searchPhotos": "Chercher par légende, personne ou lieu",
-    "noPhotos": "Aucune photo ne correspond."
+    "noPhotos": "Aucune photo ne correspond.",
+    "storiesTitle": "Histoires"
   },
   "photos": {
     "eyebrow": "Visages de la famille",

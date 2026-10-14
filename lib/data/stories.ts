@@ -70,7 +70,7 @@ async function cards(
             s.original_locale, s.featured, m.storage_path as cover_path, m.width as cover_width,
             m.height as cover_height, s.published_at, s.status, s.is_demo
      from public.stories s left join public.media m on m.id = s.cover_id
-     where not s.anecdote and ${where}
+     where ${where}
      order by s.featured desc, s.published_at desc nulls last, s.created_at desc`,
     params,
   );
@@ -178,7 +178,11 @@ export const loadStories = cache(
   async (viewer: Viewer, locale: Locale): Promise<StoryCard[]> => {
     if (!hasDatabase()) return [];
     return withViewer(viewer, async (q) => {
-      const { cards: list } = await cards(q, locale, "s.status = 'published'");
+      const { cards: list } = await cards(
+        q,
+        locale,
+        "not s.anecdote and s.status = 'published'",
+      );
       return list.map(withoutId);
     });
   },
@@ -242,7 +246,7 @@ export const loadStory = cache(
       const { cards: others } = await cards(
         q,
         locale,
-        "s.status = 'published' and s.id <> $1",
+        "not s.anecdote and s.status = 'published' and s.id <> $1",
         [story.id],
       );
       const shared = (c: StoryCard) =>
@@ -281,12 +285,12 @@ export const loadStory = cache(
   },
 );
 
-/** Stories the public may read, built in advance. */
+/** Stories and anecdotes the public may read, built in advance. */
 export async function publicStorySlugs(): Promise<string[]> {
   if (!hasDatabase()) return [];
   const rows = await withViewer({ kind: "visitor" }, (q) =>
     q<{ slug: string }>(
-      "select slug from public.stories where status = 'published' and not anecdote",
+      "select slug from public.stories where status = 'published'",
     ),
   ).catch(() => []);
   return rows.map((r) => r.slug);

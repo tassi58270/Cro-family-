@@ -6,6 +6,7 @@ import { ButtonLink } from "@/components/ui/button";
 import type { StoryDetail } from "@/lib/data/story-types";
 import { Link } from "@/lib/i18n/navigation";
 import { StoryReader } from "./story-reader";
+import { EditLink } from "@/components/ui/edit-link";
 
 /**
  * A story page: the version built in advance for the public, or, for a
@@ -51,6 +52,12 @@ export function StoryPage({
 
   return (
     <div className="grid gap-8">
+      <EditLink
+        href={{
+          pathname: "/admin/histoires/[histoire]",
+          params: { histoire: slug },
+        }}
+      />
       <nav className="text-caption">
         <Link
           href="/histoires"

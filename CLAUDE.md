@@ -27,7 +27,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 - [x] 8. Histoires (magazine, lecture, écriture et validation), puis page Photos (mur, albums, visionneuse, envoi groupé, visages, propositions)
 - [x] 9. Lieux et événements (carte MapLibre, frise, liaison dans les deux sens, lecture, page par lieu, saisie)
 - [x] 10. Comptes famille et contributions (invitations, demandes d’accès, page Contribuer, propositions, espace membre, e-mails)
-- [ ] 11. Dashboard administrateur
+- [x] 11. Dashboard administrateur (vue d’ensemble, journal et annulation, personnes et doublons, anecdotes, traductions, titres, export)
 - [ ] 12. Traductions, finitions, mise en ligne
 
 ## Décisions de la famille (10 octobre 2026)
@@ -195,6 +195,20 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - `/fr/lieux/[lieu]` : description, visite, événements, personnes liées, nées et mortes sur place, histoires, photos (`media.place_id`), petite carte de situation.
 - Saisie : `/fr/admin/lieux` (lieux placés d’un clic sur la carte ou par coordonnées collées, événements à date floue, personnes, branche). Aides communes des formulaires : `lib/admin/form.ts`.
 - Tests : `tests/e2e/places.spec.ts` vérifie le « terminé quand » (Azincourt ↔ 1415) sur des données de test saisies par le tableau de bord.
+
+## Tableau de bord (étape 11)
+
+- `/fr/admin` : « À traiter » (propositions, demandes d’accès, photos et histoires à valider), assistant de démarrage, chiffres, « À compléter », dernières modifications. Menu commun : `components/admin/admin-nav.tsx`.
+- Journal `/fr/admin/journal` (`lib/data/journal.ts`) : une modification = toutes les lignes d’`audit_log` d’une même transaction (`at`) et d’un même auteur. `public.undo_change(at, auteur)` (administrateurs) remet d’abord les lignes supprimées, puis les anciennes valeurs, puis retire les ajouts ; refus « changed since » si une modification plus récente touche les mêmes lignes. Une annulation est elle-même journalisée (`audit_log.undoes`).
+- Personnes `/fr/admin/personnes` : fiches incomplètes et doublons probables ; `public.merge_people(garder, doublon)` complète, déplace tous les liens puis supprime le doublon (annulable depuis le journal).
+- Anecdotes : `components/admin/anecdotes-admin.tsx`, sur `/fr/admin/histoires` et `/fr/admin/accueil` ; reliées aux personnes (`story_people`), elles apparaissent sur leur fiche ; « à la une » passe en premier dans « Le saviez-vous ? ».
+- Traductions `/fr/admin/traductions` (`lib/data/translations.ts`) : textes FR/EN/DE côte à côte, état « à relire » ; proposition automatique par DeepL seulement si `DEEPL_API_KEY`.
+- Propositions : « Appliquer » préremplit le formulaire de la fiche concernée (personne, lieu, événement) à côté de la fiche actuelle.
+- Armoiries : dépôt de SVG (nettoyé par `lib/storage/svg.ts`) ou d’image ; titres et porteurs dans `/fr/admin/armoiries`.
+- Export (administrateurs, sans la démonstration) : `/api/export/arbre.ged`, `personnes.csv`, `lieux.csv`, `evenements.csv`, `sauvegarde.json` (`lib/genealogie/gedcom-export.ts`).
+- Lien « Modifier » sur les pages publiques pour un administrateur (`components/ui/edit-link.tsx`, cookie `croy_membre=admin`).
+- Les clés de messages ne contiennent jamais de point (next-intl les lit comme des niveaux).
+- Tests : `tests/db/journal.test.ts`, `tests/e2e/admin.spec.ts` (le « terminé quand » : une anecdote reliée à deux personnes, publiée, visible sur leurs deux fiches, puis annulée depuis le journal).
 
 ## Système de design (étape 2)
 

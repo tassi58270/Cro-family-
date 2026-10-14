@@ -44,6 +44,7 @@ export type TitleCard = {
 export type Anecdote = {
   id: string;
   slug: string;
+  featured: boolean;
   title: Localized;
   excerpt: Localized | null;
 };
@@ -255,9 +256,9 @@ async function home(q: Query, locale: Locale): Promise<HomeData> {
     ];
   });
 
-  const anecdoteRows = await q<{ id: string; slug: string }>(
-    `select id, slug from public.stories where anecdote and status = 'published'
-     order by published_at desc nulls last limit 24`,
+  const anecdoteRows = await q<{ id: string; slug: string; featured: boolean }>(
+    `select id, slug, featured from public.stories where anecdote and status = 'published'
+     order by featured desc, published_at desc nulls last limit 24`,
   );
   const anecdoteTexts = anecdoteRows.length
     ? await q<Row & { story_id: string }>(
@@ -273,6 +274,7 @@ async function home(q: Query, locale: Locale): Promise<HomeData> {
       {
         id: a.id,
         slug: a.slug,
+        featured: a.featured,
         title,
         excerpt: field(rows, locale, "excerpt") ?? field(rows, locale, "body"),
       },

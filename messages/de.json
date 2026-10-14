@@ -12,7 +12,8 @@
       "de": "Deutsch"
     },
     "close": "Schließen",
-    "loading": "Wird geladen…"
+    "loading": "Wird geladen…",
+    "edit": "Bearbeiten"
   },
   "nav": {
     "label": "Hauptmenü",
@@ -352,7 +353,7 @@
       "label": "Bereiche der Verwaltung",
       "overview": "Überblick",
       "tree": "Stammbaum erfassen",
-      "import": "GEDCOM-Import",
+      "import": "Import und Export",
       "demo": "Beispieldaten",
       "home": "Startseite",
       "lineages": "Einstiege und Abstammungslinien",
@@ -361,7 +362,10 @@
       "photos": "Fotos",
       "places": "Orte und Ereignisse",
       "proposals": "Vorschläge",
-      "members": "Mitglieder"
+      "members": "Mitglieder",
+      "journal": "Protokoll",
+      "translations": "Übersetzungen",
+      "people": "Personen"
     },
     "overview": {
       "title": "Guten Tag",
@@ -406,7 +410,22 @@
           "body": "Jeder kann dann seine Erinnerungen vorschlagen, die Sie freigeben.",
           "action": "Einladen"
         }
-      }
+      },
+      "todo": "Zu bearbeiten",
+      "todoNone": "Nichts wartet auf Ihre Entscheidung.",
+      "todos": {
+        "proposals": "{count, plural, one {# Vorschlag} other {# Vorschläge}} von Mitgliedern",
+        "photoProposals": "{count, plural, one {# vorgeschlagener Name} other {# vorgeschlagene Namen}} auf Fotos",
+        "requests": "{count, plural, one {# Zugangsanfrage} other {# Zugangsanfragen}}",
+        "photos": "{count, plural, one {# Foto} other {# Fotos}} zu prüfen",
+        "stories": "{count, plural, one {# Geschichte} other {# Geschichten}} zu lesen"
+      },
+      "complete": "Zu ergänzen",
+      "incomplete": "{count, plural, =0 {Alle Seiten sind vollständig} one {# unvollständige Seite} other {# unvollständige Seiten}}",
+      "untranslated": "{count, plural, =0 {Alles ist übersetzt} one {# Text zu übersetzen oder zu prüfen} other {# Texte zu übersetzen oder zu prüfen}}",
+      "recent": "Letzte Änderungen",
+      "journalLink": "Das ganze Protokoll",
+      "open": "Öffnen"
     },
     "tree": {
       "title": "Stammbaum erfassen",
@@ -544,9 +563,6 @@
       "chapters": "Die Geschichte in Kapiteln",
       "chaptersIntro": "Vier bis acht Kapitel, beim Scrollen über der Europakarte erzählt.",
       "addChapter": "Kapitel hinzufügen",
-      "anecdotes": "Wussten Sie schon?",
-      "anecdotesIntro": "Kurze Anekdoten; drei werden bei jedem Besuch zufällig ausgewählt.",
-      "addAnecdote": "Anekdote hinzufügen",
       "none": "Noch nichts.",
       "draft": "Entwurf",
       "published": "Auf der Seite sichtbar",
@@ -559,8 +575,7 @@
       "itemTitle": "Titel",
       "panel": {
         "figure": "Eine Zahl",
-        "chapter": "Ein Kapitel",
-        "anecdote": "Eine Anekdote"
+        "chapter": "Ein Kapitel"
       },
       "figure": {
         "kind": "Art der Zahl",
@@ -600,9 +615,6 @@
           "5": "Eine Region",
           "8": "Eine Stadt"
         }
-      },
-      "anecdote": {
-        "body": "Text der Anekdote"
       },
       "errors": {
         "required": "Dieses Feld wird benötigt.",
@@ -742,13 +754,18 @@
         "familyName": "Familie",
         "familyNameHint": "Bei einer verbundenen Familie: ihr Name.",
         "bearers": "Träger",
-        "bearersHint": "In wenigen Worten, wenn weder Linie noch Person es sagen."
+        "bearersHint": "In wenigen Worten, wenn weder Linie noch Person es sagen.",
+        "file": "Oder Ihre eigene Datei",
+        "fileHint": "Ein SVG (am besten) oder ein hochauflösendes PNG, höchstens 3 MB. Es ersetzt die oben gewählte Zeichnung.",
+        "removeFile": "Hochgeladene Datei entfernen",
+        "currentFile": "Hochgeladene Datei"
       },
       "errors": {
         "required": "Dieses Feld wird benötigt.",
         "year": "Schreiben Sie ein Jahr, etwa 1612.",
         "order": "Das Ende liegt vor dem Beginn.",
-        "parent": "Eine Linie kann nicht ihre eigene Mutterlinie sein."
+        "parent": "Eine Linie kann nicht ihre eigene Mutterlinie sein.",
+        "file": "Diese Datei konnte nicht gelesen werden: ein SVG oder ein Bild bis 3 MB."
       }
     },
     "photos": {
@@ -812,7 +829,13 @@
       "state": "Status",
       "saved": "Gespeichert.",
       "delete": "Dieses Foto endgültig löschen",
-      "confirmDelete": "Dieses Foto und seine Datei löschen?"
+      "confirmDelete": "Dieses Foto und seine Datei löschen?",
+      "library": "Bibliothek",
+      "libraryIntro": "Alle Fotos der Website, die neuesten zuerst. Tippen Sie auf eines, um es zu beschreiben oder die Personen zu benennen.",
+      "librarySearch": "In den Bildunterschriften suchen",
+      "libraryNone": "Kein Foto.",
+      "noCaption": "Ohne Bildunterschrift",
+      "peopleCount": "{count, plural, one {# Person} other {# Personen}}"
     },
     "places": {
       "title": "Orte und Ereignisse",
@@ -903,7 +926,29 @@
       "accept": "Annehmen",
       "reject": "Ablehnen",
       "decided": "{state} am {date}",
-      "openTree": "Stammbaum-Eingabe öffnen"
+      "current": "Die Seite heute",
+      "proposed": "Was vorgeschlagen wird",
+      "editPerson": "Diese Seite bearbeiten",
+      "facts": {
+        "birth": "Geburt",
+        "death": "Tod",
+        "branch": "Zweig"
+      },
+      "applyFormNote": "Das Formular unten legt das Vorgeschlagene mit Ihren Korrekturen an und benachrichtigt den Verfasser. „Annehmen“ allein benachrichtigt ihn, ohne etwas anzulegen.",
+      "apply": {
+        "title": {
+          "person": "Diese Person in den Stammbaum aufnehmen",
+          "place": "Diesen Ort hinzufügen",
+          "event": "Dieses Ereignis hinzufügen"
+        },
+        "intro": "Aus dem Vorschlag vorausgefüllt: Korrigieren Sie, was nötig ist, und nehmen Sie dann an.",
+        "sibling": "Der Vorschlag betrifft einen Bruder oder eine Schwester: Verbinden Sie die Person danach in der Stammbaum-Eingabe mit ihren Eltern.",
+        "placeWas": "Vom Verfasser angegebener Ort: {place}",
+        "publish": "Sofort veröffentlichen",
+        "submit": "Anlegen und annehmen",
+        "check": "Prüfen Sie die markierten Felder.",
+        "error": "Das hat nicht geklappt."
+      }
     },
     "members": {
       "title": "Mitglieder",
@@ -945,6 +990,271 @@
         "email": "Diese Adresse scheint unvollständig.",
         "required": "Pflichtfeld.",
         "error": "Das hat nicht geklappt. Versuchen Sie es gleich noch einmal."
+      }
+    },
+    "journal": {
+      "title": "Protokoll",
+      "intro": "Alle Änderungen der Website, die neuesten zuerst. Jede kann rückgängig gemacht werden.",
+      "empty": "Noch keine Änderung.",
+      "actions": {
+        "insert": "Hinzugefügt",
+        "update": "Geändert",
+        "delete": "Gelöscht"
+      },
+      "undoOf": "Rücknahme der Änderung vom {date}",
+      "by": "von {name}",
+      "bySite": "von der Website",
+      "more": "{count, plural, one {# weiteres Element} other {# weitere Elemente}}",
+      "details": "Einzelheiten zeigen",
+      "undo": "Diese Änderung rückgängig machen",
+      "confirm": "Diese Änderung rückgängig machen? Die Website kehrt zum vorherigen Stand zurück.",
+      "undone": "Rückgängig gemacht",
+      "done": "Änderung rückgängig gemacht.",
+      "later": "Nicht möglich: Eine spätere Änderung betrifft dieselben Elemente. Machen Sie diese zuerst rückgängig.",
+      "error": "Die Änderung konnte nicht rückgängig gemacht werden.",
+      "older": "Ältere Änderungen",
+      "newest": "Zurück zu den neuesten",
+      "before": "Vorher",
+      "after": "Nachher",
+      "tables": {
+        "access_requests": "Zugangsanfrage",
+        "albums": "Album",
+        "albums_i18n": "Albumtext",
+        "arms": "Wappen",
+        "arms_i18n": "Wappentext",
+        "branches": "Zweig",
+        "branches_i18n": "Zweigtext",
+        "event_people": "Person eines Ereignisses",
+        "events": "Ereignis",
+        "events_i18n": "Ereignistext",
+        "filiation_sources": "Abstammungsnachweis",
+        "home_chapters": "Kapitel der Startseite",
+        "home_chapters_i18n": "Kapiteltext",
+        "home_figures": "Zahl der Startseite",
+        "home_figures_i18n": "Zahlentext",
+        "home_i18n": "Text der Startseite",
+        "invitations": "Einladung",
+        "lineages": "Linie",
+        "lineages_i18n": "Linientext",
+        "media": "Foto oder Dokument",
+        "media_i18n": "Bildunterschrift",
+        "media_people": "Person auf einem Foto",
+        "parent_child": "Abstammung",
+        "people": "Person",
+        "people_i18n": "Biografie",
+        "people_titles": "Geführter Titel",
+        "person_sources": "Quelle einer Person",
+        "place_people": "Person eines Ortes",
+        "places": "Ort",
+        "places_i18n": "Ortstext",
+        "profiles": "Konto",
+        "sources": "Quelle",
+        "stories": "Geschichte",
+        "stories_i18n": "Geschichtstext",
+        "story_events": "Ereignis einer Geschichte",
+        "story_media": "Foto einer Geschichte",
+        "story_people": "Person einer Geschichte",
+        "story_places": "Ort einer Geschichte",
+        "suggestions": "Vorschlag",
+        "titles": "Titel",
+        "titles_i18n": "Titeltext",
+        "tree_entry_points": "Einstieg in den Stammbaum",
+        "tree_entry_points_i18n": "Einstiegstext",
+        "union_sources": "Ehenachweis",
+        "unions": "Verbindung"
+      },
+      "fields": {
+        "given_names": "Vornamen",
+        "surname": "Nachname",
+        "epithet": "Beiname",
+        "sex": "Geschlecht",
+        "birth_date": "Geburt",
+        "birth_precision": "Genauigkeit der Geburt",
+        "birth_place_id": "Geburtsort",
+        "death_date": "Tod",
+        "death_precision": "Genauigkeit des Todes",
+        "death_place_id": "Sterbeort",
+        "deceased": "Verstorben",
+        "branch_id": "Zweig",
+        "status": "Status",
+        "title": "Titel",
+        "name": "Name",
+        "body": "Text",
+        "excerpt": "Vorspann",
+        "biography": "Biografie",
+        "description": "Beschreibung",
+        "caption": "Bildunterschrift",
+        "slug": "Adresse",
+        "role": "Rolle",
+        "disabled_at": "Deaktiviert am",
+        "person_id": "Person",
+        "place_id": "Ort",
+        "event_date": "Datum",
+        "kind": "Art",
+        "lat": "Breite",
+        "lng": "Länge",
+        "visitable": "Zu besichtigen",
+        "featured": "Hervorgehoben",
+        "portrait_id": "Porträt",
+        "state": "Zustand",
+        "admin_reply": "Antwort"
+      }
+    },
+    "anecdotes": {
+      "title": "Anekdoten",
+      "intro": "Eine Anekdote wird in wenigen Zeilen erzählt. Verknüpfen Sie sie mit den betroffenen Personen: Sie erscheint auf deren Seite und unter „Wussten Sie schon?“ auf der Startseite.",
+      "add": "Anekdote hinzufügen",
+      "edit": "Anekdote bearbeiten",
+      "none": "Noch keine Anekdote.",
+      "titleField": "Titel",
+      "titleHint": "Ein Satz, der Lust aufs Lesen macht.",
+      "body": "Die Anekdote",
+      "bodyHint": "Wenige Zeilen genügen.",
+      "people": "Betroffene Personen",
+      "peopleHint": "Suchen Sie sie im Stammbaum nach dem Namen.",
+      "places": "Orte",
+      "published": "Veröffentlicht",
+      "publishedHint": "Ohne Häkchen bleibt die Anekdote ein Entwurf, den die Öffentlichkeit nicht sieht.",
+      "featured": "Auf der Startseite hervorgehoben",
+      "featuredHint": "Wird unter „Wussten Sie schon?“ zuerst gezeigt.",
+      "featuredChip": "Hervorgehoben",
+      "draft": "Entwurf",
+      "required": "Pflichtfeld."
+    },
+    "translations": {
+      "title": "Übersetzungen",
+      "intro": "Die Texte der Familie auf Französisch, Englisch und Deutsch nebeneinander. Französisch ist maßgeblich; fehlt eine Übersetzung, zeigt die Website den französischen Text.",
+      "filter": "Art des Inhalts",
+      "allKinds": "Alle",
+      "onlyMissing": "Nur, was noch zu übersetzen ist",
+      "showAll": "Alles zeigen, auch Übersetztes",
+      "none": "Alles ist übersetzt.",
+      "kinds": {
+        "people": "Biografien",
+        "stories": "Geschichten",
+        "places": "Orte",
+        "events": "Ereignisse",
+        "branches": "Zweige",
+        "arms": "Wappen",
+        "titles": "Titel",
+        "albums": "Alben",
+        "photos": "Bildunterschriften"
+      },
+      "states": {
+        "missing": "zu übersetzen",
+        "machine": "zu prüfen",
+        "original": "Original",
+        "reviewed": "geprüft"
+      },
+      "fields": {
+        "biography": "Biografie",
+        "roles": "Rollen und Ämter",
+        "works": "Werke und Leistungen",
+        "title": "Titel",
+        "excerpt": "Vorspann",
+        "body": "Text",
+        "name": "Name",
+        "description": "Beschreibung",
+        "visit_info": "Besichtigung",
+        "fate": "Verbleib",
+        "blazon": "Blasonierung",
+        "explanation": "Erklärung",
+        "bearers": "Träger",
+        "caption": "Bildunterschrift",
+        "alt": "Beschreibung für Bildschirmleser"
+      },
+      "propose": "Automatische Übersetzung vorschlagen ({language})",
+      "noMachine": "Die automatische Übersetzung braucht einen DeepL-Schlüssel, der bei der Veröffentlichung bereitzustellen ist.",
+      "machineError": "Die automatische Übersetzung hat nicht geantwortet. Versuchen Sie es gleich noch einmal.",
+      "reviewHint": "Lesen Sie die Übersetzung vor dem Speichern: Was hier gespeichert wird, gilt als geprüft.",
+      "save": "Speichern",
+      "required": "Pflichtfeld, oder lassen Sie die ganze Sprache leer.",
+      "error": "Das konnte nicht gespeichert werden."
+    },
+    "people": {
+      "title": "Personen",
+      "intro": "Alle Personen des Stammbaums, was jeder Seite noch fehlt, und mögliche Doppelungen zum Zusammenführen.",
+      "add": "Im Stammbaum hinzufügen",
+      "views": "Ansicht",
+      "all": "Alle ({count})",
+      "incomplete": "Zu ergänzen ({count})",
+      "duplicates": "Mögliche Doppelungen ({count})",
+      "search": "Nach Name oder Jahr suchen",
+      "lacks": "Es fehlt: {list}",
+      "missing": {
+        "dates": "die Daten",
+        "portrait": "ein Porträt",
+        "biography": "eine Biografie",
+        "translations": "die Übersetzungen"
+      },
+      "draft": "Entwurf",
+      "edit": "Bearbeiten",
+      "sheet": "Seite",
+      "more": "Mehr zeigen ({count})",
+      "none": "Niemand entspricht.",
+      "duplicatesIntro": "Gleicher Name und gleiches Geburtsjahr: Das ist vielleicht dieselbe Person. Wählen Sie die Seite, die bleibt; alles, was auf die andere verweist, wird ihr zugeordnet, und was ihr fehlt, wird von der anderen übernommen. Die Zusammenführung kann im Protokoll rückgängig gemacht werden.",
+      "keepWhich": "Zu behaltende Seite",
+      "merge": "Zusammenführen",
+      "mergeConfirm": "Diese Seiten zu einer zusammenführen? Sie können es im Protokoll rückgängig machen.",
+      "mergeError": "Die Zusammenführung hat nicht geklappt.",
+      "noDuplicates": "Keine Doppelung gefunden."
+    },
+    "export": {
+      "title": "Exportieren",
+      "intro": "Um eine Kopie aufzubewahren oder den Stammbaum in einem Genealogieprogramm zu öffnen.",
+      "demoNote": "Die Demonstrationsfamilie „Exemple“ wird nie exportiert. Die Fotos selbst bleiben im Speicher; die Sicherung enthält ihre Beschreibungen.",
+      "files": {
+        "arbre": {
+          "title": "Der Stammbaum (GEDCOM)",
+          "body": "Personen, Verbindungen und Abstammungen, lesbar für jedes Genealogieprogramm."
+        },
+        "personnes": {
+          "title": "Die Personen (Tabelle)",
+          "body": "Eine Zeile pro Person: Namen, Daten, Orte, Zweig."
+        },
+        "lieux": {
+          "title": "Die Orte (Tabelle)",
+          "body": "Namen, Koordinaten, Zeiträume, Beschreibungen."
+        },
+        "evenements": {
+          "title": "Die Ereignisse (Tabelle)",
+          "body": "Titel, Daten, Orte, Beschreibungen."
+        },
+        "sauvegarde": {
+          "title": "Vollständige Sicherung (JSON)",
+          "body": "Alle Inhalte der Website in allen Sprachen, mit Vorschlägen und Konten (ohne E-Mail-Adressen)."
+        }
+      }
+    },
+    "titles": {
+      "title": "Titel",
+      "intro": "Die Titel der Familie und, der Reihe nach, ihre Träger.",
+      "add": "Titel hinzufügen",
+      "edit": "Titel bearbeiten",
+      "none": "Noch kein Titel.",
+      "name": "Name des Titels",
+      "nameHint": "Wie er geschrieben wird, zum Beispiel „Herzog von …“.",
+      "created": "Geschaffen",
+      "dateHint": "„1533“, „um 1533“, „9. Februar 1533“.",
+      "creator": "Geschaffen von",
+      "creatorHint": "Der Herrscher oder die Urkunde, wie geschrieben.",
+      "branch": "Zweig",
+      "noBranch": "Keiner",
+      "description": "Beschreibung",
+      "holders": "Aufeinanderfolgende Träger",
+      "holdersHint": "Der Reihe nach: der erste Träger zuerst. Der Rang ist die Nummer (3 für den 3. Herzog).",
+      "holder": "Träger {n}",
+      "rank": "Rang",
+      "from": "Von",
+      "to": "Bis",
+      "addHolder": "Träger hinzufügen",
+      "removeHolder": "Diesen Träger entfernen",
+      "holdersCount": "{count, plural, =0 {kein Träger} one {# Träger} other {# Träger}}",
+      "published": "Veröffentlicht",
+      "draft": "Entwurf",
+      "errors": {
+        "required": "Pflichtfeld.",
+        "date": "Datum nicht verstanden."
       }
     }
   },
@@ -1312,7 +1622,8 @@
     "choosePhotos": "Fotos auswählen",
     "hidePhotos": "Auswahl schließen",
     "searchPhotos": "Nach Bildunterschrift, Person oder Ort suchen",
-    "noPhotos": "Kein Foto passt."
+    "noPhotos": "Kein Foto passt.",
+    "storiesTitle": "Geschichten"
   },
   "photos": {
     "eyebrow": "Gesichter der Familie",

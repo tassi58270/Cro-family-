@@ -11,7 +11,6 @@ import { useTranslations } from "next-intl";
 import {
   deleteHomeItem,
   moveHomeItem,
-  saveAnecdote,
   saveChapter,
   saveFigure,
   saveHomeTexts,
@@ -49,8 +48,7 @@ const initial: HomeFormState = { status: "idle" };
 
 type Panel =
   | { kind: "figure"; item?: AdminHome["figures"][number] }
-  | { kind: "chapter"; item?: AdminHome["chapters"][number] }
-  | { kind: "anecdote"; item?: AdminHome["anecdotes"][number] };
+  | { kind: "chapter"; item?: AdminHome["chapters"][number] };
 
 function Section({
   id,
@@ -222,12 +220,7 @@ function ItemForm({
 }) {
   const t = useTranslations("admin.home");
   const tLang = useTranslations("common.languages");
-  const action =
-    panel.kind === "figure"
-      ? saveFigure
-      : panel.kind === "chapter"
-        ? saveChapter
-        : saveAnecdote;
+  const action = panel.kind === "figure" ? saveFigure : saveChapter;
   const [state, onSubmit, pending] = useFormAction(action, initial);
   useSaved(state, onSaved);
   const error = (field: string) => {
@@ -274,10 +267,8 @@ function ItemForm({
         error={error("title_fr")}
       />
       <TextArea
-        label={
-          panel.kind === "chapter" ? t("chapter.body") : t("anecdote.body")
-        }
-        hint={panel.kind === "chapter" ? t("chapter.bodyHint") : undefined}
+        label={t("chapter.body")}
+        hint={t("chapter.bodyHint")}
         name="body_fr"
         rows={5}
         defaultValue={item?.i18n.fr?.body ?? ""}
@@ -329,11 +320,7 @@ function ItemForm({
               defaultValue={item?.i18n[l]?.title ?? ""}
             />
             <TextArea
-              label={
-                panel.kind === "chapter"
-                  ? t("chapter.body")
-                  : t("anecdote.body")
-              }
+              label={t("chapter.body")}
               name={`body_${l}`}
               rows={4}
               defaultValue={item?.i18n[l]?.body ?? ""}
@@ -538,7 +525,7 @@ export function HomeEditor({ data }: { data: AdminHome }) {
       await fn();
       router.refresh();
     });
-  const remove = (kind: "figure" | "chapter" | "anecdote", id: string) => {
+  const remove = (kind: "figure" | "chapter", id: string) => {
     if (window.confirm(t("deleteConfirm"))) run(() => deleteHomeItem(kind, id));
   };
   const fr = (v?: string | null) => v || "—";
@@ -633,35 +620,6 @@ export function HomeEditor({ data }: { data: AdminHome }) {
           ))}
         </ol>
         {data.chapters.length === 0 && (
-          <p className="text-ink-muted">{t("none")}</p>
-        )}
-      </Section>
-
-      <Section
-        id="anecdotes"
-        title={t("anecdotes")}
-        intro={t("anecdotesIntro")}
-        action={
-          <Button size="sm" onClick={() => show({ kind: "anecdote" })}>
-            {t("addAnecdote")}
-          </Button>
-        }
-      >
-        <ul>
-          {data.anecdotes.map((a) => (
-            <Row
-              key={a.id}
-              onEdit={() => show({ kind: "anecdote", item: a })}
-              onDelete={() => remove("anecdote", a.id)}
-            >
-              <p className="font-medium">{fr(a.i18n.fr?.title)}</p>
-              <p className="line-clamp-1 text-caption text-ink-muted">
-                {a.i18n.fr?.body}
-              </p>
-            </Row>
-          ))}
-        </ul>
-        {data.anecdotes.length === 0 && (
           <p className="text-ink-muted">{t("none")}</p>
         )}
       </Section>

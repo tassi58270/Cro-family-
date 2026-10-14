@@ -7,6 +7,7 @@ import { branchColor } from "@/components/armoiries/branch-color";
 import { branchSlugs, loadBranchPage } from "@/lib/data/arms";
 import { Link } from "@/lib/i18n/navigation";
 import { resolveLocale } from "@/lib/i18n/server";
+import { EditLink } from "@/components/ui/edit-link";
 
 export async function generateStaticParams() {
   return (await branchSlugs()).map((branche) => ({ branche }));
@@ -50,6 +51,7 @@ export default async function BranchPage({
       id="contenu"
       className="page mx-auto grid w-full max-w-4xl gap-12 px-(--gutter) pt-8 pb-28 md:pt-14"
     >
+      <EditLink href="/admin/armoiries" />
       <nav className="text-caption">
         <Link
           href="/armoiries"

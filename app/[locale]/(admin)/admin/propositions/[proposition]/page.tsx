@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { markReviewing } from "@/app/[locale]/(admin)/admin/propositions/actions";
+import { ApplyProposal } from "@/components/admin/apply-proposal";
 import { DecisionForm } from "@/components/admin/decision-form";
 import { PersonChip, StatusChip } from "@/components/ui/chip";
 import { requireAdmin, viewerOf } from "@/lib/auth/session";
 import { FIELDS, type SuggestionKind } from "@/lib/contributions/kinds";
 import { PROPOSAL_CHIP } from "@/lib/contributions/states";
 import { loadProposal } from "@/lib/data/admin-proposals";
+import { placeChoices } from "@/lib/data/story-editor";
 import { withViewer } from "@/lib/db";
 import { Link } from "@/lib/i18n/navigation";
 import { resolveLocale } from "@/lib/i18n/server";
@@ -27,8 +29,12 @@ export default async function ProposalPage({
   const locale = await resolveLocale(params);
   const session = await requireAdmin(locale);
   const { proposition } = await params;
-  const proposal = await withViewer(viewerOf(session), (q) =>
-    loadProposal(q, proposition),
+  const { proposal, places } = await withViewer(
+    viewerOf(session),
+    async (q) => ({
+      proposal: await loadProposal(q, proposition),
+      places: await placeChoices(q, locale),
+    }),
   );
   if (!proposal) notFound();
   const t = await getTranslations({ locale, namespace: "admin.proposals" });
@@ -75,9 +81,9 @@ export default async function ProposalPage({
       </header>
 
       {proposal.target && (
-        <section className="grid gap-3">
+        <section className="grid gap-3 rounded-xs bg-paper-2 p-5">
           <h2 className="text-caption font-medium text-ink-muted">
-            {t("about")}
+            {t("current")}
           </h2>
           <div>
             <PersonChip
@@ -92,13 +98,34 @@ export default async function ProposalPage({
               }}
             />
           </div>
+          {proposal.target.facts.length > 0 && (
+            <dl className="grid gap-1 text-caption">
+              {proposal.target.facts.map((f) => (
+                <div key={f.field} className="flex gap-2">
+                  <dt className="text-ink-muted">{t(`facts.${f.field}`)}</dt>
+                  <dd>{f.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+          <p>
+            <Link
+              href={{
+                pathname: "/admin/arbre",
+                query: { personne: proposal.target.id },
+              }}
+              className="link text-caption font-medium"
+            >
+              {t("editPerson")}
+            </Link>
+          </p>
         </section>
       )}
 
       {fields.length > 0 && (
         <section className="grid gap-3">
           <h2 className="text-caption font-medium text-ink-muted">
-            {t("content")}
+            {proposal.target ? t("proposed") : t("content")}
           </h2>
           <dl className="grid border-t border-hairline">
             {fields.map((f) => (
@@ -166,15 +193,23 @@ export default async function ProposalPage({
       {open ? (
         <section className="grid gap-5 border-t border-hairline pt-8">
           <p className="text-caption text-ink-muted">
-            {proposal.kind === "claim" ? t("claimNote") : t("applyNote")}
+            {proposal.kind === "claim"
+              ? t("claimNote")
+              : proposal.kind === "correction"
+                ? t("applyNote")
+                : t("applyFormNote")}
           </p>
-          {proposal.kind === "person" || proposal.kind === "correction" ? (
-            <p>
-              <Link href="/admin/arbre" className="link font-medium">
-                {t("openTree")}
-              </Link>
-            </p>
-          ) : null}
+          {(proposal.kind === "person" ||
+            proposal.kind === "place" ||
+            proposal.kind === "event") && (
+            <ApplyProposal
+              id={proposal.id}
+              kind={proposal.kind}
+              payload={proposal.payload}
+              targetId={proposal.target?.id ?? null}
+              places={places}
+            />
+          )}
           {proposal.state === "sent" && (
             <form action={markReviewing}>
               <input type="hidden" name="id" value={proposal.id} />

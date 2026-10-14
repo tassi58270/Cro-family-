@@ -4,7 +4,6 @@ import { getSession, viewerOf, type Session } from "@/lib/auth/session";
 import { contentChanged } from "@/lib/data/revalidate";
 import { withViewer, type Query } from "@/lib/db";
 import { routing, type Locale } from "@/lib/i18n/routing";
-import { slugify, uniqueSlug } from "@/lib/slug";
 
 export type HomeFormState = {
   status: "idle" | "saved" | "invalid" | "error";
@@ -229,75 +228,12 @@ export async function saveChapter(
   }
 }
 
-/** A short anecdote for « Le saviez-vous ? », published at once. */
-export async function saveAnecdote(
-  _previous: HomeFormState,
-  form: FormData,
-): Promise<HomeFormState> {
-  const title = text(form, "title_fr");
-  const body = text(form, "body_fr");
-  const errors: HomeFormState["errors"] = {};
-  if (!title) errors.title_fr = "required";
-  if (!body) errors.body_fr = "required";
-  if (Object.keys(errors).length) return { status: "invalid", errors };
-
-  const id = text(form, "id") || null;
-  try {
-    await asAdmin(async (q, session) => {
-      let storyId = id;
-      if (!storyId) {
-        const slug = await uniqueSlug(slugify(title), async (s) =>
-          Boolean(
-            (await q("select 1 from public.stories where slug = $1", [s]))
-              .length,
-          ),
-        );
-        storyId = (
-          await q<{ id: string }>(
-            `insert into public.stories (slug, anecdote, author_id, original_locale, published_at, status)
-             values ($1, true, $2, 'fr', now(), 'published') returning id`,
-            [slug, session.accountId],
-          )
-        )[0].id;
-      }
-      for (const locale of LOCALES) {
-        const t = text(form, `title_${locale}`);
-        const b = text(form, `body_${locale}`);
-        if (!t || !b) {
-          if (locale !== "fr") {
-            await q(
-              "delete from public.stories_i18n where story_id = $1 and locale = $2",
-              [storyId, locale],
-            );
-          }
-          continue;
-        }
-        await q(
-          `insert into public.stories_i18n (story_id, locale, title, excerpt, body, translation)
-           values ($1, $2, $3, $4, $4, $5)
-           on conflict (story_id, locale) do update
-             set title = excluded.title, excerpt = excluded.excerpt, body = excluded.body,
-                 translation = excluded.translation`,
-          [storyId, locale, t, b, locale === "fr" ? "original" : "reviewed"],
-        );
-      }
-    });
-    return saved();
-  } catch (error) {
-    console.error(error);
-    return { status: "error" };
-  }
-}
-
 const ORDERED = { figure: "home_figures", chapter: "home_chapters" } as const;
-const DELETABLE = { ...ORDERED, anecdote: "stories" } as const;
+const DELETABLE = ORDERED;
 
 export async function deleteHomeItem(kind: keyof typeof DELETABLE, id: string) {
   await asAdmin((q) =>
-    q(
-      `delete from public.${DELETABLE[kind]} where id = $1${kind === "anecdote" ? " and anecdote" : ""}`,
-      [id],
-    ),
+    q(`delete from public.${DELETABLE[kind]} where id = $1`, [id]),
   );
 }
 

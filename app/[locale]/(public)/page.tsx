@@ -9,6 +9,7 @@ import { TitlesFrieze } from "@/components/accueil/titles-frieze";
 import { projectInto } from "@/lib/carte/project";
 import { loadHome } from "@/lib/data/home";
 import { resolveLocale } from "@/lib/i18n/server";
+import { EditLink } from "@/components/ui/edit-link";
 
 // Decorative markers for the map tile while no place has coordinates.
 const DEFAULT_MARKERS: [number, number][] = [
@@ -51,6 +52,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
 
   return (
     <main id="contenu" className="flex flex-1 flex-col">
+      <EditLink href="/admin/accueil" />
       <Opening
         tagline={tagline}
         pronunciation={pronunciation}

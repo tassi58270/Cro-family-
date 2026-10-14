@@ -9,6 +9,7 @@ import type { LinkedPerson, PlaceDetail } from "@/lib/data/place-types";
 import { Link } from "@/lib/i18n/navigation";
 import { usePeriod } from "./place-card";
 import { dateParts } from "./timeline";
+import { EditLink } from "@/components/ui/edit-link";
 
 function People({ title, people }: { title: string; people: LinkedPerson[] }) {
   if (!people.length) return null;
@@ -79,6 +80,7 @@ export function PlacePage({
 
   return (
     <article className="grid gap-12">
+      <EditLink href="/admin/lieux" />
       <nav className="text-caption">
         <Link
           href="/lieux-et-evenements"
