@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import pg from "pg";
 import { expectAccessible, hasDatabase, signIn } from "./helpers";
 
 /** Step 9: the map, the timeline and their two-way link (6.6). */
@@ -21,9 +22,28 @@ test.describe("with places entered in the dashboard", () => {
     test.skip(isMobile, "writes to the shared database: desktop project only");
   });
 
+  // A retry replays the whole group: start again from no test place.
+  async function removeTestPlaces() {
+    const db = new pg.Client({ connectionString: process.env.DATABASE_URL });
+    await db.connect();
+    try {
+      await db.query(
+        `delete from public.events where id in (select event_id from public.events_i18n
+         where locale = 'fr' and title = 'Bataille d’essai')`,
+      );
+      await db.query(
+        `delete from public.places where id in (select place_id from public.places_i18n
+         where locale = 'fr' and name = 'Azincourt')`,
+      );
+    } finally {
+      await db.end();
+    }
+  }
+
   test("an administrator places Azincourt on the map and dates an event there", async ({
     page,
   }) => {
+    await removeTestPlaces();
     await signIn(page);
     await page.goto("/fr/admin/lieux");
     await page.getByRole("button", { name: "Ajouter un lieu" }).click();

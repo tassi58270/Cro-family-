@@ -28,6 +28,14 @@ test.describe("dashboard", () => {
     const db = new pg.Client({ connectionString: process.env.DATABASE_URL });
     await db.connect();
     try {
+      // A retry replays the whole group: start again from no test person.
+      await db.query(
+        `delete from public.stories where id in (select story_id from public.stories_i18n
+         where title like 'Le pari du moulin %')`,
+      );
+      await db.query(
+        "delete from public.people where slug ~ '^(albertine|barnabe)-essai-[0-9]+$'",
+      );
       for (const p of people) {
         await db.query(
           `insert into public.people (slug, given_names, surname, deceased, status)
