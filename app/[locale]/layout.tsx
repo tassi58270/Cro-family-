@@ -5,7 +5,6 @@ import { PageTransition } from "@/components/ui/page-transition";
 import { openingScript } from "@/components/accueil/opening";
 import { themeScript } from "@/components/ui/theme-switcher";
 import { atkinson, bodoni } from "@/lib/design/fonts";
-import { getPathname } from "@/lib/i18n/navigation";
 import { routing } from "@/lib/i18n/routing";
 import { resolveLocale } from "@/lib/i18n/server";
 import { isIndexable, siteUrl } from "@/lib/site";
@@ -28,12 +27,6 @@ export async function generateMetadata({
     title: { default: t("siteName"), template: `%s · ${t("siteName")}` },
     description: t("description"),
     applicationName: t("siteName"),
-    alternates: {
-      canonical: getPathname({ locale, href: "/" }),
-      languages: Object.fromEntries(
-        routing.locales.map((l) => [l, getPathname({ locale: l, href: "/" })]),
-      ),
-    },
     openGraph: { siteName: t("siteName"), locale, type: "website" },
     robots: { index: indexable, follow: indexable },
   };

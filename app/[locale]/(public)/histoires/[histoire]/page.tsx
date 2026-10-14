@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { StoryPage } from "@/components/histoires/story-page";
 import { loadStory, publicStorySlugs } from "@/lib/data/stories";
 import { VISITOR } from "@/lib/db";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { resolveLocale } from "@/lib/i18n/server";
 import { isIndexable } from "@/lib/site";
 
@@ -30,6 +31,10 @@ export async function generateMetadata({
   const indexable = isIndexable() && !story.isDemo;
   return {
     title: story.title.text,
+    alternates: alternatesFor(locale, {
+      pathname: "/histoires/[histoire]",
+      params: { histoire },
+    }),
     description: story.excerpt?.text,
     robots: { index: indexable, follow: indexable },
   };

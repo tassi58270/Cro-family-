@@ -1,0 +1,60 @@
+name: Sauvegarde
+
+# Every night, a copy of the database, encrypted, kept 35 days as an artifact
+# of this repository. It waits for two secrets (Settings › Secrets › Actions):
+# BACKUP_DATABASE_URL (Supabase connection string) and BACKUP_PASSPHRASE.
+# The copy holds e-mail addresses: never stored unencrypted, even here.
+# Restoring: docs/mise-en-ligne.md.
+
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    name: Database copy
+    runs-on: ubuntu-latest
+    # pg_dump must be at least as recent as the server.
+    container: postgres:17
+    steps:
+      - name: Check the secrets
+        id: check
+        env:
+          DATABASE_URL: ${{ secrets.BACKUP_DATABASE_URL }}
+          PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          if [ -z "$DATABASE_URL" ] || [ -z "$PASSPHRASE" ]; then
+            echo "::notice::No backup: BACKUP_DATABASE_URL and BACKUP_PASSPHRASE are not set yet."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Dump and encrypt
+        if: steps.check.outputs.ready == 'true'
+        env:
+          DATABASE_URL: ${{ secrets.BACKUP_DATABASE_URL }}
+          PASSPHRASE: ${{ secrets.BACKUP_PASSPHRASE }}
+        run: |
+          apt-get update -qq && apt-get install -y -qq gnupg > /dev/null
+          day=$(date -u +%F)
+          pg_dump "$DATABASE_URL" --format=custom --no-owner --no-privileges \
+            --schema=public --schema=private --schema=app \
+            --schema=supabase_migrations --file=croy.dump
+          gpg --batch --yes --pinentry-mode loopback --passphrase "$PASSPHRASE" \
+            --symmetric --cipher-algo AES256 --output "croy-$day.dump.gpg" croy.dump
+          rm croy.dump
+          ls -l croy-*.dump.gpg
+
+      - name: Keep the copy
+        if: steps.check.outputs.ready == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: sauvegarde-${{ github.run_id }}
+          path: croy-*.dump.gpg
+          retention-days: 35
+          if-no-files-found: error

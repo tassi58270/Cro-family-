@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/lib/i18n/routing";
-import { isIndexable } from "@/lib/site";
+import { isIndexable, siteUrl } from "@/lib/site";
 
 /** Member and admin areas are never crawled, in any language. */
 const privateRoutes = ["/connexion", "/compte", "/admin"] as const;
@@ -19,5 +19,8 @@ export default function robots(): MetadataRoute.Robots {
     }),
   );
 
-  return { rules: { userAgent: "*", allow: "/", disallow } };
+  return {
+    rules: { userAgent: "*", allow: "/", disallow },
+    sitemap: new URL("/sitemap.xml", siteUrl()).toString(),
+  };
 }

@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { TreeApp } from "@/components/arbre/tree-app";
 import { ButtonLink } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { resolveLocale } from "@/lib/i18n/server";
 
 export async function generateMetadata({
@@ -10,7 +11,10 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/arbre">): Promise<Metadata> {
   const locale = await resolveLocale(params);
   const t = await getTranslations({ locale, namespace: "sections" });
-  return { title: t("tree.title") };
+  return {
+    title: t("tree.title"),
+    alternates: alternatesFor(locale, "/arbre"),
+  };
 }
 
 /**

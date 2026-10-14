@@ -38,6 +38,7 @@ export default function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Every path except API routes, Next.js internals and files with an extension.
-  matcher: "/((?!api|_next|_vercel|.*\\..*).*)",
+  // Every path except API routes, Next.js internals, the home-screen icon
+  // and files with an extension.
+  matcher: "/((?!api|_next|_vercel|apple-icon|.*\\..*).*)",
 };

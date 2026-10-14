@@ -6,6 +6,7 @@ import { PlacePage } from "@/components/carte/place-page";
 import { project } from "@/lib/carte/project";
 import { loadPlace, publicPlaceSlugs } from "@/lib/data/places";
 import { VISITOR } from "@/lib/db";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { resolveLocale } from "@/lib/i18n/server";
 import { isIndexable } from "@/lib/site";
 
@@ -27,6 +28,10 @@ export async function generateMetadata({
   const indexable = isIndexable() && !place.isDemo;
   return {
     title: place.name.text,
+    alternates: alternatesFor(locale, {
+      pathname: "/lieux/[lieu]",
+      params: { lieu },
+    }),
     description: place.summary?.text,
     robots: { index: indexable, follow: indexable },
   };

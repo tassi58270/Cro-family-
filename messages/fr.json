@@ -175,7 +175,8 @@
   "notFound": {
     "title": "Page introuvable",
     "body": "Cette adresse ne mène à aucune page. Elle a peut-être changé, ou la page n’existe pas encore.",
-    "backHome": "Revenir à l’accueil"
+    "backHome": "Revenir à l’accueil",
+    "search": "Chercher sur le site"
   },
   "style": {
     "title": "Système de design",
@@ -365,7 +366,8 @@
       "members": "Membres",
       "journal": "Journal",
       "translations": "Traductions",
-      "people": "Personnes"
+      "people": "Personnes",
+      "guide": "Guide"
     },
     "overview": {
       "title": "Bonjour",
@@ -1256,6 +1258,80 @@
         "required": "À remplir.",
         "date": "Date non comprise."
       }
+    },
+    "guide": {
+      "title": "Guide de l’administrateur",
+      "intro": "Deux pages pour tenir le site au quotidien. Rien n’est publié sans vous, et tout ce que vous faites peut être annulé.",
+      "print": "Imprimer le guide",
+      "open": "Ouvrir",
+      "sections": {
+        "start": {
+          "title": "Avant d’ouvrir le site",
+          "points": {
+            "1": "Supprimez les données de démonstration : la famille « Exemple » est fictive et disparaît en un clic.",
+            "2": "Suivez « Pour bien démarrer » sur la vue d’ensemble : le blason, le résumé de l’accueil, les premiers ancêtres, les premières photos, trois cousins invités.",
+            "3": "Un arbre déjà saisi dans un logiciel de généalogie s’importe en une fois (Import et export, fichier GEDCOM). Rien n’est écrit avant votre confirmation."
+          }
+        },
+        "weekly": {
+          "title": "Chaque semaine",
+          "points": {
+            "1": "La vue d’ensemble rassemble ce qui attend votre décision : propositions, demandes d’accès, photos et histoires à valider.",
+            "2": "Une proposition s’accepte ou se refuse avec un mot pour son auteur, qui le reçoit par e-mail. « Appliquer » ouvre le formulaire de la fiche, déjà rempli, à côté de la fiche actuelle.",
+            "3": "Accepter « C’est moi » relie le compte d’un membre à sa fiche dans l’arbre."
+          }
+        },
+        "add": {
+          "title": "Ajouter du contenu",
+          "points": {
+            "1": "Personnes : une personne au centre, puis « + » pour un parent, un conjoint ou un enfant. Une date peut rester floue : « vers 1450 », « 1450 ».",
+            "2": "Histoires et anecdotes : reliez-les aux personnes concernées, elles apparaissent d’elles-mêmes sur leur fiche.",
+            "3": "Photos : envoyez-en plusieurs à la fois, puis entourez les visages et nommez-les.",
+            "4": "Lieux et événements : un clic sur la carte place un lieu ; un événement porte une date, un lieu et des personnes.",
+            "5": "Armoiries et titres : vos fichiers SVG remplacent les dessins du site.",
+            "6": "Sur le site, le bouton « Modifier » mène droit à l’écran qui correspond à la page."
+          }
+        },
+        "privacy": {
+          "title": "Vie privée",
+          "points": {
+            "1": "Une personne est traitée comme vivante tant qu’elle n’a ni date de décès ni case « décédée » cochée, sauf si elle est née il y a plus de cent ans.",
+            "2": "Une personne vivante n’est jamais visible du public ni des moteurs de recherche : l’arbre public affiche « Personne vivante ». Les membres connectés la voient.",
+            "3": "Avant de publier une photo ou une histoire qui montre des vivants, demandez-leur leur accord."
+          }
+        },
+        "members": {
+          "title": "Membres",
+          "points": {
+            "1": "Invitez un cousin par son adresse e-mail : il reçoit un lien de connexion valable sept jours.",
+            "2": "Les demandes d’accès envoyées depuis la page Contribuer s’acceptent ou se refusent ici.",
+            "3": "Un membre peut devenir administrateur ; un compte se désactive sans être supprimé."
+          }
+        },
+        "undo": {
+          "title": "Se tromper sans crainte",
+          "points": {
+            "1": "Le journal garde chaque modification : qui, quoi, quand, avant et après.",
+            "2": "« Annuler cette modification » remet le site dans l’état d’avant, même après une suppression ou une fusion de doublons.",
+            "3": "Si une modification plus récente touche les mêmes éléments, annulez d’abord celle-là."
+          }
+        },
+        "languages": {
+          "title": "Langues",
+          "points": {
+            "1": "Le français fait foi ; une traduction manquante retombe sur le français.",
+            "2": "L’écran Traductions montre côte à côte le français, l’anglais et l’allemand, et ce qui reste à traduire ou à relire.",
+            "3": "Une traduction proposée par la machine reste « à relire » jusqu’à ce que vous la validiez."
+          }
+        },
+        "backup": {
+          "title": "Sauvegarde",
+          "points": {
+            "1": "Import et export : l’arbre au format GEDCOM, des tableurs (personnes, lieux, événements) et une sauvegarde complète. Gardez-en une copie de temps en temps.",
+            "2": "Une fois le site en ligne, la base est aussi sauvegardée chaque nuit, automatiquement."
+          }
+        }
+      }
     }
   },
   "tree": {
@@ -1995,5 +2071,35 @@
       "another": "Proposer autre chose",
       "follow": "Suivre mes propositions"
     }
+  },
+  "searchPage": {
+    "title": "Rechercher",
+    "intro": "Une personne, une histoire, un lieu, un événement, une branche ou un titre. Les accents et les anciennes graphies sont ignorés : Croÿ, Croy et Crouy mènent au même endroit.",
+    "label": "Que cherchez-vous ?",
+    "placeholder": "Un nom, un lieu, une année…",
+    "loading": "Chargement de la recherche",
+    "count": "{count, plural, =0 {Aucun résultat} one {# résultat} other {# résultats}}",
+    "none": "Rien ne correspond à « {query} ».",
+    "noneHint": "Essayez un autre mot, ou le début du nom seulement. S’il manque quelqu’un ou quelque chose, vous pouvez le proposer.",
+    "propose": "Proposer un ajout",
+    "showAll": "Afficher les {count}",
+    "anecdote": "Anecdote",
+    "browse": "Ou parcourez le site",
+    "emptySite": "Le site attend encore ses premiers contenus : la recherche les trouvera dès leur publication.",
+    "kinds": {
+      "person": "Personnes",
+      "story": "Histoires",
+      "place": "Lieux",
+      "event": "Événements",
+      "branch": "Branches",
+      "title": "Titres"
+    }
+  },
+  "errorPage": {
+    "title": "La page n’a pas pu s’afficher",
+    "body": "Un incident est survenu de notre côté. Réessayez dans un instant ; si cela recommence, prévenez un administrateur en lui donnant la référence ci-dessous.",
+    "retry": "Réessayer",
+    "backHome": "Revenir à l’accueil",
+    "reference": "Référence : {digest}"
   }
 }

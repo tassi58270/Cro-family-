@@ -34,6 +34,21 @@ test.describe("the opening", () => {
     expect(Date.now() - start).toBeLessThan(1_000);
   });
 
+  test("a phone too slow to start it shows the page at once", async ({
+    page,
+  }) => {
+    const cdp = await page.context().newCDPSession(page);
+    await cdp.send("Emulation.setCPUThrottlingRate", { rate: 10 });
+    const start = Date.now();
+    await page.goto("/fr", { waitUntil: "commit" });
+    await expect(
+      page.getByRole("heading", { level: 1, name: "Croÿ" }),
+    ).toBeVisible({ timeout: 4_000 });
+    expect(Date.now() - start).toBeLessThan(4_000);
+    await cdp.send("Emulation.setCPUThrottlingRate", { rate: 1 });
+    await expect(page.locator("html")).not.toHaveClass(/intro/);
+  });
+
   test("does not play on other pages", async ({ page }) => {
     await page.goto("/fr/histoires");
     await expect(page.locator("html")).not.toHaveClass(/intro/);

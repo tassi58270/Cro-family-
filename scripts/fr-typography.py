@@ -12,8 +12,8 @@ def fix(value: str) -> str:
     return value
 
 def walk(node):
-    for key, value in node.items():
-        if isinstance(value, dict):
+    for key, value in (node.items() if isinstance(node, dict) else enumerate(node)):
+        if isinstance(value, (dict, list)):
             walk(value)
         else:
             node[key] = fix(value)

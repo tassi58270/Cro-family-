@@ -21,7 +21,10 @@ export const SEEN_KEY = "croy:opening-seen";
  * Runs in <head> before the first paint, on the home page only, so that
  * neither the final page nor the menu flashes before the opening.
  */
-export const openingScript = `(function(){if(!/^\\/(fr|en|de)\\/?$/.test(location.pathname))return;var d=document.documentElement,s=false;try{s=sessionStorage.getItem("${SEEN_KEY}")==="1"}catch(e){}if(!s&&!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("intro");window.__croyIntroSafety=setTimeout(function(){d.classList.remove("intro","intro-motion")},4500)}})();`;
+// On a slow phone, the opening must not keep the page blank: if it has not
+// started within START_DEADLINE ms of the HTML, the page shows without it.
+const START_DEADLINE = 1200;
+export const openingScript = `(function(){if(!/^\\/(fr|en|de)\\/?$/.test(location.pathname))return;var d=document.documentElement,s=false;try{s=sessionStorage.getItem("${SEEN_KEY}")==="1"}catch(e){}if(!s&&!matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("intro");window.__croyIntroSafety=setTimeout(function(){d.classList.remove("intro","intro-motion")},${START_DEADLINE})}})();`;
 
 // Strong ease-out and ease-in-out; gravity curves for the falling dots.
 const EASE_OUT = "cubic-bezier(0.23, 1, 0.32, 1)";
@@ -315,6 +318,12 @@ export function Opening({
       await fontsReady();
       if (!alive) return;
       buildName(word);
+      // Too slow to start: the page is already shown, it stays as it is.
+      if (!html.classList.contains("intro")) {
+        session.mark();
+        tilt.enabled = !reduced;
+        return;
+      }
       clearTimeout(
         (window as unknown as { __croyIntroSafety?: number }).__croyIntroSafety,
       );

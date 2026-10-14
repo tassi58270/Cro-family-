@@ -5,6 +5,7 @@ import { ButtonLink } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { loadStories } from "@/lib/data/stories";
 import { VISITOR } from "@/lib/db";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { resolveLocale } from "@/lib/i18n/server";
 
 export async function generateMetadata({
@@ -12,7 +13,11 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/histoires">): Promise<Metadata> {
   const locale = await resolveLocale(params);
   const t = await getTranslations({ locale, namespace: "stories" });
-  return { title: t("title"), description: t("intro") };
+  return {
+    title: t("title"),
+    description: t("intro"),
+    alternates: alternatesFor(locale, "/histoires"),
+  };
 }
 
 /** Stories as a magazine (cahier des charges, 6.4), written by the family. */

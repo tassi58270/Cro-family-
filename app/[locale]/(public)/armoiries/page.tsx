@@ -9,6 +9,7 @@ import { BandsRule } from "@/components/ui/bands";
 import { ButtonLink } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
 import { loadArmsPage } from "@/lib/data/arms";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { resolveLocale } from "@/lib/i18n/server";
 import { EditLink } from "@/components/ui/edit-link";
 
@@ -17,7 +18,11 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/armoiries">): Promise<Metadata> {
   const locale = await resolveLocale(params);
   const t = await getTranslations({ locale, namespace: "armsPage" });
-  return { title: t("title"), description: t("intro") };
+  return {
+    title: t("title"),
+    description: t("intro"),
+    alternates: alternatesFor(locale, "/armoiries"),
+  };
 }
 
 function Section({

@@ -21,7 +21,7 @@ export default async function AdminLayout({
 
   return (
     <>
-      <header className="page sticky top-0 z-40 flex h-(--header-h) items-center gap-3 border-b border-hairline bg-paper">
+      <header className="page sticky top-0 z-40 flex h-(--header-h) items-center gap-3 border-b border-hairline bg-paper print:hidden">
         <Brand />
         <span className="hidden text-caption text-ink-muted sm:inline">
           {t("title")}
@@ -45,7 +45,9 @@ export default async function AdminLayout({
           </form>
         </div>
       </header>
-      <DemoBanner />
+      <div className="print:hidden">
+        <DemoBanner />
+      </div>
       <div className="page mx-auto grid w-full max-w-7xl flex-1 gap-6 pt-6 pb-24 lg:grid-cols-[13rem_1fr] lg:gap-12 lg:pt-10">
         <AdminNav />
         <div className="min-w-0">{children}</div>

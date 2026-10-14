@@ -4,6 +4,7 @@ import { PlacesApp } from "@/components/carte/places-app";
 import { ButtonLink } from "@/components/ui/button";
 import { loadPlacesIndex } from "@/lib/data/places";
 import { VISITOR } from "@/lib/db";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { resolveLocale } from "@/lib/i18n/server";
 
 export async function generateMetadata({
@@ -11,7 +12,11 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/lieux-et-evenements">): Promise<Metadata> {
   const locale = await resolveLocale(params);
   const t = await getTranslations({ locale, namespace: "places" });
-  return { title: t("title"), description: t("intro") };
+  return {
+    title: t("title"),
+    description: t("intro"),
+    alternates: alternatesFor(locale, "/lieux-et-evenements"),
+  };
 }
 
 /** The map and the timeline (cahier des charges, 6.6). */

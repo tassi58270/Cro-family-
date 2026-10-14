@@ -175,7 +175,8 @@
   "notFound": {
     "title": "Page not found",
     "body": "This address does not lead to any page. It may have changed, or the page does not exist yet.",
-    "backHome": "Back to the home page"
+    "backHome": "Back to the home page",
+    "search": "Search the site"
   },
   "style": {
     "title": "Design system",
@@ -365,7 +366,8 @@
       "members": "Members",
       "journal": "Journal",
       "translations": "Translations",
-      "people": "People"
+      "people": "People",
+      "guide": "Guide"
     },
     "overview": {
       "title": "Hello",
@@ -1256,6 +1258,80 @@
         "required": "Required.",
         "date": "Date not understood."
       }
+    },
+    "guide": {
+      "title": "Administrator’s guide",
+      "intro": "Two pages to keep the site running day to day. Nothing is published without you, and everything you do can be undone.",
+      "print": "Print the guide",
+      "open": "Open",
+      "sections": {
+        "start": {
+          "title": "Before opening the site",
+          "points": {
+            "1": "Delete the demonstration data: the « Exemple » family is fictional and goes in one click.",
+            "2": "Follow “Getting started” on the overview: the arms, the home page summary, the first ancestors, the first photos, three cousins invited.",
+            "3": "A tree already entered in genealogy software can be imported at once (Import and export, GEDCOM file). Nothing is written before you confirm."
+          }
+        },
+        "weekly": {
+          "title": "Every week",
+          "points": {
+            "1": "The overview gathers what awaits your decision: suggestions, access requests, photos and stories to approve.",
+            "2": "A suggestion is accepted or declined with a word for its author, who receives it by email. “Apply” opens the record’s form, already filled in, next to the current record.",
+            "3": "Accepting “This is me” links a member’s account to their record in the tree."
+          }
+        },
+        "add": {
+          "title": "Adding content",
+          "points": {
+            "1": "People: one person in the centre, then “+” for a parent, a spouse or a child. A date can stay vague: “about 1450”, “1450”.",
+            "2": "Stories and anecdotes: link them to the people concerned, and they appear on their records by themselves.",
+            "3": "Photos: send several at once, then outline the faces and name them.",
+            "4": "Places and events: a click on the map places a place; an event has a date, a place and people.",
+            "5": "Arms and titles: your SVG files replace the site’s drawings.",
+            "6": "On the site, the “Edit” button leads straight to the matching screen."
+          }
+        },
+        "privacy": {
+          "title": "Privacy",
+          "points": {
+            "1": "A person is treated as living as long as they have neither a date of death nor the “deceased” box ticked, unless they were born more than a hundred years ago.",
+            "2": "A living person is never visible to the public or to search engines: the public tree shows “Living person”. Signed-in members see them.",
+            "3": "Before publishing a photo or a story showing living people, ask for their consent."
+          }
+        },
+        "members": {
+          "title": "Members",
+          "points": {
+            "1": "Invite a cousin by email address: they receive a sign-in link valid for seven days.",
+            "2": "Access requests sent from the Contribute page are accepted or declined here.",
+            "3": "A member can become an administrator; an account can be disabled without being deleted."
+          }
+        },
+        "undo": {
+          "title": "Mistakes are safe",
+          "points": {
+            "1": "The journal keeps every change: who, what, when, before and after.",
+            "2": "“Undo this change” puts the site back as it was, even after a deletion or a merge of duplicates.",
+            "3": "If a later change touches the same items, undo that one first."
+          }
+        },
+        "languages": {
+          "title": "Languages",
+          "points": {
+            "1": "French is the reference; a missing translation falls back on French.",
+            "2": "The Translations screen shows French, English and German side by side, and what is left to translate or review.",
+            "3": "A machine-suggested translation stays “to review” until you approve it."
+          }
+        },
+        "backup": {
+          "title": "Backups",
+          "points": {
+            "1": "Import and export: the tree as GEDCOM, spreadsheets (people, places, events) and a full backup. Keep a copy from time to time.",
+            "2": "Once the site is online, the database is also backed up every night, automatically."
+          }
+        }
+      }
     }
   },
   "tree": {
@@ -1995,5 +2071,35 @@
       "another": "Propose something else",
       "follow": "Follow my proposals"
     }
+  },
+  "searchPage": {
+    "title": "Search",
+    "intro": "A person, a story, a place, an event, a branch or a title. Accents and old spellings are ignored: Croÿ, Croy and Crouy lead to the same place.",
+    "label": "What are you looking for?",
+    "placeholder": "A name, a place, a year…",
+    "loading": "Loading the search",
+    "count": "{count, plural, =0 {No results} one {# result} other {# results}}",
+    "none": "Nothing matches “{query}”.",
+    "noneHint": "Try another word, or just the beginning of the name. If someone or something is missing, you can suggest it.",
+    "propose": "Suggest an addition",
+    "showAll": "Show all {count}",
+    "anecdote": "Anecdote",
+    "browse": "Or browse the site",
+    "emptySite": "The site is still waiting for its first content: search will find it as soon as it is published.",
+    "kinds": {
+      "person": "People",
+      "story": "Stories",
+      "place": "Places",
+      "event": "Events",
+      "branch": "Branches",
+      "title": "Titles"
+    }
+  },
+  "errorPage": {
+    "title": "This page could not be shown",
+    "body": "Something went wrong on our side. Try again in a moment; if it happens again, let an administrator know and give them the reference below.",
+    "retry": "Try again",
+    "backHome": "Back to the home page",
+    "reference": "Reference: {digest}"
   }
 }

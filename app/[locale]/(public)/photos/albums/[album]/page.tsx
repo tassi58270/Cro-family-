@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { AlbumView } from "@/components/photos/album-view";
 import { albumSlugs, loadPhotoIndex } from "@/lib/data/photos";
 import { VISITOR } from "@/lib/db";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { Link } from "@/lib/i18n/navigation";
 import { resolveLocale } from "@/lib/i18n/server";
 
@@ -19,7 +20,14 @@ export async function generateMetadata({
   const index = await loadPhotoIndex(VISITOR, locale);
   const found = index.albums.find((a) => a.slug === album);
   return found
-    ? { title: found.title, description: found.description ?? undefined }
+    ? {
+        title: found.title,
+        description: found.description ?? undefined,
+        alternates: alternatesFor(locale, {
+          pathname: "/photos/albums/[album]",
+          params: { album },
+        }),
+      }
     : {};
 }
 

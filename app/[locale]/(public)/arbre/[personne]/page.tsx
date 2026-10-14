@@ -3,8 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { PersonPage } from "@/components/arbre/person-page";
 import { loadPerson, publicSlugs } from "@/lib/data/person";
 import { VISITOR } from "@/lib/db";
-import { getPathname } from "@/lib/i18n/navigation";
-import { routing } from "@/lib/i18n/routing";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { resolveLocale } from "@/lib/i18n/server";
 import { isIndexable } from "@/lib/site";
 
@@ -34,21 +33,10 @@ export async function generateMetadata({
     isIndexable() && person.status === "published" && !person.isDemo;
   return {
     title: person.name,
-    alternates: {
-      canonical: getPathname({
-        locale,
-        href: { pathname: "/arbre/[personne]", params: { personne } },
-      }),
-      languages: Object.fromEntries(
-        routing.locales.map((l) => [
-          l,
-          getPathname({
-            locale: l,
-            href: { pathname: "/arbre/[personne]", params: { personne } },
-          }),
-        ]),
-      ),
-    },
+    alternates: alternatesFor(locale, {
+      pathname: "/arbre/[personne]",
+      params: { personne },
+    }),
     robots: { index: indexable, follow: indexable },
   };
 }

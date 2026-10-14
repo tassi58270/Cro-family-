@@ -28,7 +28,7 @@ Public : la famille, de l’adolescent au grand-parent, surtout sur téléphone.
 - [x] 9. Lieux et événements (carte MapLibre, frise, liaison dans les deux sens, lecture, page par lieu, saisie)
 - [x] 10. Comptes famille et contributions (invitations, demandes d’accès, page Contribuer, propositions, espace membre, e-mails)
 - [x] 11. Dashboard administrateur (vue d’ensemble, journal et annulation, personnes et doublons, anecdotes, traductions, titres, export)
-- [ ] 12. Traductions, finitions, mise en ligne
+- [ ] 12. Traductions, finitions, mise en ligne (finitions faites ; reste la mise en ligne : domaine et clés, voir `docs/mise-en-ligne.md`)
 
 ## Décisions de la famille (10 octobre 2026)
 
@@ -209,6 +209,19 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - Lien « Modifier » sur les pages publiques pour un administrateur (`components/ui/edit-link.tsx`, cookie `croy_membre=admin`).
 - Les clés de messages ne contiennent jamais de point (next-intl les lit comme des niveaux).
 - Tests : `tests/db/journal.test.ts`, `tests/e2e/admin.spec.ts` (le « terminé quand » : une anecdote reliée à deux personnes, publiée, visible sur leurs deux fiches, puis annulée depuis le journal).
+
+## Finitions (étape 12)
+
+- Recherche globale `/fr/recherche` (statique) : un index compact par langue, `/api/recherche/{langue}` (public, régénéré par `contentChanged()`) ou `/membres` ; logique pure dans `lib/search/global.ts` (six sortes, regroupées, accents et variantes ignorés, mots trouvés en gras) ; requêtes dans `lib/data/search.ts` (`buildSearchIndex`, testé en base : aucun vivant pour le public, même porteur d’un titre). La requête est dans l’adresse (`q`).
+- Chaque page publique déclare sa propre adresse canonique et ses traductions (hreflang) par `alternatesFor()` (`lib/i18n/alternates.ts`) ; le layout n’en déclare plus. Toute nouvelle page publique doit l’appeler.
+- `app/sitemap.ts` : pages publiées, sans démonstration, lues comme visiteur (donc sans vivants) ; vide tant que `SITE_INDEXING` n’est pas `on`. `robots.txt` l’annonce.
+- Images de partage : `lib/design/share-image.tsx` (`next/og`, polices TTF dans `assets/fonts`), une par langue et une par personne, histoire, lieu, branche. Icône d’écran d’accueil `app/apple-icon.tsx` (exclue du proxy), `app/manifest.ts`.
+- Pages d’erreur : `components/ui/error-screen.tsx` ; 404 avec menu et recherche, `error.tsx` (réessayer, référence), `(public)/error.tsx` garde le menu, `global-error.tsx` en trois langues.
+- Ouverture de l’accueil : si elle n’a pas démarré 1,2 s après l’arrivée du HTML (téléphone lent), la page s’affiche sans elle (`START_DEADLINE`). Mesure à CPU ×4 et réseau mobile : première image en 2,1 s.
+- Guide de l’administrateur `/fr/admin/guide` (deux pages A4 à l’impression, textes dans `admin.guide`). Les listes de messages sont des objets numérotés (le type des messages refuse les tableaux).
+- Sauvegarde : `.github/workflows/backup.yml`, chaque nuit, chiffrée (GPG), 35 jours ; attend `BACKUP_DATABASE_URL` et `BACKUP_PASSPHRASE`.
+- Mise en ligne : `docs/mise-en-ligne.md` (Supabase, Resend, Vercel, domaine, sauvegarde, restauration).
+- Tests : `tests/e2e/finish.spec.ts`, `tests/db/search.test.ts`, `tests/unit/global-search.test.ts`.
 
 ## Système de design (étape 2)
 

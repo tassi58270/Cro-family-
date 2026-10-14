@@ -4,6 +4,7 @@ import { PhotosApp } from "@/components/photos/photos-app";
 import { ButtonLink } from "@/components/ui/button";
 import { loadPhotoIndex } from "@/lib/data/photos";
 import { VISITOR } from "@/lib/db";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { resolveLocale } from "@/lib/i18n/server";
 
 export async function generateMetadata({
@@ -11,7 +12,11 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/photos">): Promise<Metadata> {
   const locale = await resolveLocale(params);
   const t = await getTranslations({ locale, namespace: "photos" });
-  return { title: t("title"), description: t("intro") };
+  return {
+    title: t("title"),
+    description: t("intro"),
+    alternates: alternatesFor(locale, "/photos"),
+  };
 }
 
 /** The page that gives faces to the tree (cahier des charges, 6.5). */

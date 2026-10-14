@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { ContributeArea } from "@/components/contribuer/contribute-area";
 import { BandsRule } from "@/components/ui/bands";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { resolveLocale } from "@/lib/i18n/server";
 
 export async function generateMetadata({
@@ -9,7 +10,11 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/contribuer">): Promise<Metadata> {
   const locale = await resolveLocale(params);
   const t = await getTranslations({ locale, namespace: "contribute" });
-  return { title: t("eyebrow"), description: t("intro") };
+  return {
+    title: t("eyebrow"),
+    description: t("intro"),
+    alternates: alternatesFor(locale, "/contribuer"),
+  };
 }
 
 /** How to take part, and the forms to do it (cahier des charges, 6.7). */

@@ -20,6 +20,7 @@ export const adminNav = [
   { href: "/admin/traductions", key: "translations" },
   { href: "/admin/journal", key: "journal" },
   { href: "/admin/demonstration", key: "demo" },
+  { href: "/admin/guide", key: "guide" },
 ] as const;
 
 /** Dashboard sections: a scrollable row on phones, a column on computers. */
@@ -30,7 +31,7 @@ export function AdminNav() {
   return (
     <nav
       aria-label={t("label")}
-      className="min-w-0 lg:sticky lg:top-(--header-h) lg:self-start"
+      className="min-w-0 lg:sticky lg:top-(--header-h) lg:self-start print:hidden"
     >
       <ul className="-mx-(--gutter) flex gap-1 overflow-x-auto px-(--gutter) pb-2 lg:mx-0 lg:grid lg:gap-0.5 lg:overflow-visible lg:px-0">
         {adminNav.map((item) => {

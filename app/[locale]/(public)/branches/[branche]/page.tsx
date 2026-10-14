@@ -5,6 +5,7 @@ import { ArmsImage } from "@/components/armoiries/arms-gallery";
 import { extinctionLine, PersonName } from "@/components/armoiries/branch-card";
 import { branchColor } from "@/components/armoiries/branch-color";
 import { branchSlugs, loadBranchPage } from "@/lib/data/arms";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { Link } from "@/lib/i18n/navigation";
 import { resolveLocale } from "@/lib/i18n/server";
 import { EditLink } from "@/components/ui/edit-link";
@@ -22,6 +23,10 @@ export async function generateMetadata({
   return data
     ? {
         title: data.branch.name,
+        alternates: alternatesFor(locale, {
+          pathname: "/branches/[branche]",
+          params: { branche },
+        }),
         description: data.branch.description ?? undefined,
       }
     : {};

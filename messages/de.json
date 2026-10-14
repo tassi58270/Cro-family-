@@ -175,7 +175,8 @@
   "notFound": {
     "title": "Seite nicht gefunden",
     "body": "Unter dieser Adresse gibt es keine Seite. Vielleicht hat sie sich geändert, oder die Seite existiert noch nicht.",
-    "backHome": "Zurück zur Startseite"
+    "backHome": "Zurück zur Startseite",
+    "search": "Auf der Seite suchen"
   },
   "style": {
     "title": "Designsystem",
@@ -365,7 +366,8 @@
       "members": "Mitglieder",
       "journal": "Protokoll",
       "translations": "Übersetzungen",
-      "people": "Personen"
+      "people": "Personen",
+      "guide": "Leitfaden"
     },
     "overview": {
       "title": "Guten Tag",
@@ -1256,6 +1258,80 @@
         "required": "Pflichtfeld.",
         "date": "Datum nicht verstanden."
       }
+    },
+    "guide": {
+      "title": "Leitfaden für Administratoren",
+      "intro": "Zwei Seiten für die tägliche Pflege der Website. Nichts wird ohne Sie veröffentlicht, und alles, was Sie tun, lässt sich rückgängig machen.",
+      "print": "Leitfaden drucken",
+      "open": "Öffnen",
+      "sections": {
+        "start": {
+          "title": "Vor dem Start der Website",
+          "points": {
+            "1": "Löschen Sie die Demonstrationsdaten: Die Familie „Exemple“ ist erfunden und verschwindet mit einem Klick.",
+            "2": "Folgen Sie „Erste Schritte“ in der Übersicht: das Wappen, die Zusammenfassung der Startseite, die ersten Vorfahren, die ersten Fotos, drei eingeladene Cousins.",
+            "3": "Ein Stammbaum aus einem Genealogieprogramm lässt sich auf einmal importieren (Import und Export, GEDCOM-Datei). Vor Ihrer Bestätigung wird nichts geschrieben."
+          }
+        },
+        "weekly": {
+          "title": "Jede Woche",
+          "points": {
+            "1": "Die Übersicht sammelt, was auf Ihre Entscheidung wartet: Vorschläge, Zugangsanfragen, zu prüfende Fotos und Geschichten.",
+            "2": "Ein Vorschlag wird mit einem Wort an den Verfasser angenommen oder abgelehnt; er erhält es per E-Mail. „Übernehmen“ öffnet das Formular des Eintrags, bereits ausgefüllt, neben dem aktuellen Eintrag.",
+            "3": "Wird „Das bin ich“ angenommen, ist das Konto eines Mitglieds mit seinem Eintrag im Stammbaum verbunden."
+          }
+        },
+        "add": {
+          "title": "Inhalte hinzufügen",
+          "points": {
+            "1": "Personen: eine Person in der Mitte, dann „+“ für ein Elternteil, einen Ehepartner oder ein Kind. Ein Datum darf ungefähr bleiben: „um 1450“, „1450“.",
+            "2": "Geschichten und Anekdoten: Verknüpfen Sie sie mit den betroffenen Personen; sie erscheinen dann von selbst auf deren Einträgen.",
+            "3": "Fotos: Senden Sie mehrere auf einmal, umranden Sie dann die Gesichter und benennen Sie sie.",
+            "4": "Orte und Ereignisse: Ein Klick auf die Karte setzt einen Ort; ein Ereignis hat ein Datum, einen Ort und Personen.",
+            "5": "Wappen und Titel: Ihre SVG-Dateien ersetzen die Zeichnungen der Website.",
+            "6": "Auf der Website führt die Schaltfläche „Bearbeiten“ direkt zum passenden Bildschirm."
+          }
+        },
+        "privacy": {
+          "title": "Datenschutz",
+          "points": {
+            "1": "Eine Person gilt als lebend, solange weder ein Sterbedatum eingetragen noch „verstorben“ angekreuzt ist, außer sie wurde vor mehr als hundert Jahren geboren.",
+            "2": "Eine lebende Person ist für die Öffentlichkeit und Suchmaschinen nie sichtbar: Der öffentliche Stammbaum zeigt „Lebende Person“. Angemeldete Mitglieder sehen sie.",
+            "3": "Bitten Sie lebende Personen um ihr Einverständnis, bevor Sie ein Foto oder eine Geschichte mit ihnen veröffentlichen."
+          }
+        },
+        "members": {
+          "title": "Mitglieder",
+          "points": {
+            "1": "Laden Sie einen Cousin per E-Mail-Adresse ein: Er erhält einen Anmeldelink, der sieben Tage gültig ist.",
+            "2": "Zugangsanfragen von der Seite „Mitwirken“ werden hier angenommen oder abgelehnt.",
+            "3": "Ein Mitglied kann Administrator werden; ein Konto lässt sich deaktivieren, ohne es zu löschen."
+          }
+        },
+        "undo": {
+          "title": "Fehler sind kein Problem",
+          "points": {
+            "1": "Das Protokoll bewahrt jede Änderung: wer, was, wann, vorher und nachher.",
+            "2": "„Diese Änderung rückgängig machen“ stellt den vorherigen Zustand wieder her, auch nach einer Löschung oder dem Zusammenführen von Doppelungen.",
+            "3": "Betrifft eine spätere Änderung dieselben Elemente, machen Sie zuerst diese rückgängig."
+          }
+        },
+        "languages": {
+          "title": "Sprachen",
+          "points": {
+            "1": "Französisch ist maßgeblich; fehlt eine Übersetzung, erscheint der französische Text.",
+            "2": "Der Bildschirm „Übersetzungen“ zeigt Französisch, Englisch und Deutsch nebeneinander und was noch zu übersetzen oder zu prüfen ist.",
+            "3": "Eine maschinell vorgeschlagene Übersetzung bleibt „zu prüfen“, bis Sie sie freigeben."
+          }
+        },
+        "backup": {
+          "title": "Sicherung",
+          "points": {
+            "1": "Import und Export: der Stammbaum als GEDCOM, Tabellen (Personen, Orte, Ereignisse) und eine vollständige Sicherung. Bewahren Sie ab und zu eine Kopie auf.",
+            "2": "Sobald die Website online ist, wird die Datenbank zusätzlich jede Nacht automatisch gesichert."
+          }
+        }
+      }
     }
   },
   "tree": {
@@ -1995,5 +2071,35 @@
       "another": "Etwas anderes vorschlagen",
       "follow": "Meine Vorschläge verfolgen"
     }
+  },
+  "searchPage": {
+    "title": "Suche",
+    "intro": "Eine Person, eine Geschichte, ein Ort, ein Ereignis, ein Zweig oder ein Titel. Akzente und alte Schreibweisen werden ignoriert: Croÿ, Croy und Crouy führen zum selben Ziel.",
+    "label": "Wonach suchen Sie?",
+    "placeholder": "Ein Name, ein Ort, ein Jahr…",
+    "loading": "Suche wird geladen",
+    "count": "{count, plural, =0 {Keine Treffer} one {# Treffer} other {# Treffer}}",
+    "none": "Nichts passt zu „{query}“.",
+    "noneHint": "Versuchen Sie ein anderes Wort oder nur den Anfang des Namens. Fehlt jemand oder etwas, können Sie es vorschlagen.",
+    "propose": "Ergänzung vorschlagen",
+    "showAll": "Alle {count} anzeigen",
+    "anecdote": "Anekdote",
+    "browse": "Oder stöbern Sie auf der Seite",
+    "emptySite": "Die Seite wartet noch auf ihre ersten Inhalte: Die Suche findet sie, sobald sie veröffentlicht sind.",
+    "kinds": {
+      "person": "Personen",
+      "story": "Geschichten",
+      "place": "Orte",
+      "event": "Ereignisse",
+      "branch": "Zweige",
+      "title": "Titel"
+    }
+  },
+  "errorPage": {
+    "title": "Diese Seite konnte nicht angezeigt werden",
+    "body": "Bei uns ist ein Fehler aufgetreten. Versuchen Sie es gleich noch einmal; passiert es erneut, geben Sie einem Administrator die Referenz unten weiter.",
+    "retry": "Erneut versuchen",
+    "backHome": "Zurück zur Startseite",
+    "reference": "Referenz: {digest}"
   }
 }

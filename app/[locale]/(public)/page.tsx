@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Anecdotes } from "@/components/accueil/anecdotes";
 import { Chapters } from "@/components/accueil/chapters";
@@ -8,8 +9,9 @@ import { Summary } from "@/components/accueil/summary";
 import { TitlesFrieze } from "@/components/accueil/titles-frieze";
 import { projectInto } from "@/lib/carte/project";
 import { loadHome } from "@/lib/data/home";
-import { resolveLocale } from "@/lib/i18n/server";
 import { EditLink } from "@/components/ui/edit-link";
+import { alternatesFor } from "@/lib/i18n/alternates";
+import { resolveLocale } from "@/lib/i18n/server";
 
 // Decorative markers for the map tile while no place has coordinates.
 const DEFAULT_MARKERS: [number, number][] = [
@@ -18,6 +20,13 @@ const DEFAULT_MARKERS: [number, number][] = [
   [138, 72],
   [88, 88],
 ];
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/[locale]">): Promise<Metadata> {
+  const locale = await resolveLocale(params);
+  return { alternates: alternatesFor(locale, "/") };
+}
 
 /**
  * Home page (cahier des charges, 6.1). Every text and figure comes from the

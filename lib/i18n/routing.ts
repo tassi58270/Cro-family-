@@ -132,6 +132,7 @@ export const routing = defineRouting({
     "/admin/propositions/[proposition]": "/admin/propositions/[proposition]",
     "/admin/membres": "/admin/membres",
     "/admin/journal": "/admin/journal",
+    "/admin/guide": "/admin/guide",
     "/admin/personnes": "/admin/personnes",
     "/admin/traductions": "/admin/traductions",
     "/admin/histoires": "/admin/histoires",

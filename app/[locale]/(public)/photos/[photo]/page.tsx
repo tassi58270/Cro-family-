@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { PhotoPage } from "@/components/photos/photo-page";
 import { loadPhoto, publicPhotoIds } from "@/lib/data/photos";
 import { VISITOR } from "@/lib/db";
+import { alternatesFor } from "@/lib/i18n/alternates";
 import { resolveLocale } from "@/lib/i18n/server";
 import { isIndexable } from "@/lib/site";
 import { EditLink } from "@/components/ui/edit-link";
@@ -26,6 +27,10 @@ export async function generateMetadata({
   const indexable = isIndexable() && !item.isDemo;
   return {
     title: item.caption?.text ?? t("title"),
+    alternates: alternatesFor(locale, {
+      pathname: "/photos/[photo]",
+      params: { photo },
+    }),
     robots: { index: indexable, follow: indexable },
   };
 }
