@@ -35,18 +35,17 @@ Il servira aussi à l’adresse d’envoi des e-mails (`site@le-domaine`).
 1. Importer le dépôt GitHub dans [vercel.com](https://vercel.com). La région `cdg1` (Paris) est déjà fixée par `vercel.json`.
 2. Variables d’environnement de **Production** :
 
-   | Variable                    | Valeur                                                     |
-   | --------------------------- | ---------------------------------------------------------- |
-   | `NEXT_PUBLIC_SITE_URL`      | `https://le-domaine` (sans barre finale)                   |
-   | `DATABASE_URL`              | adresse _Transaction pooler_ + `?sslmode=require`          |
-   | `ADMIN_EMAILS`              | adresse(s) du ou des premiers administrateurs              |
-   | `RESEND_API_KEY`            | clé Resend                                                 |
-   | `EMAIL_FROM`                | adresse d’envoi                                            |
-   | `SUPABASE_URL`              | adresse du projet                                          |
-   | `SUPABASE_SERVICE_ROLE_KEY` | clé _service_role_                                         |
-   | `SUPABASE_BUCKET`           | `fichiers`                                                 |
-   | `DEEPL_API_KEY`             | facultatif : traductions proposées (toujours « à relire ») |
-   | `SITE_INDEXING`             | `off` jusqu’au jour de l’ouverture, puis `on`              |
+   | Variable                    | Valeur                                            |
+   | --------------------------- | ------------------------------------------------- |
+   | `NEXT_PUBLIC_SITE_URL`      | `https://le-domaine` (sans barre finale)          |
+   | `DATABASE_URL`              | adresse _Transaction pooler_ + `?sslmode=require` |
+   | `ADMIN_EMAILS`              | adresse(s) du ou des premiers administrateurs     |
+   | `RESEND_API_KEY`            | clé Resend                                        |
+   | `EMAIL_FROM`                | adresse d’envoi                                   |
+   | `SUPABASE_URL`              | adresse du projet                                 |
+   | `SUPABASE_SERVICE_ROLE_KEY` | clé _service_role_                                |
+   | `SUPABASE_BUCKET`           | `fichiers`                                        |
+   | `SITE_INDEXING`             | `off` jusqu’au jour de l’ouverture, puis `on`     |
 
    Ne jamais définir `AUTH_DEV_LINKS` sur Vercel.
 

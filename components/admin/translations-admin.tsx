@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import {
-  proposeTranslation,
   saveTranslation,
   type TranslationFormState,
 } from "@/app/[locale]/(admin)/admin/traductions/actions";
@@ -32,11 +31,9 @@ const CHIP: Record<TranslationState, ContentStatus> = {
 
 function Editor({
   item,
-  machine,
   onSaved,
 }: {
   item: TranslationItem;
-  machine: boolean;
   onSaved: () => void;
 }) {
   const t = useTranslations("admin.translations");
@@ -44,27 +41,6 @@ function Editor({
   const [state, onSubmit, pending] = useFormAction(saveTranslation, initial);
   useSaved(state, onSaved);
   const [values, setValues] = useState(item.texts);
-  const [asking, setAsking] = useState<"en" | "de" | null>(null);
-  const [failed, setFailed] = useState(false);
-
-  async function propose(target: "en" | "de") {
-    setAsking(target);
-    setFailed(false);
-    const result = await proposeTranslation(
-      item.fields.map((f) => item.texts.fr[f] ?? ""),
-      target,
-    );
-    setAsking(null);
-    if (!result) {
-      setFailed(true);
-      return;
-    }
-    setValues((v) => ({
-      ...v,
-      [target]: Object.fromEntries(item.fields.map((f, i) => [f, result[i]])),
-    }));
-  }
-
   const field = (name: string) =>
     t.has(`fields.${name}` as never) ? t(`fields.${name}` as never) : name;
 
@@ -120,29 +96,6 @@ function Editor({
         </fieldset>
       ))}
       <div className="grid gap-3 border-t border-hairline pt-6">
-        {machine ? (
-          <div className="flex flex-wrap gap-3">
-            {(["en", "de"] as const).map((l) => (
-              <Button
-                key={l}
-                type="button"
-                variant="ghost"
-                size="sm"
-                busy={asking === l}
-                onClick={() => propose(l)}
-              >
-                {t("propose", { language: tLang(l) })}
-              </Button>
-            ))}
-          </div>
-        ) : (
-          <p className="text-caption text-ink-muted">{t("noMachine")}</p>
-        )}
-        {failed && (
-          <p role="alert" className="text-caption font-medium text-croy-text">
-            {t("machineError")}
-          </p>
-        )}
         <p className="text-caption text-ink-muted">{t("reviewHint")}</p>
         <div>
           <Button type="submit" busy={pending}>
@@ -166,14 +119,12 @@ export function TranslationsAdmin({
   kind,
   all,
   kinds,
-  machine,
 }: {
   rows: TranslationRow[];
   item: TranslationItem | null;
   kind: TranslatableKind | null;
   all: boolean;
   kinds: readonly TranslatableKind[];
-  machine: boolean;
 }) {
   const t = useTranslations("admin.translations");
   const tLang = useTranslations("common.languages");
@@ -269,7 +220,6 @@ export function TranslationsAdmin({
           <Editor
             key={`${item.kind}-${item.id}`}
             item={item}
-            machine={machine}
             onSaved={() => {
               close();
               router.refresh();

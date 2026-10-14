@@ -1165,9 +1165,6 @@
         "caption": "Légende",
         "alt": "Description pour les lecteurs d’écran"
       },
-      "propose": "Proposer une traduction automatique ({language})",
-      "noMachine": "La traduction automatique demande une clé DeepL, à fournir lors de la mise en ligne.",
-      "machineError": "La traduction automatique n’a pas répondu. Réessayez dans un instant.",
       "reviewHint": "Relisez la traduction avant d’enregistrer : ce qui est enregistré ici est considéré comme relu.",
       "save": "Enregistrer",
       "required": "À remplir, ou laissez toute la langue vide.",
@@ -1320,8 +1317,7 @@
           "title": "Langues",
           "points": {
             "1": "Le français fait foi ; une traduction manquante retombe sur le français.",
-            "2": "L’écran Traductions montre côte à côte le français, l’anglais et l’allemand, et ce qui reste à traduire ou à relire.",
-            "3": "Une traduction proposée par la machine reste « à relire » jusqu’à ce que vous la validiez."
+            "2": "L’écran Traductions montre côte à côte le français, l’anglais et l’allemand, et ce qui reste à traduire ou à relire."
           }
         },
         "backup": {

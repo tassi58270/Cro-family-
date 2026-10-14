@@ -1165,9 +1165,6 @@
         "caption": "Bildunterschrift",
         "alt": "Beschreibung für Bildschirmleser"
       },
-      "propose": "Automatische Übersetzung vorschlagen ({language})",
-      "noMachine": "Die automatische Übersetzung braucht einen DeepL-Schlüssel, der bei der Veröffentlichung bereitzustellen ist.",
-      "machineError": "Die automatische Übersetzung hat nicht geantwortet. Versuchen Sie es gleich noch einmal.",
       "reviewHint": "Lesen Sie die Übersetzung vor dem Speichern: Was hier gespeichert wird, gilt als geprüft.",
       "save": "Speichern",
       "required": "Pflichtfeld, oder lassen Sie die ganze Sprache leer.",
@@ -1320,8 +1317,7 @@
           "title": "Sprachen",
           "points": {
             "1": "Französisch ist maßgeblich; fehlt eine Übersetzung, erscheint der französische Text.",
-            "2": "Der Bildschirm „Übersetzungen“ zeigt Französisch, Englisch und Deutsch nebeneinander und was noch zu übersetzen oder zu prüfen ist.",
-            "3": "Eine maschinell vorgeschlagene Übersetzung bleibt „zu prüfen“, bis Sie sie freigeben."
+            "2": "Der Bildschirm „Übersetzungen“ zeigt Französisch, Englisch und Deutsch nebeneinander und was noch zu übersetzen oder zu prüfen ist."
           }
         },
         "backup": {

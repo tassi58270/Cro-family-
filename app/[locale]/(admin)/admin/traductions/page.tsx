@@ -46,7 +46,6 @@ export default async function TranslationsPage({
       kind={kind}
       all={all}
       kinds={TRANSLATABLE_KINDS}
-      machine={Boolean(process.env.DEEPL_API_KEY)}
     />
   );
 }

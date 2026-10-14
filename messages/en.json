@@ -1165,9 +1165,6 @@
         "caption": "Caption",
         "alt": "Description for screen readers"
       },
-      "propose": "Propose an automatic translation ({language})",
-      "noMachine": "Automatic translation needs a DeepL key, to be provided when the site goes live.",
-      "machineError": "The automatic translation did not answer. Please try again in a moment.",
       "reviewHint": "Read the translation before saving: what is saved here counts as reviewed.",
       "save": "Save",
       "required": "Required, or leave the whole language empty.",
@@ -1320,8 +1317,7 @@
           "title": "Languages",
           "points": {
             "1": "French is the reference; a missing translation falls back on French.",
-            "2": "The Translations screen shows French, English and German side by side, and what is left to translate or review.",
-            "3": "A machine-suggested translation stays “to review” until you approve it."
+            "2": "The Translations screen shows French, English and German side by side, and what is left to translate or review."
           }
         },
         "backup": {

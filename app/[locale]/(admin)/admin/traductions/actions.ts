@@ -1,7 +1,6 @@
 "use server";
 
 import { asAdmin, id, text } from "@/lib/admin/form";
-import { getSession } from "@/lib/auth/session";
 import {
   TRANSLATABLE,
   TRANSLATABLE_KINDS,
@@ -10,8 +9,7 @@ import {
 
 /**
  * Translations (section 7): English and German beside the French. What an
- * administrator saves here is « reviewed »; an automatic proposal only
- * fills the fields, to be read before saving.
+ * administrator saves here is « reviewed ».
  */
 
 export type TranslationFormState = {
@@ -69,38 +67,4 @@ export async function saveTranslation(
     console.error(error);
     return { status: "error" };
   }
-}
-
-/**
- * An automatic proposal from DeepL for the given French texts, to be read
- * and corrected by the administrator before saving.
- */
-export async function proposeTranslation(
-  texts: string[],
-  target: "en" | "de",
-): Promise<string[] | null> {
-  const session = await getSession();
-  const key = process.env.DEEPL_API_KEY;
-  if (!session || session.role !== "admin" || !key) return null;
-  const filled = texts.map((t) => t.slice(0, 20_000));
-  if (!filled.some(Boolean)) return texts.map(() => "");
-  const host = key.endsWith(":fx")
-    ? "https://api-free.deepl.com"
-    : "https://api.deepl.com";
-  const response = await fetch(`${host}/v2/translate`, {
-    method: "POST",
-    headers: {
-      Authorization: `DeepL-Auth-Key ${key}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      text: filled.map((t) => t || " "),
-      source_lang: "FR",
-      target_lang: target === "en" ? "EN-GB" : "DE",
-      preserve_formatting: true,
-    }),
-  }).catch(() => null);
-  if (!response?.ok) return null;
-  const data = (await response.json()) as { translations: { text: string }[] };
-  return data.translations.map((t, i) => (filled[i] ? t.text : ""));
 }
