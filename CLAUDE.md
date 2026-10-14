@@ -220,6 +220,7 @@ proxy.ts               détection de langue et préfixe /fr /en /de
 - Ouverture de l’accueil : si elle n’a pas démarré 1,2 s après l’arrivée du HTML (téléphone lent), la page s’affiche sans elle (`START_DEADLINE`). Mesure à CPU ×4 et réseau mobile : première image en 2,1 s.
 - Guide de l’administrateur `/fr/admin/guide` (deux pages A4 à l’impression, textes dans `admin.guide`). Les listes de messages sont des objets numérotés (le type des messages refuse les tableaux).
 - Sauvegarde : `.github/workflows/backup.yml`, chaque nuit, chiffrée (GPG), 35 jours ; attend `BACKUP_DATABASE_URL` et `BACKUP_PASSPHRASE`.
+- Vercel : `vercel.json` lance `scripts/vercel-build.mjs` ; en production, il applique d’abord les migrations (`MIGRATION_DATABASE_URL`, session pooler 5432), puis construit le site. Un échec bloque le déploiement. Projet `croy-family`, branche de production `claude/web-dev-quality-eobjqw`.
 - Mise en ligne : `docs/mise-en-ligne.md` (Supabase, Resend, Vercel, domaine, sauvegarde, restauration).
 - Tests : `tests/e2e/finish.spec.ts`, `tests/db/search.test.ts`, `tests/unit/global-search.test.ts`.
 

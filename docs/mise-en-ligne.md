@@ -14,14 +14,10 @@ Il servira aussi à l’adresse d’envoi des e-mails (`site@le-domaine`).
 1. Créer un projet sur [supabase.com](https://supabase.com), région **Paris (eu-west-3)** ou Francfort. Noter le mot de passe de la base dans un coffre.
 2. _Storage_ → créer un bucket **privé** nommé `fichiers`.
 3. Récupérer :
-   - l’adresse **Transaction pooler** (port 6543) → `DATABASE_URL` pour Vercel, suivie de `?sslmode=require` ;
+   - l’adresse **Transaction pooler** (port 6543) → `DATABASE_URL` pour Vercel, suivie de `?uselibpqcompat=true&sslmode=require` (Supabase signe ses connexions avec sa propre autorité) ;
    - l’adresse **Direct** ou **Session pooler** (port 5432) → pour les migrations et la sauvegarde ;
    - _Project URL_ → `SUPABASE_URL` ; clé _service_role_ → `SUPABASE_SERVICE_ROLE_KEY`.
-4. Créer les tables, depuis un ordinateur où le projet est installé :
-
-   ```bash
-   DATABASE_URL="<adresse directe>" npm run db:migrate
-   ```
+4. Les tables se créent toutes seules : à chaque déploiement de production, Vercel applique les migrations manquantes (`scripts/vercel-build.mjs`) avec la variable `MIGRATION_DATABASE_URL` (adresse **Session pooler**, port 5432). Si une migration échoue, le déploiement s’arrête et l’ancienne version reste en ligne. Depuis un ordinateur, `DATABASE_URL="<adresse directe>" npm run db:migrate` fait la même chose.
 
    Les règles de vie privée (RLS) sont dans ces migrations : rien d’autre à configurer.
 
@@ -35,19 +31,21 @@ Il servira aussi à l’adresse d’envoi des e-mails (`site@le-domaine`).
 1. Importer le dépôt GitHub dans [vercel.com](https://vercel.com). La région `cdg1` (Paris) est déjà fixée par `vercel.json`.
 2. Variables d’environnement de **Production** :
 
-   | Variable                    | Valeur                                            |
-   | --------------------------- | ------------------------------------------------- |
-   | `NEXT_PUBLIC_SITE_URL`      | `https://le-domaine` (sans barre finale)          |
-   | `DATABASE_URL`              | adresse _Transaction pooler_ + `?sslmode=require` |
-   | `ADMIN_EMAILS`              | adresse(s) du ou des premiers administrateurs     |
-   | `RESEND_API_KEY`            | clé Resend                                        |
-   | `EMAIL_FROM`                | adresse d’envoi                                   |
-   | `SUPABASE_URL`              | adresse du projet                                 |
-   | `SUPABASE_SERVICE_ROLE_KEY` | clé _service_role_                                |
-   | `SUPABASE_BUCKET`           | `fichiers`                                        |
-   | `SITE_INDEXING`             | `off` jusqu’au jour de l’ouverture, puis `on`     |
+   | Variable               | Valeur                                                                |
+   | ---------------------- | --------------------------------------------------------------------- |
+   | `NEXT_PUBLIC_SITE_URL` | `https://le-domaine` (sans barre finale)                              |
+   | `DATABASE_URL`         | adresse _Transaction pooler_ + `?uselibpqcompat=true&sslmode=require` |
 
-   Ne jamais définir `AUTH_DEV_LINKS` sur Vercel.
+| `MIGRATION_DATABASE_URL` | adresse _Session pooler_ (port 5432), sans rien ajouter |
+| `ADMIN_EMAILS` | adresse(s) du ou des premiers administrateurs |
+| `RESEND_API_KEY` | clé Resend |
+| `EMAIL_FROM` | adresse d’envoi |
+| `SUPABASE_URL` | adresse du projet |
+| `SUPABASE_SERVICE_ROLE_KEY` | clé _service_role_ |
+| `SUPABASE_BUCKET` | `fichiers` |
+| `SITE_INDEXING` | `off` jusqu’au jour de l’ouverture, puis `on` |
+
+Ne jamais définir `AUTH_DEV_LINKS` sur Vercel.
 
 3. _Settings_ → _Domains_ : ajouter le nom de domaine et suivre les instructions DNS.
 4. Ouvrir `https://le-domaine/fr/connexion` avec l’adresse de `ADMIN_EMAILS` : le lien arrive par e-mail.
